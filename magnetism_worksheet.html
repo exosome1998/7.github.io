@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Magnetism and Field Lines Worksheet - Year 7 Science</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Times New Roman', serif;
+            background: #f5f5f5;
+            padding: 20px;
+            font-size: 11pt;
+            line-height: 1.4;
+        }
+
+        .worksheet {
+            background: white;
+            max-width: 210mm;
+            min-height: 297mm;
+            margin: 0 auto;
+            padding: 15mm;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            border: 2px solid #000;
+        }
+
+        .worksheet-header {
+            text-align: center;
+            margin-bottom: 15pt;
+            border-bottom: 2px solid #000;
+            padding-bottom: 10pt;
+        }
+
+        .worksheet-header h1 {
+            margin: 0;
+            font-size: 16pt;
+            font-weight: bold;
+        }
+
+        .student-line {
+            text-align: right;
+            margin-top: 10pt;
+            margin-bottom: 10pt;
+        }
+
+        .controls {
+            text-align: center;
+            margin: 10pt 0;
+            border: 1px solid #ccc;
+            padding: 8pt;
+            background: #f9f9f9;
+        }
+
+        .show-answers-btn {
+            background: #FF6B35;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 10pt;
+        }
+
+        .show-answers-btn:hover {
+            background: #e55a2b;
+        }
+
+        .section {
+            margin-bottom: 15pt;
+            border: 2px solid #000;
+        }
+
+        .section-header {
+            background: #000;
+            color: white;
+            padding: 5pt 10pt;
+            font-weight: bold;
+            font-size: 11pt;
+        }
+
+        .section-content {
+            padding: 10pt;
+        }
+
+        .instructions {
+            font-style: italic;
+            margin-bottom: 8pt;
+            font-size: 10pt;
+        }
+
+        .question {
+            margin-bottom: 12pt;
+        }
+
+        .mc-options {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3pt;
+            margin: 5pt 0;
+        }
+
+        .mc-option {
+            font-size: 10pt;
+        }
+
+        .tf-questions {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8pt;
+        }
+
+        .tf-question {
+            margin-bottom: 6pt;
+            font-size: 10pt;
+        }
+
+        .answer-box {
+            border-bottom: 1px solid #000;
+            min-height: 12pt;
+            min-width: 80pt;
+            display: inline-block;
+            cursor: pointer;
+            position: relative;
+            background: #f9f9f9;
+            padding: 1pt 3pt;
+        }
+
+        .answer-box:hover {
+            background-color: #e9e9e9;
+        }
+
+        .answer-text {
+            color: #d32f2f;
+            font-weight: bold;
+            display: none;
+        }
+
+        .answer-box.revealed .answer-text {
+            display: inline;
+        }
+
+        .answer-space {
+            margin-top: 8pt;
+        }
+
+        .answer-space div {
+            border-bottom: 1px solid #000;
+            min-height: 20pt;
+            margin-bottom: 8pt;
+            cursor: pointer;
+            padding: 2pt;
+        }
+
+        .answer-space div:hover {
+            background-color: #f9f9f9;
+        }
+
+        .answer-space div.revealed .answer-text {
+            display: inline;
+        }
+
+        .answer-space .answer-text {
+            color: #d32f2f;
+            font-weight: bold;
+            display: none;
+        }
+
+        .drawing-space {
+            border: 2px solid #000;
+            min-height: 120pt;
+            margin: 10pt 0;
+            background: white;
+            position: relative;
+        }
+
+        .drawing-instructions {
+            position: absolute;
+            top: 5pt;
+            left: 5pt;
+            font-size: 9pt;
+            color: #666;
+            font-style: italic;
+        }
+
+        .magnet-template {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .north-pole {
+            fill: #FF5252;
+            stroke: #D32F2F;
+            stroke-width: 2;
+        }
+
+        .south-pole {
+            fill: #2196F3;
+            stroke: #1565C0;
+            stroke-width: 2;
+        }
+
+        /* Print styles */
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            .worksheet {
+                box-shadow: none;
+                margin: 0;
+                max-width: none;
+                min-height: auto;
+            }
+            .controls {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="worksheet">
+        <div class="worksheet-header">
+            <h1>Year 7 Science Quiz: Magnetism and Field Lines</h1>
+            <div class="student-line">
+                <strong>Student Name:</strong> _________________________
+            </div>
+        </div>
+
+        <div class="controls">
+            <button class="show-answers-btn" onclick="revealAllAnswers()">Click to Show All Answers</button>
+            <div style="font-size: 9pt; margin-top: 4pt; font-style: italic;">
+                Click individual answer areas to reveal answers, or use the button above.
+            </div>
+        </div>
+
+        <!-- Section 1: Multiple Choice Questions -->
+        <div class="section">
+            <div class="section-header">Section 1: Multiple-Choice Questions (12 points, 1 each)</div>
+            <div class="section-content">
+                <div class="instructions">Circle the correct answer. Options are listed horizontally in two columns.</div>
+
+                <div class="question">
+                    <strong>1. What are the two ends of a magnet called?</strong><br>
+                    <div class="mc-options">
+                        <div class="mc-option">a) Top and bottom</div>
+                        <div class="mc-option">b) North and South poles</div>
+                        <div class="mc-option">c) Positive and negative</div>
+                        <div class="mc-option">d) Left and right sides</div>
+                    </div>
+                    <strong>Answer:</strong>
+                    <div class="answer-box" onclick="revealAnswer(this)">
+                        <span class="answer-text">b) North and South poles</span>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <strong>2. What happens when two north poles are brought together?</strong><br>
+                    <div class="mc-options">
+                        <div class="mc-option">a) They attract each other</div>
+                        <div class="mc-option">b) They repel each other</div>
+                        <div class="mc-option">c) Nothing happens</div>
+                        <div class="mc-option">d) They stick together</div>
+                    </div>
+                    <strong>Answer:</strong>
+                    <div class="answer-box" onclick="revealAnswer(this)">
+                        <span class="answer-text">b) They repel each other</span>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <strong>3. Magnetic field lines always point from:</strong><br>
+                    <div class="mc-options">
+                        <div class="mc-option">a) South to North pole</div>
+                        <div class="mc-option">b) North to South pole</div>
+                        <div class="mc-option">c) Left to right</div>
+                        <div class="mc-option">d) Any direction</div>
+                    </div>
+                    <strong>Answer:</strong>
+                    <div class="answer-box" onclick="revealAnswer(this)">
+                        <span class="answer-text">b) North to South pole</span>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <strong>4. What does a compass needle point towards?</strong><br>
+                    <div class="mc-options">
+                        <div class="mc-option">a) The sun</div>
+                        <div class="mc-option">b) The nearest magnet</div>
+                        <div class="mc-option">c) Earth's magnetic north pole</div>
+                        <div class="mc-option">d) The moon</div>
+                    </div>
+                    <strong>Answer:</strong>
+                    <div class="answer-box" onclick="revealAnswer(this)">
+                        <span class="answer-text">c) Earth's magnetic north pole</span>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <strong>5. Where is the magnetic field strongest around a bar magnet?</strong><br>
+                    <div class="mc-options">
+                        <div class="mc-option">a) In the middle</div>
+                        <div class="mc-option">b) At the poles</div>
+                        <div class="mc-option">c) Far away from it</div>
+                        <div class="mc-option">d) It's the same everywhere</div>
+                    </div>
+                    <strong>Answer:</strong>
+                    <div class="answer-box" onclick="revealAnswer(this)">
+                        <span class="answer-text">b) At the poles</span>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <strong>6. Magnetic field lines can:</strong><br>
+                    <div class="mc-options">
+                        <div class="mc-option">a) Cross each other</div>
+                        <div class="mc-option">b) Never cross each other</div>
+                        <div class="mc-option">c) Only cross at right angles</div>
+                        <div class="mc-option">d) Cross only at the poles</div>
+                    </div>
+                    <strong>Answer:</strong>
+                    <div class="answer-box" onclick="revealAnswer(this)">
+                        <span class="answer-text">b) Never cross each other</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 2: True/False Questions -->
+        <div class="section">
+            <div class="section-header">Section 2: True/False Questions (8 points, 1 each)</div>
+            <div class="section-content">
+                <div class="instructions">Circle T for True or F for False.</div>
+
+                <div class="tf-questions">
+                    <div class="tf-question">
+                        <strong>1.</strong> Earth is like a giant magnet.
+                        <div class="answer-box" onclick="revealAnswer(this)" style="width: 20pt;">
+                            <span class="answer-text">T</span>
+                        </div>
+                    </div>
+
+                    <div class="tf-question">
+                        <strong>2.</strong> Magnetic field lines are visible to the naked eye.
+                        <div class="answer-box" onclick="revealAnswer(this)" style="width: 20pt;">
+                            <span class="answer-text">F</span>
+                        </div>
+                    </div>
+
+                    <div class="tf-question">
+                        <strong>3.</strong> Like poles repel each other.
+                        <div class="answer-box" onclick="revealAnswer(this)" style="width: 20pt;">
+                            <span class="answer-text">T</span>
+                        </div>
+                    </div>
+
+                    <div class="tf-question">
+                        <strong>4.</strong> Iron filings can show magnetic field patterns.
+                        <div class="answer-box" onclick="revealAnswer(this)" style="width: 20pt;">
+                            <span class="answer-text">T</span>
+                        </div>
+                    </div>
+
+                    <div class="tf-question">
+                        <strong>5.</strong> Magnetic field lines always form straight lines.
+                        <div class="answer-box" onclick="revealAnswer(this)" style="width: 20pt;">
+                            <span class="answer-text">F</span>
+                        </div>
+                    </div>
+
+                    <div class="tf-question">
+                        <strong>6.</strong> A compass works because Earth has a magnetic field.
+                        <div class="answer-box" onclick="revealAnswer(this)" style="width: 20pt;">
+                            <span class="answer-text">T</span>
+                        </div>
+                    </div>
+
+                    <div class="tf-question">
+                        <strong>7.</strong> Magnetic fields only exist inside magnets.
+                        <div class="answer-box" onclick="revealAnswer(this)" style="width: 20pt;">
+                            <span class="answer-text">F</span>
+                        </div>
+                    </div>
+
+                    <div class="tf-question">
+                        <strong>8.</strong> Opposite poles attract each other.
+                        <div class="answer-box" onclick="revealAnswer(this)" style="width: 20pt;">
+                            <span class="answer-text">T</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 3: Short-Answer Questions -->
+        <div class="section">
+            <div class="section-header">Section 3: Short-Answer Questions (6 points, 3 each)</div>
+            <div class="section-content">
+                <div class="instructions">Write answers on the lines provided.</div>
+
+                <div class="question">
+                    <strong>1. Magnetic Field Rules:</strong> List three important rules for drawing magnetic field lines.
+                    <div class="answer-space">
+                        <div onclick="revealAnswer(this)">
+                            <span class="answer-text">1. Lines go from North to South pole</span>
+                        </div>
+                        <div onclick="revealAnswer(this)">
+                            <span class="answer-text">2. Lines never cross each other</span>
+                        </div>
+                        <div onclick="revealAnswer(this)">
+                            <span class="answer-text">3. Lines closer together show stronger magnetic field</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <strong>2. Compass Explanation:</strong> Explain why a compass needle always points north.
+                    <div class="answer-space">
+                        <div onclick="revealAnswer(this)">
+                            <span class="answer-text">A compass needle is a small magnet that aligns with Earth's magnetic field. The needle points towards Earth's magnetic north pole because Earth acts like a giant magnet.</span>
+                        </div>
+                        <div onclick="revealAnswer(this)">
+                            <span class="answer-text"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 4: Drawing Questions -->
+        <div class="section">
+            <div class="section-header">Section 4: Drawing Magnetic Field Lines (10 points)</div>
+            <div class="section-content">
+                <div class="instructions">Draw magnetic field lines around the magnets below. Remember the rules!</div>
+
+                <div class="question">
+                    <strong>A) Single Bar Magnet:</strong> Draw at least 4 field lines around this bar magnet.
+                    <div class="drawing-space">
+                        <div class="drawing-instructions">Draw smooth curved lines from N to S. Add arrows showing direction.</div>
+                        <svg class="magnet-template" width="80" height="30" viewBox="0 0 80 30">
+                            <rect x="0" y="0" width="40" height="30" class="north-pole"/>
+                            <rect x="40" y="0" width="40" height="30" class="south-pole"/>
+                            <text x="20" y="20" text-anchor="middle" font-size="14" font-weight="bold" fill="white">N</text>
+                            <text x="60" y="20" text-anchor="middle" font-size="14" font-weight="bold" fill="white">S</text>
+                        </svg>
+                    </div>
+                    <div style="margin-top: 5pt; font-size: 10pt; font-style: italic;">
+                        Mark scheme: Correct direction (2 pts), No crossing (2 pts), Smooth curves (1 pt)
+                    </div>
+                </div>
+
+                <div class="question" style="margin-top: 15pt;">
+                    <strong>B) Two Magnets - Attracting:</strong> Draw field lines between these attracting magnets.
+                    <div class="drawing-space">
+                        <div class="drawing-instructions">Show how field lines connect opposite poles.</div>
+                        <svg width="200" height="30" viewBox="0 0 200 30" style="position: absolute; top: 50%; left: 20%; transform: translateY(-50%);">
+                            <rect x="0" y="0" width="30" height="30" class="north-pole"/>
+                            <rect x="30" y="0" width="30" height="30" class="south-pole"/>
+                            <text x="15" y="20" text-anchor="middle" font-size="12" font-weight="bold" fill="white">N</text>
+                            <text x="45" y="20" text-anchor="middle" font-size="12" font-weight="bold" fill="white">S</text>
+                        </svg>
+                        <svg width="200" height="30" viewBox="0 0 200 30" style="position: absolute; top: 50%; right: 20%; transform: translateY(-50%);">
+                            <rect x="0" y="0" width="30" height="30" class="south-pole"/>
+                            <rect x="30" y="0" width="30" height="30" class="north-pole"/>
+                            <text x="15" y="20" text-anchor="middle" font-size="12" font-weight="bold" fill="white">S</text>
+                            <text x="45" y="20" text-anchor="middle" font-size="12" font-weight="bold" fill="white">N</text>
+                        </svg>
+                    </div>
+                    <div style="margin-top: 5pt; font-size: 10pt; font-style: italic;">
+                        Mark scheme: Lines connect poles (2 pts), Correct direction (2 pts), No crossing (1 pt)
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 5: Analysis Question -->
+        <div class="section">
+            <div class="section-header">Section 5: Analysis Question (4 points)</div>
+            <div class="section-content">
+                <div class="instructions">Look at the diagram and answer the questions.</div>
+
+                <div class="question">
+                    <strong>Diagram Description:</strong> A compass is placed at different positions around a bar magnet.
+
+                    <div style="text-align: center; margin: 15pt 0;">
+                        <svg width="300" height="200" viewBox="0 0 300 200" style="border: 1pt solid #000; background: #f9f9f9;">
+                            <!-- Bar magnet -->
+                            <rect x="125" y="85" width="25" height="30" class="north-pole"/>
+                            <rect x="150" y="85" width="25" height="30" class="south-pole"/>
+                            <text x="137" y="105" text-anchor="middle" font-size="12" font-weight="bold" fill="white">N</text>
+                            <text x="162" y="105" text-anchor="middle" font-size="12" font-weight="bold" fill="white">S</text>
+
+                            <!-- Compass positions -->
+                            <circle cx="80" cy="100" r="8" fill="white" stroke="#333" stroke-width="1"/>
+                            <text x="80" y="125" text-anchor="middle" font-size="10">A</text>
+
+                            <circle cx="220" cy="100" r="8" fill="white" stroke="#333" stroke-width="1"/>
+                            <text x="220" y="125" text-anchor="middle" font-size="10">B</text>
+
+                            <circle cx="150" cy="50" r="8" fill="white" stroke="#333" stroke-width="1"/>
+                            <text x="150" y="40" text-anchor="middle" font-size="10">C</text>
+
+                            <circle cx="150" cy="150" r="8" fill="white" stroke="#333" stroke-width="1"/>
+                            <text x="150" y="170" text-anchor="middle" font-size="10">D</text>
+                        </svg>
+                    </div>
+
+                    <strong>Questions:</strong><br>
+                    <strong>a)</strong> Which compass position (A, B, C, or D) would have the strongest magnetic field? Explain why.<br>
+                    <strong>b)</strong> Draw arrows on the diagram above to show which direction each compass needle would point.
+
+                    <div class="answer-space">
+                        <strong>a)</strong>
+                        <div onclick="revealAnswer(this)">
+                            <span class="answer-text">Positions A and B would have the strongest magnetic field because they are closest to the magnetic poles, where the field is strongest.</span>
+                        </div>
+                        <strong>b)</strong>
+                        <div onclick="revealAnswer(this)">
+                            <span class="answer-text">A: points right (toward N pole), B: points left (toward N pole), C: points down (toward magnet), D: points up (toward magnet)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function revealAnswer(element) {
+            element.classList.add('revealed');
+        }
+
+        function revealAllAnswers() {
+            document.querySelectorAll('.answer-box, .answer-space div').forEach(box => {
+                box.classList.add('revealed');
+            });
+        }
+    </script>
+</body>
+</html>
