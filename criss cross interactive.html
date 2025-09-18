@@ -1,0 +1,385 @@
+<script type="text/javascript">
+        var gk_isXlsx = false;
+        var gk_xlsxFileLookup = {};
+        var gk_fileData = {};
+        function filledCell(cell) {
+          return cell !== '' && cell != null;
+        }
+        function loadFileData(filename) {
+        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
+            try {
+                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
+                var firstSheetName = workbook.SheetNames[0];
+                var worksheet = workbook.Sheets[firstSheetName];
+
+                // Convert sheet to JSON to filter blank rows
+                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
+                // Filter out blank rows (rows where all cells are empty, null, or undefined)
+                var filteredData = jsonData.filter(row => row.some(filledCell));
+
+                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
+                var headerRowIndex = filteredData.findIndex((row, index) =>
+                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
+                );
+                // Fallback
+                if (headerRowIndex === -1 || headerRowIndex > 25) {
+                  headerRowIndex = 0;
+                }
+
+                // Convert filtered JSON back to CSV
+                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
+                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
+                return csv;
+            } catch (e) {
+                console.error(e);
+                return "";
+            }
+        }
+        return gk_fileData[filename] || "";
+        }
+        </script><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Criss-Cross Method for Ionic Compounds</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .container {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .dropdowns {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        select {
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+            width: 45%;
+        }
+        .button-container {
+            text-align: center;
+            margin: 20px 0;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 0 10px;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        button:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+        #canvas {
+            display: block;
+            margin: 20px auto;
+            border: 1px solid #ccc;
+        }
+        #result {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #e9ecef;
+            border-radius: 5px;
+            font-size: 18px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>Criss-Cross Method for Ionic Compounds</h1>
+    <div class="container">
+        <div class="dropdowns">
+            <select id="positiveIon">
+                <option value="" disabled selected>Select Positive Ion</option>
+                <option value="Li+1">Li⁺ (Lithium)</option>
+                <option value="Na+1">Na⁺ (Sodium)</option>
+                <option value="K+1">K⁺ (Potassium)</option>
+                <option value="Ag+1">Ag⁺ (Silver)</option>
+                <option value="NH4+1">NH₄⁺ (Ammonium)</option>
+                <option value="Mg+2">Mg²⁺ (Magnesium)</option>
+                <option value="Ca+2">Ca²⁺ (Calcium)</option>
+                <option value="Ba+2">Ba²⁺ (Barium)</option>
+                <option value="Zn+2">Zn²⁺ (Zinc)</option>
+                <option value="Fe+2">Fe²⁺ (Iron(II))</option>
+                <option value="Cu+2">Cu²⁺ (Copper(II))</option>
+                <option value="Cu+1">Cu⁺ (Copper(I))</option>
+                <option value="Fe+3">Fe³⁺ (Iron(III))</option>
+                <option value="Al+3">Al³⁺ (Aluminum)</option>
+            </select>
+            <select id="negativeIon">
+                <option value="" disabled selected>Select Negative Ion</option>
+                <option value="F-1">F⁻ (Fluoride)</option>
+                <option value="Cl-1">Cl⁻ (Chloride)</option>
+                <option value="Br-1">Br⁻ (Bromide)</option>
+                <option value="I-1">I⁻ (Iodide)</option>
+                <option value="OH-1">OH⁻ (Hydroxide)</option>
+                <option value="NO3-1">NO₃⁻ (Nitrate)</option>
+                <option value="HCO3-1">HCO₃⁻ (Bicarbonate)</option>
+                <option value="O-2">O²⁻ (Oxide)</option>
+                <option value="S-2">S²⁻ (Sulfide)</option>
+                <option value="SO4-2">SO₄²⁻ (Sulfate)</option>
+                <option value="CO3-2">CO₃²⁻ (Carbonate)</option>
+                <option value="N-3">N³⁻ (Nitride)</option>
+                <option value="PO4-3">PO₄³⁻ (Phosphate)</option>
+            </select>
+        </div>
+        <div class="button-container">
+            <button onclick="startDemonstration()" id="startBtn">Start Demonstration</button>
+            <button onclick="nextStep()" id="nextBtn" disabled>Next Step</button>
+            <button onclick="resetDemonstration()" id="resetBtn" disabled>Reset</button>
+        </div>
+        <canvas id="canvas" width="600" height="200"></canvas>
+        <div id="result"></div>
+    </div>
+
+    <script>
+        let step = 0;
+        let posSymbol, posCharge, negSymbol, negCharge, posSubscript, negSubscript, isPosPolyatomic, isNegPolyatomic, finalFormula;
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        const startBtn = document.getElementById('startBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const resetBtn = document.getElementById('resetBtn');
+        const resultDiv = document.getElementById('result');
+
+        function startDemonstration() {
+            const positiveIon = document.getElementById('positiveIon').value;
+            const negativeIon = document.getElementById('negativeIon').value;
+
+            if (!positiveIon || !negativeIon) {
+                resultDiv.innerHTML = 'Please select both a positive and negative ion.';
+                return;
+            }
+
+            // Extract ion symbols and charges
+            posSymbol = positiveIon.split('+')[0];
+            posCharge = parseInt(positiveIon.split('+')[1]);
+            negSymbol = negativeIon.split('-')[0];
+            negCharge = parseInt(negativeIon.split('-')[1]);
+
+            // Criss-cross method: swap the charges as subscripts
+            posSubscript = negCharge;
+            negSubscript = posCharge;
+
+            // Simplify the subscripts to their lowest whole-number ratio
+            const gcd = (a, b) => b === 0 ? a : gcd(b, a % b);
+            const divisor = gcd(posSubscript, negSubscript);
+            posSubscript = posSubscript / divisor;
+            negSubscript = negSubscript / divisor;
+
+            // Handle polyatomic ions
+            isPosPolyatomic = posSymbol.includes('NH4');
+            isNegPolyatomic = negSymbol.includes('NO3') || negSymbol.includes('SO4') || negSymbol.includes('CO3') || negSymbol.includes('PO4') || negSymbol.includes('OH') || negSymbol.includes('HCO3');
+
+            // Format the final formula
+            finalFormula = '';
+            if (isPosPolyatomic && posSubscript > 1) {
+                finalFormula += `(${posSymbol})${posSubscript}`;
+            } else {
+                finalFormula += `${posSymbol}${posSubscript > 1 ? posSubscript : ''}`;
+            }
+            if (isNegPolyatomic && negSubscript > 1) {
+                finalFormula += `(${negSymbol})${negSubscript}`;
+            } else {
+                finalFormula += `${negSymbol}${negSubscript > 1 ? negSubscript : ''}`;
+            }
+
+            // Reset step counter and enable next button
+            step = 0;
+            startBtn.disabled = true;
+            nextBtn.disabled = false;
+            resetBtn.disabled = false;
+            resultDiv.innerHTML = '';
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Start with the first step
+            nextStep();
+        }
+
+        function nextStep() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.font = '30px Arial';
+            ctx.fillStyle = 'black';
+
+            if (step === 0) {
+                // Step 1: Display ions with charges
+                ctx.fillText(posSymbol, 100, 50);
+                ctx.fillText(negSymbol, 300, 50);
+                ctx.fillStyle = 'green';
+                ctx.font = '20px Arial';
+                ctx.fillText(`+${posCharge}`, 150, 40);
+                ctx.fillStyle = 'red';
+                ctx.fillText(`-${negCharge}`, 370, 40); // Shifted further right
+            } else if (step === 1) {
+                // Step 2: Draw first arrow (positive to negative)
+                ctx.fillText(posSymbol, 100, 50);
+                ctx.fillText(negSymbol, 300, 50);
+                ctx.fillStyle = 'green';
+                ctx.font = '20px Arial';
+                ctx.fillText(`+${posCharge}`, 150, 40);
+                ctx.fillStyle = 'red';
+                ctx.fillText(`-${negCharge}`, 370, 40); // Shifted further right
+
+                ctx.strokeStyle = 'blue';
+                ctx.lineWidth = 3;
+                ctx.beginPath();
+                ctx.moveTo(160, 30);
+                ctx.lineTo(340, 80);
+                ctx.stroke();
+                drawArrowHead(ctx, 340, 80, -Math.PI / 4);
+            } else if (step === 2) {
+                // Step 3: Draw second arrow (negative to positive)
+                ctx.fillText(posSymbol, 100, 50);
+                ctx.fillText(negSymbol, 300, 50);
+                ctx.fillStyle = 'green';
+                ctx.font = '20px Arial';
+                ctx.fillText(`+${posCharge}`, 150, 40);
+                ctx.fillStyle = 'red';
+                ctx.fillText(`-${negCharge}`, 370, 40); // Shifted further right
+
+                ctx.strokeStyle = 'blue';
+                ctx.lineWidth = 3;
+                ctx.beginPath();
+                ctx.moveTo(160, 30);
+                ctx.lineTo(340, 80);
+                ctx.stroke();
+                drawArrowHead(ctx, 340, 80, -Math.PI / 4);
+
+                ctx.beginPath();
+                ctx.moveTo(360, 30);
+                ctx.lineTo(160, 80);
+                ctx.stroke();
+                drawArrowHead(ctx, 160, 80, Math.PI * 3 / 4);
+            } else if (step === 3) {
+                // Step 4: Show subscripts
+                ctx.fillText(posSymbol, 100, 50);
+                ctx.fillText(negSymbol, 300, 50);
+                ctx.fillStyle = 'green';
+                ctx.font = '20px Arial';
+                ctx.fillText(`+${posCharge}`, 150, 40);
+                ctx.fillStyle = 'red';
+                ctx.fillText(`-${negCharge}`, 370, 40); // Shifted further right
+
+                ctx.strokeStyle = 'blue';
+                ctx.lineWidth = 3;
+                ctx.beginPath();
+                ctx.moveTo(160, 30);
+                ctx.lineTo(340, 80);
+                ctx.stroke();
+                drawArrowHead(ctx, 340, 80, -Math.PI / 4);
+
+                ctx.beginPath();
+                ctx.moveTo(360, 30);
+                ctx.lineTo(160, 80);
+                ctx.stroke();
+                drawArrowHead(ctx, 160, 80, Math.PI * 3 / 4);
+
+                ctx.fillStyle = 'green';
+                ctx.fillText(posCharge, 350, 100);
+                ctx.fillStyle = 'red';
+                ctx.fillText(negCharge, 150, 100);
+            } else if (step === 4) {
+                // Step 5: Show final formula
+                ctx.fillText(posSymbol, 100, 50);
+                ctx.fillText(negSymbol, 300, 50);
+                ctx.fillStyle = 'green';
+                ctx.font = '20px Arial';
+                ctx.fillText(`+${posCharge}`, 150, 40);
+                ctx.fillStyle = 'red';
+                ctx.fillText(`-${negCharge}`, 370, 40); // Shifted further right
+
+                ctx.strokeStyle = 'blue';
+                ctx.lineWidth = 3;
+                ctx.beginPath();
+                ctx.moveTo(160, 30);
+                ctx.lineTo(340, 80);
+                ctx.stroke();
+                drawArrowHead(ctx, 340, 80, -Math.PI / 4);
+
+                ctx.beginPath();
+                ctx.moveTo(360, 30);
+                ctx.lineTo(160, 80);
+                ctx.stroke();
+                drawArrowHead(ctx, 160, 80, Math.PI * 3 / 4);
+
+                ctx.fillStyle = 'green';
+                ctx.fillText(posCharge, 350, 100);
+                ctx.fillStyle = 'red';
+                ctx.fillText(negCharge, 150, 100);
+
+                // "This will give" section with simplified formula
+                ctx.fillStyle = 'black';
+                ctx.font = '30px Arial';
+                ctx.fillText('This will give:', 100, 150);
+                let finalDisplay = '';
+                if (isPosPolyatomic && posSubscript > 1) {
+                    finalDisplay += `(${posSymbol})${posSubscript}`;
+                } else {
+                    finalDisplay += `${posSymbol}${posSubscript > 1 ? posSubscript : ''}`;
+                }
+                if (isNegPolyatomic && negSubscript > 1) {
+                    finalDisplay += `(${negSymbol})${negSubscript}`;
+                } else {
+                    finalDisplay += `${negSymbol}${negSubscript > 1 ? negSubscript : ''}`;
+                }
+                ctx.fillText(finalDisplay, 300, 150);
+
+                resultDiv.innerHTML = `Final Formula: ${formatFormula(finalFormula)}`;
+                nextBtn.disabled = true;
+            }
+
+            step++;
+        }
+
+        function resetDemonstration() {
+            step = 0;
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            resultDiv.innerHTML = '';
+            startBtn.disabled = false;
+            nextBtn.disabled = true;
+            resetBtn.disabled = true;
+        }
+
+        function drawArrowHead(ctx, x, y, angle) {
+            ctx.save();
+            ctx.translate(x, y);
+            ctx.rotate(angle);
+            ctx.beginPath();
+            ctx.moveTo(0, 0);
+            ctx.lineTo(-10, -5);
+            ctx.lineTo(-10, 5);
+            ctx.closePath();
+            ctx.fillStyle = 'blue';
+            ctx.fill();
+            ctx.restore();
+        }
+
+        function formatFormula(formula) {
+            return formula.replace(/(\d+)/g, '<sub>$1</sub>');
+        }
+    </script>
+</body>
+</html>
