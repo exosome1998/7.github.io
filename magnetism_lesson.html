@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Magnetism and Field Lines - Year 7 Science</title>
+
+    <!-- Reveal.js CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.3.1/dist/reveal.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.3.1/dist/theme/white.css">
+
+    <style>
+        /* Custom styles for lesson */
+        .reveal {
+            font-family: 'Arial', sans-serif;
+        }
+
+        .reveal h1, .reveal h2, .reveal h3 {
+            color: #2E86AB;
+            text-transform: none;
+            line-height: 1.2;
+        }
+
+        .reveal h1 {
+            font-size: 1.4em;
+            margin-bottom: 0.2em;
+        }
+
+        .reveal h2 {
+            font-size: 1.1em;
+            margin-bottom: 0.2em;
+        }
+
+        .reveal h3 {
+            font-size: 0.9em;
+            margin-bottom: 0.1em;
+        }
+
+        .reveal .slides section {
+            text-align: left;
+            padding: 10px;
+            overflow-y: auto;
+            max-height: 80vh;
+        }
+
+        /* Scroll down button */
+        .scroll-indicator {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: #FF6B35;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+            font-size: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            transition: all 0.3s ease;
+        }
+
+        .scroll-indicator:hover {
+            background: #e55a2b;
+            transform: scale(1.1);
+        }
+
+        .scroll-indicator.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .reveal .slides section > * {
+            margin-left: 0;
+            margin-right: 0;
+        }
+
+        /* Navigation panel */
+        .nav-panel {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            font-size: 14px;
+        }
+
+        .nav-button {
+            display: block;
+            margin: 5px 0;
+            padding: 8px 15px;
+            background: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+            transition: background 0.3s;
+        }
+
+        .nav-button:hover {
+            background: #45a049;
+        }
+
+        .nav-button.worksheet {
+            background: #FF6B35;
+        }
+
+        .nav-button.worksheet:hover {
+            background: #e55a2b;
+        }
+
+        /* Do Now activity styles */
+        .do-now {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin: 20px 0;
+        }
+
+        .do-now h3 {
+            color: #FFE082;
+            margin-bottom: 20px;
+        }
+
+        /* Content styles */
+        .content-box {
+            background: #f8f9fa;
+            padding: 15px 20px;
+            border-radius: 10px;
+            border-left: 4px solid #4CAF50;
+            margin: 15px 0;
+            font-size: 0.9em;
+        }
+
+        .key-term {
+            color: #2E86AB;
+            font-weight: bold;
+        }
+
+        .simple-explanation {
+            color: #666;
+            font-style: italic;
+            font-size: 0.85em;
+        }
+
+        .real-life {
+            background: linear-gradient(135deg, #FFE082, #FFC107);
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+            border-left: 4px solid #FF9800;
+            font-size: 0.9em;
+        }
+
+        .real-life h4 {
+            color: #E65100;
+            margin-bottom: 10px;
+            font-size: 1em;
+        }
+
+        /* Make text more readable */
+        .reveal p, .reveal li {
+            font-size: 0.6em;
+            line-height: 1.2;
+        }
+
+        .reveal ul {
+            margin: 10px 0;
+        }
+
+        .reveal li {
+            margin: 8px 0;
+        }
+
+        /* Diagram styles */
+        .diagram-container {
+            text-align: center;
+            margin: 30px 0;
+        }
+
+        /* Excalidraw-style filters */
+        .hand-drawn {
+            filter: url(#roughPaper);
+        }
+
+        /* Fragment animations */
+        .fragment {
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .fragment.visible {
+            opacity: 1;
+        }
+
+        .magnet {
+            fill: #FF5252;
+            stroke: #D32F2F;
+            stroke-width: 3;
+        }
+
+        .magnet-south {
+            fill: #2196F3;
+            stroke: #1565C0;
+            stroke-width: 3;
+        }
+
+        .field-line {
+            stroke: #4CAF50;
+            stroke-width: 2;
+            fill: none;
+            marker-end: url(#arrowhead);
+        }
+
+        .compass-needle {
+            stroke: #333;
+            stroke-width: 2;
+            fill: #FF5252;
+        }
+
+        /* Interactive elements */
+        .interactive-magnet {
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .interactive-magnet:hover {
+            transform: scale(1.05);
+            filter: brightness(1.1);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation Panel -->
+    <div class="nav-panel">
+        <strong>Navigation</strong>
+        <button class="nav-button" onclick="goToSlide(0)">Start</button>
+        <button class="nav-button" onclick="goToSlide(1)">Do Now</button>
+        <button class="nav-button" onclick="goToSlide(3)">What are Magnets?</button>
+        <button class="nav-button" onclick="goToSlide(4)">Magnetic Fields</button>
+        <button class="nav-button" onclick="goToSlide(5)">Drawing Field Lines</button>
+        <button class="nav-button" onclick="goToSlide(7)">Earth's Magnetism</button>
+        <button class="nav-button worksheet" onclick="window.open('magnetism_worksheet.html', '_blank')">📝 Worksheet</button>
+    </div>
+
+    <!-- Scroll Down Button -->
+    <button class="scroll-indicator" id="scrollBtn" onclick="scrollCurrentSlide()">↓</button>
+
+    <!-- Reveal.js Presentation -->
+    <div class="reveal">
+        <div class="slides">
+
+            <!-- Title Slide -->
+            <section>
+                <h1>🧲 Magnetism and Field Lines</h1>
+                <h3>Invisible Forces Around Us</h3>
+                <p><em>Year 7 Science</em></p>
+                <div class="real-life">
+                    <h4>🔬 What You Learn Today</h4>
+                    <p>How to see invisible magnetic forces and draw the secret patterns they make!</p>
+                </div>
+            </section>
+
+            <!-- Do Now Activity -->
+            <section>
+                <div class="do-now">
+                    <h3>🚀 DO NOW - What Do You Know? (5 minutes)</h3>
+                    <p>Think about magnets you've seen before...</p>
+
+                    <div class="fragment">
+                        <h4>Quick Questions:</h4>
+                        <ul>
+                            <li>What sticks to a magnet?</li>
+                            <li>What happens when you bring two magnets together?</li>
+                            <li>Have you ever seen a compass? What does it do?</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Do Now Answers -->
+            <section>
+                <h3>✅ Let's See What You Know!</h3>
+                <div class="content-box">
+                    <h4>Your Answers:</h4>
+                    <ul>
+                        <li><strong>What sticks?</strong> Iron, steel, nickel - metals that are magnetic</li>
+                        <li><strong>Two magnets?</strong> They can push apart or pull together</li>
+                        <li><strong>Compass?</strong> Points north - it follows Earth's invisible magnetic force!</li>
+                    </ul>
+                </div>
+                <div class="fragment">
+                    <div class="real-life">
+                        <h4>🤔 The Big Question</h4>
+                        <p>How can we see these invisible magnetic forces?</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- What are Magnets? -->
+            <section>
+                <h2>🧲 What are Magnets?</h2>
+                <div class="content-box fragment">
+                    <p><span class="key-term">Magnets</span> are objects that can push or pull certain metals.</p>
+                    <p class="simple-explanation">(They have a special invisible force around them)</p>
+                </div>
+
+                <div class="fragment">
+                    <h4>Every Magnet Has Two Ends:</h4>
+                    <ul>
+                        <li class="fragment"><strong style="color: #FF5252;">North Pole (N)</strong> - Usually red</li>
+                        <li class="fragment"><strong style="color: #2196F3;">South Pole (S)</strong> - Usually blue</li>
+                        <li class="fragment"><strong>Rule:</strong> Opposite poles attract, same poles repel</li>
+                    </ul>
+                </div>
+
+                <div class="fragment">
+                    <div class="diagram-container">
+                        <svg width="500" height="200" viewBox="0 0 500 200" class="hand-drawn">
+                            <defs>
+                                <filter id="roughPaper" x="-20%" y="-20%" width="140%" height="140%">
+                                    <feTurbulence baseFrequency="0.04" numOctaves="5" result="noise" seed="1"/>
+                                    <feDisplacementMap in="SourceGraphic" in2="noise" scale="1"/>
+                                </filter>
+                            </defs>
+
+                            <!-- Bar magnet -->
+                            <rect x="150" y="80" width="80" height="40" class="magnet" rx="5"/>
+                            <rect x="230" y="80" width="80" height="40" class="magnet-south" rx="5"/>
+
+                            <!-- Labels -->
+                            <text x="190" y="105" text-anchor="middle" font-size="16" font-weight="bold" fill="white">N</text>
+                            <text x="270" y="105" text-anchor="middle" font-size="16" font-weight="bold" fill="white">S</text>
+
+                            <text x="250" y="150" text-anchor="middle" font-size="14" fill="#333">Bar Magnet</text>
+                        </svg>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Magnetic Fields -->
+            <section>
+                <h2>👻 Invisible Magnetic Fields</h2>
+                <div class="content-box fragment">
+                    <p><span class="key-term">Magnetic Field</span> is the invisible area around a magnet where its force works.</p>
+                    <p class="simple-explanation">(Like an invisible bubble of pushing and pulling power)</p>
+                </div>
+
+                <div class="fragment">
+                    <h4>How Do We See the Invisible?</h4>
+                    <ul>
+                        <li class="fragment"><strong>Iron filings</strong> - Tiny metal pieces that line up</li>
+                        <li class="fragment"><strong>Compass</strong> - Needle points along the field</li>
+                        <li class="fragment"><strong>Draw field lines</strong> - Show the pattern on paper</li>
+                    </ul>
+                </div>
+
+                <div class="fragment">
+                    <div class="diagram-container">
+                        <svg width="600" height="300" viewBox="0 0 600 300" class="hand-drawn">
+                            <defs>
+                                <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="0" refY="3.5" orient="auto">
+                                    <polygon points="0 0, 10 3.5, 0 7" fill="#4CAF50"/>
+                                </marker>
+                            </defs>
+
+                            <!-- Bar magnet -->
+                            <rect x="250" y="130" width="50" height="40" class="magnet" rx="5"/>
+                            <rect x="300" y="130" width="50" height="40" class="magnet-south" rx="5"/>
+
+                            <!-- Labels -->
+                            <text x="275" y="155" text-anchor="middle" font-size="14" font-weight="bold" fill="white">N</text>
+                            <text x="325" y="155" text-anchor="middle" font-size="14" font-weight="bold" fill="white">S</text>
+
+                            <!-- Magnetic field lines -->
+                            <path d="M 250 150 Q 200 100 150 150 Q 200 200 250 150" class="field-line"/>
+                            <path d="M 350 150 Q 400 100 450 150 Q 400 200 350 150" class="field-line"/>
+                            <path d="M 250 140 Q 150 140 50 140" class="field-line"/>
+                            <path d="M 350 140 Q 450 140 550 140" class="field-line"/>
+                            <path d="M 250 160 Q 150 160 50 160" class="field-line"/>
+                            <path d="M 350 160 Q 450 160 550 160" class="field-line"/>
+
+                            <!-- Iron filings representation -->
+                            <g id="iron-filings" opacity="0.7">
+                                <circle cx="200" cy="120" r="2" fill="#333"/>
+                                <circle cx="180" cy="140" r="2" fill="#333"/>
+                                <circle cx="160" cy="160" r="2" fill="#333"/>
+                                <circle cx="400" cy="120" r="2" fill="#333"/>
+                                <circle cx="420" cy="140" r="2" fill="#333"/>
+                                <circle cx="440" cy="160" r="2" fill="#333"/>
+                            </g>
+
+                            <text x="300" y="250" text-anchor="middle" font-size="14" fill="#333">Magnetic Field Lines Around a Bar Magnet</text>
+                        </svg>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Drawing Field Lines Rules -->
+            <section>
+                <h2>📏 Rules for Drawing Field Lines</h2>
+
+                <div class="content-box fragment">
+                    <h4>Rule 1: Direction</h4>
+                    <p>Lines always go <strong style="color: #FF5252;">FROM North</strong> <strong style="color: #2196F3;">TO South</strong></p>
+                </div>
+
+                <div class="content-box fragment">
+                    <h4>Rule 2: Never Cross</h4>
+                    <p>Field lines never cross each other - they're like train tracks!</p>
+                </div>
+
+                <div class="content-box fragment">
+                    <h4>Rule 3: Closer = Stronger</h4>
+                    <p>Lines close together = strong field. Lines far apart = weak field</p>
+                </div>
+
+                <div class="content-box fragment">
+                    <h4>Rule 4: Curves</h4>
+                    <p>Lines curve smoothly - no sharp corners or straight angles</p>
+                </div>
+
+                <div class="fragment">
+                    <div class="real-life">
+                        <h4>💡 Memory Trick</h4>
+                        <p>Think of field lines like water flowing from North to South - smooth and never crossing!</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Step by Step Drawing -->
+            <section>
+                <h2>✏️ How to Draw Field Lines Step-by-Step</h2>
+
+                <div class="content-box fragment">
+                    <h4>Step 1: Draw Your Magnet</h4>
+                    <p>Rectangle shape, label N (red) and S (blue) ends</p>
+                </div>
+
+                <div class="content-box fragment">
+                    <h4>Step 2: Start at North Pole</h4>
+                    <p>Put your pencil at the N end</p>
+                </div>
+
+                <div class="content-box fragment">
+                    <h4>Step 3: Draw Smooth Curves</h4>
+                    <p>Curve around to the S end - like drawing a smile!</p>
+                </div>
+
+                <div class="content-box fragment">
+                    <h4>Step 4: Add Arrow</h4>
+                    <p>Arrow points FROM N TO S</p>
+                </div>
+
+                <div class="content-box fragment">
+                    <h4>Step 5: Repeat</h4>
+                    <p>Draw more lines above and below - don't let them touch!</p>
+                </div>
+
+                <div class="fragment">
+                    <div class="diagram-container">
+                        <svg width="600" height="250" viewBox="0 0 600 250" class="hand-drawn">
+                            <!-- Step by step demonstration -->
+                            <g id="step1">
+                                <rect x="50" y="100" width="40" height="25" class="magnet" rx="3"/>
+                                <rect x="90" y="100" width="40" height="25" class="magnet-south" rx="3"/>
+                                <text x="70" y="118" text-anchor="middle" font-size="12" font-weight="bold" fill="white">N</text>
+                                <text x="110" y="118" text-anchor="middle" font-size="12" font-weight="bold" fill="white">S</text>
+                                <text x="95" y="150" text-anchor="middle" font-size="12" fill="#333">Step 1: Draw Magnet</text>
+                            </g>
+
+                            <g id="step2">
+                                <rect x="200" y="100" width="40" height="25" class="magnet" rx="3"/>
+                                <rect x="240" y="100" width="40" height="25" class="magnet-south" rx="3"/>
+                                <text x="220" y="118" text-anchor="middle" font-size="12" font-weight="bold" fill="white">N</text>
+                                <text x="260" y="118" text-anchor="middle" font-size="12" font-weight="bold" fill="white">S</text>
+                                <path d="M 240 112 Q 320 80 280 112" class="field-line"/>
+                                <text x="245" y="150" text-anchor="middle" font-size="12" fill="#333">Step 2-4: Draw Line + Arrow</text>
+                            </g>
+
+                            <g id="step3">
+                                <rect x="400" y="100" width="40" height="25" class="magnet" rx="3"/>
+                                <rect x="440" y="100" width="40" height="25" class="magnet-south" rx="3"/>
+                                <text x="420" y="118" text-anchor="middle" font-size="12" font-weight="bold" fill="white">N</text>
+                                <text x="460" y="118" text-anchor="middle" font-size="12" font-weight="bold" fill="white">S</text>
+                                <path d="M 440 112 Q 520 80 480 112" class="field-line"/>
+                                <path d="M 440 105 Q 510 70 480 105" class="field-line"/>
+                                <path d="M 440 119 Q 510 140 480 119" class="field-line"/>
+                                <text x="445" y="150" text-anchor="middle" font-size="12" fill="#333">Step 5: Add More Lines</text>
+                            </g>
+                        </svg>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Earth's Magnetism -->
+            <section>
+                <h2>🌍 Earth is a Giant Magnet!</h2>
+                <div class="content-box fragment">
+                    <p>Our planet Earth is like a huge bar magnet!</p>
+                    <p class="simple-explanation">(That's why compasses work everywhere on Earth)</p>
+                </div>
+
+                <div class="fragment">
+                    <h4>Earth's Magnetic Poles:</h4>
+                    <ul>
+                        <li class="fragment"><strong>Magnetic North Pole</strong> - Where compass needles point</li>
+                        <li class="fragment"><strong>Magnetic South Pole</strong> - Opposite end of Earth's magnet</li>
+                        <li class="fragment"><strong>Surprise!</strong> Magnetic poles are NOT the same as geographic poles</li>
+                    </ul>
+                </div>
+
+                <div class="fragment">
+                    <div class="diagram-container">
+                        <svg width="500" height="400" viewBox="0 0 500 400" class="hand-drawn">
+                            <!-- Earth -->
+                            <circle cx="250" cy="200" r="120" fill="#4FC3F7" stroke="#0277BD" stroke-width="3"/>
+
+                            <!-- Continents (simplified) -->
+                            <path d="M 200 150 Q 230 140 260 155 Q 280 170 250 180 Q 220 175 200 150" fill="#4CAF50"/>
+                            <path d="M 280 220 Q 310 210 320 240 Q 300 260 280 220" fill="#4CAF50"/>
+
+                            <!-- Magnetic field lines around Earth -->
+                            <path d="M 250 80 Q 150 100 130 200 Q 150 300 250 320" class="field-line" stroke-width="3"/>
+                            <path d="M 250 80 Q 350 100 370 200 Q 350 300 250 320" class="field-line" stroke-width="3"/>
+                            <path d="M 250 80 Q 100 150 100 200 Q 100 250 250 320" class="field-line" stroke-width="3"/>
+                            <path d="M 250 80 Q 400 150 400 200 Q 400 250 250 320" class="field-line" stroke-width="3"/>
+
+                            <!-- Poles -->
+                            <circle cx="250" cy="80" r="8" fill="#FF5252"/>
+                            <text x="250" y="65" text-anchor="middle" font-size="14" font-weight="bold" fill="#FF5252">Magnetic N</text>
+
+                            <circle cx="250" cy="320" r="8" fill="#2196F3"/>
+                            <text x="250" y="345" text-anchor="middle" font-size="14" font-weight="bold" fill="#2196F3">Magnetic S</text>
+
+                            <!-- Compass -->
+                            <g id="compass" transform="translate(350, 120)">
+                                <circle cx="0" cy="0" r="15" fill="white" stroke="#333" stroke-width="2"/>
+                                <line x1="0" y1="-10" x2="0" y2="10" stroke="#FF5252" stroke-width="3" marker-end="url(#arrowhead)"/>
+                                <text x="0" y="-25" text-anchor="middle" font-size="10" fill="#333">Compass</text>
+                            </g>
+
+                            <text x="250" y="380" text-anchor="middle" font-size="16" fill="#333">Earth's Magnetic Field</text>
+                        </svg>
+                    </div>
+                </div>
+            </section>
+
+            <!-- How Compasses Work -->
+            <section>
+                <h2>🧭 How Compasses Work</h2>
+                <div class="content-box fragment">
+                    <p>A <span class="key-term">compass</span> is a tiny magnet that can spin freely.</p>
+                    <p class="simple-explanation">(The needle is like a mini bar magnet)</p>
+                </div>
+
+                <div class="fragment">
+                    <h4>Why It Always Points North:</h4>
+                    <ul>
+                        <li class="fragment">Earth's magnetic field pushes and pulls the compass needle</li>
+                        <li class="fragment">The needle lines up with Earth's field lines</li>
+                        <li class="fragment">North end of needle points to Earth's Magnetic North</li>
+                        <li class="fragment">Works anywhere on Earth!</li>
+                    </ul>
+                </div>
+
+                <div class="fragment">
+                    <div class="real-life">
+                        <h4>🗺️ Real Life Uses</h4>
+                        <ul>
+                            <li>Hikers and campers finding direction</li>
+                            <li>Ships navigating the ocean</li>
+                            <li>Phone GPS and maps</li>
+                            <li>Birds and animals use Earth's magnetism to migrate!</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Summary -->
+            <section>
+                <h2>📋 What We Learned Today</h2>
+
+                <div class="content-box">
+                    <h4>Key Points to Remember:</h4>
+                    <ol>
+                        <li class="fragment"><strong>Magnets:</strong> Have North and South poles</li>
+                        <li class="fragment"><strong>Magnetic Fields:</strong> Invisible force areas around magnets</li>
+                        <li class="fragment"><strong>Field Lines:</strong> Show the pattern of magnetic force</li>
+                        <li class="fragment"><strong>Drawing Rules:</strong> N to S, never cross, closer = stronger</li>
+                        <li class="fragment"><strong>Earth:</strong> Is a giant magnet with its own field</li>
+                        <li class="fragment"><strong>Compasses:</strong> Follow Earth's magnetic field lines</li>
+                    </ol>
+                </div>
+
+                <div class="fragment">
+                    <div class="real-life">
+                        <h4>🎯 Remember This</h4>
+                        <p>You can't see magnetic fields, but you can draw them and use them to navigate anywhere on Earth!</p>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </div>
+
+    <!-- Reveal.js JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.3.1/dist/reveal.js"></script>
+
+    <script>
+        // Initialize Reveal.js
+        Reveal.initialize({
+            hash: true,
+            controls: true,
+            progress: true,
+            center: true,
+            transition: 'slide',
+            backgroundTransition: 'fade'
+        });
+
+        // Navigation functions
+        function goToSlide(slideNumber) {
+            Reveal.slide(slideNumber);
+        }
+
+        // Scroll functionality
+        function scrollCurrentSlide() {
+            const currentSlide = document.querySelector('.reveal .present');
+            if (currentSlide) {
+                currentSlide.scrollBy({
+                    top: 200,
+                    behavior: 'smooth'
+                });
+            }
+        }
+
+        // Show/hide scroll button based on slide content
+        function updateScrollButton() {
+            const currentSlide = document.querySelector('.reveal .present');
+            const scrollBtn = document.getElementById('scrollBtn');
+
+            if (currentSlide && currentSlide.scrollHeight > currentSlide.clientHeight) {
+                scrollBtn.classList.remove('hidden');
+            } else {
+                scrollBtn.classList.add('hidden');
+            }
+        }
+
+        // Update scroll button when slide changes
+        Reveal.addEventListener('slidechanged', updateScrollButton);
+
+        // Initial check
+        setTimeout(updateScrollButton, 1000);
+
+        // Add interactivity to magnets
+        document.addEventListener('DOMContentLoaded', function() {
+            const magnets = document.querySelectorAll('.interactive-magnet');
+            magnets.forEach(magnet => {
+                magnet.addEventListener('click', function() {
+                    this.style.transform = 'scale(1.1) rotate(5deg)';
+                    setTimeout(() => {
+                        this.style.transform = '';
+                    }, 300);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
