@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🧲 Magnetic Field Explorer - Year 7 Science Game</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .game-header {
+            text-align: center;
+            color: white;
+            margin-bottom: 20px;
+        }
+
+        .game-header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .game-header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .game-container {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            max-width: 1000px;
+            width: 100%;
+        }
+
+        .controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .control-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .magnet-controls {
+            display: flex;
+            gap: 10px;
+        }
+
+        .magnet-btn {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .bar-magnet {
+            background: linear-gradient(90deg, #FF5722 50%, #2196F3 50%);
+            color: white;
+        }
+
+        .horseshoe-magnet {
+            background: linear-gradient(45deg, #FF5722, #2196F3);
+            color: white;
+        }
+
+        .magnet-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .game-area {
+            position: relative;
+            width: 100%;
+            height: 500px;
+            border: 3px solid #333;
+            border-radius: 10px;
+            background: #f0f8ff;
+            overflow: hidden;
+            cursor: crosshair;
+        }
+
+        .magnet {
+            position: absolute;
+            cursor: move;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+            user-select: none;
+            z-index: 10;
+        }
+
+        .bar-magnet-obj {
+            width: 80px;
+            height: 20px;
+            background: linear-gradient(90deg, #FF5722 50%, #2196F3 50%);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 5px;
+            color: white;
+            font-weight: bold;
+            font-size: 12px;
+        }
+
+        .horseshoe-magnet-obj {
+            width: 60px;
+            height: 60px;
+            background: #666;
+            border-radius: 30px 30px 0 0;
+            position: relative;
+            border: 8px solid #666;
+            border-bottom: none;
+        }
+
+        .horseshoe-magnet-obj::before,
+        .horseshoe-magnet-obj::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+        }
+
+        .horseshoe-magnet-obj::before {
+            left: -8px;
+            background: #FF5722;
+        }
+
+        .horseshoe-magnet-obj::after {
+            right: -8px;
+            background: #2196F3;
+        }
+
+        .compass {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background: white;
+            border: 2px solid #333;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 5;
+        }
+
+        .compass-needle {
+            width: 20px;
+            height: 2px;
+            background: linear-gradient(90deg, #FF5722 50%, #333 50%);
+            border-radius: 1px;
+            transform-origin: center;
+            transition: transform 0.3s ease;
+        }
+
+        .field-line {
+            position: absolute;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .field-line-path {
+            stroke: #4CAF50;
+            stroke-width: 2;
+            fill: none;
+            opacity: 0.7;
+        }
+
+        .info-panel {
+            margin-top: 20px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border-left: 4px solid #4CAF50;
+        }
+
+        .score-panel {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            padding: 10px;
+            background: linear-gradient(45deg, #4CAF50, #45a049);
+            color: white;
+            border-radius: 8px;
+        }
+
+        .challenge-mode {
+            margin-top: 15px;
+            padding: 15px;
+            background: #fff3cd;
+            border: 2px solid #ffc107;
+            border-radius: 8px;
+        }
+
+        .challenge-btn {
+            background: #ffc107;
+            color: #333;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            margin: 5px;
+        }
+
+        .challenge-btn:hover {
+            background: #e0a800;
+        }
+
+        .iron-filing {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background: #333;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            z-index: 2;
+        }
+
+        .instructions {
+            margin-bottom: 15px;
+            padding: 10px;
+            background: #e3f2fd;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+
+        .magnet-strength {
+            margin: 10px 0;
+        }
+
+        .strength-slider {
+            width: 150px;
+            margin: 0 10px;
+        }
+
+        .reset-btn {
+            background: #f44336;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .reset-btn:hover {
+            background: #da190b;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .correct-answer {
+            animation: pulse 0.5s ease-in-out;
+            border: 3px solid #4CAF50 !important;
+        }
+
+        .quiz-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .quiz-content {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            max-width: 500px;
+            text-align: center;
+        }
+
+        .quiz-btn {
+            background: #2196F3;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 5px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .quiz-btn:hover {
+            background: #1976D2;
+        }
+    </style>
+</head>
+<body>
+    <div class="game-header">
+        <h1>🧲 Magnetic Field Explorer</h1>
+        <p>Discover the invisible world of magnetic fields!</p>
+    </div>
+
+    <div class="game-container">
+        <div class="instructions">
+            <strong>🎯 How to Play:</strong> Drag magnets around the field area and watch how they affect compass needles and iron filings!
+            Try different magnet types and positions to see how magnetic field lines work. Complete challenges to earn points!
+        </div>
+
+        <div class="score-panel">
+            <div><strong>Score: <span id="score">0</span></strong></div>
+            <div><strong>Level: <span id="level">1</span></strong></div>
+            <div><strong>Discoveries: <span id="discoveries">0</span>/10</strong></div>
+        </div>
+
+        <div class="controls">
+            <div class="control-group">
+                <label><strong>Add Magnets:</strong></label>
+                <div class="magnet-controls">
+                    <button class="magnet-btn bar-magnet" onclick="addMagnet('bar')">
+                        🧲 Bar Magnet
+                    </button>
+                    <button class="magnet-btn horseshoe-magnet" onclick="addMagnet('horseshoe')">
+                        🔗 Horseshoe Magnet
+                    </button>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label><strong>Field Strength:</strong></label>
+                <input type="range" class="strength-slider" id="fieldStrength" min="1" max="5" value="3" onchange="updateFieldStrength()">
+                <span id="strengthValue">3</span>
+            </div>
+
+            <div class="control-group">
+                <button class="reset-btn" onclick="resetField()">🔄 Reset</button>
+                <button class="challenge-btn" onclick="showQuiz()">🧠 Quiz Time!</button>
+            </div>
+        </div>
+
+        <div class="game-area" id="gameArea"></div>
+
+        <div class="info-panel">
+            <h3>📚 Magnetic Field Facts:</h3>
+            <p id="factDisplay">Magnetic field lines always flow from North pole to South pole. The closer the lines, the stronger the magnetic field!</p>
+        </div>
+
+        <div class="challenge-mode">
+            <h3>🏆 Current Challenge:</h3>
+            <p id="currentChallenge">Place a bar magnet and observe how the compass needles align with the magnetic field!</p>
+            <button class="challenge-btn" onclick="nextChallenge()">Next Challenge</button>
+            <button class="challenge-btn" onclick="toggleFieldLines()">Toggle Field Lines</button>
+            <button class="challenge-btn" onclick="addIronFilings()">Add Iron Filings</button>
+        </div>
+    </div>
+
+    <!-- Quiz Modal -->
+    <div class="quiz-modal" id="quizModal">
+        <div class="quiz-content">
+            <h2>🧠 Magnetic Field Quiz</h2>
+            <p id="quizQuestion">Which direction do magnetic field lines flow?</p>
+            <div id="quizOptions">
+                <button class="quiz-btn" onclick="checkAnswer(0)">North to South</button>
+                <button class="quiz-btn" onclick="checkAnswer(1)">South to North</button>
+                <button class="quiz-btn" onclick="checkAnswer(2)">Both directions</button>
+                <button class="quiz-btn" onclick="checkAnswer(3)">No specific direction</button>
+            </div>
+            <button class="challenge-btn" onclick="closeQuiz()" style="margin-top: 20px;">Close</button>
+        </div>
+    </div>
+
+    <script>
+        let magnets = [];
+        let compasses = [];
+        let ironFilings = [];
+        let fieldStrength = 3;
+        let score = 0;
+        let level = 1;
+        let discoveries = 0;
+        let showingFieldLines = false;
+        let currentChallengeIndex = 0;
+
+        const facts = [
+            "Magnetic field lines always flow from North pole to South pole!",
+            "The Earth itself is like a giant magnet with North and South poles!",
+            "Magnets are strongest at their poles where field lines are most concentrated!",
+            "Iron filings align themselves along magnetic field lines!",
+            "Compass needles always point toward magnetic North!",
+            "Like poles repel each other, opposite poles attract!",
+            "Magnetic fields can pass through most materials!",
+            "The strength of a magnetic field decreases with distance!",
+            "Electromagnets can be turned on and off unlike permanent magnets!",
+            "Magnetic fields are invisible but we can detect them with compasses!"
+        ];
+
+        const challenges = [
+            "Place a bar magnet and observe how compass needles align!",
+            "Add two bar magnets with opposite poles facing each other!",
+            "Create a horseshoe magnet and see the field pattern!",
+            "Place two magnets with like poles facing - watch them repel!",
+            "Add iron filings and see how they follow field lines!",
+            "Use multiple compasses to map the magnetic field!",
+            "Experiment with different magnet strengths!",
+            "Create an attraction between opposite poles!",
+            "Observe how field strength changes with distance!",
+            "Design your own magnetic field pattern!"
+        ];
+
+        const quizQuestions = [
+            {
+                question: "Which direction do magnetic field lines flow?",
+                options: ["North to South", "South to North", "Both directions", "No specific direction"],
+                correct: 0
+            },
+            {
+                question: "What happens when you bring two North poles together?",
+                options: ["They attract", "They repel", "Nothing happens", "They break"],
+                correct: 1
+            },
+            {
+                question: "Where is a magnet strongest?",
+                options: ["In the middle", "At the poles", "At the top", "Everywhere equally"],
+                correct: 1
+            },
+            {
+                question: "What makes a compass needle point North?",
+                options: ["Gravity", "Wind", "Earth's magnetic field", "The Sun"],
+                correct: 2
+            },
+            {
+                question: "Iron filings around a magnet will:",
+                options: ["Scatter randomly", "Form straight lines", "Follow magnetic field lines", "Disappear"],
+                correct: 2
+            }
+        ];
+
+        let currentQuiz = 0;
+
+        function initializeGame() {
+            createCompasses();
+            updateFactDisplay();
+            updateChallengeDisplay();
+            addInitialMagnet();
+        }
+
+        function addInitialMagnet() {
+            // Add a starter bar magnet
+            const gameArea = document.getElementById('gameArea');
+            const magnet = createMagnet('bar');
+            magnet.style.left = '200px';
+            magnet.style.top = '200px';
+            gameArea.appendChild(magnet);
+            magnets.push({
+                element: magnet,
+                type: 'bar',
+                x: 200,
+                y: 200,
+                strength: fieldStrength
+            });
+            updateField();
+        }
+
+        function createCompasses() {
+            const gameArea = document.getElementById('gameArea');
+            const rows = 8;
+            const cols = 15;
+
+            for (let i = 0; i < rows; i++) {
+                for (let j = 0; j < cols; j++) {
+                    const compass = document.createElement('div');
+                    compass.className = 'compass';
+                    const needle = document.createElement('div');
+                    needle.className = 'compass-needle';
+                    compass.appendChild(needle);
+
+                    const x = (j + 1) * (gameArea.offsetWidth / (cols + 1));
+                    const y = (i + 1) * (gameArea.offsetHeight / (rows + 1));
+
+                    compass.style.left = x + 'px';
+                    compass.style.top = y + 'px';
+
+                    gameArea.appendChild(compass);
+                    compasses.push({
+                        element: compass,
+                        needle: needle,
+                        x: x,
+                        y: y
+                    });
+                }
+            }
+        }
+
+        function createMagnet(type) {
+            const magnet = document.createElement('div');
+            magnet.className = 'magnet';
+
+            if (type === 'bar') {
+                const bar = document.createElement('div');
+                bar.className = 'bar-magnet-obj';
+                bar.innerHTML = '<span>N</span><span>S</span>';
+                magnet.appendChild(bar);
+            } else if (type === 'horseshoe') {
+                const horseshoe = document.createElement('div');
+                horseshoe.className = 'horseshoe-magnet-obj';
+                magnet.appendChild(horseshoe);
+            }
+
+            makeDraggable(magnet);
+            return magnet;
+        }
+
+        function makeDraggable(element) {
+            let isDragging = false;
+            let startX, startY, offsetX, offsetY;
+
+            element.addEventListener('mousedown', (e) => {
+                isDragging = true;
+                startX = e.clientX;
+                startY = e.clientY;
+                const rect = element.getBoundingClientRect();
+                offsetX = startX - rect.left;
+                offsetY = startY - rect.top;
+                element.style.zIndex = 100;
+            });
+
+            document.addEventListener('mousemove', (e) => {
+                if (isDragging) {
+                    const gameArea = document.getElementById('gameArea');
+                    const gameRect = gameArea.getBoundingClientRect();
+
+                    const newX = e.clientX - gameRect.left - offsetX;
+                    const newY = e.clientY - gameRect.top - offsetY;
+
+                    if (newX >= 0 && newX <= gameRect.width - element.offsetWidth &&
+                        newY >= 0 && newY <= gameRect.height - element.offsetHeight) {
+                        element.style.left = newX + 'px';
+                        element.style.top = newY + 'px';
+
+                        // Update magnet position in array
+                        const magnetIndex = magnets.findIndex(m => m.element === element);
+                        if (magnetIndex !== -1) {
+                            magnets[magnetIndex].x = newX;
+                            magnets[magnetIndex].y = newY;
+                        }
+
+                        updateField();
+                    }
+                }
+            });
+
+            document.addEventListener('mouseup', () => {
+                if (isDragging) {
+                    isDragging = false;
+                    element.style.zIndex = 10;
+                    checkForDiscovery();
+                }
+            });
+        }
+
+        function addMagnet(type) {
+            const gameArea = document.getElementById('gameArea');
+            const magnet = createMagnet(type);
+
+            // Random position
+            const x = Math.random() * (gameArea.offsetWidth - 100);
+            const y = Math.random() * (gameArea.offsetHeight - 100);
+
+            magnet.style.left = x + 'px';
+            magnet.style.top = y + 'px';
+
+            gameArea.appendChild(magnet);
+            magnets.push({
+                element: magnet,
+                type: type,
+                x: x,
+                y: y,
+                strength: fieldStrength
+            });
+
+            updateField();
+            addScore(10);
+        }
+
+        function updateField() {
+            compasses.forEach(compass => {
+                const angle = calculateMagneticField(compass.x, compass.y);
+                compass.needle.style.transform = `rotate(${angle}deg)`;
+            });
+
+            // Update iron filings if they exist
+            ironFilings.forEach(filing => {
+                const angle = calculateMagneticField(filing.x, filing.y);
+                filing.element.style.transform = `rotate(${angle}deg)`;
+            });
+
+            // Update field lines if showing
+            if (showingFieldLines) {
+                drawFieldLines();
+            }
+        }
+
+        function calculateMagneticField(x, y) {
+            let totalFieldX = 0;
+            let totalFieldY = 0;
+
+            magnets.forEach(magnet => {
+                const dx = x - (magnet.x + 40); // Center of magnet
+                const dy = y - (magnet.y + 20);
+                const distance = Math.sqrt(dx * dx + dy * dy);
+
+                if (distance > 5) { // Avoid division by zero
+                    const fieldStrength = magnet.strength * 1000 / (distance * distance);
+
+                    if (magnet.type === 'bar') {
+                        // Bar magnet field (simplified dipole)
+                        totalFieldX += fieldStrength * dx / distance;
+                        totalFieldY += fieldStrength * dy / distance;
+                    } else if (magnet.type === 'horseshoe') {
+                        // Horseshoe magnet field
+                        totalFieldX += fieldStrength * dx / distance * 0.8;
+                        totalFieldY += fieldStrength * dy / distance * 0.8;
+                    }
+                }
+            });
+
+            return Math.atan2(totalFieldY, totalFieldX) * 180 / Math.PI;
+        }
+
+        function updateFieldStrength() {
+            fieldStrength = parseInt(document.getElementById('fieldStrength').value);
+            document.getElementById('strengthValue').textContent = fieldStrength;
+
+            // Update all magnet strengths
+            magnets.forEach(magnet => {
+                magnet.strength = fieldStrength;
+            });
+
+            updateField();
+        }
+
+        function addIronFilings() {
+            const gameArea = document.getElementById('gameArea');
+
+            // Clear existing filings
+            ironFilings.forEach(filing => filing.element.remove());
+            ironFilings = [];
+
+            // Add new filings
+            for (let i = 0; i < 100; i++) {
+                const filing = document.createElement('div');
+                filing.className = 'iron-filing';
+
+                const x = Math.random() * gameArea.offsetWidth;
+                const y = Math.random() * gameArea.offsetHeight;
+
+                filing.style.left = x + 'px';
+                filing.style.top = y + 'px';
+
+                gameArea.appendChild(filing);
+                ironFilings.push({
+                    element: filing,
+                    x: x,
+                    y: y
+                });
+            }
+
+            updateField();
+            addScore(15);
+        }
+
+        function toggleFieldLines() {
+            showingFieldLines = !showingFieldLines;
+
+            if (showingFieldLines) {
+                drawFieldLines();
+            } else {
+                // Remove field lines
+                document.querySelectorAll('.field-line').forEach(line => line.remove());
+            }
+
+            addScore(5);
+        }
+
+        function drawFieldLines() {
+            // Remove existing field lines
+            document.querySelectorAll('.field-line').forEach(line => line.remove());
+
+            const gameArea = document.getElementById('gameArea');
+
+            magnets.forEach(magnet => {
+                for (let angle = 0; angle < 360; angle += 30) {
+                    const line = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+                    line.className = 'field-line';
+                    line.style.position = 'absolute';
+                    line.style.top = '0';
+                    line.style.left = '0';
+                    line.style.width = '100%';
+                    line.style.height = '100%';
+
+                    const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+                    path.className = 'field-line-path';
+
+                    // Calculate field line path (simplified)
+                    const startX = magnet.x + 40;
+                    const startY = magnet.y + 20;
+                    const endX = startX + 100 * Math.cos(angle * Math.PI / 180);
+                    const endY = startY + 100 * Math.sin(angle * Math.PI / 180);
+
+                    path.setAttribute('d', `M ${startX} ${startY} Q ${(startX + endX) / 2} ${(startY + endY) / 2} ${endX} ${endY}`);
+
+                    line.appendChild(path);
+                    gameArea.appendChild(line);
+                }
+            });
+        }
+
+        function resetField() {
+            // Remove all magnets except the first one
+            while (magnets.length > 1) {
+                magnets.pop().element.remove();
+            }
+
+            // Remove iron filings
+            ironFilings.forEach(filing => filing.element.remove());
+            ironFilings = [];
+
+            // Remove field lines
+            document.querySelectorAll('.field-line').forEach(line => line.remove());
+            showingFieldLines = false;
+
+            updateField();
+        }
+
+        function checkForDiscovery() {
+            // Simple discovery system - award points for certain interactions
+            if (magnets.length >= 2) {
+                const distance = Math.sqrt(
+                    Math.pow(magnets[0].x - magnets[1].x, 2) +
+                    Math.pow(magnets[0].y - magnets[1].y, 2)
+                );
+
+                if (distance < 100) {
+                    addDiscovery();
+                }
+            }
+        }
+
+        function addScore(points) {
+            score += points;
+            document.getElementById('score').textContent = score;
+
+            // Level up every 100 points
+            const newLevel = Math.floor(score / 100) + 1;
+            if (newLevel > level) {
+                level = newLevel;
+                document.getElementById('level').textContent = level;
+                updateFactDisplay();
+            }
+        }
+
+        function addDiscovery() {
+            discoveries = Math.min(discoveries + 1, 10);
+            document.getElementById('discoveries').textContent = discoveries;
+            addScore(25);
+        }
+
+        function updateFactDisplay() {
+            const factIndex = (level - 1) % facts.length;
+            document.getElementById('factDisplay').textContent = facts[factIndex];
+        }
+
+        function updateChallengeDisplay() {
+            document.getElementById('currentChallenge').textContent = challenges[currentChallengeIndex];
+        }
+
+        function nextChallenge() {
+            currentChallengeIndex = (currentChallengeIndex + 1) % challenges.length;
+            updateChallengeDisplay();
+            addScore(5);
+        }
+
+        function showQuiz() {
+            document.getElementById('quizModal').style.display = 'flex';
+            loadQuizQuestion();
+        }
+
+        function loadQuizQuestion() {
+            const quiz = quizQuestions[currentQuiz];
+            document.getElementById('quizQuestion').textContent = quiz.question;
+
+            const optionsDiv = document.getElementById('quizOptions');
+            optionsDiv.innerHTML = '';
+
+            quiz.options.forEach((option, index) => {
+                const btn = document.createElement('button');
+                btn.className = 'quiz-btn';
+                btn.textContent = option;
+                btn.onclick = () => checkAnswer(index);
+                optionsDiv.appendChild(btn);
+            });
+        }
+
+        function checkAnswer(selectedIndex) {
+            const quiz = quizQuestions[currentQuiz];
+
+            if (selectedIndex === quiz.correct) {
+                addScore(50);
+                alert('Correct! Well done! 🎉');
+            } else {
+                alert('Not quite right. Try again! 🤔');
+            }
+
+            currentQuiz = (currentQuiz + 1) % quizQuestions.length;
+            loadQuizQuestion();
+        }
+
+        function closeQuiz() {
+            document.getElementById('quizModal').style.display = 'none';
+        }
+
+        // Initialize the game when page loads
+        window.onload = function() {
+            initializeGame();
+        };
+    </script>
+</body>
+</html>
