@@ -1,0 +1,2089 @@
+<!DOCTYPE html>
+<!-- saved from url=(0072)file:///Users/henrywang/Downloads/force-calculation-lesson%20(1).html#/2 -->
+<html lang="en" class="reveal-full-page"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Force Calculation - Interactive Physics Lesson</title>
+    <link rel="stylesheet" href="./Force Calculation - Interactive Physics Lesson_files/reveal.min.css">
+    <link rel="stylesheet" href="./Force Calculation - Interactive Physics Lesson_files/white.min.css">
+    <style>
+        .reveal {
+            font-size: 24px;
+        }
+        .reveal h1 { 
+            font-size: 1.8em; 
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+        .reveal h2 { 
+            font-size: 1.5em; 
+            color: #34495e;
+            margin-bottom: 20px;
+        }
+        .reveal h3 { 
+            font-size: 1.2em; 
+            color: #34495e;
+            margin-bottom: 15px;
+        }
+        .reveal .slides section {
+            text-align: center;
+            padding: 20px;
+            box-sizing: border-box;
+            overflow-y: auto;
+            max-height: 100vh;
+        }
+
+        .reveal .slides {
+            width: 100%;
+            height: 100%;
+        }
+
+        .reveal .slides > section {
+            width: 100%;
+            height: 100%;
+            padding: 20px;
+            box-sizing: border-box;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+        }
+
+        .slide-content-wrapper {
+            width: 100%;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px 0;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+        }
+
+        .content-block {
+            margin: 15px 0;
+            padding: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .reveal {
+                font-size: 20px;
+            }
+            .reveal .slides section {
+                padding: 15px;
+            }
+        }
+
+        .do-now-box {
+            background: linear-gradient(135deg, #ff6b6b 0%, #feca57 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px auto;
+            max-width: 600px;
+            font-weight: bold;
+        }
+        .topic-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px;
+            border-radius: 15px;
+            margin: 15px auto;
+            max-width: 500px;
+        }
+        .click-reveal {
+            background: #f0f4f8;
+            border: 2px solid #4a90e2;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 10px auto;
+            max-width: 600px;
+            cursor: pointer;
+            transition: all 0.3s;
+            min-height: 60px;
+        }
+        .click-reveal:hover {
+            background: #e1e8ed;
+            transform: scale(1.02);
+        }
+        .click-reveal.revealed {
+            background: #e8f5e9;
+            border-color: #4caf50;
+            cursor: default;
+        }
+        .definition-box {
+            background: #fff9e6;
+            border-left: 5px solid #ffc107;
+            padding: 15px;
+            margin: 15px auto;
+            max-width: 600px;
+            border-radius: 5px;
+            text-align: left;
+        }
+        .keyword-box {
+            background: #f3e5f5;
+            border: 2px solid #9c27b0;
+            padding: 20px;
+            margin: 15px auto;
+            max-width: 700px;
+            border-radius: 10px;
+        }
+        .keyword-item {
+            background: white;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            text-align: left;
+        }
+        .keyword-term {
+            color: #9c27b0;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+        .question-prompt {
+            background: #e3f2fd;
+            border: 2px solid #2196f3;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px auto;
+            max-width: 600px;
+            font-weight: bold;
+        }
+        .answer-choice {
+            background: #f5f5f5;
+            border: 2px solid #9e9e9e;
+            padding: 12px;
+            margin: 8px auto;
+            max-width: 500px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .answer-choice:hover {
+            background: #eeeeee;
+            transform: scale(1.02);
+        }
+        .answer-choice.correct {
+            background: #c8e6c9;
+            border-color: #4caf50;
+        }
+        .answer-choice.incorrect {
+            background: #ffcdd2;
+            border-color: #f44336;
+        }
+        .step-number {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background: #667eea;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            z-index: 1000;
+        }
+        .reveal-text {
+            color: #666;
+            font-style: italic;
+            font-size: 0.9em;
+        }
+        .transition-box {
+            background: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%);
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px auto;
+            max-width: 600px;
+            font-weight: bold;
+        }
+        .equation-box {
+            background: linear-gradient(135deg, #ffd93d 0%, #6bcf7f 100%);
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px auto;
+            max-width: 500px;
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #2c3e50;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        .formula-breakdown {
+            background: #f8f9fa;
+            border: 2px solid #6c757d;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px auto;
+            max-width: 600px;
+            text-align: left;
+        }
+        .formula-part {
+            padding: 8px;
+            margin: 5px 0;
+            background: white;
+            border-radius: 5px;
+        }
+        .calculation-step {
+            background: #e8f4f8;
+            border-left: 4px solid #2196f3;
+            padding: 10px;
+            margin: 10px auto;
+            max-width: 600px;
+            text-align: left;
+            font-family: 'Courier New', monospace;
+        }
+        .practice-problem {
+            background: #fff3e0;
+            border: 2px solid #ff9800;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 15px auto;
+            max-width: 650px;
+        }
+        .problem-number {
+            background: #ff9800;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            display: inline-block;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        .connection-arrow {
+            font-size: 2em;
+            color: #667eea;
+            animation: bounce 2s infinite;
+        }
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        .progress-tracker {
+            background: #f0f0f0;
+            padding: 10px;
+            border-radius: 10px;
+            margin: 15px auto;
+            max-width: 600px;
+        }
+        .topic-complete {
+            background: #4caf50;
+            color: white;
+            padding: 10px;
+            border-radius: 10px;
+            font-weight: bold;
+            margin: 20px auto;
+            max-width: 400px;
+        }
+        .force-arrow {
+            font-size: 3em;
+            color: #e74c3c;
+            font-weight: bold;
+            display: inline-block;
+            margin: 10px;
+        }
+        .unit-highlight {
+            background: #ffeb3b;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+        
+        /* Image Placeholder Styling */
+        .image-placeholder {
+            width: 100%;
+            max-width: 650px;
+            height: 350px;
+            border: 2px dashed #ccc;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f9f9f9;
+            margin: 20px auto;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+        .image-placeholder:hover {
+            background: #f0f0f0;
+            border-color: #999;
+        }
+        .image-placeholder.has-image {
+            border: none;
+            background: transparent;
+        }
+        .image-placeholder img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            border-radius: 8px;
+        }
+        .placeholder-content {
+            text-align: center;
+            padding: 20px;
+            color: #666;
+        }
+        .placeholder-icon {
+            font-size: 3em;
+            display: block;
+            margin-bottom: 10px;
+            opacity: 0.5;
+        }
+        .placeholder-text {
+            font-size: 1.2em;
+            font-weight: bold;
+            display: block;
+            margin-bottom: 10px;
+        }
+        .placeholder-hint {
+            font-size: 0.9em;
+            color: #999;
+            display: block;
+            font-family: monospace;
+        }
+
+        /* Minimized image placeholder */
+        .image-placeholder.minimized {
+            height: 40px;
+            background: #e8f4fd;
+            border: 1px solid #b3d9ff;
+            cursor: pointer;
+            border-radius: 20px;
+            margin: 10px auto;
+        }
+
+        .image-placeholder.minimized .placeholder-content {
+            padding: 8px 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .image-placeholder.minimized .placeholder-icon {
+            font-size: 1.2em;
+            margin: 0;
+        }
+
+        .image-placeholder.minimized .placeholder-text {
+            font-size: 0.8em;
+            margin: 0;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 200px;
+        }
+
+        .image-placeholder.minimized .placeholder-hint {
+            display: none;
+        }
+
+        /* Drag and drop styling */
+        .image-placeholder.drag-over {
+            border-color: #4CAF50 !important;
+            background: #e8f5e9 !important;
+            transform: scale(1.02);
+            box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3);
+        }
+
+        .image-placeholder.minimized.drag-over {
+            height: 60px;
+            background: #e8f5e9 !important;
+            border-color: #4CAF50 !important;
+        }
+
+        /* Drag hint overlay */
+        .drag-hint-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(76, 175, 80, 0.9);
+            color: white;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.1em;
+            border-radius: 10px;
+            z-index: 5;
+        }
+
+        /* Image controls */
+        .image-controls {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            display: flex;
+            gap: 5px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 10;
+        }
+
+        .image-placeholder:hover .image-controls,
+        .image-placeholder.minimized .image-controls {
+            opacity: 1;
+        }
+
+        .image-control-btn {
+            background: rgba(0,0,0,0.7);
+            color: white;
+            border: none;
+            border-radius: 3px;
+            padding: 5px 8px;
+            cursor: pointer;
+            font-size: 0.8em;
+            transition: background 0.3s;
+        }
+
+        .image-control-btn:hover {
+            background: rgba(0,0,0,0.9);
+        }
+
+        /* Upload methods panel */
+        .upload-methods {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            display: flex;
+            gap: 5px;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .image-placeholder:hover .upload-methods {
+            opacity: 1;
+        }
+
+        .upload-method-btn {
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            padding: 5px 10px;
+            cursor: pointer;
+            font-size: 0.8em;
+        }
+
+        /* Image Management Panel */
+        .image-manager {
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            background: white;
+            border: 2px solid #667eea;
+            border-radius: 10px;
+            padding: 15px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+            z-index: 2000;
+            max-width: 300px;
+            max-height: 80vh;
+            overflow-y: auto;
+            transform: translateX(-320px);
+            transition: transform 0.3s ease;
+        }
+        .image-manager.open {
+            transform: translateX(0);
+        }
+        .image-manager-toggle {
+            position: fixed;
+            top: 50px;
+            left: 10px;
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            z-index: 2001;
+            font-size: 12px;
+        }
+        .image-manager h3 {
+            margin: 0 0 15px 0;
+            color: #667eea;
+            font-size: 1.1em;
+        }
+        .bulk-upload {
+            margin-bottom: 15px;
+            padding: 10px;
+            border: 2px dashed #ccc;
+            border-radius: 5px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .bulk-upload:hover {
+            border-color: #667eea;
+            background: #f0f4f8;
+        }
+        .slide-list {
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        .slide-item {
+            display: flex;
+            align-items: center;
+            padding: 5px;
+            margin: 3px 0;
+            border-radius: 3px;
+            font-size: 0.8em;
+        }
+        .slide-item.has-image {
+            background: #e8f5e9;
+            border-left: 3px solid #4caf50;
+        }
+        .slide-item.no-image {
+            background: #ffebee;
+            border-left: 3px solid #f44336;
+        }
+        .slide-status {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+        .slide-status.has-image {
+            background: #4caf50;
+        }
+        .slide-status.no-image {
+            background: #f44336;
+        }
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background: #f0f0f0;
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 10px 0;
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            transition: width 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 0.8em;
+            font-weight: bold;
+        }
+        .action-buttons {
+            display: flex;
+            gap: 5px;
+            margin-top: 10px;
+        }
+        .action-btn {
+            flex: 1;
+            padding: 8px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 0.8em;
+            font-weight: bold;
+        }
+        .action-btn.export {
+            background: #4caf50;
+            color: white;
+        }
+        .action-btn.import {
+            background: #2196f3;
+            color: white;
+        }
+        .action-btn.clear {
+            background: #f44336;
+            color: white;
+        }
+    </style>
+</head>
+<body class="reveal-viewport" style="--slide-width: 100%px; --slide-height: 100%px;">
+    <!-- Image Management Panel -->
+    <button class="image-manager-toggle" onclick="toggleImageManager()">
+        📷 Images
+    </button>
+
+    <div class="image-manager" id="imageManager">
+        <h3>📷 Image Manager</h3>
+
+        <div class="bulk-upload" onclick="bulkUpload()">
+            <div>📁 Bulk Upload Images</div>
+            <small>Click to select multiple images</small>
+        </div>
+
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressFill" style="width: 6.66667%;">1/15</div>
+        </div>
+
+        <div class="slide-list" id="slideList"><div class="slide-item no-image">
+                    <div class="slide-status no-image"></div>
+                    <div>
+                        <div>Slide 1</div>
+                        <small>Image: Pushing a Pencil</small>
+                    </div>
+                </div><div class="slide-item no-image">
+                    <div class="slide-status no-image"></div>
+                    <div>
+                        <div>Slide 2</div>
+                        <small>Image: Force Learning Path</small>
+                    </div>
+                </div><div class="slide-item has-image">
+                    <div class="slide-status has-image"></div>
+                    <div>
+                        <div>Slide 3</div>
+                        <small>Image: Force Examples</small>
+                    </div>
+                </div><div class="slide-item no-image">
+                    <div class="slide-status no-image"></div>
+                    <div>
+                        <div>Slide 4</div>
+                        <small>Image: Force Vectors</small>
+                    </div>
+                </div><div class="slide-item no-image">
+                    <div class="slide-status no-image"></div>
+                    <div>
+                        <div>Slide 5</div>
+                        <small>Image: Newton Portrait</small>
+                    </div>
+                </div><div class="slide-item no-image">
+                    <div class="slide-status no-image"></div>
+                    <div>
+                        <div>Slide 6</div>
+                        <small>Image: Types of Forces</small>
+                    </div>
+                </div><div class="slide-item no-image">
+                    <div class="slide-status no-image"></div>
+                    <div>
+                        <div>Slide 7</div>
+                        <small>Image: F=ma Visual</small>
+                    </div>
+                </div><div class="slide-item no-image">
+                    <div class="slide-status no-image"></div>
+                    <div>
+                        <div>Slide 8</div>
+                        <small>Image: Variables Diagram</small>
+                    </div>
+                </div><div class="slide-item no-image">
+                    <div class="slide-status no-image"></div>
+                    <div>
+                        <div>Slide 9</div>
+                        <small>Image: Car vs Shopping Cart</small>
+                    </div>
+                </div><div class="slide-item no-image">
+                    <div class="slide-status no-image"></div>
+                    <div>
+                        <div>Slide 11</div>
+                        <small>Image: Force Doubling</small>
+                    </div>
+                </div><div class="slide-item no-image">
+                    <div class="slide-status no-image"></div>
+                    <div>
+                        <div>Slide 14</div>
+                        <small>Image: Weight vs Mass</small>
+                    </div>
+                </div><div class="slide-item no-image">
+                    <div class="slide-status no-image"></div>
+                    <div>
+                        <div>Slide 16</div>
+                        <small>Image: Multiple Forces</small>
+                    </div>
+                </div><div class="slide-item no-image">
+                    <div class="slide-status no-image"></div>
+                    <div>
+                        <div>Slide 17</div>
+                        <small>Image: Tug of War</small>
+                    </div>
+                </div><div class="slide-item no-image">
+                    <div class="slide-status no-image"></div>
+                    <div>
+                        <div>Slide 20</div>
+                        <small>Image: Daily Forces</small>
+                    </div>
+                </div><div class="slide-item no-image">
+                    <div class="slide-status no-image"></div>
+                    <div>
+                        <div>Slide 25</div>
+                        <small>Image: Celebration</small>
+                    </div>
+                </div></div>
+
+        <div class="action-buttons">
+            <button class="action-btn export" onclick="exportImages()">💾 Export</button>
+            <button class="action-btn import" onclick="importImages()">📂 Import</button>
+            <button class="action-btn clear" onclick="clearAllImages()">🗑️ Clear</button>
+        </div>
+    </div>
+
+    <div class="reveal slide focused has-horizontal-slides ready" role="application" data-transition-speed="default" data-background-transition="fade" style="cursor: none;">
+        <div class="slides" style="width: 1422.96px; height: 678.16px;">
+            
+            <!-- SLIDE 1: Do Now -->
+            <section hidden="" aria-hidden="true" class="past" style="display: block; scroll-behavior: smooth;">
+                <div class="do-now-box">
+                    <h1>📔 DO NOW</h1>
+                    <p>Get ready to become a force expert!</p>
+                </div>
+                <div class="question-prompt">
+                    Push your pencil across your desk. Now push it harder.
+                </div>
+                
+                <div class="image-placeholder" id="slide1-image" data-slide="1">
+                    <div class="placeholder-content">
+                        <span class="placeholder-icon">🖼️</span>
+                        <span class="placeholder-text">Image: Pushing a Pencil</span>
+                        <span class="placeholder-hint">Hand pushing pencil with different forces</span>
+                    </div>
+
+                    <!-- Drag hint overlay -->
+                    <div class="drag-hint-overlay">
+                        📁 Drop image here
+                    </div>
+
+                    <!-- Image Controls -->
+                    <div class="image-controls">
+                        <button class="image-control-btn" onclick="toggleMinimize(&#39;slide1-image&#39;)" title="Minimize/Maximize">📦</button>
+                        <button class="image-control-btn" onclick="replaceImage(&#39;slide1-image&#39;)" title="Upload">📂</button>
+                        <button class="image-control-btn" onclick="removeImage(&#39;slide1-image&#39;)" title="Remove">🗑️</button>
+                    </div>
+
+                    <!-- Upload Methods (shown on hover) -->
+                    <div class="upload-methods">
+                        <button class="upload-method-btn" onclick="selectImageForSlide(&#39;slide1-image&#39;)" title="Upload from computer">📁 Upload</button>
+                    </div>
+                </div>
+                
+                <div class="click-reveal" onclick="revealContent(this, &#39;What changed when you pushed harder?&lt;br&gt;• Speed?&lt;br&gt;• Distance?&lt;br&gt;• Effort needed?&#39;)">
+                    <span class="reveal-text">Click to see what to observe →</span>
+                </div>
+                <div class="click-reveal" onclick="revealContent(this, &#39;🤔 &lt;strong&gt;Think:&lt;/strong&gt; What invisible thing made the pencil move?&#39;)">
+                    <span class="reveal-text">The big question →</span>
+                </div>
+            </section>
+
+            <!-- SLIDE 2: Today's Mission -->
+            <section hidden="" aria-hidden="true" class="past" style="display: block; scroll-behavior: smooth;">
+                <div class="topic-header">
+                    <h1>🎯 TODAY'S MISSION</h1>
+                    <h2>Master the Power of Forces</h2>
+                </div>
+                
+                <div class="image-placeholder" id="slide2-image" data-slide="2">
+                    <div class="placeholder-content">
+                        <span class="placeholder-icon">🖼️</span>
+                        <span class="placeholder-text">Image: Force Learning Path</span>
+                        <span class="placeholder-hint">Visual roadmap of topics</span>
+                    </div>
+                <div class="drag-hint-overlay">📁 Drop image here</div><div class="image-controls">
+                        <button class="image-control-btn" onclick="toggleMinimize(&#39;slide2-image&#39;)" title="Minimize/Maximize">📦</button>
+                        <button class="image-control-btn" onclick="replaceImage(&#39;slide2-image&#39;)" title="Upload">📂</button>
+                        <button class="image-control-btn" onclick="removeImage(&#39;slide2-image&#39;)" title="Remove">🗑️</button>
+                    </div><div class="upload-methods">
+                        <button class="upload-method-btn" onclick="selectImageForSlide(&#39;slide2-image&#39;)" title="Upload from computer">📁 Upload</button>
+                    </div></div>
+                
+                <div class="click-reveal" onclick="revealContent(this, &#39;By the end of today, you will:&#39;)">
+                    <span class="reveal-text">Your goals →</span>
+                </div>
+                <div class="click-reveal" onclick="revealContent(this, &#39;✅ Understand what forces are&#39;)">
+                    <span class="reveal-text">Goal 1 →</span>
+                </div>
+                <div class="click-reveal" onclick="revealContent(this, &#39;✅ Master Newton\&#39;s Second Law&#39;)">
+                    <span class="reveal-text">Goal 2 →</span>
+                </div>
+                <div class="click-reveal" onclick="revealContent(this, &#39;✅ Calculate forces like a physicist!&#39;)">
+                    <span class="reveal-text">Goal 3 →</span>
+                </div>
+            </section>
+
+            <!-- SLIDE 3: What is Force? -->
+            <section class="present" style="display: block; scroll-behavior: smooth;">
+                <h2>What is a Force?</h2>
+                <div class="definition-box">
+                    <strong>Force:</strong> A push or pull on an object
+                </div>
+                
+                <div class="image-placeholder has-image" id="slide3-image" data-slide="3">
+                    <img src="data:image/jpeg;base64,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" alt="Slide image: web-image.jpg">
+                    <div class="image-controls">
+                        <button class="image-control-btn" onclick="toggleMinimize(&#39;slide3-image&#39;)" title="Minimize">📦</button>
+                        <button class="image-control-btn" onclick="replaceImage(&#39;slide3-image&#39;)" title="Replace">🔄</button>
+                        <button class="image-control-btn" onclick="removeImage(&#39;slide3-image&#39;)" title="Remove">🗑️</button>
+                    </div>
+                </div>
+                
+                <div class="click-reveal" onclick="revealContent(this, &#39;💪 Push: Opening a door&#39;)">
+                    <span class="reveal-text">Example 1 →</span>
+                </div>
+                <div class="click-reveal" onclick="revealContent(this, &#39;🧲 Pull: Gravity on a falling apple&#39;)">
+                    <span class="reveal-text">Example 2 →</span>
+                </div>
+                <div class="click-reveal" onclick="revealContent(this, &#39;Forces can change: speed, direction, or shape!&#39;)">
+                    <span class="reveal-text">What forces do →</span>
+                </div>
+            </section>
+
+            <!-- SLIDE 4: Forces are Vectors -->
+            <section hidden="" aria-hidden="true" class="future" style="display: block; scroll-behavior: smooth;">
+                <h2>Forces Have Direction!</h2>
+                
+                <div class="image-placeholder" id="slide4-image" data-slide="4">
+                    <div class="placeholder-content">
+                        <span class="placeholder-icon">🖼️</span>
+                        <span class="placeholder-text">Image: Force Vectors</span>
+                        <span class="placeholder-hint">Arrows showing force direction and magnitude</span>
+                    </div>
+                <div class="drag-hint-overlay">📁 Drop image here</div><div class="image-controls">
+                        <button class="image-control-btn" onclick="toggleMinimize(&#39;slide4-image&#39;)" title="Minimize/Maximize">📦</button>
+                        <button class="image-control-btn" onclick="replaceImage(&#39;slide4-image&#39;)" title="Upload">📂</button>
+                        <button class="image-control-btn" onclick="removeImage(&#39;slide4-image&#39;)" title="Remove">🗑️</button>
+                    </div><div class="upload-methods">
+                        <button class="upload-method-btn" onclick="selectImageForSlide(&#39;slide4-image&#39;)" title="Upload from computer">📁 Upload</button>
+                    </div></div>
+                
+                <div class="click-reveal" onclick="revealContent(this, &#39;Forces are VECTORS - they have:&#39;)">
+                    <span class="reveal-text">Key concept →</span>
+                </div>
+                <div class="click-reveal" onclick="revealContent(this, &#39;📏 &lt;strong&gt;Magnitude:&lt;/strong&gt; How strong (the number)&#39;)">
+                    <span class="reveal-text">Part 1 →</span>
+                </div>
+                <div class="click-reveal" onclick="revealContent(this, &#39;➡️ &lt;strong&gt;Direction:&lt;/strong&gt; Which way it points&#39;)">
+                    <span class="reveal-text">Part 2 →</span>
+                </div>
+                <div class="force-arrow">→</div>
+                <div class="click-reveal" onclick="revealContent(this, &#39;Bigger arrow = Stronger force!&#39;)">
+                    <span class="reveal-text">Visual rule →</span>
+                </div>
+            </section>
+
+            <!-- SLIDE 5: Units of Force -->
+            <section hidden="" aria-hidden="true" class="future" style="display: block; scroll-behavior: smooth;">
+                <h2>How Do We Measure Force?</h2>
+                
+                <div class="equation-box">
+                    Force Unit = Newton (N)
+                </div>
+                
+                <div class="image-placeholder" id="slide5-image" data-slide="5">
+                    <div class="placeholder-content">
+                        <span class="placeholder-icon">🖼️</span>
+                        <span class="placeholder-text">Image: Newton Portrait</span>
+                        <span class="placeholder-hint">Sir Isaac Newton and apple</span>
+                    </div>
+                <div class="drag-hint-overlay">📁 Drop image here</div><div class="image-controls">
+                        <button class="image-control-btn" onclick="toggleMinimize(&#39;slide5-image&#39;)" title="Minimize/Maximize">📦</button>
+                        <button class="image-control-btn" onclick="replaceImage(&#39;slide5-image&#39;)" title="Upload">📂</button>
+                        <button class="image-control-btn" onclick="removeImage(&#39;slide5-image&#39;)" title="Remove">🗑️</button>
+                    </div><div class="upload-methods">
+                        <button class="upload-method-btn" onclick="selectImageForSlide(&#39;slide5-image&#39;)" title="Upload from computer">📁 Upload</button>
+                    </div></div>
+                
+                <div class="click-reveal" onclick="revealContent(this, &#39;🍎 Named after Sir Isaac Newton&#39;)">
+                    <span class="reveal-text">Fun fact →</span>
+                </div>
+                <div class="click-reveal" onclick="revealContent(this, &#39;1 Newton = Force to accelerate 1 kg by 1 m/s²&#39;)">
+                    <span class="reveal-text">Definition →</span>
+                </div>
+                <div class="click-reveal" onclick="revealContent(this, &#39;🍎 An apple weighs about 1 Newton!&#39;)">
+                    <span class="reveal-text">Real-world reference →</span>
+                </div>
+            </section>
+
+            <!-- SLIDE 6: Types of Forces -->
+            <section hidden="" aria-hidden="true" class="future" style="display: none; scroll-behavior: smooth;">
+                <h2>Common Forces Around Us</h2>
+                
+                <div class="image-placeholder" id="slide6-image" data-slide="6">
+                    <div class="placeholder-content">
+                        <span class="placeholder-icon">🖼️</span>
+                        <span class="placeholder-text">Image: Types of Forces</span>
+                        <span class="placeholder-hint">Gravity, friction, normal, tension illustrated</span>
+                    </div>
+                <div class="drag-hint-overlay">📁 Drop image here</div><div class="image-controls">
+                        <button class="image-control-btn" onclick="toggleMinimize(&#39;slide6-image&#39;)" title="Minimize/Maximize">📦</button>
+                        <button class="image-control-btn" onclick="replaceImage(&#39;slide6-image&#39;)" title="Upload">📂</button>
+                        <button class="image-control-btn" onclick="removeImage(&#39;slide6-image&#39;)" title="Remove">🗑️</button>
+                    </div><div class="upload-methods">
+                        <button class="upload-method-btn" onclick="selectImageForSlide(&#39;slide6-image&#39;)" title="Upload from computer">📁 Upload</button>
+                    </div></div>
+                
+                <div class="click-reveal" onclick="revealContent(this, &#39;🌍 &lt;strong&gt;Gravity:&lt;/strong&gt; Pulls everything down (9.8 m/s² on Earth)&#39;)">
+                    <span class="reveal-text">Force 1 →</span>
+                </div>
+                <div class="click-reveal" onclick="revealContent(this, &#39;👟 &lt;strong&gt;Friction:&lt;/strong&gt; Opposes motion between surfaces&#39;)">
+                    <span class="reveal-text">Force 2 →</span>
+                </div>
+                <div class="click-reveal" onclick="revealContent(this, &#39;📚 &lt;strong&gt;Normal:&lt;/strong&gt; Surface pushing back (perpendicular)&#39;)">
+                    <span class="reveal-text">Force 3 →</span>
+                </div>
+                <div class="click-reveal" onclick="revealContent(this, &#39;🎯 &lt;strong&gt;Applied:&lt;/strong&gt; Any push or pull you add&#39;)">
+                    <span class="reveal-text">Force 4 →</span>
+                </div>
+            </section>
+
+            <!-- SLIDE 7: Newton's Second Law Introduction -->
+            <section hidden="" aria-hidden="true" class="future" style="display: none; scroll-behavior: smooth;">
+                <div class="topic-header">
+                    <h1>⚡ NEWTON'S SECOND LAW</h1>
+                    <p>The most important equation in physics!</p>
+                </div>
+                
+                <div class="equation-box">
+                    F = ma
+                </div>
+                
+                <div class="image-placeholder" id="slide7-image" data-slide="7">
+                    <div class="placeholder-content">
+                        <span class="placeholder-icon">🖼️</span>
+                        <span class="placeholder-text">Image: F=ma Visual</span>
+                        <span class="placeholder-hint">Force, mass, acceleration relationship</span>
+                    </div>
+                <div class="drag-hint-overlay">📁 Drop image here</div><div class="image-controls">
+                        <button class="image-control-btn" onclick="toggleMinimize(&#39;slide7-image&#39;)" title="Minimize/Maximize">📦</button>
+                        <button class="image-control-btn" onclick="replaceImage(&#39;slide7-image&#39;)" title="Upload">📂</button>
+                        <button class="image-control-btn" onclick="removeImage(&#39;slide7-image&#39;)" title="Remove">🗑️</button>
+                    </div><div class="upload-methods">
+                        <button class="upload-method-btn" onclick="selectImageForSlide(&#39;slide7-image&#39;)" title="Upload from computer">📁 Upload</button>
+                    </div></div>
+                
+                <div class="click-reveal" onclick="revealContent(this, &#39;This ONE equation explains almost all motion!&#39;)">
+                    <span class="reveal-text">Why it matters →</span>
+                </div>
+            </section>
+
+            <!-- SLIDE 8: Breaking Down F=ma -->
+            <section hidden="" aria-hidden="true" class="future" style="display: none; scroll-behavior: smooth;">
+                <h2>Understanding F = ma</h2>
+                
+                <div class="formula-breakdown">
+                    <div class="formula-part">
+                        <strong>F</strong> = Force (measured in Newtons, N)
+                    </div>
+                    <div class="formula-part">
+                        <strong>m</strong> = mass (measured in kilograms, kg)
+                    </div>
+                    <div class="formula-part">
+                        <strong>a</strong> = acceleration (measured in m/s²)
+                    </div>
+                </div>
+                
+                <div class="image-placeholder" id="slide8-image" data-slide="8">
+                    <div class="placeholder-content">
+                        <span class="placeholder-icon">🖼️</span>
+                        <span class="placeholder-text">Image: Variables Diagram</span>
+                        <span class="placeholder-hint">Visual showing F, m, and a relationship</span>
+                    </div>
+                <div class="drag-hint-overlay">📁 Drop image here</div><div class="image-controls">
+                        <button class="image-control-btn" onclick="toggleMinimize(&#39;slide8-image&#39;)" title="Minimize/Maximize">📦</button>
+                        <button class="image-control-btn" onclick="replaceImage(&#39;slide8-image&#39;)" title="Upload">📂</button>
+                        <button class="image-control-btn" onclick="removeImage(&#39;slide8-image&#39;)" title="Remove">🗑️</button>
+                    </div><div class="upload-methods">
+                        <button class="upload-method-btn" onclick="selectImageForSlide(&#39;slide8-image&#39;)" title="Upload from computer">📁 Upload</button>
+                    </div></div>
+                
+                <div class="click-reveal" onclick="revealContent(this, &#39;⬆️ More force = More acceleration&#39;)">
+                    <span class="reveal-text">Relationship 1 →</span>
+                </div>
+                <div class="click-reveal" onclick="revealContent(this, &#39;⬆️ More mass = Less acceleration (for same force)&#39;)">
+                    <span class="reveal-text">Relationship 2 →</span>
+                </div>
+            </section>
+
+            <!-- SLIDE 9: Real-World Example -->
+            <section hidden="" aria-hidden="true" class="future" style="display: none; scroll-behavior: smooth;">
+                <h2>F = ma in Action</h2>
+                
+                <div class="question-prompt">
+                    Why is it harder to push a car than a shopping cart?
+                </div>
+                
+                <div class="image-placeholder" id="slide9-image" data-slide="9">
+                    <div class="placeholder-content">
+                        <span class="placeholder-icon">🖼️</span>
+                        <span class="placeholder-text">Image: Car vs Shopping Cart</span>
+                        <span class="placeholder-hint">Person pushing both objects</span>
+                    </div>
+                <div class="drag-hint-overlay">📁 Drop image here</div><div class="image-controls">
+                        <button class="image-control-btn" onclick="toggleMinimize(&#39;slide9-image&#39;)" title="Minimize/Maximize">📦</button>
+                        <button class="image-control-btn" onclick="replaceImage(&#39;slide9-image&#39;)" title="Upload">📂</button>
+                        <button class="image-control-btn" onclick="removeImage(&#39;slide9-image&#39;)" title="Remove">🗑️</button>
+                    </div><div class="upload-methods">
+                        <button class="upload-method-btn" onclick="selectImageForSlide(&#39;slide9-image&#39;)" title="Upload from computer">📁 Upload</button>
+                    </div></div>
+                
+                <div class="click-reveal" onclick="revealContent(this, &#39;🚗 Car: Large mass (m) → needs MORE force (F)&#39;)">
+                    <span class="reveal-text">Car analysis →</span>
+                </div>
+                <div class="click-reveal" onclick="revealContent(this, &#39;🛒 Cart: Small mass (m) → needs LESS force (F)&#39;)">
+                    <span class="reveal-text">Cart analysis →</span>
+                </div>
+                <div class="click-reveal" onclick="revealContent(this, &#39;Same acceleration (a) requires F proportional to m!&#39;)">
+                    <span class="reveal-text">The connection →</span>
+                </div>
+            </section>
+
+            <!-- SLIDE 10: First Calculation -->
+            <section hidden="" aria-hidden="true" class="future" style="display: none; scroll-behavior: smooth;">
+                <h2>Let's Calculate!</h2>
+                
+                <div class="practice-problem">
+                    <span class="problem-number">Problem 1</span>
+                    <p>A 5 kg box is pushed with 20 N of force. Find the acceleration.</p>
+                </div>
+                
+                <div class="click-reveal" onclick="revealContent(this, &#39;&lt;strong&gt;Given:&lt;/strong&gt; F = 20 N, m = 5 kg&#39;)">
+                    <span class="reveal-text">Step 1: Identify →</span>
+                </div>
+                <div class="click-reveal" onclick="revealContent(this, &#39;&lt;strong&gt;Formula:&lt;/strong&gt; F = ma → a = F/m&#39;)">
+                    <span class="reveal-text">Step 2: Rearrange →</span>
+                </div>
+                <div class="click-reveal" onclick="revealContent(this, &#39;&lt;strong&gt;Calculate:&lt;/strong&gt; a = 20 N ÷ 5 kg = 4 m/s²&#39;)">
+                    <span class="reveal-text">Step 3: Solve →</span>
+                </div>
+                <div class="click-reveal" onclick="revealContent(this, &#39;✅ The box accelerates at &lt;span class=\" unit-highlight\"="">4 m/s²')"&gt;
+                    <span class="reveal-text">Answer →</span>
+                </div>
+            </section>
+
+            <!-- SLIDE 11: Quick Check -->
+            <section hidden="" aria-hidden="true" class="future" style="display: none; scroll-behavior: smooth;">
+                <h2>Quick Check #1</h2>
+                <div class="question-prompt">
+                    If you DOUBLE the force on an object, what happens to acceleration?
+                </div>
+                
+                <div class="image-placeholder" id="slide11-image" data-slide="11">
+                    <div class="placeholder-content">
+                        <span class="placeholder-icon">🖼️</span>
+                        <span class="placeholder-text">Image: Force Doubling</span>
+                        <span class="placeholder-hint">Visual showing F→2F effect</span>
+                    </div>
+                <div class="drag-hint-overlay">📁 Drop image here</div><div class="image-controls">
+                        <button class="image-control-btn" onclick="toggleMinimize(&#39;slide11-image&#39;)" title="Minimize/Maximize">📦</button>
+                        <button class="image-control-btn" onclick="replaceImage(&#39;slide11-image&#39;)" title="Upload">📂</button>
+                        <button class="image-control-btn" onclick="removeImage(&#39;slide11-image&#39;)" title="Remove">🗑️</button>
+                    </div><div class="upload-methods">
+                        <button class="upload-method-btn" onclick="selectImageForSlide(&#39;slide11-image&#39;)" title="Upload from computer">📁 Upload</button>
+                    </div></div>
+                
+                <div class="answer-choice" onclick="markAnswer(this, false)">Stays the same</div>
+                <div class="answer-choice" onclick="markAnswer(this, true)">Doubles</div>
+                <div class="answer-choice" onclick="markAnswer(this, false)">Halves</div>
+                <div class="answer-choice" onclick="markAnswer(this, false)">Quadruples</div>
+                
+                <div class="click-reveal" onclick="revealContent(this, &#39;F = ma, so if F doubles and m stays same, a must double!&#39;)">
+                    <span class="reveal-text">Explanation →</span>
+                </div>
+            </section>
+
+            <!-- SLIDE 12: Finding Force -->
+            <section hidden="" aria-hidden="true" class="future" style="display: none; scroll-behavior: smooth;">
+                <h2>Finding Force</h2>
+                
+                <div class="practice-problem">
+                    <span class="problem-number">Problem 2</span>
+                    <p>A 2 kg ball accelerates at 3 m/s². What force was applied?</p>
+                </div>
+                
+                <div class="calculation-step">Given: m = 2 kg, a = 3 m/s²</div>
+                <div class="calculation-step">Formula: F = ma</div>
+                <div class="calculation-step">F = 2 kg × 3 m/s²</div>
+                <div class="calculation-step">F = 6 N</div>
+                
+                <div class="transition-box">
+                    Notice: Units multiply too! kg × m/s² = N
+                </div>
+            </section>
+
+            <!-- SLIDE 13: Finding Mass -->
+            <section hidden="" aria-hidden="true" class="future" style="display: none; scroll-behavior: smooth;">
+                <h2>Finding Mass</h2>
+                
+                <div class="practice-problem">
+                    <span class="problem-number">Problem 3</span>
+                    <p>A 15 N force causes 5 m/s² acceleration. What's the mass?</p>
+                </div>
+                
+                <div class="click-reveal" onclick="revealContent(this, &#39;&lt;strong&gt;Given:&lt;/strong&gt; F = 15 N, a = 5 m/s²&#39;)">
+                    <span class="reveal-text">Identify →</span>
+                </div>
+                <div class="click-reveal" onclick="revealContent(this, &#39;&lt;strong&gt;Rearrange:&lt;/strong&gt; m = F/a&#39;)">
+                    <span class="reveal-text">Formula →</span>
+                </div>
+                <div class="click-reveal" onclick="revealContent(this, &#39;&lt;strong&gt;Calculate:&lt;/strong&gt; m = 15 N ÷ 5 m/s² = 3 kg&#39;)">
+                    <span class="reveal-text">Solve →</span>
+                </div>
+                
+                <div class="equation-box">
+                    m = 3 kg
+                </div>
+            </section>
+
+            <!-- SLIDE 14: Weight vs Mass -->
+            <section hidden="" aria-hidden="true" class="future" style="display: none; scroll-behavior: smooth;">
+                <h2>Weight is a Force!</h2>
+                
+                <div class="definition-box">
+                    <strong>Weight:</strong> The force of gravity on an object<br>
+                    W = mg (where g = 9.8 m/s² on Earth)
+                </div>
+                
+                <div class="image-placeholder" id="slide14-image" data-slide="14">
+                    <div class="placeholder-content">
+                        <span class="placeholder-icon">🖼️</span>
+                        <span class="placeholder-text">Image: Weight vs Mass</span>
+                        <span class="placeholder-hint">Scale showing weight, mass comparison</span>
+                    </div>
+                <div class="drag-hint-overlay">📁 Drop image here</div><div class="image-controls">
+                        <button class="image-control-btn" onclick="toggleMinimize(&#39;slide14-image&#39;)" title="Minimize/Maximize">📦</button>
+                        <button class="image-control-btn" onclick="replaceImage(&#39;slide14-image&#39;)" title="Upload">📂</button>
+                        <button class="image-control-btn" onclick="removeImage(&#39;slide14-image&#39;)" title="Remove">🗑️</button>
+                    </div><div class="upload-methods">
+                        <button class="upload-method-btn" onclick="selectImageForSlide(&#39;slide14-image&#39;)" title="Upload from computer">📁 Upload</button>
+                    </div></div>
+                
+                <div class="click-reveal" onclick="revealContent(this, &#39;⚖️ Mass = amount of matter (kg) - SAME everywhere&#39;)">
+                    <span class="reveal-text">Mass →</span>
+                </div>
+                <div class="click-reveal" onclick="revealContent(this, &#39;🌍 Weight = force of gravity (N) - CHANGES by location&#39;)">
+                    <span class="reveal-text">Weight →</span>
+                </div>
+                <div class="click-reveal" onclick="revealContent(this, &#39;🌙 On the Moon: Same mass, 1/6 the weight!&#39;)">
+                    <span class="reveal-text">Example →</span>
+                </div>
+            </section>
+
+            <!-- SLIDE 15: Weight Calculation -->
+            <section hidden="" aria-hidden="true" class="future" style="display: none; scroll-behavior: smooth;">
+                <h2>Calculate Your Weight in Newtons!</h2>
+                
+                <div class="practice-problem">
+                    <span class="problem-number">Problem 4</span>
+                    <p>A student has a mass of 50 kg. What is their weight on Earth?</p>
+                </div>
+                
+                <div class="calculation-step">Given: m = 50 kg, g = 9.8 m/s²</div>
+                <div class="calculation-step">Formula: W = mg</div>
+                <div class="calculation-step">W = 50 kg × 9.8 m/s²</div>
+                <div class="calculation-step">W = 490 N</div>
+                
+                <div class="click-reveal" onclick="revealContent(this, &#39;📊 Quick trick: Your weight in N ≈ Your mass in kg × 10&#39;)">
+                    <span class="reveal-text">Helpful tip →</span>
+                </div>
+            </section>
+
+            <!-- SLIDE 16: Net Force -->
+            <section hidden="" aria-hidden="true" class="future" style="display: none; scroll-behavior: smooth;">
+                <h2>Net Force: Forces Add Up!</h2>
+                
+                <div class="image-placeholder" id="slide16-image" data-slide="16">
+                    <div class="placeholder-content">
+                        <span class="placeholder-icon">🖼️</span>
+                        <span class="placeholder-text">Image: Multiple Forces</span>
+                        <span class="placeholder-hint">Box with forces from different directions</span>
+                    </div>
+                <div class="drag-hint-overlay">📁 Drop image here</div><div class="image-controls">
+                        <button class="image-control-btn" onclick="toggleMinimize(&#39;slide16-image&#39;)" title="Minimize/Maximize">📦</button>
+                        <button class="image-control-btn" onclick="replaceImage(&#39;slide16-image&#39;)" title="Upload">📂</button>
+                        <button class="image-control-btn" onclick="removeImage(&#39;slide16-image&#39;)" title="Remove">🗑️</button>
+                    </div><div class="upload-methods">
+                        <button class="upload-method-btn" onclick="selectImageForSlide(&#39;slide16-image&#39;)" title="Upload from computer">📁 Upload</button>
+                    </div></div>
+                
+                <div class="click-reveal" onclick="revealContent(this, &#39;Same direction: ADD forces →→ = stronger&#39;)">
+                    <span class="reveal-text">Rule 1 →</span>
+                </div>
+                <div class="click-reveal" onclick="revealContent(this, &#39;Opposite direction: SUBTRACT ←→ = weaker&#39;)">
+                    <span class="reveal-text">Rule 2 →</span>
+                </div>
+                <div class="click-reveal" onclick="revealContent(this, &#39;Net Force = Total of all forces = What actually moves object&#39;)">
+                    <span class="reveal-text">Definition →</span>
+                </div>
+            </section>
+
+            <!-- SLIDE 17: Net Force Example -->
+            <section hidden="" aria-hidden="true" class="future" style="display: none; scroll-behavior: smooth;">
+                <h2>Tug of War!</h2>
+                
+                <div class="practice-problem">
+                    <span class="problem-number">Problem 5</span>
+                    <p>Team A pulls with 100 N right. Team B pulls with 80 N left. What's the net force?</p>
+                </div>
+                
+                <div class="image-placeholder" id="slide17-image" data-slide="17">
+                    <div class="placeholder-content">
+                        <span class="placeholder-icon">🖼️</span>
+                        <span class="placeholder-text">Image: Tug of War</span>
+                        <span class="placeholder-hint">Two teams pulling rope</span>
+                    </div>
+                <div class="drag-hint-overlay">📁 Drop image here</div><div class="image-controls">
+                        <button class="image-control-btn" onclick="toggleMinimize(&#39;slide17-image&#39;)" title="Minimize/Maximize">📦</button>
+                        <button class="image-control-btn" onclick="replaceImage(&#39;slide17-image&#39;)" title="Upload">📂</button>
+                        <button class="image-control-btn" onclick="removeImage(&#39;slide17-image&#39;)" title="Remove">🗑️</button>
+                    </div><div class="upload-methods">
+                        <button class="upload-method-btn" onclick="selectImageForSlide(&#39;slide17-image&#39;)" title="Upload from computer">📁 Upload</button>
+                    </div></div>
+                
+                <div class="click-reveal" onclick="revealContent(this, &#39;Right: +100 N, Left: -80 N&#39;)">
+                    <span class="reveal-text">Set directions →</span>
+                </div>
+                <div class="click-reveal" onclick="revealContent(this, &#39;Net = 100 N + (-80 N) = 20 N right&#39;)">
+                    <span class="reveal-text">Calculate →</span>
+                </div>
+                <div class="click-reveal" onclick="revealContent(this, &#39;✅ Team A wins! Rope moves right with 20 N&#39;)">
+                    <span class="reveal-text">Result →</span>
+                </div>
+            </section>
+
+            <!-- SLIDE 18: Complex Problem -->
+            <section hidden="" aria-hidden="true" class="future" style="display: none; scroll-behavior: smooth;">
+                <h2>Challenge Problem!</h2>
+                
+                <div class="practice-problem">
+                    <span class="problem-number">Problem 6</span>
+                    <p>A 10 kg box on a frictionless surface has:<br>
+                    • 50 N pushing right<br>
+                    • 20 N pushing left<br>
+                    Find the acceleration.</p>
+                </div>
+                
+                <div class="click-reveal" onclick="revealContent(this, &#39;&lt;strong&gt;Step 1:&lt;/strong&gt; Find net force = 50 N - 20 N = 30 N right&#39;)">
+                    <span class="reveal-text">Net force →</span>
+                </div>
+                <div class="click-reveal" onclick="revealContent(this, &#39;&lt;strong&gt;Step 2:&lt;/strong&gt; Use F = ma → a = F/m&#39;)">
+                    <span class="reveal-text">Formula →</span>
+                </div>
+                <div class="click-reveal" onclick="revealContent(this, &#39;&lt;strong&gt;Step 3:&lt;/strong&gt; a = 30 N ÷ 10 kg = 3 m/s²&#39;)">
+                    <span class="reveal-text">Calculate →</span>
+                </div>
+            </section>
+
+            <!-- SLIDE 19: Quick Check #2 -->
+            <section hidden="" aria-hidden="true" class="future" style="display: none; scroll-behavior: smooth;">
+                <h2>Quick Check #2</h2>
+                <div class="question-prompt">
+                    A car (1000 kg) and a bike (10 kg) both accelerate at 2 m/s². Which needs more force?
+                </div>
+                
+                <div class="answer-choice" onclick="markAnswer(this, false)">The bike</div>
+                <div class="answer-choice" onclick="markAnswer(this, true)">The car</div>
+                <div class="answer-choice" onclick="markAnswer(this, false)">Same force</div>
+                <div class="answer-choice" onclick="markAnswer(this, false)">Can't tell</div>
+                
+                <div class="click-reveal" onclick="revealContent(this, &#39;Car: F = 1000 kg × 2 m/s² = 2000 N&lt;br&gt;Bike: F = 10 kg × 2 m/s² = 20 N&#39;)">
+                    <span class="reveal-text">Calculations →</span>
+                </div>
+            </section>
+
+            <!-- SLIDE 20: Force in Everyday Life -->
+            <section hidden="" aria-hidden="true" class="future" style="display: none; scroll-behavior: smooth;">
+                <h2>Forces in Your Daily Life</h2>
+                
+                <div class="image-placeholder" id="slide20-image" data-slide="20">
+                    <div class="placeholder-content">
+                        <span class="placeholder-icon">🖼️</span>
+                        <span class="placeholder-text">Image: Daily Forces</span>
+                        <span class="placeholder-hint">Sports, walking, driving examples</span>
+                    </div>
+                <div class="drag-hint-overlay">📁 Drop image here</div><div class="image-controls">
+                        <button class="image-control-btn" onclick="toggleMinimize(&#39;slide20-image&#39;)" title="Minimize/Maximize">📦</button>
+                        <button class="image-control-btn" onclick="replaceImage(&#39;slide20-image&#39;)" title="Upload">📂</button>
+                        <button class="image-control-btn" onclick="removeImage(&#39;slide20-image&#39;)" title="Remove">🗑️</button>
+                    </div><div class="upload-methods">
+                        <button class="upload-method-btn" onclick="selectImageForSlide(&#39;slide20-image&#39;)" title="Upload from computer">📁 Upload</button>
+                    </div></div>
+                
+                <div class="click-reveal" onclick="revealContent(this, &#39;⚽ Kicking a ball: Your foot applies force&#39;)">
+                    <span class="reveal-text">Sports →</span>
+                </div>
+                <div class="click-reveal" onclick="revealContent(this, &#39;🚶 Walking: Friction force moves you forward&#39;)">
+                    <span class="reveal-text">Movement →</span>
+                </div>
+                <div class="click-reveal" onclick="revealContent(this, &#39;🚗 Car braking: Friction force slows you down&#39;)">
+                    <span class="reveal-text">Safety →</span>
+                </div>
+                <div class="click-reveal" onclick="revealContent(this, &#39;📱 Phone falling: Gravity pulls it down at 9.8 m/s²&#39;)">
+                    <span class="reveal-text">Technology →</span>
+                </div>
+            </section>
+
+            <!-- SLIDE 21: Keywords Summary -->
+            <section hidden="" aria-hidden="true" class="future" style="display: none; scroll-behavior: smooth;">
+                <div class="keyword-box">
+                    <h2>📝 KEY VOCABULARY</h2>
+                    <div class="keyword-item">
+                        <span class="keyword-term">Force (F):</span> Push or pull measured in Newtons (N)
+                    </div>
+                    <div class="keyword-item">
+                        <span class="keyword-term">Mass (m):</span> Amount of matter in kg
+                    </div>
+                    <div class="keyword-item">
+                        <span class="keyword-term">Acceleration (a):</span> Change in velocity (m/s²)
+                    </div>
+                    <div class="keyword-item">
+                        <span class="keyword-term">Newton's 2nd Law:</span> F = ma
+                    </div>
+                    <div class="keyword-item">
+                        <span class="keyword-term">Weight:</span> Force of gravity (W = mg)
+                    </div>
+                    <div class="keyword-item">
+                        <span class="keyword-term">Net Force:</span> Total of all forces
+                    </div>
+                </div>
+            </section>
+
+            <!-- SLIDE 22: Problem-Solving Strategy -->
+            <section hidden="" aria-hidden="true" class="future" style="display: none; scroll-behavior: smooth;">
+                <h2>🎯 Force Problem Strategy</h2>
+                
+                <div class="formula-breakdown">
+                    <h3>The 5-Step Method:</h3>
+                    <div class="formula-part">1️⃣ <strong>READ:</strong> What's given? What's asked?</div>
+                    <div class="formula-part">2️⃣ <strong>DRAW:</strong> Sketch the situation</div>
+                    <div class="formula-part">3️⃣ <strong>LIST:</strong> Known values with units</div>
+                    <div class="formula-part">4️⃣ <strong>FORMULA:</strong> Choose F=ma or rearrange</div>
+                    <div class="formula-part">5️⃣ <strong>SOLVE:</strong> Calculate with units</div>
+                </div>
+                
+                <div class="transition-box">
+                    Master this method = Master force problems!
+                </div>
+            </section>
+
+            <!-- SLIDE 23: Exit Ticket -->
+            <section hidden="" aria-hidden="true" class="future" style="display: none; scroll-behavior: smooth;">
+                <h2>🎫 EXIT TICKET</h2>
+                <div class="practice-problem">
+                    <p><strong>Solve this problem in your notebook:</strong></p>
+                    <p>A 4 kg skateboard is pushed with a force of 12 N.</p>
+                    <p>a) What is its acceleration?</p>
+                    <p>b) If friction provides 2 N of resistance, what is the net force?</p>
+                    <p>c) What is the new acceleration with friction?</p>
+                </div>
+                
+                <div class="click-reveal" onclick="revealContent(this, &#39;a) a = F/m = 12N/4kg = 3 m/s²&#39;)">
+                    <span class="reveal-text">Answer a →</span>
+                </div>
+                <div class="click-reveal" onclick="revealContent(this, &#39;b) Net F = 12N - 2N = 10N&#39;)">
+                    <span class="reveal-text">Answer b →</span>
+                </div>
+                <div class="click-reveal" onclick="revealContent(this, &#39;c) a = 10N/4kg = 2.5 m/s²&#39;)">
+                    <span class="reveal-text">Answer c →</span>
+                </div>
+            </section>
+
+            <!-- SLIDE 24: Summary -->
+            <section hidden="" aria-hidden="true" class="future" style="display: none; scroll-behavior: smooth;">
+                <h2>🌟 What You Mastered Today!</h2>
+                
+                <div class="progress-tracker">
+                    <div class="topic-complete">✅ Force = Push or Pull</div>
+                    <div class="topic-complete">✅ Newton's Second Law: F = ma</div>
+                    <div class="topic-complete">✅ Weight = mg</div>
+                    <div class="topic-complete">✅ Net Force Calculations</div>
+                    <div class="topic-complete">✅ Problem-Solving Method</div>
+                </div>
+                
+                <div class="equation-box">
+                    Remember: F = ma
+                </div>
+                
+                <div class="transition-box">
+                    You're now a Force Calculation Expert! 🎉
+                </div>
+            </section>
+
+            <!-- SLIDE 25: Homework & Next Lesson -->
+            <section hidden="" aria-hidden="true" class="future" style="display: none; scroll-behavior: smooth;">
+                <div class="topic-header">
+                    <h1>🎉 EXCELLENT WORK!</h1>
+                    <h2>You've Mastered Forces!</h2>
+                </div>
+                
+                <div class="definition-box">
+                    <p><strong>📚 Homework:</strong></p>
+                    <ol style="text-align: left;">
+                        <li>Complete practice problems 1-10 in your workbook</li>
+                        <li>Find 3 examples of forces in your home</li>
+                        <li>Calculate the weight of 3 objects (estimate mass)</li>
+                    </ol>
+                </div>
+                
+                <div class="click-reveal" onclick="revealContent(this, &#39;🔮 &lt;strong&gt;Next Lesson:&lt;/strong&gt; Energy and Work!&#39;)">
+                    <span class="reveal-text">Coming up →</span>
+                </div>
+                
+                <div class="image-placeholder" id="slide25-image" data-slide="25">
+                    <div class="placeholder-content">
+                        <span class="placeholder-icon">🖼️</span>
+                        <span class="placeholder-text">Image: Celebration</span>
+                        <span class="placeholder-hint">Success/achievement graphic</span>
+                    </div>
+                <div class="drag-hint-overlay">📁 Drop image here</div><div class="image-controls">
+                        <button class="image-control-btn" onclick="toggleMinimize(&#39;slide25-image&#39;)" title="Minimize/Maximize">📦</button>
+                        <button class="image-control-btn" onclick="replaceImage(&#39;slide25-image&#39;)" title="Upload">📂</button>
+                        <button class="image-control-btn" onclick="removeImage(&#39;slide25-image&#39;)" title="Remove">🗑️</button>
+                    </div><div class="upload-methods">
+                        <button class="upload-method-btn" onclick="selectImageForSlide(&#39;slide25-image&#39;)" title="Upload from computer">📁 Upload</button>
+                    </div></div>
+            </section>
+
+        </div>
+    <div class="backgrounds"><div class="slide-background past" data-loaded="true" style="display: block;"><div class="slide-background-content"></div></div><div class="slide-background past" data-loaded="true" style="display: block;"><div class="slide-background-content"></div></div><div class="slide-background present" data-loaded="true" style="display: block;"><div class="slide-background-content"></div></div><div class="slide-background future" data-loaded="true" style="display: block;"><div class="slide-background-content"></div></div><div class="slide-background future" data-loaded="true" style="display: block;"><div class="slide-background-content"></div></div><div class="slide-background future" style="display: none;"><div class="slide-background-content"></div></div><div class="slide-background future" style="display: none;"><div class="slide-background-content"></div></div><div class="slide-background future" style="display: none;"><div class="slide-background-content"></div></div><div class="slide-background future" style="display: none;"><div class="slide-background-content"></div></div><div class="slide-background future" style="display: none;"><div class="slide-background-content"></div></div><div class="slide-background future" style="display: none;"><div class="slide-background-content"></div></div><div class="slide-background future" style="display: none;"><div class="slide-background-content"></div></div><div class="slide-background future" style="display: none;"><div class="slide-background-content"></div></div><div class="slide-background future" style="display: none;"><div class="slide-background-content"></div></div><div class="slide-background future" style="display: none;"><div class="slide-background-content"></div></div><div class="slide-background future" style="display: none;"><div class="slide-background-content"></div></div><div class="slide-background future" style="display: none;"><div class="slide-background-content"></div></div><div class="slide-background future" style="display: none;"><div class="slide-background-content"></div></div><div class="slide-background future" style="display: none;"><div class="slide-background-content"></div></div><div class="slide-background future" style="display: none;"><div class="slide-background-content"></div></div><div class="slide-background future" style="display: none;"><div class="slide-background-content"></div></div><div class="slide-background future" style="display: none;"><div class="slide-background-content"></div></div><div class="slide-background future" style="display: none;"><div class="slide-background-content"></div></div><div class="slide-background future" style="display: none;"><div class="slide-background-content"></div></div><div class="slide-background future" style="display: none;"><div class="slide-background-content"></div></div></div><div class="slide-number" style="display: none;"></div><aside class="controls" data-controls-layout="bottom-right" data-controls-back-arrows="faded" style="display: block;"><button class="navigate-left enabled" aria-label="previous slide"><div class="controls-arrow"></div></button>
+			<button class="navigate-right enabled highlight" aria-label="next slide"><div class="controls-arrow"></div></button>
+			<button class="navigate-up" aria-label="above slide" disabled="disabled"><div class="controls-arrow"></div></button>
+			<button class="navigate-down" aria-label="below slide" disabled="disabled"><div class="controls-arrow"></div></button></aside><div class="progress" style="display: block;"><span style="transform: scaleX(0.0833333);"></span></div><div class="speaker-notes" data-prevent-swipe="" tabindex="0"></div><div class="pause-overlay"><button class="resume-button">Resume presentation</button></div><div class="aria-status" aria-live="polite" aria-atomic="true" style="position: absolute; height: 1px; width: 1px; overflow: hidden; clip: rect(1px, 1px, 1px, 1px);">What is a Force? Force: A push or pull on an object 🖼️ Image: Force Examples Various push/pull examples Example 1 → Example 2 → What forces do → </div></div>
+
+    <!-- Fixed UI Elements -->
+    <div class="step-number">
+        <span id="slideNumber">3</span> / 25
+    </div>
+
+    <script src="./Force Calculation - Interactive Physics Lesson_files/reveal.min.js"></script>
+    <script>
+        // Initialize Reveal.js
+        Reveal.initialize({
+            hash: true,
+            controls: true,
+            progress: true,
+            center: false,
+            transition: 'slide',
+            width: '100%',
+            height: '100%',
+            margin: 0.02,
+            minScale: 0.5,
+            maxScale: 2.0,
+            overview: true,
+            touch: true,
+            loop: false,
+            rtl: false,
+            navigationMode: 'default',
+            shuffle: false,
+            fragments: true,
+            embedded: false,
+            help: true,
+            showNotes: false,
+            autoAnimate: false,
+            autoSlide: 0,
+            mouseWheel: false,
+            hideInactiveCursor: true,
+            hideCursorTime: 5000,
+            previewLinks: false,
+            focusBodyOnPageVisibilityChange: true,
+            transitionSpeed: 'default',
+            backgroundTransition: 'fade',
+            viewDistance: 3,
+            mobileViewDistance: 2,
+            display: 'block'
+        });
+
+        // Update slide number and handle scrolling
+        Reveal.on('slidechanged', event => {
+            document.getElementById('slideNumber').textContent = event.indexh + 1;
+            const currentSlide = Reveal.getCurrentSlide();
+            if (currentSlide) {
+                currentSlide.scrollTop = 0;
+            }
+        });
+
+        // Enable smooth scrolling within slides
+        Reveal.on('ready', event => {
+            const slides = document.querySelectorAll('.reveal .slides section');
+            slides.forEach(slide => {
+                slide.style.scrollBehavior = 'smooth';
+            });
+        });
+
+        // Custom mouse wheel handling for slide scrolling
+        document.addEventListener('wheel', function(e) {
+            const currentSlide = Reveal.getCurrentSlide();
+            if (currentSlide) {
+                if (e.target.closest('.image-manager')) {
+                    return;
+                }
+                currentSlide.scrollBy(0, e.deltaY * 0.5);
+                e.preventDefault();
+            }
+        }, { passive: false });
+
+        // Function to reveal content on click
+        function revealContent(element, content) {
+            if (!element.classList.contains('revealed')) {
+                element.innerHTML = content;
+                element.classList.add('revealed');
+            }
+        }
+
+        // Function to mark answers
+        function markAnswer(element, isCorrect) {
+            const siblings = element.parentNode.querySelectorAll('.answer-choice');
+            siblings.forEach(sib => {
+                sib.classList.remove('correct', 'incorrect');
+                sib.onclick = null;
+            });
+
+            if (isCorrect) {
+                element.classList.add('correct');
+                element.innerHTML += ' ✔';
+            } else {
+                element.classList.add('incorrect');
+                element.innerHTML += ' ✗';
+            }
+        }
+
+        // ===========================
+        // IMAGE MANAGEMENT SYSTEM
+        // ===========================
+
+        let imageData = {};
+        let isImageManagerOpen = false;
+
+        // Initialize image management system
+        window.addEventListener('DOMContentLoaded', function() {
+            loadImagesFromStorage();
+            setupImagePlaceholders();
+            updateSlideList();
+            updateProgress();
+            enhanceAllImagePlaceholders();
+            loadMinimizedStates();
+        });
+
+        // Toggle image manager panel
+        function toggleImageManager() {
+            const manager = document.getElementById('imageManager');
+            isImageManagerOpen = !isImageManagerOpen;
+
+            if (isImageManagerOpen) {
+                manager.classList.add('open');
+                updateSlideList();
+            } else {
+                manager.classList.remove('open');
+            }
+        }
+
+        // Setup drag and drop for all image placeholders
+        function setupImagePlaceholders() {
+            const placeholders = document.querySelectorAll('.image-placeholder');
+
+            placeholders.forEach(placeholder => {
+                const slideId = placeholder.id;
+                const slideNum = placeholder.dataset.slide || slideId.match(/\d+/)?.[0] || '';
+                const dragHintOverlay = placeholder.querySelector('.drag-hint-overlay');
+
+                if (!placeholder.dataset.slide && slideNum) {
+                    placeholder.dataset.slide = slideNum;
+                }
+
+                // Drag and drop events
+                placeholder.addEventListener('dragover', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    placeholder.classList.add('drag-over');
+                    if (dragHintOverlay) dragHintOverlay.style.display = 'flex';
+                });
+
+                placeholder.addEventListener('dragenter', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    placeholder.classList.add('drag-over');
+                    if (dragHintOverlay) dragHintOverlay.style.display = 'flex';
+                });
+
+                placeholder.addEventListener('dragleave', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    if (!placeholder.contains(e.relatedTarget)) {
+                        placeholder.classList.remove('drag-over');
+                        if (dragHintOverlay) dragHintOverlay.style.display = 'none';
+                    }
+                });
+
+                placeholder.addEventListener('drop', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+
+                    placeholder.classList.remove('drag-over');
+                    if (dragHintOverlay) dragHintOverlay.style.display = 'none';
+
+                    const files = e.dataTransfer.files;
+                    const htmlData = e.dataTransfer.getData('text/html');
+                    const urlData = e.dataTransfer.getData('text/uri-list') || e.dataTransfer.getData('URL');
+                    const textData = e.dataTransfer.getData('text/plain');
+
+                    if (files && files.length > 0) {
+                        const file = files[0];
+                        if (file.type.startsWith('image/')) {
+                            loadImageToSlide(file, slideId);
+                            showDropFeedback(placeholder, '✅ Image uploaded!', '#4CAF50');
+                        } else {
+                            showDropFeedback(placeholder, '❌ Please drop an image file', '#f44336');
+                        }
+                    } else if (htmlData) {
+                        const imgMatch = htmlData.match(/<img[^>]+src=["']([^"']+)["'][^>]*>/i);
+                        if (imgMatch && imgMatch[1]) {
+                            loadImageFromURL(imgMatch[1], slideId);
+                            showDropFeedback(placeholder, '✅ Image from web loaded!', '#4CAF50');
+                        }
+                    } else if (urlData && (urlData.match(/\.(jpg|jpeg|png|gif|webp|svg)$/i) || urlData.includes('unsplash') || urlData.includes('pexels'))) {
+                        loadImageFromURL(urlData, slideId);
+                        showDropFeedback(placeholder, '✅ Image from URL loaded!', '#4CAF50');
+                    } else if (textData && textData.match(/^https?:\/\/.+\.(jpg|jpeg|png|gif|webp|svg)$/i)) {
+                        loadImageFromURL(textData, slideId);
+                        showDropFeedback(placeholder, '✅ Image from URL loaded!', '#4CAF50');
+                    } else {
+                        showDropFeedback(placeholder, '❌ Please drop an image file or image from another tab', '#f44336');
+                    }
+                });
+
+                // Click to upload (only if no image)
+                placeholder.addEventListener('click', function(e) {
+                    if (e.target.closest('.image-control-btn, .upload-method-btn')) {
+                        return;
+                    }
+                    if (!this.classList.contains('has-image')) {
+                        selectImageForSlide(slideId);
+                    }
+                });
+
+                // Double-click to expand minimized placeholder
+                placeholder.addEventListener('dblclick', function(e) {
+                    if (this.classList.contains('minimized')) {
+                        toggleMinimize(slideId);
+                    }
+                });
+            });
+        }
+
+        // Show feedback after drag and drop
+        function showDropFeedback(placeholder, message, color) {
+            const feedback = document.createElement('div');
+            feedback.style.cssText = `
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background: ${color};
+                color: white;
+                padding: 10px 20px;
+                border-radius: 20px;
+                font-weight: bold;
+                z-index: 1000;
+                pointer-events: none;
+                opacity: 0;
+                transition: opacity 0.3s;
+            `;
+            feedback.textContent = message;
+            placeholder.appendChild(feedback);
+
+            setTimeout(() => feedback.style.opacity = '1', 10);
+
+            setTimeout(() => {
+                feedback.style.opacity = '0';
+                setTimeout(() => {
+                    if (feedback.parentNode) {
+                        feedback.parentNode.removeChild(feedback);
+                    }
+                }, 300);
+            }, 2000);
+        }
+
+        // Load image from URL
+        function loadImageFromURL(imageUrl, slideId) {
+            const img = new Image();
+            img.crossOrigin = 'anonymous';
+
+            img.onload = function() {
+                try {
+                    const canvas = document.createElement('canvas');
+                    canvas.width = img.width;
+                    canvas.height = img.height;
+                    const ctx = canvas.getContext('2d');
+                    ctx.drawImage(img, 0, 0);
+                    const dataUrl = canvas.toDataURL('image/jpeg', 0.8);
+
+                    setSlideImage(slideId, dataUrl, 'web-image.jpg');
+                    saveImageToStorage(slideId, dataUrl, 'web-image.jpg');
+                } catch (e) {
+                    setSlideImage(slideId, imageUrl, 'web-image.jpg');
+                    saveImageToStorage(slideId, imageUrl, 'web-image.jpg');
+                }
+
+                updateSlideList();
+                updateProgress();
+            };
+
+            img.onerror = function() {
+                setSlideImage(slideId, imageUrl, 'web-image.jpg');
+                saveImageToStorage(slideId, imageUrl, 'web-image.jpg');
+                updateSlideList();
+                updateProgress();
+            };
+
+            img.src = imageUrl;
+        }
+
+        // Load image to specific slide
+        function loadImageToSlide(file, slideId) {
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                const imageData = event.target.result;
+                setSlideImage(slideId, imageData, file.name);
+                saveImageToStorage(slideId, imageData, file.name);
+                updateSlideList();
+                updateProgress();
+            };
+            reader.readAsDataURL(file);
+        }
+
+        // Set image for slide
+        function setSlideImage(slideId, imageData, filename = '') {
+            const placeholder = document.getElementById(slideId);
+            if (placeholder) {
+                const wasMinimized = placeholder.classList.contains('minimized');
+                
+                placeholder.innerHTML = `
+                    <img src="${imageData}" alt="Slide image: ${filename}">
+                    <div class="image-controls">
+                        <button class="image-control-btn" onclick="toggleMinimize('${slideId}')" title="${wasMinimized ? 'Expand' : 'Minimize'}">${wasMinimized ? '📤' : '📦'}</button>
+                        <button class="image-control-btn" onclick="replaceImage('${slideId}')" title="Replace">🔄</button>
+                        <button class="image-control-btn" onclick="removeImage('${slideId}')" title="Remove">🗑️</button>
+                    </div>
+                `;
+                placeholder.classList.add('has-image');
+                
+                if (wasMinimized) {
+                    placeholder.classList.add('minimized');
+                }
+            }
+        }
+
+        // Replace image
+        function replaceImage(slideId) {
+            selectImageForSlide(slideId);
+        }
+
+        // Remove image
+        function removeImage(slideId) {
+            const placeholder = document.getElementById(slideId);
+            if (placeholder) {
+                const wasMinimized = placeholder.classList.contains('minimized');
+                const originalHint = getOriginalHint(slideId);
+                
+                placeholder.innerHTML = `
+                    <div class="placeholder-content">
+                        <span class="placeholder-icon">🖼️</span>
+                        <span class="placeholder-text">${originalHint.text}</span>
+                        <span class="placeholder-hint">${originalHint.hint}</span>
+                    </div>
+
+                    <div class="drag-hint-overlay">
+                        📁 Drop image here
+                    </div>
+
+                    <div class="image-controls">
+                        <button class="image-control-btn" onclick="toggleMinimize('${slideId}')" title="${wasMinimized ? 'Expand' : 'Minimize'}">${wasMinimized ? '📤' : '📦'}</button>
+                        <button class="image-control-btn" onclick="replaceImage('${slideId}')" title="Upload">📂</button>
+                        <button class="image-control-btn" onclick="removeImage('${slideId}')" title="Remove">🗑️</button>
+                    </div>
+
+                    <div class="upload-methods">
+                        <button class="upload-method-btn" onclick="selectImageForSlide('${slideId}')" title="Upload from computer">📁 Upload</button>
+                    </div>
+                `;
+                placeholder.classList.remove('has-image');
+                
+                if (wasMinimized) {
+                    placeholder.classList.add('minimized');
+                }
+
+                setupSinglePlaceholder(placeholder);
+                removeImageFromStorage(slideId);
+                updateSlideList();
+                updateProgress();
+            }
+        }
+
+        // Get original placeholder hint
+        function getOriginalHint(slideId) {
+            const hints = {
+                'slide1-image': { text: 'Image: Pushing a Pencil', hint: 'Hand pushing pencil with different forces' },
+                'slide2-image': { text: 'Image: Force Learning Path', hint: 'Visual roadmap of topics' },
+                'slide3-image': { text: 'Image: Force Examples', hint: 'Various push/pull examples' },
+                'slide4-image': { text: 'Image: Force Vectors', hint: 'Arrows showing force direction and magnitude' },
+                'slide5-image': { text: 'Image: Newton Portrait', hint: 'Sir Isaac Newton and apple' },
+                'slide6-image': { text: 'Image: Types of Forces', hint: 'Gravity, friction, normal, tension illustrated' },
+                'slide7-image': { text: 'Image: F=ma Visual', hint: 'Force, mass, acceleration relationship' },
+                'slide8-image': { text: 'Image: Variables Diagram', hint: 'Visual showing F, m, and a relationship' },
+                'slide9-image': { text: 'Image: Car vs Shopping Cart', hint: 'Person pushing both objects' },
+                'slide11-image': { text: 'Image: Force Doubling', hint: 'Visual showing F→2F effect' },
+                'slide14-image': { text: 'Image: Weight vs Mass', hint: 'Scale showing weight, mass comparison' },
+                'slide16-image': { text: 'Image: Multiple Forces', hint: 'Box with forces from different directions' },
+                'slide17-image': { text: 'Image: Tug of War', hint: 'Two teams pulling rope' },
+                'slide20-image': { text: 'Image: Daily Forces', hint: 'Sports, walking, driving examples' },
+                'slide25-image': { text: 'Image: Celebration', hint: 'Success/achievement graphic' }
+            };
+            return hints[slideId] || { text: 'Image Placeholder', hint: 'Add your image here' };
+        }
+
+        // Select image for specific slide
+        function selectImageForSlide(slideId) {
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.accept = 'image/*';
+            input.onchange = function(e) {
+                const file = e.target.files[0];
+                if (file) {
+                    loadImageToSlide(file, slideId);
+                }
+            };
+            input.click();
+        }
+
+        // Bulk upload images
+        function bulkUpload() {
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.accept = 'image/*';
+            input.multiple = true;
+            input.onchange = function(e) {
+                const files = Array.from(e.target.files);
+                if (files.length > 0) {
+                    processBulkUpload(files);
+                }
+            };
+            input.click();
+        }
+
+        // Process bulk upload
+        function processBulkUpload(files) {
+            const placeholders = document.querySelectorAll('.image-placeholder:not(.has-image)');
+
+            files.forEach((file, index) => {
+                if (index < placeholders.length) {
+                    const slideId = placeholders[index].id;
+                    loadImageToSlide(file, slideId);
+                }
+            });
+
+            if (files.length > placeholders.length) {
+                alert(`Uploaded ${placeholders.length} images. ${files.length - placeholders.length} files skipped (no empty slides).`);
+            }
+        }
+
+        // Update slide list in manager
+        function updateSlideList() {
+            const slideList = document.getElementById('slideList');
+            const placeholders = document.querySelectorAll('.image-placeholder');
+
+            slideList.innerHTML = '';
+
+            placeholders.forEach(placeholder => {
+                const slideId = placeholder.id;
+                const slideNum = placeholder.dataset.slide || slideId.match(/\d+/)?.[0] || '';
+                const hasImage = placeholder.classList.contains('has-image');
+                const hint = getOriginalHint(slideId);
+
+                const item = document.createElement('div');
+                item.className = `slide-item ${hasImage ? 'has-image' : 'no-image'}`;
+                item.innerHTML = `
+                    <div class="slide-status ${hasImage ? 'has-image' : 'no-image'}"></div>
+                    <div>
+                        <div>Slide ${slideNum}</div>
+                        <small>${hint.text}</small>
+                    </div>
+                `;
+
+                item.addEventListener('click', () => {
+                    if (hasImage) {
+                        Reveal.slide(parseInt(slideNum) - 1);
+                    } else {
+                        selectImageForSlide(slideId);
+                    }
+                });
+
+                slideList.appendChild(item);
+            });
+        }
+
+        // Update progress bar
+        function updateProgress() {
+            const placeholders = document.querySelectorAll('.image-placeholder');
+            const withImages = document.querySelectorAll('.image-placeholder.has-image');
+            const percentage = (withImages.length / placeholders.length) * 100;
+
+            const progressFill = document.getElementById('progressFill');
+            progressFill.style.width = percentage + '%';
+            progressFill.textContent = `${withImages.length}/${placeholders.length}`;
+        }
+
+        // Local storage functions
+        function saveImageToStorage(slideId, imageData, filename) {
+            const stored = JSON.parse(localStorage.getItem('forceImages') || '{}');
+            stored[slideId] = { data: imageData, filename: filename };
+            localStorage.setItem('forceImages', JSON.stringify(stored));
+        }
+
+        function loadImagesFromStorage() {
+            const stored = JSON.parse(localStorage.getItem('forceImages') || '{}');
+            Object.keys(stored).forEach(slideId => {
+                const { data, filename } = stored[slideId];
+                setSlideImage(slideId, data, filename);
+            });
+        }
+
+        function removeImageFromStorage(slideId) {
+            const stored = JSON.parse(localStorage.getItem('forceImages') || '{}');
+            delete stored[slideId];
+            localStorage.setItem('forceImages', JSON.stringify(stored));
+        }
+
+        // Export images
+        function exportImages() {
+            const stored = localStorage.getItem('forceImages');
+            if (stored) {
+                const blob = new Blob([stored], { type: 'application/json' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'force-lesson-images.json';
+                a.click();
+                URL.revokeObjectURL(url);
+            } else {
+                alert('No images to export!');
+            }
+        }
+
+        // Import images
+        function importImages() {
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.accept = '.json';
+            input.onchange = function(e) {
+                const file = e.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(event) {
+                        try {
+                            const importedData = JSON.parse(event.target.result);
+                            localStorage.setItem('forceImages', JSON.stringify(importedData));
+
+                            clearAllImages(false);
+                            loadImagesFromStorage();
+                            updateSlideList();
+                            updateProgress();
+
+                            alert('Images imported successfully!');
+                        } catch (error) {
+                            alert('Error importing images: Invalid file format');
+                        }
+                    };
+                    reader.readAsText(file);
+                }
+            };
+            input.click();
+        }
+
+        // Clear all images
+        function clearAllImages(confirm = true) {
+            if (confirm && !window.confirm('Are you sure you want to remove all images?')) {
+                return;
+            }
+
+            const placeholders = document.querySelectorAll('.image-placeholder');
+            placeholders.forEach(placeholder => {
+                if (placeholder.classList.contains('has-image')) {
+                    removeImage(placeholder.id);
+                }
+            });
+
+            localStorage.removeItem('forceImages');
+            updateSlideList();
+            updateProgress();
+        }
+
+        // Toggle minimize/maximize
+        function toggleMinimize(slideId) {
+            const placeholder = document.getElementById(slideId);
+            if (placeholder) {
+                const wasMinimized = placeholder.classList.contains('minimized');
+                placeholder.classList.toggle('minimized');
+
+                const minimizedState = JSON.parse(localStorage.getItem('minimizedPlaceholders') || '{}');
+                minimizedState[slideId] = placeholder.classList.contains('minimized');
+                localStorage.setItem('minimizedPlaceholders', JSON.stringify(minimizedState));
+
+                const minimizeBtn = placeholder.querySelector('[onclick*="toggleMinimize"]');
+                if (minimizeBtn) {
+                    if (placeholder.classList.contains('minimized')) {
+                        minimizeBtn.textContent = '📤';
+                        minimizeBtn.title = 'Expand';
+                    } else {
+                        minimizeBtn.textContent = '📦';
+                        minimizeBtn.title = 'Minimize';
+                    }
+                }
+
+                const message = wasMinimized ? '📤 Expanded' : '📦 Minimized';
+                showDropFeedback(placeholder, message, '#667eea');
+
+                updateSlideList();
+            }
+        }
+
+        // Setup single placeholder
+        function setupSinglePlaceholder(placeholder) {
+            setupImagePlaceholders();
+        }
+
+        // Load minimized states
+        function loadMinimizedStates() {
+            const minimizedState = JSON.parse(localStorage.getItem('minimizedPlaceholders') || '{}');
+            Object.keys(minimizedState).forEach(slideId => {
+                if (minimizedState[slideId]) {
+                    const placeholder = document.getElementById(slideId);
+                    if (placeholder) {
+                        placeholder.classList.add('minimized');
+                    }
+                }
+            });
+        }
+
+        // Enhance all basic image placeholders
+        function enhanceAllImagePlaceholders() {
+            const placeholders = document.querySelectorAll('.image-placeholder');
+
+            placeholders.forEach(placeholder => {
+                if (placeholder.querySelector('.drag-hint-overlay')) {
+                    return;
+                }
+
+                const slideId = placeholder.id;
+                const placeholderContent = placeholder.querySelector('.placeholder-content');
+
+                if (placeholderContent) {
+                    const dragHint = document.createElement('div');
+                    dragHint.className = 'drag-hint-overlay';
+                    dragHint.textContent = '📁 Drop image here';
+                    placeholder.appendChild(dragHint);
+
+                    const controls = document.createElement('div');
+                    controls.className = 'image-controls';
+                    controls.innerHTML = `
+                        <button class="image-control-btn" onclick="toggleMinimize('${slideId}')" title="Minimize/Maximize">📦</button>
+                        <button class="image-control-btn" onclick="replaceImage('${slideId}')" title="Upload">📂</button>
+                        <button class="image-control-btn" onclick="removeImage('${slideId}')" title="Remove">🗑️</button>
+                    `;
+                    placeholder.appendChild(controls);
+
+                    const uploadMethods = document.createElement('div');
+                    uploadMethods.className = 'upload-methods';
+                    uploadMethods.innerHTML = `
+                        <button class="upload-method-btn" onclick="selectImageForSlide('${slideId}')" title="Upload from computer">📁 Upload</button>
+                    `;
+                    placeholder.appendChild(uploadMethods);
+                }
+            });
+
+            setupImagePlaceholders();
+        }
+    </script>
+
+</body></html>
