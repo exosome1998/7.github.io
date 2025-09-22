@@ -1,0 +1,1537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evolution - Interactive Science Lesson</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reveal.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/theme/white.min.css">
+    <style>
+        .reveal {
+            font-size: 24px;
+        }
+        .reveal h1 {
+            font-size: 1.8em;
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+        .reveal h2 {
+            font-size: 1.5em;
+            color: #34495e;
+            margin-bottom: 20px;
+        }
+        .reveal h3 {
+            font-size: 1.2em;
+            color: #34495e;
+            margin-bottom: 15px;
+        }
+        .reveal .slides section {
+            text-align: center;
+            padding: 20px;
+            box-sizing: border-box;
+            overflow-y: auto;
+            max-height: 100vh;
+        }
+        .reveal .slides {
+            width: 100%;
+            height: 100%;
+        }
+        .reveal .slides > section {
+            width: 100%;
+            height: 100%;
+            padding: 20px;
+            box-sizing: border-box;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+        }
+        .slide-content-wrapper {
+            width: 100%;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px 0;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+        }
+        .content-block {
+            margin: 15px 0;
+            padding: 10px;
+        }
+        @media (max-width: 768px) {
+            .reveal {
+                font-size: 20px;
+            }
+            .reveal .slides section {
+                padding: 15px;
+            }
+        }
+        .do-now-box {
+            background: linear-gradient(135deg, #ff6b6b 0%, #feca57 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px auto;
+            max-width: 600px;
+            font-weight: bold;
+        }
+        .topic-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px;
+            border-radius: 15px;
+            margin: 15px auto;
+            max-width: 500px;
+        }
+        .click-reveal {
+            background: #f0f4f8;
+            border: 2px solid #4a90e2;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 10px auto;
+            max-width: 600px;
+            cursor: pointer;
+            transition: all 0.3s;
+            min-height: 60px;
+        }
+        .click-reveal:hover {
+            background: #e1e8ed;
+            transform: scale(1.02);
+        }
+        .click-reveal.revealed {
+            background: #e8f5e9;
+            border-color: #4caf50;
+            cursor: default;
+        }
+        .definition-box {
+            background: #fff9e6;
+            border-left: 5px solid #ffc107;
+            padding: 15px;
+            margin: 15px auto;
+            max-width: 600px;
+            border-radius: 5px;
+            text-align: left;
+        }
+        .keyword-box {
+            background: #f3e5f5;
+            border: 2px solid #9c27b0;
+            padding: 20px;
+            margin: 15px auto;
+            max-width: 700px;
+            border-radius: 10px;
+        }
+        .keyword-item {
+            background: white;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            text-align: left;
+        }
+        .keyword-term {
+            color: #9c27b0;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+        .question-prompt {
+            background: #e3f2fd;
+            border: 2px solid #2196f3;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px auto;
+            max-width: 600px;
+            font-weight: bold;
+        }
+        .answer-choice {
+            background: #f5f5f5;
+            border: 2px solid #9e9e9e;
+            padding: 12px;
+            margin: 8px auto;
+            max-width: 500px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .answer-choice:hover {
+            background: #eeeeee;
+            transform: scale(1.02);
+        }
+        .answer-choice.correct {
+            background: #c8e6c9;
+            border-color: #4caf50;
+        }
+        .answer-choice.incorrect {
+            background: #ffcdd2;
+            border-color: #f44336;
+        }
+        .step-number {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background: #667eea;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            z-index: 1000;
+        }
+        .reveal-text {
+            color: #666;
+            font-style: italic;
+            font-size: 0.9em;
+        }
+        .transition-box {
+            background: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%);
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px auto;
+            max-width: 600px;
+            font-weight: bold;
+        }
+        .equation-box {
+            background: linear-gradient(135deg, #ffd93d 0%, #6bcf7f 100%);
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px auto;
+            max-width: 500px;
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #2c3e50;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        .formula-breakdown {
+            background: #f8f9fa;
+            border: 2px solid #6c757d;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px auto;
+            max-width: 600px;
+            text-align: left;
+        }
+        .formula-part {
+            padding: 8px;
+            margin: 5px 0;
+            background: white;
+            border-radius: 5px;
+        }
+        .calculation-step {
+            background: #e8f4f8;
+            border-left: 4px solid #2196f3;
+            padding: 10px;
+            margin: 10px auto;
+            max-width: 600px;
+            text-align: left;
+            font-family: 'Courier New', monospace;
+        }
+        .practice-problem {
+            background: #fff3e0;
+            border: 2px solid #ff9800;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 15px auto;
+            max-width: 650px;
+        }
+        .problem-number {
+            background: #ff9800;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            display: inline-block;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        .connection-arrow {
+            font-size: 2em;
+            color: #667eea;
+            animation: bounce 2s infinite;
+        }
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        .progress-tracker {
+            background: #f0f0f0;
+            padding: 10px;
+            border-radius: 10px;
+            margin: 15px auto;
+            max-width: 600px;
+        }
+        .topic-complete {
+            background: #4caf50;
+            color: white;
+            padding: 10px;
+            border-radius: 10px;
+            font-weight: bold;
+            margin: 20px auto;
+            max-width: 400px;
+        }
+        .force-arrow {
+            font-size: 3em;
+            color: #e74c3c;
+            font-weight: bold;
+            display: inline-block;
+            margin: 10px;
+        }
+        .unit-highlight {
+            background: #ffeb3b;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+        /* Image Placeholder Styling */
+        .image-placeholder {
+            width: 100%;
+            max-width: 650px;
+            height: 350px;
+            border: 2px dashed #ccc;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f9f9f9;
+            margin: 20px auto;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+        .image-placeholder:hover {
+            background: #f0f0f0;
+            border-color: #999;
+        }
+        .image-placeholder.has-image {
+            border: none;
+            background: transparent;
+        }
+        .image-placeholder img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            border-radius: 8px;
+        }
+        .placeholder-content {
+            text-align: center;
+            padding: 20px;
+            color: #666;
+        }
+        .placeholder-icon {
+            font-size: 3em;
+            display: block;
+            margin-bottom: 10px;
+            opacity: 0.5;
+        }
+        .placeholder-text {
+            font-size: 1.2em;
+            font-weight: bold;
+            display: block;
+            margin-bottom: 10px;
+        }
+        .placeholder-hint {
+            font-size: 0.9em;
+            color: #999;
+            display: block;
+            font-family: monospace;
+        }
+        /* Minimized image placeholder */
+        .image-placeholder.minimized {
+            height: 40px;
+            background: #e8f4fd;
+            border: 1px solid #b3d9ff;
+            cursor: pointer;
+            border-radius: 20px;
+            margin: 10px auto;
+        }
+        .image-placeholder.minimized .placeholder-content {
+            padding: 8px 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        .image-placeholder.minimized .placeholder-icon {
+            font-size: 1.2em;
+            margin: 0;
+        }
+        .image-placeholder.minimized .placeholder-text {
+            font-size: 0.8em;
+            margin: 0;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 200px;
+        }
+        .image-placeholder.minimized .placeholder-hint {
+            display: none;
+        }
+        /* Drag and drop styling */
+        .image-placeholder.drag-over {
+            border-color: #4CAF50 !important;
+            background: #e8f5e9 !important;
+            transform: scale(1.02);
+            box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3);
+        }
+        .image-placeholder.minimized.drag-over {
+            height: 60px;
+            background: #e8f5e9 !important;
+            border-color: #4CAF50 !important;
+        }
+        /* Drag hint overlay */
+        .drag-hint-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(76, 175, 80, 0.9);
+            color: white;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.1em;
+            border-radius: 10px;
+            z-index: 5;
+        }
+        /* Image controls */
+        .image-controls {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            display: flex;
+            gap: 5px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 10;
+        }
+        .image-placeholder:hover .image-controls,
+        .image-placeholder.minimized .image-controls {
+            opacity: 1;
+        }
+        .image-control-btn {
+            background: rgba(0,0,0,0.7);
+            color: white;
+            border: none;
+            border-radius: 3px;
+            padding: 5px 8px;
+            cursor: pointer;
+            font-size: 0.8em;
+            transition: background 0.3s;
+        }
+        .image-control-btn:hover {
+            background: rgba(0,0,0,0.9);
+        }
+        /* Upload methods panel */
+        .upload-methods {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            display: flex;
+            gap: 5px;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .image-placeholder:hover .upload-methods {
+            opacity: 1;
+        }
+        .upload-method-btn {
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            padding: 5px 10px;
+            cursor: pointer;
+            font-size: 0.8em;
+        }
+        /* Image Management Panel */
+        .image-manager {
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            background: white;
+            border: 2px solid #667eea;
+            border-radius: 10px;
+            padding: 15px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+            z-index: 2000;
+            max-width: 300px;
+            max-height: 80vh;
+            overflow-y: auto;
+            transform: translateX(-320px);
+            transition: transform 0.3s ease;
+        }
+        .image-manager.open {
+            transform: translateX(0);
+        }
+        .image-manager-toggle {
+            position: fixed;
+            top: 50px;
+            left: 10px;
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            z-index: 2001;
+            font-size: 12px;
+        }
+        .image-manager h3 {
+            margin: 0 0 15px 0;
+            color: #667eea;
+            font-size: 1.1em;
+        }
+        .bulk-upload {
+            margin-bottom: 15px;
+            padding: 10px;
+            border: 2px dashed #ccc;
+            border-radius: 5px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .bulk-upload:hover {
+            border-color: #667eea;
+            background: #f0f4f8;
+        }
+        .slide-list {
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        .slide-item {
+            display: flex;
+            align-items: center;
+            padding: 5px;
+            margin: 3px 0;
+            border-radius: 3px;
+            font-size: 0.8em;
+        }
+        .slide-item.has-image {
+            background: #e8f5e9;
+            border-left: 3px solid #4caf50;
+        }
+        .slide-item.no-image {
+            background: #ffebee;
+            border-left: 3px solid #f44336;
+        }
+        .slide-status {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+        .slide-status.has-image {
+            background: #4caf50;
+        }
+        .slide-status.no-image {
+            background: #f44336;
+        }
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background: #f0f0f0;
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 10px 0;
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            transition: width 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 0.8em;
+            font-weight: bold;
+        }
+        .action-buttons {
+            display: flex;
+            gap: 5px;
+            margin-top: 10px;
+        }
+        .action-btn {
+            flex: 1;
+            padding: 8px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 0.8em;
+            font-weight: bold;
+        }
+        .action-btn.export {
+            background: #4caf50;
+            color: white;
+        }
+        .action-btn.import {
+            background: #2196f3;
+            color: white;
+        }
+        .action-btn.clear {
+            background: #f44336;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <!-- Image Management Panel -->
+    <button class="image-manager-toggle" onclick="toggleImageManager()">
+        📷 Images
+    </button>
+    <div class="image-manager" id="imageManager">
+        <h3>📷 Image Manager</h3>
+        <div class="bulk-upload" onclick="bulkUpload()">
+            <div>📁 Bulk Upload Images</div>
+            <small>Click to select multiple images</small>
+        </div>
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressFill" style="width: 0%">0/15</div>
+        </div>
+        <div class="slide-list" id="slideList">
+            <!-- Will be populated by JavaScript -->
+        </div>
+        <div class="action-buttons">
+            <button class="action-btn export" onclick="exportImages()">💾 Export</button>
+            <button class="action-btn import" onclick="importImages()">📂 Import</button>
+            <button class="action-btn clear" onclick="clearAllImages()">🗑️ Clear</button>
+        </div>
+    </div>
+    <div class="reveal">
+        <div class="slides">
+            <!-- SLIDE 1: Do Now -->
+            <section>
+                <div class="do-now-box">
+                    <h1>🧬 DO NOW</h1>
+                    <p>Get ready to explore the history of life on Earth!</p>
+                </div>
+                <div class="question-prompt">
+                    Look at these two animals. What do you notice that's similar?
+                </div>
+                <div class="image-placeholder" id="slide1-image" data-slide="1">
+                    <div class="placeholder-content">
+                        <span class="placeholder-icon">🖼️</span>
+                        <span class="placeholder-text">Image: Whale and Shark Comparison</span>
+                        <span class="placeholder-hint">Side-by-side images of whale and shark</span>
+                    </div>
+                    <!-- Drag hint overlay -->
+                    <div class="drag-hint-overlay">
+                        📁 Drop image here
+                    </div>
+                    <!-- Image Controls -->
+                    <div class="image-controls">
+                        <button class="image-control-btn" onclick="toggleMinimize('slide1-image')" title="Minimize/Maximize">📦</button>
+                        <button class="image-control-btn" onclick="replaceImage('slide1-image')" title="Upload">📂</button>
+                        <button class="image-control-btn" onclick="removeImage('slide1-image')" title="Remove">🗑️</button>
+                    </div>
+                    <!-- Upload Methods (shown on hover) -->
+                    <div class="upload-methods">
+                        <button class="upload-method-btn" onclick="selectImageForSlide('slide1-image')" title="Upload from computer">📁 Upload</button>
+                    </div>
+                </div>
+                <div class="click-reveal" onclick="revealContent(this, 'Both are streamlined for swimming!<br>• Both have fins<br>• Both have tails for propulsion<br>• Both live in water')">
+                    <span class="reveal-text">Click to see observations →</span>
+                </div>
+                <div class="click-reveal" onclick="revealContent(this, '🤔 <strong>Think:</strong> How did they both develop these similar features?')">
+                    <span class="reveal-text">The big question →</span>
+                </div>
+            </section>
+
+            <!-- SLIDE 2: Today's Mission -->
+            <section>
+                <div class="topic-header">
+                    <h1>🎯 TODAY'S MISSION</h1>
+                    <h2>Unravel the Mystery of Evolution</h2>
+                </div>
+                <div class="image-placeholder" id="slide2-image">
+                    <div class="placeholder-content">
+                        <span class="placeholder-icon">🖼️</span>
+                        <span class="placeholder-text">Image: Evolution Path</span>
+                        <span class="placeholder-hint">Visual roadmap of topics</span>
+                    </div>
+                </div>
+                <div class="click-reveal" onclick="revealContent(this, 'By the end of today, you will:')">
+                    <span class="reveal-text">Your goals →</span>
+                </div>
+                <div class="click-reveal" onclick="revealContent(this, '✅ Understand the theory of evolution by natural selection')">
+                    <span class="reveal-text">Goal 1 →</span>
+                </div>
+                <div class="click-reveal" onclick="revealContent(this, '✅ Analyze evidence for evolution')">
+                    <span class="reveal-text">Goal 2 →</span>
+                </div>
+                <div class="click-reveal" onclick="revealContent(this, '✅ Explain how species change over time')">
+                    <span class="reveal-text">Goal 3 →</span>
+                </div>
+            </section>
+
+            <!-- SLIDE 3: What is Evolution? -->
+            <section>
+                <h2>What is Evolution?</h2>
+                <div class="definition-box">
+                    <strong>Evolution:</strong> The change in inherited characteristics of populations over successive generations.
+                </div>
+                <div class="image-placeholder" id="slide3-image">
+                    <div class="placeholder-content">
+                        <span class="placeholder-icon">🖼️</span>
+                        <span class="placeholder-text">Image: Evolution Concept</span>
+                        <span class="placeholder-hint">Timeline showing change over time</span>
+                    </div>
+                </div>
+                <div class="click-reveal" onclick="revealContent(this, 'It happens at the population level, not individual level')">
+                    <span class="reveal-text">Key point →</span>
+                </div>
+                <div class="click-reveal" onclick="revealContent(this, 'It involves changes in DNA passed to offspring')">
+                    <span class="reveal-text">Mechanism →</span>
+                </div>
+                <div class="click-reveal" onclick="revealContent(this, 'Over millions of years, these changes can lead to new species')">
+                    <span class="reveal-text">Result →</span>
+                </div>
+            </section>
+
+            <!-- SLIDE 4: Darwin's Theory -->
+            <section>
+                <h2>Darwin's Theory of Evolution</h2>
+                <div class="definition-box">
+                    <strong>Charles Darwin:</strong> Naturalist who proposed the theory of evolution by natural selection.
+                </div>
+                <div class="image-placeholder" id="slide4-image">
+                    <div class="placeholder-content">
+                        <span class="placeholder-icon">🖼️</span>
+                        <span class="placeholder-text">Image: Charles Darwin</span>
+                        <span class="placeholder-hint">Portrait of Darwin on HMS Beagle</span>
+                    </div>
+                </div>
+                <div class="click-reveal" onclick="revealContent(this, 'Developed his theory during his voyage on the HMS Beagle (1831-1836)')">
+                    <span class="reveal-text">Background →</span>
+                </div>
+                <div class="click-reveal" onclick="revealContent(this, 'Published \"On the Origin of Species\" in 1859')">
+                    <span class="reveal-text">Publication →</span>
+                </div>
+                <div class="click-reveal" onclick="revealContent(this, 'Revolutionized our understanding of life on Earth!')">
+                    <span class="reveal-text">Impact →</span>
+                </div>
+            </section>
+
+            <!-- SLIDE 5: Natural Selection -->
+            <section>
+                <div class="topic-header">
+                    <h1>🔍 NATURAL SELECTION</h1>
+                    <p>The mechanism of evolution</p>
+                </div>
+                <div class="equation-box">
+                    Variation + Selection + Inheritance = Evolution
+                </div>
+                <div class="image-placeholder" id="slide5-image">
+                    <div class="placeholder-content">
+                        <span class="placeholder-icon">🖼️</span>
+                        <span class="placeholder-text">Image: Natural Selection Process</span>
+                        <span class="placeholder-hint">Diagram showing the steps of natural selection</span>
+                    </div>
+                </div>
+                <div class="click-reveal" onclick="revealContent(this, 'This is how species adapt to their environment over time!')">
+                    <span class="reveal-text">Key concept →</span>
+                </div>
+            </section>
+
+            <!-- SLIDE 6: The Process of Natural Selection -->
+            <section>
+                <h2>How Natural Selection Works</h2>
+                <div class="formula-breakdown">
+                    <div class="formula-part">
+                        <strong>1️⃣ Variation:</strong> Individuals in a population have different traits
+                    </div>
+                    <div class="formula-part">
+                        <strong>2️⃣ Inheritance:</strong> Some traits are passed from parents to offspring
+                    </div>
+                    <div class="formula-part">
+                        <strong>3️⃣ Selection:</strong> Environmental pressures favor certain traits
+                    </div>
+                    <div class="formula-part">
+                        <strong>4️⃣ Time:</strong> Over many generations, favorable traits become more common
+                    </div>
+                </div>
+                <div class="image-placeholder" id="slide6-image">
+                    <div class="placeholder-content">
+                        <span class="placeholder-icon">🖼️</span>
+                        <span class="placeholder-text">Image: Natural Selection Steps</span>
+                        <span class="placeholder-hint">Visual flowchart of the four steps</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SLIDE 7: Example - Peppered Moths -->
+            <section>
+                <h2>Real Example: Peppered Moths</h2>
+                <div class="image-placeholder" id="slide7-image">
+                    <div class="placeholder-content">
+                        <span class="placeholder-icon">🖼️</span>
+                        <span class="placeholder-text">Image: Peppered Moths</span>
+                        <span class="placeholder-hint">Light and dark moths on tree bark</span>
+                    </div>
+                </div>
+                <div class="click-reveal" onclick="revealContent(this, 'Before Industrial Revolution: Light moths were common, dark moths were rare')">
+                    <span class="reveal-text">Original state →</span>
+                </div>
+                <div class="click-reveal" onclick="revealContent(this, 'During Industrial Revolution: Pollution darkened tree bark')">
+                    <span class="reveal-text">Environmental change →</span>
+                </div>
+                <div class="click-reveal" onclick="revealContent(this, 'Dark moths became better camouflaged and survived better')">
+                    <span class="reveal-text">Selection pressure →</span>
+                </div>
+                <div class="click-reveal" onclick="revealContent(this, 'Dark moths became more common - evolution in action!')">
+                    <span class="reveal-text">Evolutionary change →</span>
+                </div>
+            </section>
+
+            <!-- SLIDE 8: Evidence for Evolution -->
+            <section>
+                <h2>Evidence for Evolution</h2>
+                <div class="definition-box">
+                    <strong>Scientific evidence:</strong> Multiple lines of evidence support the theory of evolution.
+                </div>
+                <div class="image-placeholder" id="slide8-image">
+                    <div class="placeholder-content">
+                        <span class="placeholder-icon">🖼️</span>
+                        <span class="placeholder-text">Image: Evidence Types</span>
+                        <span class="placeholder-hint">Icons for fossil, comparative anatomy, etc.</span>
+                    </div>
+                </div>
+                <div class="click-reveal" onclick="revealContent(this, 'Let's explore the main types of evidence:')">
+                    <span class="reveal-text">Overview →</span>
+                </div>
+            </section>
+
+            <!-- SLIDE 9: Fossil Evidence -->
+            <section>
+                <h2>Fossil Evidence</h2>
+                <div class="definition-box">
+                    <strong>Fossils:</strong> Preserved remains or traces of ancient organisms.
+                </div>
+                <div class="image-placeholder" id="slide9-image">
+                    <div class="placeholder-content">
+                        <span class="placeholder-icon">🖼️</span>
+                        <span class="placeholder-text">Image: Fossil Record</span>
+                        <span class="placeholder-hint">Timeline of fossils showing evolutionary changes</span>
+                    </div>
+                </div>
+                <div class="click-reveal" onclick="revealContent(this, 'Show gradual changes over time')">
+                    <span class="reveal-text">What they show →</span>
+                </div>
+                <div class="click-reveal" onclick="revealContent(this, 'Reveal transitional forms (e.g., Archaeopteryx - between reptiles and birds)')">
+                    <span class="reveal-text">Transitional forms →</span>
+                </div>
+                <div class="click-reveal" onclick="revealContent(this, 'Document extinction events and appearance of new species')">
+                    <span class="reveal-text">Extinctions →</span>
+                </div>
+            </section>
+
+            <!-- SLIDE 10: Comparative Anatomy -->
+            <section>
+                <h2>Comparative Anatomy</h2>
+                <div class="definition-box">
+                    <strong>Comparative Anatomy:</strong> Study of similarities and differences in body structures.
+                </div>
+                <div class="image-placeholder" id="slide10-image">
+                    <div class="placeholder-content">
+                        <span class="placeholder-icon">🖼️</span>
+                        <span class="placeholder-text">Image: Homologous Structures</span>
+                        <span class="placeholder-hint">Limbs of different vertebrates</span>
+                    </div>
+                </div>
+                <div class="click-reveal" onclick="revealContent(this, 'Homologous Structures: Same basic structure, different functions')">
+                    <span class="reveal-text">Type 1 →</span>
+                </div>
+                <div class="click-reveal" onclick="revealContent(this, 'Example: Human arm, whale flipper, bat wing, horse leg')">
+                    <span class="reveal-text">Examples →</span>
+                </div>
+                <div class="click-reveal" onclick="revealContent(this, 'Suggests common ancestry')">
+                    <span class="reveal-text">Implication →</span>
+                </div>
+            </section>
+
+            <!-- SLIDE 11: Molecular Evidence -->
+            <section>
+                <h2>Molecular Evidence</h2>
+                <div class="definition-box">
+                    <strong>Molecular Evidence:</strong> Comparison of DNA and proteins between species.
+                </div>
+                <div class="image-placeholder" id="slide11-image">
+                    <div class="placeholder-content">
+                        <span class="placeholder-icon">🖼️</span>
+                        <span class="placeholder-text">Image: DNA Comparison</span>
+                        <span class="placeholder-hint">DNA sequences of different species</span>
+                    </div>
+                </div>
+                <div class="click-reveal" onclick="revealContent(this, 'Species that are closely related have more similar DNA')">
+                    <span class="reveal-text">Key principle →</span>
+                </div>
+                <div class="click-reveal" onclick="revealContent(this, 'Humans and chimpanzees share about 98.8% of their DNA')">
+                    <span class="reveal-text">Example →</span>
+                </div>
+                <div class="click-reveal" onclick="revealContent(this, 'Molecular clocks help estimate when species diverged')">
+                    <span class="reveal-text">Tool →</span>
+                </div>
+            </section>
+
+            <!-- SLIDE 12: Quick Check #1 -->
+            <section>
+                <h2>Quick Check #1</h2>
+                <div class="question-prompt">
+                    Which of these is NOT a requirement for natural selection?
+                </div>
+                <div class="answer-choice" onclick="markAnswer(this, false)">Variation in traits</div>
+                <div class="answer-choice" onclick="markAnswer(this, false)">Inheritance of traits</div>
+                <div class="answer-choice" onclick="markAnswer(this, true)">Constant environment</div>
+                <div class="answer-choice" onclick="markAnswer(this, false)">Differential survival/reproduction</div>
+                <div class="click-reveal" onclick="revealContent(this, 'Natural selection requires environmental pressures that change over time to favor different traits.')">
+                    <span class="reveal-text">Explanation →</span>
+                </div>
+            </section>
+
+            <!-- SLIDE 13: Speciation -->
+            <section>
+                <h2>How New Species Form</h2>
+                <div class="definition-box">
+                    <strong>Speciation:</strong> The formation of new and distinct species in the course of evolution.
+                </div>
+                <div class="image-placeholder" id="slide13-image">
+                    <div class="placeholder-content">
+                        <span class="placeholder-icon">🖼️</span>
+                        <span class="placeholder-text">Image: Speciation Process</span>
+                        <span class="placeholder-hint">Population splitting into two species</span>
+                    </div>
+                </div>
+                <div class="click-reveal" onclick="revealContent(this, '1️⃣ Isolation: Populations become separated')">
+                    <span class="reveal-text">Step 1 →</span>
+                </div>
+                <div class="click-reveal" onclick="revealContent(this, '2️⃣ Divergence: Different selection pressures cause different changes')">
+                    <span class="reveal-text">Step 2 →</span>
+                </div>
+                <div class="click-reveal" onclick="revealContent(this, '3️⃣ Reproductive isolation: Changes prevent interbreeding')">
+                    <span class="reveal-text">Step 3 →</span>
+                </div>
+            </section>
+
+            <!-- SLIDE 14: Human Evolution -->
+            <section>
+                <h2>Human Evolution</h2>
+                <div class="definition-box">
+                    <strong>Human Evolution:</strong> The process by which humans developed from earlier primates.
+                </div>
+                <div class="image-placeholder" id="slide14-image">
+                    <div class="placeholder-content">
+                        <span class="placeholder-icon">🖼️</span>
+                        <span class="placeholder-text">Image: Human Evolution Timeline</span>
+                        <span class="placeholder-hint">Hominin species timeline</span>
+                    </div>
+                </div>
+                <div class="click-reveal" onclick="revealContent(this, 'Shared ancestry with chimpanzees (~6-7 million years ago)')">
+                    <span class="reveal-text">Origin →</span>
+                </div>
+                <div class="click-reveal" onclick="revealContent(this, 'Key developments: Bipedalism, larger brains, tool use')">
+                    <span class="reveal-text">Major changes →</span>
+                </div>
+                <div class="click-reveal" onclick="revealContent(this, 'Modern humans (Homo sapiens) emerged ~300,000 years ago')">
+                    <span class="reveal-text">Recent history →</span>
+                </div>
+            </section>
+
+            <!-- SLIDE 15: Keywords Summary -->
+            <section>
+                <div class="keyword-box">
+                    <h2>📝 KEY VOCABULARY</h2>
+                    <div class="keyword-item">
+                        <span class="keyword-term">Evolution:</span> Change in inherited characteristics of populations over time.
+                    </div>
+                    <div class="keyword-item">
+                        <span class="keyword-term">Natural Selection:</span> Process where organisms better adapted to environment survive and reproduce.
+                    </div>
+                    <div class="keyword-item">
+                        <span class="keyword-term">Variation:</span> Differences in traits among individuals in a population.
+                    </div>
+                    <div class="keyword-item">
+                        <span class="keyword-term">Inheritance:</span> Passing of traits from parents to offspring.
+                    </div>
+                    <div class="keyword-item">
+                        <span class="keyword-term">Fossil:</span> Preserved remains or traces of ancient organisms.
+                    </div>
+                    <div class="keyword-item">
+                        <span class="keyword-term">Homologous Structures:</span> Body parts with same basic structure but different functions.
+                    </div>
+                    <div class="keyword-item">
+                        <span class="keyword-term">Speciation:</span> Formation of new species.
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </div>
+    <!-- Fixed UI Elements -->
+    <div class="step-number">
+        <span id="slideNumber">1</span> / 15
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reveal.min.js"></script>
+    <script>
+        // Initialize Reveal.js
+        Reveal.initialize({
+            hash: true,
+            controls: true,
+            progress: true,
+            center: false,
+            transition: 'slide',
+            width: '100%',
+            height: '100%',
+            margin: 0.02,
+            minScale: 0.5,
+            maxScale: 2.0,
+            overview: true,
+            touch: true,
+            loop: false,
+            rtl: false,
+            navigationMode: 'default',
+            shuffle: false,
+            fragments: true,
+            embedded: false,
+            help: true,
+            showNotes: false,
+            autoAnimate: false,
+            autoSlide: 0,
+            mouseWheel: false,
+            hideInactiveCursor: true,
+            hideCursorTime: 5000,
+            previewLinks: false,
+            focusBodyOnPageVisibilityChange: true,
+            transitionSpeed: 'default',
+            backgroundTransition: 'fade',
+            viewDistance: 3,
+            mobileViewDistance: 2,
+            display: 'block'
+        });
+        // Update slide number and handle scrolling
+        Reveal.on('slidechanged', event => {
+            document.getElementById('slideNumber').textContent = event.indexh + 1;
+            const currentSlide = Reveal.getCurrentSlide();
+            if (currentSlide) {
+                currentSlide.scrollTop = 0;
+            }
+        });
+        // Enable smooth scrolling within slides
+        Reveal.on('ready', event => {
+            const slides = document.querySelectorAll('.reveal .slides section');
+            slides.forEach(slide => {
+                slide.style.scrollBehavior = 'smooth';
+            });
+        });
+        // Custom mouse wheel handling for slide scrolling
+        document.addEventListener('wheel', function(e) {
+            const currentSlide = Reveal.getCurrentSlide();
+            if (currentSlide) {
+                if (e.target.closest('.image-manager')) {
+                    return;
+                }
+                currentSlide.scrollBy(0, e.deltaY * 0.5);
+                e.preventDefault();
+            }
+        }, { passive: false });
+        // Function to reveal content on click
+        function revealContent(element, content) {
+            if (!element.classList.contains('revealed')) {
+                element.innerHTML = content;
+                element.classList.add('revealed');
+            }
+        }
+        // Function to mark answers
+        function markAnswer(element, isCorrect) {
+            const siblings = element.parentNode.querySelectorAll('.answer-choice');
+            siblings.forEach(sib => {
+                sib.classList.remove('correct', 'incorrect');
+                sib.onclick = null;
+            });
+            if (isCorrect) {
+                element.classList.add('correct');
+                element.innerHTML += ' ✔';
+            } else {
+                element.classList.add('incorrect');
+                element.innerHTML += ' ✗';
+            }
+        }
+        // ===========================
+        // IMAGE MANAGEMENT SYSTEM
+        // ===========================
+        let imageData = {};
+        let isImageManagerOpen = false;
+        // Initialize image management system
+        window.addEventListener('DOMContentLoaded', function() {
+            loadImagesFromStorage();
+            setupImagePlaceholders();
+            updateSlideList();
+            updateProgress();
+            enhanceAllImagePlaceholders();
+            loadMinimizedStates();
+        });
+        // Toggle image manager panel
+        function toggleImageManager() {
+            const manager = document.getElementById('imageManager');
+            isImageManagerOpen = !isImageManagerOpen;
+            if (isImageManagerOpen) {
+                manager.classList.add('open');
+                updateSlideList();
+            } else {
+                manager.classList.remove('open');
+            }
+        }
+        // Setup drag and drop for all image placeholders
+        function setupImagePlaceholders() {
+            const placeholders = document.querySelectorAll('.image-placeholder');
+            placeholders.forEach(placeholder => {
+                const slideId = placeholder.id;
+                const slideNum = placeholder.dataset.slide || slideId.match(/\d+/)?.[0] || '';
+                const dragHintOverlay = placeholder.querySelector('.drag-hint-overlay');
+                if (!placeholder.dataset.slide && slideNum) {
+                    placeholder.dataset.slide = slideNum;
+                }
+                // Drag and drop events
+                placeholder.addEventListener('dragover', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    placeholder.classList.add('drag-over');
+                    if (dragHintOverlay) dragHintOverlay.style.display = 'flex';
+                });
+                placeholder.addEventListener('dragenter', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    placeholder.classList.add('drag-over');
+                    if (dragHintOverlay) dragHintOverlay.style.display = 'flex';
+                });
+                placeholder.addEventListener('dragleave', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    if (!placeholder.contains(e.relatedTarget)) {
+                        placeholder.classList.remove('drag-over');
+                        if (dragHintOverlay) dragHintOverlay.style.display = 'none';
+                    }
+                });
+                placeholder.addEventListener('drop', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    placeholder.classList.remove('drag-over');
+                    if (dragHintOverlay) dragHintOverlay.style.display = 'none';
+                    const files = e.dataTransfer.files;
+                    const htmlData = e.dataTransfer.getData('text/html');
+                    const urlData = e.dataTransfer.getData('text/uri-list') || e.dataTransfer.getData('URL');
+                    const textData = e.dataTransfer.getData('text/plain');
+                    if (files && files.length > 0) {
+                        const file = files[0];
+                        if (file.type.startsWith('image/')) {
+                            loadImageToSlide(file, slideId);
+                            showDropFeedback(placeholder, '✅ Image uploaded!', '#4CAF50');
+                        } else {
+                            showDropFeedback(placeholder, '❌ Please drop an image file', '#f44336');
+                        }
+                    } else if (htmlData) {
+                        const imgMatch = htmlData.match(/<img[^>]+src=["']([^"']+)["'][^>]*>/i);
+                        if (imgMatch && imgMatch[1]) {
+                            loadImageFromURL(imgMatch[1], slideId);
+                            showDropFeedback(placeholder, '✅ Image from web loaded!', '#4CAF50');
+                        }
+                    } else if (urlData && (urlData.match(/\.(jpg|jpeg|png|gif|webp|svg)$/i) || urlData.includes('unsplash') || urlData.includes('pexels'))) {
+                        loadImageFromURL(urlData, slideId);
+                        showDropFeedback(placeholder, '✅ Image from URL loaded!', '#4CAF50');
+                    } else if (textData && textData.match(/^https?:\/\/.+\.(jpg|jpeg|png|gif|webp|svg)$/i)) {
+                        loadImageFromURL(textData, slideId);
+                        showDropFeedback(placeholder, '✅ Image from URL loaded!', '#4CAF50');
+                    } else {
+                        showDropFeedback(placeholder, '❌ Please drop an image file or image from another tab', '#f44336');
+                    }
+                });
+                // Click to upload (only if no image)
+                placeholder.addEventListener('click', function(e) {
+                    if (e.target.closest('.image-control-btn, .upload-method-btn')) {
+                        return;
+                    }
+                    if (!this.classList.contains('has-image')) {
+                        selectImageForSlide(slideId);
+                    }
+                });
+                // Double-click to expand minimized placeholder
+                placeholder.addEventListener('dblclick', function(e) {
+                    if (this.classList.contains('minimized')) {
+                        toggleMinimize(slideId);
+                    }
+                });
+            });
+        }
+        // Show feedback after drag and drop
+        function showDropFeedback(placeholder, message, color) {
+            const feedback = document.createElement('div');
+            feedback.style.cssText = `
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background: ${color};
+                color: white;
+                padding: 10px 20px;
+                border-radius: 20px;
+                font-weight: bold;
+                z-index: 1000;
+                pointer-events: none;
+                opacity: 0;
+                transition: opacity 0.3s;
+            `;
+            feedback.textContent = message;
+            placeholder.appendChild(feedback);
+            setTimeout(() => feedback.style.opacity = '1', 10);
+            setTimeout(() => {
+                feedback.style.opacity = '0';
+                setTimeout(() => {
+                    if (feedback.parentNode) {
+                        feedback.parentNode.removeChild(feedback);
+                    }
+                }, 300);
+            }, 2000);
+        }
+        // Load image from URL
+        function loadImageFromURL(imageUrl, slideId) {
+            const img = new Image();
+            img.crossOrigin = 'anonymous';
+            img.onload = function() {
+                try {
+                    const canvas = document.createElement('canvas');
+                    canvas.width = img.width;
+                    canvas.height = img.height;
+                    const ctx = canvas.getContext('2d');
+                    ctx.drawImage(img, 0, 0);
+                    const dataUrl = canvas.toDataURL('image/jpeg', 0.8);
+                    setSlideImage(slideId, dataUrl, 'web-image.jpg');
+                    saveImageToStorage(slideId, dataUrl, 'web-image.jpg');
+                } catch (e) {
+                    setSlideImage(slideId, imageUrl, 'web-image.jpg');
+                    saveImageToStorage(slideId, imageUrl, 'web-image.jpg');
+                }
+                updateSlideList();
+                updateProgress();
+            };
+            img.onerror = function() {
+                setSlideImage(slideId, imageUrl, 'web-image.jpg');
+                saveImageToStorage(slideId, imageUrl, 'web-image.jpg');
+                updateSlideList();
+                updateProgress();
+            };
+            img.src = imageUrl;
+        }
+        // Load image to specific slide
+        function loadImageToSlide(file, slideId) {
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                const imageData = event.target.result;
+                setSlideImage(slideId, imageData, file.name);
+                saveImageToStorage(slideId, imageData, file.name);
+                updateSlideList();
+                updateProgress();
+            };
+            reader.readAsDataURL(file);
+        }
+        // Set image for slide
+        function setSlideImage(slideId, imageData, filename = '') {
+            const placeholder = document.getElementById(slideId);
+            if (placeholder) {
+                const wasMinimized = placeholder.classList.contains('minimized');
+                placeholder.innerHTML = `
+                    <img src="${imageData}" alt="Slide image: ${filename}">
+                    <div class="image-controls">
+                        <button class="image-control-btn" onclick="toggleMinimize('${slideId}')" title="${wasMinimized ? 'Expand' : 'Minimize'}">${wasMinimized ? '📤' : '📦'}</button>
+                        <button class="image-control-btn" onclick="replaceImage('${slideId}')" title="Replace">🔄</button>
+                        <button class="image-control-btn" onclick="removeImage('${slideId}')" title="Remove">🗑️</button>
+                    </div>
+                `;
+                placeholder.classList.add('has-image');
+                if (wasMinimized) {
+                    placeholder.classList.add('minimized');
+                }
+            }
+        }
+        // Replace image
+        function replaceImage(slideId) {
+            selectImageForSlide(slideId);
+        }
+        // Remove image
+        function removeImage(slideId) {
+            const placeholder = document.getElementById(slideId);
+            if (placeholder) {
+                const wasMinimized = placeholder.classList.contains('minimized');
+                const originalHint = getOriginalHint(slideId);
+                placeholder.innerHTML = `
+                    <div class="placeholder-content">
+                        <span class="placeholder-icon">🖼️</span>
+                        <span class="placeholder-text">${originalHint.text}</span>
+                        <span class="placeholder-hint">${originalHint.hint}</span>
+                    </div>
+                    <div class="drag-hint-overlay">
+                        📁 Drop image here
+                    </div>
+                    <div class="image-controls">
+                        <button class="image-control-btn" onclick="toggleMinimize('${slideId}')" title="${wasMinimized ? 'Expand' : 'Minimize'}">${wasMinimized ? '📤' : '📦'}</button>
+                        <button class="image-control-btn" onclick="replaceImage('${slideId}')" title="Upload">📂</button>
+                        <button class="image-control-btn" onclick="removeImage('${slideId}')" title="Remove">🗑️</button>
+                    </div>
+                    <div class="upload-methods">
+                        <button class="upload-method-btn" onclick="selectImageForSlide('${slideId}')" title="Upload from computer">📁 Upload</button>
+                    </div>
+                `;
+                placeholder.classList.remove('has-image');
+                if (wasMinimized) {
+                    placeholder.classList.add('minimized');
+                }
+                setupSinglePlaceholder(placeholder);
+                removeImageFromStorage(slideId);
+                updateSlideList();
+                updateProgress();
+            }
+        }
+        // Get original placeholder hint
+        function getOriginalHint(slideId) {
+            const hints = {
+                'slide1-image': { text: 'Image: Whale and Shark Comparison', hint: 'Side-by-side images of whale and shark' },
+                'slide2-image': { text: 'Image: Evolution Path', hint: 'Visual roadmap of topics' },
+                'slide3-image': { text: 'Image: Evolution Concept', hint: 'Timeline showing change over time' },
+                'slide4-image': { text: 'Image: Charles Darwin', hint: 'Portrait of Darwin on HMS Beagle' },
+                'slide5-image': { text: 'Image: Natural Selection Process', hint: 'Diagram showing the steps of natural selection' },
+                'slide6-image': { text: 'Image: Natural Selection Steps', hint: 'Visual flowchart of the four steps' },
+                'slide7-image': { text: 'Image: Peppered Moths', hint: 'Light and dark moths on tree bark' },
+                'slide8-image': { text: 'Image: Evidence Types', hint: 'Icons for fossil, comparative anatomy, etc.' },
+                'slide9-image': { text: 'Image: Fossil Record', hint: 'Timeline of fossils showing evolutionary changes' },
+                'slide10-image': { text: 'Image: Homologous Structures', hint: 'Limbs of different vertebrates' },
+                'slide11-image': { text: 'Image: DNA Comparison', hint: 'DNA sequences of different species' },
+                'slide13-image': { text: 'Image: Speciation Process', hint: 'Population splitting into two species' },
+                'slide14-image': { text: 'Image: Human Evolution Timeline', hint: 'Hominin species timeline' }
+            };
+            return hints[slideId] || { text: 'Image Placeholder', hint: 'Add your image here' };
+        }
+        // Select image for specific slide
+        function selectImageForSlide(slideId) {
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.accept = 'image/*';
+            input.onchange = function(e) {
+                const file = e.target.files[0];
+                if (file) {
+                    loadImageToSlide(file, slideId);
+                }
+            };
+            input.click();
+        }
+        // Bulk upload images
+        function bulkUpload() {
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.accept = 'image/*';
+            input.multiple = true;
+            input.onchange = function(e) {
+                const files = Array.from(e.target.files);
+                if (files.length > 0) {
+                    processBulkUpload(files);
+                }
+            };
+            input.click();
+        }
+        // Process bulk upload
+        function processBulkUpload(files) {
+            const placeholders = document.querySelectorAll('.image-placeholder:not(.has-image)');
+            files.forEach((file, index) => {
+                if (index < placeholders.length) {
+                    const slideId = placeholders[index].id;
+                    loadImageToSlide(file, slideId);
+                }
+            });
+            if (files.length > placeholders.length) {
+                alert(`Uploaded ${placeholders.length} images. ${files.length - placeholders.length} files skipped (no empty slides).`);
+            }
+        }
+        // Update slide list in manager
+        function updateSlideList() {
+            const slideList = document.getElementById('slideList');
+            const placeholders = document.querySelectorAll('.image-placeholder');
+            slideList.innerHTML = '';
+            placeholders.forEach(placeholder => {
+                const slideId = placeholder.id;
+                const slideNum = placeholder.dataset.slide || slideId.match(/\d+/)?.[0] || '';
+                const hasImage = placeholder.classList.contains('has-image');
+                const hint = getOriginalHint(slideId);
+                const item = document.createElement('div');
+                item.className = `slide-item ${hasImage ? 'has-image' : 'no-image'}`;
+                item.innerHTML = `
+                    <div class="slide-status ${hasImage ? 'has-image' : 'no-image'}"></div>
+                    <div>
+                        <div>Slide ${slideNum}</div>
+                        <small>${hint.text}</small>
+                    </div>
+                `;
+                item.addEventListener('click', () => {
+                    if (hasImage) {
+                        Reveal.slide(parseInt(slideNum) - 1);
+                    } else {
+                        selectImageForSlide(slideId);
+                    }
+                });
+                slideList.appendChild(item);
+            });
+        }
+        // Update progress bar
+        function updateProgress() {
+            const placeholders = document.querySelectorAll('.image-placeholder');
+            const withImages = document.querySelectorAll('.image-placeholder.has-image');
+            const percentage = (withImages.length / placeholders.length) * 100;
+            const progressFill = document.getElementById('progressFill');
+            progressFill.style.width = percentage + '%';
+            progressFill.textContent = `${withImages.length}/${placeholders.length}`;
+        }
+        // Local storage functions
+        function saveImageToStorage(slideId, imageData, filename) {
+            const stored = JSON.parse(localStorage.getItem('evolutionImages') || '{}');
+            stored[slideId] = { data: imageData, filename: filename };
+            localStorage.setItem('evolutionImages', JSON.stringify(stored));
+        }
+        function loadImagesFromStorage() {
+            const stored = JSON.parse(localStorage.getItem('evolutionImages') || '{}');
+            Object.keys(stored).forEach(slideId => {
+                const { data, filename } = stored[slideId];
+                setSlideImage(slideId, data, filename);
+            });
+        }
+        function removeImageFromStorage(slideId) {
+            const stored = JSON.parse(localStorage.getItem('evolutionImages') || '{}');
+            delete stored[slideId];
+            localStorage.setItem('evolutionImages', JSON.stringify(stored));
+        }
+        // Export images
+        function exportImages() {
+            const stored = localStorage.getItem('evolutionImages');
+            if (stored) {
+                const blob = new Blob([stored], { type: 'application/json' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'evolution-lesson-images.json';
+                a.click();
+                URL.revokeObjectURL(url);
+            } else {
+                alert('No images to export!');
+            }
+        }
+        // Import images
+        function importImages() {
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.accept = '.json';
+            input.onchange = function(e) {
+                const file = e.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(event) {
+                        try {
+                            const importedData = JSON.parse(event.target.result);
+                            localStorage.setItem('evolutionImages', JSON.stringify(importedData));
+                            clearAllImages(false);
+                            loadImagesFromStorage();
+                            updateSlideList();
+                            updateProgress();
+                            alert('Images imported successfully!');
+                        } catch (error) {
+                            alert('Error importing images: Invalid file format');
+                        }
+                    };
+                    reader.readAsText(file);
+                }
+            };
+            input.click();
+        }
+        // Clear all images
+        function clearAllImages(confirm = true) {
+            if (confirm && !window.confirm('Are you sure you want to remove all images?')) {
+                return;
+            }
+            const placeholders = document.querySelectorAll('.image-placeholder');
+            placeholders.forEach(placeholder => {
+                if (placeholder.classList.contains('has-image')) {
+                    removeImage(placeholder.id);
+                }
+            });
+            localStorage.removeItem('evolutionImages');
+            updateSlideList();
+            updateProgress();
+        }
+        // Toggle minimize/maximize
+        function toggleMinimize(slideId) {
+            const placeholder = document.getElementById(slideId);
+            if (placeholder) {
+                const wasMinimized = placeholder.classList.contains('minimized');
+                placeholder.classList.toggle('minimized');
+                const minimizedState = JSON.parse(localStorage.getItem('minimizedPlaceholdersEvolution') || '{}');
+                minimizedState[slideId] = placeholder.classList.contains('minimized');
+                localStorage.setItem('minimizedPlaceholdersEvolution', JSON.stringify(minimizedState));
+                const minimizeBtn = placeholder.querySelector('[onclick*="toggleMinimize"]');
+                if (minimizeBtn) {
+                    if (placeholder.classList.contains('minimized')) {
+                        minimizeBtn.textContent = '📤';
+                        minimizeBtn.title = 'Expand';
+                    } else {
+                        minimizeBtn.textContent = '📦';
+                        minimizeBtn.title = 'Minimize';
+                    }
+                }
+                const message = wasMinimized ? '📤 Expanded' : '📦 Minimized';
+                showDropFeedback(placeholder, message, '#667eea');
+                updateSlideList();
+            }
+        }
+        // Setup single placeholder
+        function setupSinglePlaceholder(placeholder) {
+            setupImagePlaceholders();
+        }
+        // Load minimized states
+        function loadMinimizedStates() {
+            const minimizedState = JSON.parse(localStorage.getItem('minimizedPlaceholdersEvolution') || '{}');
+            Object.keys(minimizedState).forEach(slideId => {
+                if (minimizedState[slideId]) {
+                    const placeholder = document.getElementById(slideId);
+                    if (placeholder) {
+                        placeholder.classList.add('minimized');
+                    }
+                }
+            });
+        }
+        // Enhance all basic image placeholders
+        function enhanceAllImagePlaceholders() {
+            const placeholders = document.querySelectorAll('.image-placeholder');
+            placeholders.forEach(placeholder => {
+                if (placeholder.querySelector('.drag-hint-overlay')) {
+                    return;
+                }
+                const slideId = placeholder.id;
+                const placeholderContent = placeholder.querySelector('.placeholder-content');
+                if (placeholderContent) {
+                    const dragHint = document.createElement('div');
+                    dragHint.className = 'drag-hint-overlay';
+                    dragHint.textContent = '📁 Drop image here';
+                    placeholder.appendChild(dragHint);
+                    const controls = document.createElement('div');
+                    controls.className = 'image-controls';
+                    controls.innerHTML = `
+                        <button class="image-control-btn" onclick="toggleMinimize('${slideId}')" title="Minimize/Maximize">📦</button>
+                        <button class="image-control-btn" onclick="replaceImage('${slideId}')" title="Upload">📂</button>
+                        <button class="image-control-btn" onclick="removeImage('${slideId}')" title="Remove">🗑️</button>
+                    `;
+                    placeholder.appendChild(controls);
+                    const uploadMethods = document.createElement('div');
+                    uploadMethods.className = 'upload-methods';
+                    uploadMethods.innerHTML = `
+                        <button class="upload-method-btn" onclick="selectImageForSlide('${slideId}')" title="Upload from computer">📁 Upload</button>
+                    `;
+                    placeholder.appendChild(uploadMethods);
+                }
+            });
+            setupImagePlaceholders();
+        }
+    </script>
+</body>
+</html>
