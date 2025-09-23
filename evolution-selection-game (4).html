@@ -1,0 +1,1095 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evolution: Natural vs Artificial Selection</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(to bottom, #87CEEB, #98D8C8);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        h1 {
+            text-align: center;
+            color: #2C3E50;
+            margin-bottom: 10px;
+            font-size: 2.5em;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #7F8C8D;
+            margin-bottom: 30px;
+            font-size: 1.1em;
+        }
+
+        .game-modes {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 30px;
+            justify-content: center;
+        }
+
+        .mode-btn {
+            padding: 15px 30px;
+            font-size: 1.1em;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: bold;
+            color: white;
+        }
+
+        .mode-btn.natural {
+            background: #27AE60;
+        }
+
+        .mode-btn.artificial {
+            background: #E74C3C;
+        }
+
+        .mode-btn.active {
+            transform: scale(1.1);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .mode-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        /* Moth Display */
+        .moth-section {
+            display: none;
+        }
+
+        .moth-section.active {
+            display: block;
+        }
+
+        .environment-section {
+            margin-bottom: 30px;
+            padding: 20px;
+            background: #F8F9FA;
+            border-radius: 10px;
+        }
+
+        .environment-title {
+            font-size: 1.3em;
+            color: #2C3E50;
+            margin-bottom: 15px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .environment-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .env-btn {
+            padding: 12px 25px;
+            border: 2px solid #BDC3C7;
+            background: white;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 1.05em;
+        }
+
+        .env-btn.active {
+            background: #3498DB;
+            color: white;
+            border-color: #3498DB;
+        }
+
+        .env-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+
+        .moth-display {
+            position: relative;
+            height: 400px;
+            background: #ECF0F1;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            overflow: hidden;
+        }
+
+        .tree-background {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .tree {
+            width: 150px;
+            height: 320px;
+            border-radius: 10px;
+            position: relative;
+            transition: all 0.5s;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .tree.white {
+            background: #F5F5DC;
+        }
+
+        .tree.black {
+            background: #2C2C2C;
+        }
+
+        .moth {
+            position: absolute;
+            width: 60px;
+            height: 50px;
+            cursor: pointer;
+            transition: all 0.3s;
+            animation: flutter 2s ease-in-out infinite;
+        }
+
+        @keyframes flutter {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            25% { transform: translateY(-10px) rotate(-5deg); }
+            75% { transform: translateY(10px) rotate(5deg); }
+        }
+
+        .moth:hover {
+            transform: scale(1.2);
+            z-index: 10;
+        }
+
+        .moth.dead {
+            opacity: 0.3;
+            animation: none;
+            transform: rotate(180deg) translateY(20px);
+        }
+
+        .moth-body {
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+
+        .moth-wing {
+            position: absolute;
+            width: 25px;
+            height: 40px;
+            border-radius: 50%;
+            top: 5px;
+            border: 1px solid rgba(0,0,0,0.2);
+        }
+
+        .moth-wing.left {
+            left: 5px;
+            transform: rotate(-20deg);
+        }
+
+        .moth-wing.right {
+            right: 5px;
+            transform: rotate(20deg);
+        }
+
+        .moth-center {
+            position: absolute;
+            width: 15px;
+            height: 30px;
+            background: #4A4A4A;
+            border-radius: 50%;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        /* Cow Display */
+        .cow-section {
+            display: none;
+        }
+
+        .cow-section.active {
+            display: block;
+        }
+
+        .farm-display {
+            background: linear-gradient(to bottom, #87CEEB 0%, #87CEEB 40%, #90EE90 40%, #90EE90 100%);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 30px;
+            min-height: 400px;
+        }
+
+        .selection-instruction {
+            text-align: center;
+            background: #FFF3CD;
+            border: 2px solid #FFC107;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 20px;
+            font-size: 1.1em;
+            color: #856404;
+        }
+
+        .cow-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .cow-card {
+            background: white;
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 4px solid transparent;
+        }
+
+        .cow-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .cow-card.selected {
+            border-color: #E74C3C;
+            background: #FFE5E5;
+            transform: scale(1.05);
+        }
+
+        .cow-emoji {
+            font-size: 70px;
+            margin-bottom: 10px;
+        }
+
+        .cow-name {
+            font-weight: bold;
+            color: #2C3E50;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        .cow-milk {
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #3498DB;
+            margin-bottom: 5px;
+        }
+
+        .milk-label {
+            font-size: 0.85em;
+            color: #7F8C8D;
+        }
+
+        .milk-bar {
+            width: 100%;
+            height: 10px;
+            background: #ECF0F1;
+            border-radius: 5px;
+            margin-top: 8px;
+            overflow: hidden;
+        }
+
+        .milk-fill {
+            height: 100%;
+            background: linear-gradient(to right, #3498DB, #2980B9);
+            transition: width 0.3s;
+        }
+
+        /* Shared Stats */
+        .stats-panel {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            border: 2px solid #ECF0F1;
+            text-align: center;
+        }
+
+        .stat-label {
+            color: #7F8C8D;
+            font-size: 0.9em;
+            margin-bottom: 5px;
+        }
+
+        .stat-value {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #2C3E50;
+        }
+
+        .info-section {
+            margin-top: 20px;
+            padding: 20px;
+            background: #F8F9FA;
+            border-radius: 10px;
+        }
+
+        .info-section h3 {
+            color: #2C3E50;
+            margin-bottom: 15px;
+        }
+
+        .color-bar {
+            display: flex;
+            height: 40px;
+            border-radius: 5px;
+            overflow: hidden;
+            margin-bottom: 10px;
+            border: 2px solid #BDC3C7;
+        }
+
+        .color-segment {
+            transition: all 0.5s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+
+        .color-segment.white {
+            background: #F5F5DC;
+            color: #333;
+            border-right: 1px solid #DDD;
+        }
+
+        .color-segment.black {
+            background: #2C2C2C;
+        }
+
+        .controls {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 25px;
+            flex-wrap: wrap;
+        }
+
+        .control-btn {
+            padding: 14px 28px;
+            font-size: 1.05em;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+            color: white;
+        }
+
+        .control-btn.primary {
+            background: #3498DB;
+            font-size: 1.15em;
+        }
+
+        .control-btn.success {
+            background: #27AE60;
+        }
+
+        .control-btn.warning {
+            background: #F39C12;
+        }
+
+        .control-btn:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .control-btn:disabled {
+            background: #BDC3C7;
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+
+        .explanation {
+            background: #E8F8F5;
+            border-left: 4px solid #27AE60;
+            padding: 15px;
+            margin-top: 20px;
+            border-radius: 5px;
+        }
+
+        .explanation h4 {
+            color: #27AE60;
+            margin-bottom: 10px;
+        }
+
+        .explanation.artificial {
+            background: #FFE5E5;
+            border-left-color: #E74C3C;
+        }
+
+        .explanation.artificial h4 {
+            color: #E74C3C;
+        }
+
+        .explanation p {
+            color: #2C3E50;
+            line-height: 1.6;
+        }
+
+        .tutorial {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 50px rgba(0,0,0,0.3);
+            max-width: 550px;
+            z-index: 1000;
+            display: none;
+        }
+
+        .tutorial.active {
+            display: block;
+        }
+
+        .tutorial h2 {
+            color: #2C3E50;
+            margin-bottom: 20px;
+        }
+
+        .tutorial p {
+            color: #7F8C8D;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .tutorial button {
+            width: 100%;
+            padding: 12px;
+            background: #3498DB;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1em;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+            z-index: 999;
+            display: none;
+        }
+
+        .overlay.active {
+            display: block;
+        }
+
+        .milk-chart {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 15px;
+            text-align: center;
+        }
+
+        .milk-chart h4 {
+            color: #2C3E50;
+            margin-bottom: 15px;
+        }
+
+        .milk-average {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #3498DB;
+            margin: 10px 0;
+        }
+
+        .milk-comparison {
+            color: #7F8C8D;
+            margin-top: 10px;
+        }
+
+        .improvement {
+            color: #27AE60;
+            font-weight: bold;
+            font-size: 1.2em;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🧬 Evolution Simulator</h1>
+        <p class="subtitle">See the difference between Natural Selection and Artificial Selection!</p>
+
+        <div class="game-modes">
+            <button class="mode-btn natural" onclick="startNaturalSelection()">
+                🦋 Natural Selection (Moths)
+            </button>
+            <button class="mode-btn artificial" onclick="startArtificialSelection()">
+                🐄 Artificial Selection (Dairy Cows)
+            </button>
+        </div>
+
+        <!-- MOTH SECTION (Natural Selection) -->
+        <div class="moth-section" id="mothSection">
+            <div class="environment-section">
+                <div class="environment-title">🌳 Choose Tree Color Environment:</div>
+                <div class="environment-buttons">
+                    <button class="env-btn active" onclick="setEnvironment('white')">
+                        ⚪ White Bark Trees
+                    </button>
+                    <button class="env-btn" onclick="setEnvironment('black')">
+                        ⚫ Black Bark Trees (Industrial Pollution)
+                    </button>
+                </div>
+            </div>
+
+            <div class="moth-display" id="mothDisplay">
+                <div class="tree-background" id="treeBackground">
+                    <div class="tree white"></div>
+                    <div class="tree white"></div>
+                    <div class="tree white"></div>
+                </div>
+            </div>
+
+            <div class="stats-panel">
+                <div class="stat-card">
+                    <div class="stat-label">Generation</div>
+                    <div class="stat-value" id="mothGeneration">1</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Total Moths</div>
+                    <div class="stat-value" id="mothPopulation">20</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Survivors (Not Eaten)</div>
+                    <div class="stat-value" id="mothSurvivors">20</div>
+                </div>
+            </div>
+
+            <div class="info-section">
+                <h3>Moth Population Colors:</h3>
+                <div class="color-bar" id="mothColorBar">
+                    <div class="color-segment white" style="width: 50%">White: 50%</div>
+                    <div class="color-segment black" style="width: 50%">Black: 50%</div>
+                </div>
+            </div>
+
+            <div class="controls">
+                <button class="control-btn primary" onclick="nextMothGeneration()">
+                    🦅 Birds Hunt → Next Generation
+                </button>
+                <button class="control-btn success" id="mothRunBtn" onclick="toggleMothSimulation()">
+                    Auto Run
+                </button>
+                <button class="control-btn warning" onclick="resetMoths()">
+                    Reset
+                </button>
+            </div>
+
+            <div class="explanation">
+                <h4>🦋 Natural Selection: Peppered Moths</h4>
+                <p>
+                    <strong>This really happened!</strong> In England, white moths were common on white tree bark. 
+                    During the Industrial Revolution (1800s), pollution turned trees black with soot. Suddenly, black moths survived better 
+                    because birds couldn't see them! The population evolved from mostly white to mostly black.
+                </p>
+                <p style="margin-top: 10px;">
+                    <strong>Try it:</strong> Switch between white and black trees to see how the moth population evolves!
+                </p>
+            </div>
+        </div>
+
+        <!-- COW SECTION (Artificial Selection) -->
+        <div class="cow-section" id="cowSection">
+            <div class="farm-display">
+                <div class="selection-instruction" id="selectionInstruction">
+                    📝 <strong>Step 1:</strong> Select at least 2 cows with the HIGHEST milk production to breed!
+                </div>
+                <div class="cow-grid" id="cowGrid"></div>
+            </div>
+
+            <div class="stats-panel">
+                <div class="stat-card">
+                    <div class="stat-label">Generation</div>
+                    <div class="stat-value" id="cowGeneration">1</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Herd Size</div>
+                    <div class="stat-value" id="cowPopulation">6</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Selected for Breeding</div>
+                    <div class="stat-value" id="cowSelected">0</div>
+                </div>
+            </div>
+
+            <div class="milk-chart">
+                <h4>Average Daily Milk Production:</h4>
+                <div class="milk-average" id="milkAverage">5.0 gal</div>
+                <div class="milk-comparison">
+                    Wild Ancestor: 0.5 gallons/day<br>
+                    Modern Record: 15+ gallons/day
+                </div>
+                <div class="improvement" id="improvement"></div>
+            </div>
+
+            <div class="controls">
+                <button class="control-btn primary" id="nextGenBtn" onclick="nextCowGeneration()" disabled>
+                    → Next Generation (Select 2+ Cows First)
+                </button>
+                <button class="control-btn success" onclick="selectBestTwo()">
+                    Auto-Select Top 2 Producers
+                </button>
+                <button class="control-btn warning" onclick="resetCows()">
+                    Reset Farm
+                </button>
+            </div>
+
+            <div class="explanation artificial">
+                <h4>🐄 Artificial Selection: Creating Super Cows!</h4>
+                <p>
+                    <strong>You are the farmer!</strong> Over thousands of years, humans have bred cows to produce more milk. 
+                    Wild cows only made 0.5 gallons/day (just for their calf). Modern dairy cows can produce 15+ gallons/day!
+                </p>
+                <p style="margin-top: 10px;">
+                    <strong>Your Job:</strong> Click on the cows with the HIGHEST milk production (bigger numbers) to select them for breeding. 
+                    Their offspring will inherit high milk production! Can you breed super cows?
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="overlay" id="overlay"></div>
+    <div class="tutorial" id="tutorial">
+        <h2>Welcome to Evolution Simulator!</h2>
+        <p>
+            <strong>🦋 Natural Selection (Moths):</strong><br>
+            Birds eat moths they can see. White moths survive on white trees, black moths survive on black trees. 
+            Nature decides who lives!
+        </p>
+        <p>
+            <strong>🐄 Artificial Selection (Cows):</strong><br>
+            YOU choose which cows breed based on milk production. Pick the best milk producers to create super cows!
+        </p>
+        <p>
+            <strong>The Key Difference:</strong><br>
+            • Natural = Environment decides (birds eating moths)<br>
+            • Artificial = Humans decide (farmers choosing cows)
+        </p>
+        <button onclick="closeTutorial()">Let's Start!</button>
+    </div>
+
+    <script>
+        // Game State
+        let currentMode = null;
+        let mothEnvironment = 'white';
+        let mothGeneration = 1;
+        let cowGeneration = 1;
+        let moths = [];
+        let cows = [];
+        let selectedCows = new Set();
+        let mothSimRunning = false;
+        let mothSimInterval = null;
+        let initialCowAverage = 0;
+
+        // Cow names
+        const cowNames = ['Bessie', 'Daisy', 'Bella', 'Luna', 'Rosie', 'Molly'];
+
+        // Moth class - ONLY WHITE AND BLACK
+        class Moth {
+            constructor(color = null) {
+                if (color) {
+                    this.color = color;
+                } else {
+                    this.color = Math.random() < 0.5 ? 'white' : 'black';
+                }
+                this.alive = true;
+                this.id = Math.random().toString(36).substr(2, 9);
+                this.x = Math.random() * 80 + 10;
+                this.y = Math.random() * 70 + 15;
+            }
+
+            getColorValue() {
+                return this.color === 'white' ? '#F5F5DC' : '#2C2C2C';
+            }
+
+            calculateSurvival(environment) {
+                if (environment === 'white') {
+                    // White trees: white moths survive better
+                    return this.color === 'white' ? 0.9 : 0.1;
+                } else {
+                    // Black trees: black moths survive better
+                    return this.color === 'black' ? 0.9 : 0.1;
+                }
+            }
+        }
+
+        // Cow class
+        class Cow {
+            constructor(parent1 = null, parent2 = null) {
+                this.id = Math.random().toString(36).substr(2, 9);
+                
+                if (parent1 && parent2) {
+                    // Inherit from parents
+                    const avgMilk = (parent1.milkProduction + parent2.milkProduction) / 2;
+                    const variation = (Math.random() - 0.5) * 1.5;
+                    this.milkProduction = Math.max(1, avgMilk + variation);
+                    
+                    // Small chance of good mutation
+                    if (Math.random() < 0.15) {
+                        this.milkProduction += Math.random() * 1.5;
+                    }
+                } else {
+                    // First generation - low production
+                    this.milkProduction = 3 + Math.random() * 4; // 3-7 gallons
+                }
+                
+                this.milkProduction = Math.min(this.milkProduction, 20);
+                this.milkProduction = Math.round(this.milkProduction * 10) / 10;
+            }
+        }
+
+        // Initialize moths
+        function initializeMoths() {
+            moths = [];
+            for (let i = 0; i < 20; i++) {
+                moths.push(new Moth());
+            }
+            mothGeneration = 1;
+        }
+
+        // Initialize cows
+        function initializeCows() {
+            cows = [];
+            for (let i = 0; i < 6; i++) {
+                cows.push(new Cow());
+            }
+            cowGeneration = 1;
+            selectedCows.clear();
+            
+            // Store initial average
+            initialCowAverage = cows.reduce((sum, cow) => sum + cow.milkProduction, 0) / cows.length;
+        }
+
+        // Start Natural Selection
+        function startNaturalSelection() {
+            currentMode = 'natural';
+            document.querySelectorAll('.mode-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelector('.mode-btn.natural').classList.add('active');
+            
+            document.getElementById('mothSection').classList.add('active');
+            document.getElementById('cowSection').classList.remove('active');
+            
+            initializeMoths();
+            renderMoths();
+        }
+
+        // Start Artificial Selection
+        function startArtificialSelection() {
+            currentMode = 'artificial';
+            document.querySelectorAll('.mode-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelector('.mode-btn.artificial').classList.add('active');
+            
+            document.getElementById('mothSection').classList.remove('active');
+            document.getElementById('cowSection').classList.add('active');
+            
+            initializeCows();
+            renderCows();
+        }
+
+        // Render moths
+        function renderMoths() {
+            const display = document.getElementById('mothDisplay');
+            document.querySelectorAll('.moth').forEach(m => m.remove());
+            
+            moths.forEach(moth => {
+                const mothElement = document.createElement('div');
+                mothElement.className = `moth ${!moth.alive ? 'dead' : ''}`;
+                mothElement.style.left = moth.x + '%';
+                mothElement.style.top = moth.y + '%';
+                
+                mothElement.innerHTML = `
+                    <div class="moth-body">
+                        <div class="moth-wing left" style="background: ${moth.getColorValue()}"></div>
+                        <div class="moth-wing right" style="background: ${moth.getColorValue()}"></div>
+                        <div class="moth-center"></div>
+                    </div>
+                `;
+                
+                display.appendChild(mothElement);
+            });
+            
+            updateMothStats();
+        }
+
+        // Update moth statistics
+        function updateMothStats() {
+            document.getElementById('mothGeneration').textContent = mothGeneration;
+            document.getElementById('mothPopulation').textContent = moths.length;
+            document.getElementById('mothSurvivors').textContent = moths.filter(m => m.alive).length;
+            
+            const total = moths.length;
+            const white = moths.filter(m => m.color === 'white').length;
+            const black = moths.filter(m => m.color === 'black').length;
+            
+            const whitePercent = Math.round((white / total) * 100);
+            const blackPercent = Math.round((black / total) * 100);
+            
+            const colorBar = document.getElementById('mothColorBar');
+            colorBar.innerHTML = `
+                <div class="color-segment white" style="width: ${whitePercent || 1}%">White: ${whitePercent}%</div>
+                <div class="color-segment black" style="width: ${blackPercent || 1}%">Black: ${blackPercent}%</div>
+            `;
+        }
+
+        // Set environment
+        function setEnvironment(env) {
+            mothEnvironment = env;
+            document.querySelectorAll('.env-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            const trees = document.querySelectorAll('.tree');
+            trees.forEach(tree => {
+                tree.className = 'tree ' + env;
+            });
+        }
+
+        // Next moth generation
+        function nextMothGeneration() {
+            // Birds hunt - apply survival
+            moths.forEach(moth => {
+                const survivalChance = moth.calculateSurvival(mothEnvironment);
+                moth.alive = Math.random() < survivalChance;
+            });
+            renderMoths();
+            
+            setTimeout(() => {
+                const survivors = moths.filter(m => m.alive);
+                
+                if (survivors.length < 2) {
+                    alert('Population extinct! Try a different environment.');
+                    resetMoths();
+                    return;
+                }
+                
+                // Create next generation from survivors
+                const newMoths = [];
+                while (newMoths.length < 20) {
+                    const parent = survivors[Math.floor(Math.random() * survivors.length)];
+                    // Small mutation chance
+                    if (Math.random() < 0.95) {
+                        newMoths.push(new Moth(parent.color));
+                    } else {
+                        newMoths.push(new Moth()); // Random color
+                    }
+                }
+                
+                moths = newMoths;
+                mothGeneration++;
+                renderMoths();
+            }, 1500);
+        }
+
+        // Toggle moth simulation
+        function toggleMothSimulation() {
+            mothSimRunning = !mothSimRunning;
+            const btn = document.getElementById('mothRunBtn');
+            
+            if (mothSimRunning) {
+                btn.textContent = 'Stop Auto';
+                btn.classList.remove('success');
+                btn.classList.add('warning');
+                
+                mothSimInterval = setInterval(nextMothGeneration, 3500);
+            } else {
+                btn.textContent = 'Auto Run';
+                btn.classList.remove('warning');
+                btn.classList.add('success');
+                
+                clearInterval(mothSimInterval);
+            }
+        }
+
+        // Reset moths
+        function resetMoths() {
+            mothSimRunning = false;
+            clearInterval(mothSimInterval);
+            document.getElementById('mothRunBtn').textContent = 'Auto Run';
+            initializeMoths();
+            renderMoths();
+        }
+
+        // Render cows
+        function renderCows() {
+            const grid = document.getElementById('cowGrid');
+            grid.innerHTML = '';
+            
+            // Sort cows by milk production for easier selection
+            const sortedCows = [...cows].sort((a, b) => b.milkProduction - a.milkProduction);
+            
+            sortedCows.forEach((cow, index) => {
+                const cowCard = document.createElement('div');
+                cowCard.className = `cow-card ${selectedCows.has(cow.id) ? 'selected' : ''}`;
+                cowCard.onclick = () => selectCow(cow.id);
+                
+                const milkPercent = (cow.milkProduction / 20) * 100;
+                
+                cowCard.innerHTML = `
+                    <div class="cow-emoji">🐄</div>
+                    <div class="cow-name">${cowNames[index]}</div>
+                    <div class="cow-milk">${cow.milkProduction} gal</div>
+                    <div class="milk-label">per day</div>
+                    <div class="milk-bar">
+                        <div class="milk-fill" style="width: ${milkPercent}%"></div>
+                    </div>
+                `;
+                
+                grid.appendChild(cowCard);
+            });
+            
+            updateCowStats();
+        }
+
+        // Update cow statistics
+        function updateCowStats() {
+            document.getElementById('cowGeneration').textContent = cowGeneration;
+            document.getElementById('cowPopulation').textContent = cows.length;
+            document.getElementById('cowSelected').textContent = selectedCows.size;
+            
+            const avgMilk = cows.reduce((sum, cow) => sum + cow.milkProduction, 0) / cows.length;
+            document.getElementById('milkAverage').textContent = avgMilk.toFixed(1) + ' gal';
+            
+            // Show improvement
+            if (cowGeneration > 1) {
+                const improvement = ((avgMilk / initialCowAverage - 1) * 100).toFixed(0);
+                document.getElementById('improvement').textContent = `+${improvement}% improvement from Generation 1!`;
+            }
+            
+            // Update button and instruction
+            const nextBtn = document.getElementById('nextGenBtn');
+            const instruction = document.getElementById('selectionInstruction');
+            
+            if (selectedCows.size >= 2) {
+                nextBtn.disabled = false;
+                nextBtn.textContent = `→ Breed ${selectedCows.size} Selected Cows`;
+                instruction.innerHTML = `✅ <strong>Step 2:</strong> Click "Next Generation" to breed your selected cows!`;
+                instruction.style.background = '#D4EDDA';
+                instruction.style.borderColor = '#28A745';
+                instruction.style.color = '#155724';
+            } else {
+                nextBtn.disabled = true;
+                nextBtn.textContent = `→ Next Generation (Select ${2 - selectedCows.size} More Cow${2 - selectedCows.size > 1 ? 's' : ''})`;
+                instruction.innerHTML = `📝 <strong>Step 1:</strong> Select at least 2 cows with the HIGHEST milk production to breed!`;
+                instruction.style.background = '#FFF3CD';
+                instruction.style.borderColor = '#FFC107';
+                instruction.style.color = '#856404';
+            }
+        }
+
+        // Select cow
+        function selectCow(cowId) {
+            if (selectedCows.has(cowId)) {
+                selectedCows.delete(cowId);
+            } else {
+                selectedCows.add(cowId);
+            }
+            renderCows();
+        }
+
+        // Select best two cows
+        function selectBestTwo() {
+            selectedCows.clear();
+            const sorted = [...cows].sort((a, b) => b.milkProduction - a.milkProduction);
+            selectedCows.add(sorted[0].id);
+            selectedCows.add(sorted[1].id);
+            renderCows();
+        }
+
+        // Next cow generation
+        function nextCowGeneration() {
+            if (selectedCows.size < 2) return;
+            
+            const parents = cows.filter(cow => selectedCows.has(cow.id));
+            const newCows = [];
+            
+            // Create 6 offspring from selected parents
+            for (let i = 0; i < 6; i++) {
+                const parent1 = parents[Math.floor(Math.random() * parents.length)];
+                const parent2 = parents[Math.floor(Math.random() * parents.length)];
+                newCows.push(new Cow(parent1, parent2));
+            }
+            
+            cows = newCows;
+            cowGeneration++;
+            selectedCows.clear();
+            renderCows();
+            
+            // Check achievement
+            const avgMilk = cows.reduce((sum, cow) => sum + cow.milkProduction, 0) / cows.length;
+            if (avgMilk > 10) {
+                alert('🏆 Amazing! Your cows now produce over 10 gallons/day average! You\'ve created dairy super cows!');
+            } else if (avgMilk > 15) {
+                alert('🏆🏆 Incredible! Over 15 gallons/day! You\'ve reached modern dairy farm levels!');
+            }
+        }
+
+        // Reset cows
+        function resetCows() {
+            initializeCows();
+            renderCows();
+        }
+
+        // Tutorial
+        function showTutorial() {
+            document.getElementById('overlay').classList.add('active');
+            document.getElementById('tutorial').classList.add('active');
+        }
+
+        function closeTutorial() {
+            document.getElementById('overlay').classList.remove('active');
+            document.getElementById('tutorial').classList.remove('active');
+        }
+
+        // Initialize
+        window.onload = () => {
+            showTutorial();
+            startNaturalSelection();
+        };
+    </script>
+</body>
+</html>
