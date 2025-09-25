@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forces, Buoyancy and Flight Worksheet - Year 7 Science</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Times New Roman', serif;
+            background: #f5f5f5;
+            padding: 20px;
+            font-size: 11pt;
+            line-height: 1.4;
+        }
+
+        .worksheet {
+            background: white;
+            max-width: 210mm;
+            min-height: 297mm;
+            margin: 0 auto;
+            padding: 15mm;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            border: 2px solid #000;
+        }
+
+        .worksheet-header {
+            text-align: center;
+            margin-bottom: 15pt;
+            border-bottom: 2px solid #000;
+            padding-bottom: 10pt;
+        }
+
+        .worksheet-header h1 {
+            margin: 0;
+            font-size: 16pt;
+            font-weight: bold;
+        }
+
+        .student-line {
+            text-align: right;
+            margin-top: 10pt;
+            margin-bottom: 10pt;
+        }
+
+        .controls {
+            text-align: center;
+            margin: 10pt 0;
+            border: 1px solid #ccc;
+            padding: 8pt;
+            background: #f9f9f9;
+        }
+
+        .show-answers-btn {
+            background: #FF6B35;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 10pt;
+        }
+
+        .show-answers-btn:hover {
+            background: #e55a2b;
+        }
+
+        .section {
+            margin-bottom: 15pt;
+            border: 2px solid #000;
+        }
+
+        .section-header {
+            background: #000;
+            color: white;
+            padding: 5pt 10pt;
+            font-weight: bold;
+            font-size: 11pt;
+        }
+
+        .section-content {
+            padding: 10pt;
+        }
+
+        .instructions {
+            font-style: italic;
+            margin-bottom: 8pt;
+            font-size: 10pt;
+        }
+
+        .question {
+            margin-bottom: 12pt;
+        }
+
+        .mc-options {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3pt;
+            margin: 5pt 0;
+        }
+
+        .mc-option {
+            font-size: 10pt;
+        }
+
+        .tf-questions {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8pt;
+        }
+
+        .tf-question {
+            margin-bottom: 6pt;
+            font-size: 10pt;
+        }
+
+        .answer-box {
+            border-bottom: 1px solid #000;
+            min-height: 12pt;
+            min-width: 80pt;
+            display: inline-block;
+            cursor: pointer;
+            position: relative;
+            background: #f9f9f9;
+            padding: 1pt 3pt;
+        }
+
+        .answer-box:hover {
+            background-color: #e9e9e9;
+        }
+
+        .answer-text {
+            color: #d32f2f;
+            font-weight: bold;
+            display: none;
+        }
+
+        .answer-box.revealed .answer-text {
+            display: inline;
+        }
+
+        .answer-space {
+            margin-top: 8pt;
+        }
+
+        .answer-space div {
+            border-bottom: 1px solid #000;
+            min-height: 20pt;
+            margin-bottom: 8pt;
+            cursor: pointer;
+            padding: 2pt;
+        }
+
+        .answer-space div:hover {
+            background-color: #f9f9f9;
+        }
+
+        .answer-space div.revealed .answer-text {
+            display: inline;
+        }
+
+        .answer-space .answer-text {
+            color: #d32f2f;
+            font-weight: bold;
+            display: none;
+        }
+
+        .diagram-space {
+            border: 2px solid #000;
+            min-height: 120pt;
+            margin: 10pt 0;
+            background: white;
+            position: relative;
+            padding: 10pt;
+        }
+
+        .diagram-instructions {
+            font-size: 9pt;
+            color: #666;
+            font-style: italic;
+            margin-bottom: 5pt;
+        }
+
+        .force-arrow {
+            stroke-width: 3;
+            marker-end: url(#arrowhead);
+        }
+
+        .weight-force { stroke: #FF5722; }
+        .buoyant-force { stroke: #4CAF50; }
+        .lift-force { stroke: #2196F3; }
+        .drag-force { stroke: #FF9800; }
+        .thrust-force { stroke: #9C27B0; }
+
+        .water { fill: #81D4FA; opacity: 0.8; }
+        .object-floating { fill: #4CAF50; stroke: #2E7D32; stroke-width: 2; }
+        .object-sinking { fill: #FF5722; stroke: #D32F2F; stroke-width: 2; }
+        .airplane { fill: #E0E0E0; stroke: #424242; stroke-width: 2; }
+
+        /* Print styles */
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            .worksheet {
+                box-shadow: none;
+                margin: 0;
+                max-width: none;
+                min-height: auto;
+            }
+            .controls {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="worksheet">
+        <div class="worksheet-header">
+            <h1>Year 7 Science Quiz: Forces, Buoyancy and Flight</h1>
+            <div class="student-line">
+                <strong>Student Name:</strong> _________________________
+            </div>
+        </div>
+
+        <div class="controls">
+            <button class="show-answers-btn" onclick="revealAllAnswers()">Click to Show All Answers</button>
+            <div style="font-size: 9pt; margin-top: 4pt; font-style: italic;">
+                Click individual answer areas to reveal answers, or use the button above.
+            </div>
+        </div>
+
+        <!-- Section 1: Multiple Choice Questions -->
+        <div class="section">
+            <div class="section-header">Section 1: Multiple-Choice Questions (12 points, 1 each)</div>
+            <div class="section-content">
+                <div class="instructions">Circle the correct answer. Options are listed horizontally in two columns.</div>
+
+                <div class="question">
+                    <strong>1. What is buoyancy?</strong><br>
+                    <div class="mc-options">
+                        <div class="mc-option">a) The weight of an object</div>
+                        <div class="mc-option">b) The upward force from water or air</div>
+                        <div class="mc-option">c) The downward force of gravity</div>
+                        <div class="mc-option">d) The speed of a moving object</div>
+                    </div>
+                    <strong>Answer:</strong>
+                    <div class="answer-box" onclick="revealAnswer(this)">
+                        <span class="answer-text">b) The upward force from water or air</span>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <strong>2. An object will float when:</strong><br>
+                    <div class="mc-options">
+                        <div class="mc-option">a) Weight is greater than buoyant force</div>
+                        <div class="mc-option">b) Buoyant force equals weight</div>
+                        <div class="mc-option">c) Weight is much heavier</div>
+                        <div class="mc-option">d) There is no gravity</div>
+                    </div>
+                    <strong>Answer:</strong>
+                    <div class="answer-box" onclick="revealAnswer(this)">
+                        <span class="answer-text">b) Buoyant force equals weight</span>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <strong>3. What are the four forces acting on an airplane?</strong><br>
+                    <div class="mc-options">
+                        <div class="mc-option">a) Weight, buoyancy, thrust, drag</div>
+                        <div class="mc-option">b) Weight, lift, thrust, drag</div>
+                        <div class="mc-option">c) Gravity, air, wind, speed</div>
+                        <div class="mc-option">d) Up, down, left, right</div>
+                    </div>
+                    <strong>Answer:</strong>
+                    <div class="answer-box" onclick="revealAnswer(this)">
+                        <span class="answer-text">b) Weight, lift, thrust, drag</span>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <strong>4. Why do ships float even though they're made of steel?</strong><br>
+                    <div class="mc-options">
+                        <div class="mc-option">a) Steel is lighter than water</div>
+                        <div class="mc-option">b) They're mostly filled with air</div>
+                        <div class="mc-option">c) They have special paint</div>
+                        <div class="mc-option">d) They move very fast</div>
+                    </div>
+                    <strong>Answer:</strong>
+                    <div class="answer-box" onclick="revealAnswer(this)">
+                        <span class="answer-text">b) They're mostly filled with air</span>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <strong>5. How do airplane wings create lift?</strong><br>
+                    <div class="mc-options">
+                        <div class="mc-option">a) They flap like bird wings</div>
+                        <div class="mc-option">b) Air pressure difference above and below</div>
+                        <div class="mc-option">c) They are very light</div>
+                        <div class="mc-option">d) Engines pull them up</div>
+                    </div>
+                    <strong>Answer:</strong>
+                    <div class="answer-box" onclick="revealAnswer(this)">
+                        <span class="answer-text">b) Air pressure difference above and below</span>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <strong>6. Hot air balloons rise because:</strong><br>
+                    <div class="mc-options">
+                        <div class="mc-option">a) Hot air is denser than cool air</div>
+                        <div class="mc-option">b) Hot air is less dense than cool air</div>
+                        <div class="mc-option">c) They have powerful engines</div>
+                        <div class="mc-option">d) Wind pushes them up</div>
+                    </div>
+                    <strong>Answer:</strong>
+                    <div class="answer-box" onclick="revealAnswer(this)">
+                        <span class="answer-text">b) Hot air is less dense than cool air</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 2: True/False Questions -->
+        <div class="section">
+            <div class="section-header">Section 2: True/False Questions (10 points, 1 each)</div>
+            <div class="section-content">
+                <div class="instructions">Circle T for True or F for False.</div>
+
+                <div class="tf-questions">
+                    <div class="tf-question">
+                        <strong>1.</strong> Balanced forces cause objects to accelerate.
+                        <div class="answer-box" onclick="revealAnswer(this)" style="width: 20pt;">
+                            <span class="answer-text">F</span>
+                        </div>
+                    </div>
+
+                    <div class="tf-question">
+                        <strong>2.</strong> Buoyant force always acts upward.
+                        <div class="answer-box" onclick="revealAnswer(this)" style="width: 20pt;">
+                            <span class="answer-text">T</span>
+                        </div>
+                    </div>
+
+                    <div class="tf-question">
+                        <strong>3.</strong> Drag force always opposes motion.
+                        <div class="answer-box" onclick="revealAnswer(this)" style="width: 20pt;">
+                            <span class="answer-text">T</span>
+                        </div>
+                    </div>
+
+                    <div class="tf-question">
+                        <strong>4.</strong> Helicopters create lift by pushing air downward.
+                        <div class="answer-box" onclick="revealAnswer(this)" style="width: 20pt;">
+                            <span class="answer-text">T</span>
+                        </div>
+                    </div>
+
+                    <div class="tf-question">
+                        <strong>5.</strong> Objects with greater density will always sink.
+                        <div class="answer-box" onclick="revealAnswer(this)" style="width: 20pt;">
+                            <span class="answer-text">F</span>
+                        </div>
+                    </div>
+
+                    <div class="tf-question">
+                        <strong>6.</strong> Thrust is the force that moves aircraft forward.
+                        <div class="answer-box" onclick="revealAnswer(this)" style="width: 20pt;">
+                            <span class="answer-text">T</span>
+                        </div>
+                    </div>
+
+                    <div class="tf-question">
+                        <strong>7.</strong> Life jackets work by reducing your weight.
+                        <div class="answer-box" onclick="revealAnswer(this)" style="width: 20pt;">
+                            <span class="answer-text">F</span>
+                        </div>
+                    </div>
+
+                    <div class="tf-question">
+                        <strong>8.</strong> Air can provide buoyant force just like water.
+                        <div class="answer-box" onclick="revealAnswer(this)" style="width: 20pt;">
+                            <span class="answer-text">T</span>
+                        </div>
+                    </div>
+
+                    <div class="tf-question">
+                        <strong>9.</strong> For steady flight, all four forces must be balanced.
+                        <div class="answer-box" onclick="revealAnswer(this)" style="width: 20pt;">
+                            <span class="answer-text">T</span>
+                        </div>
+                    </div>
+
+                    <div class="tf-question">
+                        <strong>10.</strong> Submarines control buoyancy by changing their volume.
+                        <div class="answer-box" onclick="revealAnswer(this)" style="width: 20pt;">
+                            <span class="answer-text">F</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 3: Force Diagram Questions -->
+        <div class="section">
+            <div class="section-header">Section 3: Force Diagrams (12 points, 4 each)</div>
+            <div class="section-content">
+                <div class="instructions">Draw and label the forces acting on each object.</div>
+
+                <div class="question">
+                    <strong>A) Object Floating:</strong> Draw arrows to show all forces acting on this floating object.
+                    <div class="diagram-space">
+                        <div class="diagram-instructions">Draw weight (down) and buoyant force (up). Label each force.</div>
+                        <svg width="300" height="100" viewBox="0 0 300 100" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+                            <defs>
+                                <marker id="arrowhead" markerWidth="8" markerHeight="6" refX="0" refY="3" orient="auto">
+                                    <polygon points="0 0, 8 3, 0 6" fill="#333"/>
+                                </marker>
+                            </defs>
+                            <!-- Water -->
+                            <rect x="0" y="60" width="300" height="40" class="water"/>
+                            <!-- Floating object -->
+                            <rect x="130" y="50" width="40" height="30" class="object-floating"/>
+                            <text x="150" y="68" text-anchor="middle" font-size="10" fill="white">Object</text>
+                        </svg>
+                    </div>
+                    <div style="margin-top: 5pt; font-size: 10pt;">
+                        <strong>Expected forces:</strong>
+                        <div class="answer-box" onclick="revealAnswer(this)" style="width: 200pt;">
+                            <span class="answer-text">Weight (down), Buoyant force (up), equal magnitude</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <strong>B) Airplane in Flight:</strong> Draw arrows to show all four forces acting on this airplane.
+                    <div class="diagram-space">
+                        <div class="diagram-instructions">Draw weight, lift, thrust, and drag. Use different colors if possible.</div>
+                        <svg width="300" height="100" viewBox="0 0 300 100" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+                            <!-- Airplane -->
+                            <ellipse cx="150" cy="50" rx="40" ry="8" class="airplane"/>
+                            <ellipse cx="130" cy="45" rx="20" ry="5" class="airplane"/>
+                            <rect x="170" y="47" width="8" height="12" class="airplane"/>
+                        </svg>
+                    </div>
+                    <div style="margin-top: 5pt; font-size: 10pt;">
+                        <strong>Expected forces:</strong>
+                        <div class="answer-box" onclick="revealAnswer(this)" style="width: 200pt;">
+                            <span class="answer-text">Weight (down), Lift (up), Thrust (forward), Drag (backward)</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <strong>C) Sinking Object:</strong> Draw arrows to show forces on this sinking object.
+                    <div class="diagram-space">
+                        <div class="diagram-instructions">Show which force is stronger and why the object sinks.</div>
+                        <svg width="300" height="100" viewBox="0 0 300 100" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+                            <!-- Water -->
+                            <rect x="0" y="40" width="300" height="60" class="water"/>
+                            <!-- Sinking object -->
+                            <circle cx="150" cy="60" r="15" class="object-sinking"/>
+                            <text x="150" y="65" text-anchor="middle" font-size="8" fill="white">Rock</text>
+                        </svg>
+                    </div>
+                    <div style="margin-top: 5pt; font-size: 10pt;">
+                        <strong>Expected forces:</strong>
+                        <div class="answer-box" onclick="revealAnswer(this)" style="width: 200pt;">
+                            <span class="answer-text">Weight (down) larger than Buoyant force (up)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 4: Short Answer Questions -->
+        <div class="section">
+            <div class="section-header">Section 4: Short Answer Questions (12 points, 3 each)</div>
+            <div class="section-content">
+                <div class="instructions">Write your answers in complete sentences.</div>
+
+                <div class="question">
+                    <strong>1. Balanced vs Unbalanced Forces:</strong> Explain the difference between balanced and unbalanced forces using an example.
+                    <div class="answer-space">
+                        <div onclick="revealAnswer(this)">
+                            <span class="answer-text">Balanced forces are equal in magnitude but opposite in direction, resulting in no change in motion (e.g., a book sitting on a table). Unbalanced forces occur when one force is stronger than the opposing force, causing acceleration or change in motion (e.g., a ball being kicked).</span>
+                        </div>
+                        <div onclick="revealAnswer(this)">
+                            <span class="answer-text"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <strong>2. Ship Design:</strong> Explain how the shape and design of ships allow them to float despite being made of dense materials like steel.
+                    <div class="answer-space">
+                        <div onclick="revealAnswer(this)">
+                            <span class="answer-text">Ships float because they are hollow and filled mostly with air. The overall density of the ship (steel + air) is less than water. The large volume displaces a lot of water, creating a strong buoyant force that equals the ship's weight.</span>
+                        </div>
+                        <div onclick="revealAnswer(this)">
+                            <span class="answer-text"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <strong>3. Wing Design:</strong> Describe how the shape of airplane wings creates lift and keeps planes in the air.
+                    <div class="answer-space">
+                        <div onclick="revealAnswer(this)">
+                            <span class="answer-text">Airplane wings have a curved shape (airfoil) that causes air to move faster over the top surface than the bottom. This creates lower pressure above the wing and higher pressure below, resulting in an upward lift force that supports the aircraft's weight.</span>
+                        </div>
+                        <div onclick="revealAnswer(this)">
+                            <span class="answer-text"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <strong>4. Hot Air Balloons:</strong> Explain how hot air balloons work and why they rise when the air inside is heated.
+                    <div class="answer-space">
+                        <div onclick="revealAnswer(this)">
+                            <span class="answer-text">Hot air balloons work because heating air makes it expand and become less dense than the surrounding cool air. The cooler, denser air outside creates a buoyant force that pushes up on the balloon. When this upward force exceeds the balloon's weight, it rises.</span>
+                        </div>
+                        <div onclick="revealAnswer(this)">
+                            <span class="answer-text"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 5: Problem Solving -->
+        <div class="section">
+            <div class="section-header">Section 5: Problem Solving (8 points)</div>
+            <div class="section-content">
+                <div class="instructions">Read the scenario and answer the questions.</div>
+
+                <div class="question">
+                    <strong>Scenario:</strong> A submarine needs to dive underwater, stay at a constant depth, and then surface.
+
+                    <div style="margin-top: 10pt;">
+                        <strong>a)</strong> What must happen to the forces acting on the submarine for it to dive? (2 points)
+                        <div class="answer-space">
+                            <div onclick="revealAnswer(this)">
+                                <span class="answer-text">The submarine's weight must become greater than the buoyant force. This creates unbalanced forces that cause the submarine to sink downward.</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 10pt;">
+                        <strong>b)</strong> How does a submarine control its buoyancy to dive or surface? (3 points)
+                        <div class="answer-space">
+                            <div onclick="revealAnswer(this)">
+                                <span class="answer-text">Submarines control buoyancy using ballast tanks. To dive, they pump water into the tanks, making the submarine heavier. To surface, they pump air into the tanks, forcing water out and making the submarine lighter.</span>
+                            </div>
+                            <div onclick="revealAnswer(this)">
+                                <span class="answer-text"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 10pt;">
+                        <strong>c)</strong> What forces are acting on the submarine when it travels at constant depth? (3 points)
+                        <div class="answer-space">
+                            <div onclick="revealAnswer(this)">
+                                <span class="answer-text">When traveling at constant depth, the submarine has balanced forces: weight (downward) equals buoyant force (upward). The submarine also has thrust (forward) balanced by drag (backward) for constant speed.</span>
+                            </div>
+                            <div onclick="revealAnswer(this)">
+                                <span class="answer-text"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 6: Force Comparison -->
+        <div class="section">
+            <div class="section-header">Section 6: Force Comparison Chart (6 points)</div>
+            <div class="section-content">
+                <div class="instructions">Complete the table by identifying what happens when forces are compared.</div>
+
+                <table style="width: 100%; border-collapse: collapse; border: 1px solid #000;">
+                    <tr style="background: #f0f0f0;">
+                        <th style="border: 1px solid #000; padding: 5pt; font-size: 10pt;">Situation</th>
+                        <th style="border: 1px solid #000; padding: 5pt; font-size: 10pt;">Force Comparison</th>
+                        <th style="border: 1px solid #000; padding: 5pt; font-size: 10pt;">Result</th>
+                    </tr>
+                    <tr>
+                        <td style="border: 1px solid #000; padding: 5pt; font-size: 10pt;">Object in water</td>
+                        <td style="border: 1px solid #000; padding: 5pt; font-size: 10pt;">Buoyant Force > Weight</td>
+                        <td style="border: 1px solid #000; padding: 5pt; font-size: 10pt;">
+                            <div class="answer-box" onclick="revealAnswer(this)" style="width: 80pt; border: none; background: white;">
+                                <span class="answer-text">Object rises/floats up</span>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="border: 1px solid #000; padding: 5pt; font-size: 10pt;">Object in water</td>
+                        <td style="border: 1px solid #000; padding: 5pt; font-size: 10pt;">Buoyant Force = Weight</td>
+                        <td style="border: 1px solid #000; padding: 5pt; font-size: 10pt;">
+                            <div class="answer-box" onclick="revealAnswer(this)" style="width: 80pt; border: none; background: white;">
+                                <span class="answer-text">Object floats/neutral</span>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="border: 1px solid #000; padding: 5pt; font-size: 10pt;">Object in water</td>
+                        <td style="border: 1px solid #000; padding: 5pt; font-size: 10pt;">Buoyant Force < Weight</td>
+                        <td style="border: 1px solid #000; padding: 5pt; font-size: 10pt;">
+                            <div class="answer-box" onclick="revealAnswer(this)" style="width: 80pt; border: none; background: white;">
+                                <span class="answer-text">Object sinks</span>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="border: 1px solid #000; padding: 5pt; font-size: 10pt;">Airplane in flight</td>
+                        <td style="border: 1px solid #000; padding: 5pt; font-size: 10pt;">Lift > Weight</td>
+                        <td style="border: 1px solid #000; padding: 5pt; font-size: 10pt;">
+                            <div class="answer-box" onclick="revealAnswer(this)" style="width: 80pt; border: none; background: white;">
+                                <span class="answer-text">Airplane climbs up</span>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="border: 1px solid #000; padding: 5pt; font-size: 10pt;">Airplane in flight</td>
+                        <td style="border: 1px solid #000; padding: 5pt; font-size: 10pt;">Thrust > Drag</td>
+                        <td style="border: 1px solid #000; padding: 5pt; font-size: 10pt;">
+                            <div class="answer-box" onclick="revealAnswer(this)" style="width: 80pt; border: none; background: white;">
+                                <span class="answer-text">Airplane speeds up</span>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="border: 1px solid #000; padding: 5pt; font-size: 10pt;">Any moving object</td>
+                        <td style="border: 1px solid #000; padding: 5pt; font-size: 10pt;">All forces balanced</td>
+                        <td style="border: 1px solid #000; padding: 5pt; font-size: 10pt;">
+                            <div class="answer-box" onclick="revealAnswer(this)" style="width: 80pt; border: none; background: white;">
+                                <span class="answer-text">Constant velocity</span>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function revealAnswer(element) {
+            element.classList.add('revealed');
+        }
+
+        function revealAllAnswers() {
+            document.querySelectorAll('.answer-box, .answer-space div').forEach(box => {
+                box.classList.add('revealed');
+            });
+        }
+    </script>
+</body>
+</html>

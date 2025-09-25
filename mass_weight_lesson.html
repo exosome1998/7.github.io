@@ -1,0 +1,962 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Mass, Weight and Gravity - Year 7 Science</title>
+
+    <!-- Reveal.js CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.3.1/dist/reveal.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.3.1/dist/theme/white.css">
+
+    <style>
+        /* Custom styles for lesson */
+        .reveal {
+            font-family: 'Arial', sans-serif;
+        }
+
+        .reveal h1, .reveal h2, .reveal h3 {
+            color: #2E86AB;
+            text-transform: none;
+            line-height: 1.2;
+        }
+
+        .reveal h1 {
+            font-size: 1.4em;
+            margin-bottom: 0.2em;
+        }
+
+        .reveal h2 {
+            font-size: 1.1em;
+            margin-bottom: 0.2em;
+        }
+
+        .reveal h3 {
+            font-size: 0.9em;
+            margin-bottom: 0.1em;
+        }
+
+        .reveal .slides section {
+            text-align: left;
+            padding: 10px;
+            overflow-y: auto;
+            max-height: 80vh;
+        }
+
+        /* Scroll down button */
+        .scroll-indicator {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: #FF6B35;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+            font-size: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            transition: all 0.3s ease;
+        }
+
+        .scroll-indicator:hover {
+            background: #e55a2b;
+            transform: scale(1.1);
+        }
+
+        .scroll-indicator.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        /* Navigation panel */
+        .nav-panel {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            font-size: 14px;
+        }
+
+        .nav-button {
+            display: block;
+            margin: 5px 0;
+            padding: 8px 15px;
+            background: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+            transition: background 0.3s;
+        }
+
+        .nav-button:hover {
+            background: #45a049;
+        }
+
+        .nav-button.worksheet {
+            background: #FF6B35;
+        }
+
+        .nav-button.worksheet:hover {
+            background: #e55a2b;
+        }
+
+        /* Do Now activity styles */
+        .do-now {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin: 20px 0;
+        }
+
+        .do-now h3 {
+            color: #FFE082;
+            margin-bottom: 20px;
+        }
+
+        /* Content styles */
+        .content-box {
+            background: #f8f9fa;
+            padding: 15px 20px;
+            border-radius: 10px;
+            border-left: 4px solid #4CAF50;
+            margin: 15px 0;
+            font-size: 0.9em;
+        }
+
+        .key-term {
+            color: #2E86AB;
+            font-weight: bold;
+        }
+
+        .simple-explanation {
+            color: #666;
+            font-style: italic;
+            font-size: 0.85em;
+        }
+
+        .real-life {
+            background: linear-gradient(135deg, #FFE082, #FFC107);
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+            border-left: 4px solid #FF9800;
+            font-size: 0.9em;
+        }
+
+        .real-life h4 {
+            color: #E65100;
+            margin-bottom: 10px;
+            font-size: 1em;
+        }
+
+        /* Calculation styles */
+        .calculation-box {
+            background: #E8F5E8;
+            padding: 20px;
+            border-radius: 10px;
+            border: 2px solid #4CAF50;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+        }
+
+        .formula {
+            background: #2E86AB;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 1.2em;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+
+        .step {
+            background: #FFF3E0;
+            padding: 10px 15px;
+            border-radius: 5px;
+            border-left: 4px solid #FF9800;
+            margin: 8px 0;
+        }
+
+        .answer {
+            background: #E8F5E8;
+            padding: 10px 15px;
+            border-radius: 5px;
+            border: 2px solid #4CAF50;
+            text-align: center;
+            font-weight: bold;
+            font-size: 1.1em;
+            margin: 10px 0;
+        }
+
+        /* Make text more readable */
+        .reveal p, .reveal li {
+            font-size: 0.6em;
+            line-height: 1.2;
+        }
+
+        .reveal ul {
+            margin: 10px 0;
+        }
+
+        .reveal li {
+            margin: 8px 0;
+        }
+
+        /* Diagram styles */
+        .diagram-container {
+            text-align: center;
+            margin: 30px 0;
+        }
+
+        /* Planet styles */
+        .planet {
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .planet:hover {
+            transform: scale(1.1);
+            filter: brightness(1.2);
+        }
+
+        /* Scale representation */
+        .scale {
+            stroke: #333;
+            stroke-width: 3;
+            fill: #FFF;
+        }
+
+        .weight-display {
+            font-size: 24px;
+            font-weight: bold;
+            fill: #2E86AB;
+        }
+
+        /* Fragment animations */
+        .fragment {
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .fragment.visible {
+            opacity: 1;
+        }
+
+        /* Excalidraw-style filters */
+        .hand-drawn {
+            filter: url(#roughPaper);
+        }
+
+        /* Data table styles */
+        .data-table {
+            background: white;
+            border: 2px solid #333;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+
+        .data-table table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .data-table th {
+            background: #2E86AB;
+            color: white;
+            padding: 8px;
+            border: 1px solid #333;
+        }
+
+        .data-table td {
+            padding: 8px;
+            border: 1px solid #333;
+            text-align: center;
+        }
+
+        .data-table tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation Panel -->
+    <div class="nav-panel">
+        <strong>Navigation</strong>
+        <button class="nav-button" onclick="goToSlide(0)">Start</button>
+        <button class="nav-button" onclick="goToSlide(1)">Do Now</button>
+        <button class="nav-button" onclick="goToSlide(3)">Mass vs Weight</button>
+        <button class="nav-button" onclick="goToSlide(6)">Gravity</button>
+        <button class="nav-button" onclick="goToSlide(9)">The Formula</button>
+        <button class="nav-button" onclick="goToSlide(12)">Calculations</button>
+        <button class="nav-button" onclick="goToSlide(16)">Other Planets</button>
+        <button class="nav-button worksheet" onclick="window.open('mass_weight_worksheet.html', '_blank')">📝 Worksheet</button>
+    </div>
+
+    <!-- Scroll Down Button -->
+    <button class="scroll-indicator" id="scrollBtn" onclick="scrollCurrentSlide()">↓</button>
+
+    <!-- Reveal.js Presentation -->
+    <div class="reveal">
+        <div class="slides">
+
+            <!-- Title Slide -->
+            <section>
+                <h1>⚖️ Mass, Weight and Gravity</h1>
+                <h3>Understanding Forces in Space</h3>
+                <p><em>Year 7 Science</em></p>
+                <div class="real-life">
+                    <h4>🔬 What You Learn Today</h4>
+                    <p>How much would you weigh on Mars? Let's find out step by step!</p>
+                </div>
+            </section>
+
+            <!-- Do Now Activity -->
+            <section>
+                <div class="do-now">
+                    <h3>🚀 DO NOW - Quick Questions (5 minutes)</h3>
+                    <p>Think about what you know...</p>
+
+                    <div class="fragment">
+                        <h4>Questions to Think About:</h4>
+                        <ul>
+                            <li>Are mass and weight the same thing?</li>
+                            <li>Why do astronauts float in space?</li>
+                            <li>Would you weigh the same on the Moon?</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Do Now Discussion -->
+            <section>
+                <h3>✅ Let's Discuss Your Ideas</h3>
+                <div class="content-box">
+                    <h4>Common Answers:</h4>
+                    <ul>
+                        <li><strong>Mass = Weight?</strong> Many people think they're the same...</li>
+                        <li><strong>Floating astronauts?</strong> No gravity in space?</li>
+                        <li><strong>Moon weight?</strong> Would be different somehow?</li>
+                    </ul>
+                </div>
+                <div class="fragment">
+                    <div class="real-life">
+                        <h4>🤔 Today's Mission</h4>
+                        <p>Learn the difference and calculate your weight on other planets!</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- What is Mass? -->
+            <section>
+                <h2>🧱 What is Mass?</h2>
+                <div class="content-box fragment">
+                    <p><span class="key-term">Mass</span> is how much matter (stuff) is in an object.</p>
+                    <p class="simple-explanation">(How much 'stuff' you're made of)</p>
+                </div>
+
+                <div class="fragment">
+                    <h4>Key Points About Mass:</h4>
+                    <ul>
+                        <li class="fragment">Measured in <strong>kilograms (kg)</strong></li>
+                        <li class="fragment">Never changes - same everywhere in universe</li>
+                        <li class="fragment">You have the same mass on Earth, Moon, or Mars</li>
+                    </ul>
+                </div>
+
+                <div class="fragment">
+                    <div class="diagram-container">
+                        <svg width="400" height="200" viewBox="0 0 400 200" class="hand-drawn">
+                            <defs>
+                                <filter id="roughPaper" x="-20%" y="-20%" width="140%" height="140%">
+                                    <feTurbulence baseFrequency="0.04" numOctaves="5" result="noise" seed="1"/>
+                                    <feDisplacementMap in="SourceGraphic" in2="noise" scale="1"/>
+                                </filter>
+                            </defs>
+
+                            <!-- Person on Earth -->
+                            <circle cx="100" cy="120" r="30" fill="#FFE082" stroke="#FF9800" stroke-width="3"/>
+                            <circle cx="100" cy="100" r="15" fill="#FFCC80" stroke="#FF9800" stroke-width="2"/>
+                            <text x="100" y="170" text-anchor="middle" font-size="14" fill="#333">Earth: 50 kg</text>
+
+                            <!-- Person on Moon -->
+                            <circle cx="300" cy="120" r="30" fill="#FFE082" stroke="#FF9800" stroke-width="3"/>
+                            <circle cx="300" cy="100" r="15" fill="#FFCC80" stroke="#FF9800" stroke-width="2"/>
+                            <text x="300" y="170" text-anchor="middle" font-size="14" fill="#333">Moon: 50 kg</text>
+
+                            <text x="200" y="50" text-anchor="middle" font-size="16" font-weight="bold" fill="#2E86AB">Mass NEVER Changes!</text>
+                        </svg>
+                    </div>
+                </div>
+            </section>
+
+            <!-- What is Weight? -->
+            <section>
+                <h2>⚖️ What is Weight?</h2>
+                <div class="content-box fragment">
+                    <p><span class="key-term">Weight</span> is the force of gravity pulling on your mass.</p>
+                    <p class="simple-explanation">(How hard gravity pulls you down)</p>
+                </div>
+
+                <div class="fragment">
+                    <h4>Key Points About Weight:</h4>
+                    <ul>
+                        <li class="fragment">Measured in <strong>Newtons (N)</strong></li>
+                        <li class="fragment">Changes depending on gravity</li>
+                        <li class="fragment">Less gravity = less weight</li>
+                        <li class="fragment">More gravity = more weight</li>
+                    </ul>
+                </div>
+
+                <div class="fragment">
+                    <div class="real-life">
+                        <h4>🎯 Remember This</h4>
+                        <p>You have the same mass everywhere, but your weight changes!</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Mass vs Weight Comparison -->
+            <section>
+                <h2>🤔 Mass vs Weight - The Difference</h2>
+                <div class="data-table fragment">
+                    <table>
+                        <tr>
+                            <th>Property</th>
+                            <th>Mass</th>
+                            <th>Weight</th>
+                        </tr>
+                        <tr>
+                            <td><strong>What is it?</strong></td>
+                            <td>Amount of matter</td>
+                            <td>Force of gravity</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Units</strong></td>
+                            <td>Kilograms (kg)</td>
+                            <td>Newtons (N)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Changes?</strong></td>
+                            <td>No - always same</td>
+                            <td>Yes - depends on gravity</td>
+                        </tr>
+                        <tr>
+                            <td><strong>On Moon?</strong></td>
+                            <td>Same as Earth</td>
+                            <td>Much less than Earth</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="fragment">
+                    <div class="content-box">
+                        <p><strong>Example:</strong> A 50 kg person has the same mass everywhere, but weighs 490 N on Earth and only 82 N on the Moon!</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- What is Gravity? -->
+            <section>
+                <h2>🌍 What is Gravity?</h2>
+                <div class="content-box fragment">
+                    <p><span class="key-term">Gravity</span> is a force that pulls objects towards each other.</p>
+                    <p class="simple-explanation">(Everything with mass pulls on everything else)</p>
+                </div>
+
+                <div class="fragment">
+                    <h4>How Gravity Works:</h4>
+                    <ul>
+                        <li class="fragment">Bigger objects have stronger gravity</li>
+                        <li class="fragment">Earth is massive, so it pulls strongly</li>
+                        <li class="fragment">Moon is smaller, so it pulls weaker</li>
+                        <li class="fragment">You also have gravity, but it's tiny!</li>
+                    </ul>
+                </div>
+
+                <div class="fragment">
+                    <div class="diagram-container">
+                        <svg width="500" height="250" viewBox="0 0 500 250" class="hand-drawn">
+                            <!-- Earth -->
+                            <circle cx="150" cy="125" r="60" fill="#4FC3F7" stroke="#0277BD" stroke-width="3"/>
+                            <text x="150" y="135" text-anchor="middle" font-size="14" font-weight="bold" fill="white">Earth</text>
+
+                            <!-- Moon -->
+                            <circle cx="350" cy="125" r="25" fill="#BDBDBD" stroke="#616161" stroke-width="3"/>
+                            <text x="350" y="130" text-anchor="middle" font-size="12" font-weight="bold">Moon</text>
+
+                            <!-- Gravity arrows pointing down -->
+                            <path d="M 150 200 L 150 185" stroke="#FF5252" stroke-width="4" marker-end="url(#arrow)"/>
+                            <path d="M 170 200 L 170 185" stroke="#FF5252" stroke-width="4" marker-end="url(#arrow)"/>
+                            <path d="M 130 200 L 130 185" stroke="#FF5252" stroke-width="4" marker-end="url(#arrow)"/>
+
+                            <path d="M 350 165 L 350 155" stroke="#FF5252" stroke-width="2" marker-end="url(#arrow)"/>
+                            <path d="M 360 165 L 360 155" stroke="#FF5252" stroke-width="2" marker-end="url(#arrow)"/>
+
+                            <text x="150" y="230" text-anchor="middle" font-size="12" fill="#FF5252">Strong Gravity</text>
+                            <text x="350" y="190" text-anchor="middle" font-size="12" fill="#FF5252">Weak Gravity</text>
+
+                            <defs>
+                                <marker id="arrow" markerWidth="10" markerHeight="7" refX="0" refY="3.5" orient="auto">
+                                    <polygon points="0 0, 10 3.5, 0 7" fill="#FF5252"/>
+                                </marker>
+                            </defs>
+                        </svg>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Gravity Strength on Different Places -->
+            <section>
+                <h2>🌌 Gravity Strength in Different Places</h2>
+                <div class="content-box fragment">
+                    <p>Different places have different <span class="key-term">gravity strength</span>.</p>
+                    <p class="simple-explanation">(We measure this as 'g' - how many m/s² gravity pulls)</p>
+                </div>
+
+                <div class="data-table fragment">
+                    <table>
+                        <tr>
+                            <th>Location</th>
+                            <th>Gravity Strength (g)</th>
+                            <th>Compared to Earth</th>
+                        </tr>
+                        <tr>
+                            <td>Earth</td>
+                            <td>9.8 m/s²</td>
+                            <td>1.0 × (normal)</td>
+                        </tr>
+                        <tr>
+                            <td>Moon</td>
+                            <td>1.6 m/s²</td>
+                            <td>0.16 × (much weaker)</td>
+                        </tr>
+                        <tr>
+                            <td>Mars</td>
+                            <td>3.7 m/s²</td>
+                            <td>0.38 × (weaker)</td>
+                        </tr>
+                        <tr>
+                            <td>Jupiter</td>
+                            <td>24.8 m/s²</td>
+                            <td>2.5 × (much stronger)</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="fragment">
+                    <div class="real-life">
+                        <h4>🤯 Mind-Blowing Fact</h4>
+                        <p>On Jupiter, you'd weigh 2.5 times more! A 50 kg person would feel like they weigh 125 kg!</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- The Weight Formula -->
+            <section>
+                <h2>📐 The Weight Formula</h2>
+                <div class="content-box fragment">
+                    <p>To calculate weight, we use a simple formula:</p>
+                </div>
+
+                <div class="formula fragment">
+                    Weight = Mass × Gravity
+                </div>
+
+                <div class="formula fragment">
+                    W = m × g
+                </div>
+
+                <div class="fragment">
+                    <h4>What Each Letter Means:</h4>
+                    <ul>
+                        <li class="fragment"><strong>W</strong> = Weight (in Newtons, N)</li>
+                        <li class="fragment"><strong>m</strong> = Mass (in kilograms, kg)</li>
+                        <li class="fragment"><strong>g</strong> = Gravity strength (in m/s²)</li>
+                    </ul>
+                </div>
+
+                <div class="fragment">
+                    <div class="real-life">
+                        <h4>💡 Memory Trick</h4>
+                        <p>"<strong>W</strong>eight equals <strong>M</strong>ass times <strong>G</strong>ravity" - WMG!</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Example 1 - Earth Weight -->
+            <section>
+                <h2>🧮 Example 1: Weight on Earth</h2>
+                <div class="content-box fragment">
+                    <p><strong>Question:</strong> What is the weight of a 60 kg person on Earth?</p>
+                </div>
+
+                <div class="calculation-box fragment">
+                    <div class="step">
+                        <strong>Step 1:</strong> Write down what we know<br>
+                        Mass (m) = 60 kg<br>
+                        Gravity on Earth (g) = 9.8 m/s²
+                    </div>
+
+                    <div class="step fragment">
+                        <strong>Step 2:</strong> Write the formula<br>
+                        W = m × g
+                    </div>
+
+                    <div class="step fragment">
+                        <strong>Step 3:</strong> Substitute the values<br>
+                        W = 60 kg × 9.8 m/s²
+                    </div>
+
+                    <div class="step fragment">
+                        <strong>Step 4:</strong> Calculate<br>
+                        W = 588 N
+                    </div>
+
+                    <div class="answer fragment">
+                        Answer: The person weighs 588 N on Earth
+                    </div>
+                </div>
+            </section>
+
+            <!-- Example 2 - Moon Weight -->
+            <section>
+                <h2>🌙 Example 2: Weight on the Moon</h2>
+                <div class="content-box fragment">
+                    <p><strong>Question:</strong> What would the same 60 kg person weigh on the Moon?</p>
+                </div>
+
+                <div class="calculation-box fragment">
+                    <div class="step">
+                        <strong>Step 1:</strong> Write down what we know<br>
+                        Mass (m) = 60 kg (same as Earth!)<br>
+                        Gravity on Moon (g) = 1.6 m/s²
+                    </div>
+
+                    <div class="step fragment">
+                        <strong>Step 2:</strong> Write the formula<br>
+                        W = m × g
+                    </div>
+
+                    <div class="step fragment">
+                        <strong>Step 3:</strong> Substitute the values<br>
+                        W = 60 kg × 1.6 m/s²
+                    </div>
+
+                    <div class="step fragment">
+                        <strong>Step 4:</strong> Calculate<br>
+                        W = 96 N
+                    </div>
+
+                    <div class="answer fragment">
+                        Answer: The person weighs only 96 N on the Moon!
+                    </div>
+                </div>
+
+                <div class="fragment">
+                    <div class="real-life">
+                        <h4>🤔 Compare</h4>
+                        <p>Earth: 588 N → Moon: 96 N. That's 6 times lighter!</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Example 3 - Mars Weight -->
+            <section>
+                <h2>🔴 Example 3: Weight on Mars</h2>
+                <div class="content-box fragment">
+                    <p><strong>Question:</strong> What would a 40 kg student weigh on Mars?</p>
+                </div>
+
+                <div class="calculation-box fragment">
+                    <div class="step">
+                        <strong>Step 1:</strong> Write down what we know<br>
+                        Mass (m) = 40 kg<br>
+                        Gravity on Mars (g) = 3.7 m/s²
+                    </div>
+
+                    <div class="step fragment">
+                        <strong>Step 2:</strong> Write the formula<br>
+                        W = m × g
+                    </div>
+
+                    <div class="step fragment">
+                        <strong>Step 3:</strong> Substitute the values<br>
+                        W = 40 kg × 3.7 m/s²
+                    </div>
+
+                    <div class="step fragment">
+                        <strong>Step 4:</strong> Calculate<br>
+                        W = 148 N
+                    </div>
+
+                    <div class="answer fragment">
+                        Answer: The student weighs 148 N on Mars
+                    </div>
+                </div>
+
+                <div class="fragment">
+                    <div class="content-box">
+                        <p><strong>For comparison:</strong> Same student on Earth would weigh 40 × 9.8 = 392 N</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Your Turn Practice -->
+            <section>
+                <h2>🎯 Your Turn to Try!</h2>
+                <div class="content-box fragment">
+                    <p><strong>Practice Question:</strong> A 30 kg object. What would it weigh on Jupiter?</p>
+                    <p class="simple-explanation">(Remember: Jupiter's gravity = 24.8 m/s²)</p>
+                </div>
+
+                <div class="calculation-box fragment">
+                    <div class="step">
+                        <strong>Step 1:</strong> What do we know?<br>
+                        m = ?<br>
+                        g = ?
+                    </div>
+
+                    <div class="step fragment">
+                        <strong>Step 2:</strong> Formula?<br>
+                        W = ?
+                    </div>
+
+                    <div class="step fragment">
+                        <strong>Step 3:</strong> Substitute<br>
+                        W = ? × ?
+                    </div>
+
+                    <div class="step fragment">
+                        <strong>Step 4:</strong> Calculate<br>
+                        W = ?
+                    </div>
+                </div>
+
+                <div class="answer fragment">
+                    Click next to see the answer!
+                </div>
+            </section>
+
+            <!-- Practice Answer -->
+            <section>
+                <h2>✅ Practice Answer</h2>
+                <div class="calculation-box">
+                    <div class="step">
+                        <strong>Step 1:</strong> What we know<br>
+                        m = 30 kg<br>
+                        g = 24.8 m/s² (Jupiter)
+                    </div>
+
+                    <div class="step">
+                        <strong>Step 2:</strong> Formula<br>
+                        W = m × g
+                    </div>
+
+                    <div class="step">
+                        <strong>Step 3:</strong> Substitute<br>
+                        W = 30 kg × 24.8 m/s²
+                    </div>
+
+                    <div class="step">
+                        <strong>Step 4:</strong> Calculate<br>
+                        W = 744 N
+                    </div>
+
+                    <div class="answer">
+                        Answer: 744 N on Jupiter
+                    </div>
+                </div>
+
+                <div class="fragment">
+                    <div class="real-life">
+                        <h4>🎯 Well Done!</h4>
+                        <p>You just calculated weight on another planet!</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Planetary Weight Comparison -->
+            <section>
+                <h2>🌌 Weight Around the Solar System</h2>
+                <div class="content-box fragment">
+                    <p>Let's see how a 50 kg person would weigh on different planets:</p>
+                </div>
+
+                <div class="data-table fragment">
+                    <table>
+                        <tr>
+                            <th>Planet</th>
+                            <th>Gravity (g)</th>
+                            <th>Weight (50 kg person)</th>
+                            <th>Feel Like</th>
+                        </tr>
+                        <tr>
+                            <td>Mercury</td>
+                            <td>3.7 m/s²</td>
+                            <td>185 N</td>
+                            <td>Light as a feather</td>
+                        </tr>
+                        <tr>
+                            <td>Venus</td>
+                            <td>8.9 m/s²</td>
+                            <td>445 N</td>
+                            <td>Almost like Earth</td>
+                        </tr>
+                        <tr>
+                            <td>Earth</td>
+                            <td>9.8 m/s²</td>
+                            <td>490 N</td>
+                            <td>Normal</td>
+                        </tr>
+                        <tr>
+                            <td>Mars</td>
+                            <td>3.7 m/s²</td>
+                            <td>185 N</td>
+                            <td>Super light!</td>
+                        </tr>
+                        <tr>
+                            <td>Jupiter</td>
+                            <td>24.8 m/s²</td>
+                            <td>1240 N</td>
+                            <td>VERY heavy!</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="fragment">
+                    <div class="real-life">
+                        <h4>🚀 Space Fact</h4>
+                        <p>On Jupiter, you'd feel 2.5 times heavier. Walking would be very difficult!</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Why This Matters -->
+            <section>
+                <h2>🤔 Why Does This Matter?</h2>
+
+                <div class="real-life fragment">
+                    <h4>🚀 Space Travel</h4>
+                    <p>Astronauts need to know how much equipment will weigh on other planets for landing missions.</p>
+                </div>
+
+                <div class="real-life fragment">
+                    <h4>🏗️ Engineering</h4>
+                    <p>Spacecraft and rovers must be designed for different gravity conditions.</p>
+                </div>
+
+                <div class="real-life fragment">
+                    <h4>🧑‍🚀 Astronaut Health</h4>
+                    <p>Different gravity affects how astronauts move and how their bodies work.</p>
+                </div>
+
+                <div class="real-life fragment">
+                    <h4>🎮 Science Fiction</h4>
+                    <p>Movies and games use real physics to show how people would move on other worlds!</p>
+                </div>
+            </section>
+
+            <!-- Summary -->
+            <section>
+                <h2>📋 What We Learned Today</h2>
+
+                <div class="content-box">
+                    <h4>Key Points to Remember:</h4>
+                    <ol>
+                        <li class="fragment"><strong>Mass:</strong> Amount of matter - never changes (kg)</li>
+                        <li class="fragment"><strong>Weight:</strong> Force of gravity - changes with location (N)</li>
+                        <li class="fragment"><strong>Gravity:</strong> Different on every planet and moon</li>
+                        <li class="fragment"><strong>Formula:</strong> W = m × g (Weight = Mass × Gravity)</li>
+                        <li class="fragment"><strong>Calculation:</strong> Always use 4 steps - know, formula, substitute, calculate</li>
+                        <li class="fragment"><strong>Units:</strong> Mass in kg, gravity in m/s², weight in N</li>
+                    </ol>
+                </div>
+
+                <div class="fragment">
+                    <div class="real-life">
+                        <h4>🎯 Remember This</h4>
+                        <p>You have the same mass everywhere, but gravity makes your weight different on every world!</p>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </div>
+
+    <!-- Reveal.js JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.3.1/dist/reveal.js"></script>
+
+    <script>
+        // Initialize Reveal.js
+        Reveal.initialize({
+            hash: true,
+            controls: true,
+            progress: true,
+            center: true,
+            transition: 'slide',
+            backgroundTransition: 'fade'
+        });
+
+        // Navigation functions
+        function goToSlide(slideNumber) {
+            Reveal.slide(slideNumber);
+        }
+
+        // Scroll functionality
+        function scrollCurrentSlide() {
+            const currentSlide = document.querySelector('.reveal .present');
+            if (currentSlide) {
+                currentSlide.scrollBy({
+                    top: 200,
+                    behavior: 'smooth'
+                });
+            }
+        }
+
+        // Show/hide scroll button based on slide content
+        function updateScrollButton() {
+            const currentSlide = document.querySelector('.reveal .present');
+            const scrollBtn = document.getElementById('scrollBtn');
+
+            if (currentSlide && currentSlide.scrollHeight > currentSlide.clientHeight) {
+                scrollBtn.classList.remove('hidden');
+            } else {
+                scrollBtn.classList.add('hidden');
+            }
+        }
+
+        // Update scroll button when slide changes
+        Reveal.addEventListener('slidechanged', updateScrollButton);
+
+        // Initial check
+        setTimeout(updateScrollButton, 1000);
+
+        // Add interactivity to planets
+        document.addEventListener('DOMContentLoaded', function() {
+            const planets = document.querySelectorAll('.planet');
+            planets.forEach(planet => {
+                planet.addEventListener('click', function() {
+                    this.style.transform = 'scale(1.2) rotate(5deg)';
+                    setTimeout(() => {
+                        this.style.transform = '';
+                    }, 300);
+                });
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,1067 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Forces, Buoyancy and Flight - Year 7 Science</title>
+
+    <!-- Reveal.js CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.3.1/dist/reveal.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.3.1/dist/theme/white.css">
+
+    <style>
+        /* Custom styles for lesson */
+        .reveal {
+            font-family: 'Arial', sans-serif;
+        }
+
+        .reveal h1, .reveal h2, .reveal h3 {
+            color: #2E86AB;
+            text-transform: none;
+            line-height: 1.2;
+        }
+
+        .reveal h1 {
+            font-size: 1.4em;
+            margin-bottom: 0.2em;
+        }
+
+        .reveal h2 {
+            font-size: 1.1em;
+            margin-bottom: 0.2em;
+        }
+
+        .reveal h3 {
+            font-size: 0.9em;
+            margin-bottom: 0.1em;
+        }
+
+        .reveal .slides section {
+            text-align: left;
+            padding: 10px;
+            overflow-y: auto;
+            max-height: 80vh;
+        }
+
+        /* Scroll down button */
+        .scroll-indicator {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: #FF6B35;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+            font-size: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            transition: all 0.3s ease;
+        }
+
+        .scroll-indicator:hover {
+            background: #e55a2b;
+            transform: scale(1.1);
+        }
+
+        .scroll-indicator.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        /* Navigation panel */
+        .nav-panel {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            font-size: 14px;
+        }
+
+        .nav-button {
+            display: block;
+            margin: 5px 0;
+            padding: 8px 15px;
+            background: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+            transition: background 0.3s;
+        }
+
+        .nav-button:hover {
+            background: #45a049;
+        }
+
+        .nav-button.worksheet {
+            background: #FF6B35;
+        }
+
+        .nav-button.worksheet:hover {
+            background: #e55a2b;
+        }
+
+        /* Do Now activity styles */
+        .do-now {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin: 20px 0;
+        }
+
+        .do-now h3 {
+            color: #FFE082;
+            margin-bottom: 20px;
+        }
+
+        /* Content styles */
+        .content-box {
+            background: #f8f9fa;
+            padding: 15px 20px;
+            border-radius: 10px;
+            border-left: 4px solid #4CAF50;
+            margin: 15px 0;
+            font-size: 0.9em;
+        }
+
+        .key-term {
+            color: #2E86AB;
+            font-weight: bold;
+        }
+
+        .simple-explanation {
+            color: #666;
+            font-style: italic;
+            font-size: 0.85em;
+        }
+
+        .real-life {
+            background: linear-gradient(135deg, #FFE082, #FFC107);
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+            border-left: 4px solid #FF9800;
+            font-size: 0.9em;
+        }
+
+        .real-life h4 {
+            color: #E65100;
+            margin-bottom: 10px;
+            font-size: 1em;
+        }
+
+        /* Make text more readable */
+        .reveal p, .reveal li {
+            font-size: 0.6em;
+            line-height: 1.2;
+        }
+
+        .reveal ul {
+            margin: 10px 0;
+        }
+
+        .reveal li {
+            margin: 8px 0;
+        }
+
+        /* Diagram styles */
+        .diagram-container {
+            text-align: center;
+            margin: 30px 0;
+        }
+
+        /* Excalidraw-style filters */
+        .hand-drawn {
+            filter: url(#roughPaper);
+        }
+
+        /* Fragment animations */
+        .fragment {
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .fragment.visible {
+            opacity: 1;
+        }
+
+        /* Force arrow styles */
+        .force-arrow {
+            stroke-width: 4;
+            marker-end: url(#arrowhead);
+        }
+
+        .weight-force {
+            stroke: #FF5722;
+        }
+
+        .buoyant-force {
+            stroke: #4CAF50;
+        }
+
+        .lift-force {
+            stroke: #2196F3;
+        }
+
+        .drag-force {
+            stroke: #FF9800;
+        }
+
+        .thrust-force {
+            stroke: #9C27B0;
+        }
+
+        /* Object styles */
+        .water {
+            fill: #81D4FA;
+            opacity: 0.8;
+        }
+
+        .object-sinking {
+            fill: #FF5722;
+            stroke: #D32F2F;
+            stroke-width: 2;
+        }
+
+        .object-floating {
+            fill: #4CAF50;
+            stroke: #2E7D32;
+            stroke-width: 2;
+        }
+
+        .airplane {
+            fill: #E0E0E0;
+            stroke: #424242;
+            stroke-width: 2;
+        }
+
+        .balloon {
+            fill: #FFEB3B;
+            stroke: #F57F17;
+            stroke-width: 2;
+        }
+
+        /* Animation styles */
+        .floating {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .sinking {
+            animation: sink 2s ease-in infinite;
+        }
+
+        @keyframes sink {
+            0% { transform: translateY(0px); }
+            100% { transform: translateY(20px); }
+        }
+
+        /* Interactive elements */
+        .interactive-object {
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .interactive-object:hover {
+            transform: scale(1.05);
+            filter: brightness(1.1);
+        }
+
+        /* Force comparison styles */
+        .force-comparison {
+            background: #E8F5E8;
+            padding: 15px;
+            border-radius: 10px;
+            border: 2px solid #4CAF50;
+            margin: 15px 0;
+        }
+
+        .force-comparison h4 {
+            color: #2E7D32;
+            margin-bottom: 10px;
+        }
+
+        /* Balanced vs unbalanced forces */
+        .balanced-forces {
+            background: #E8F5E8;
+            border: 2px solid #4CAF50;
+        }
+
+        .unbalanced-forces {
+            background: #FFEBEE;
+            border: 2px solid #F44336;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation Panel -->
+    <div class="nav-panel">
+        <strong>Navigation</strong>
+        <button class="nav-button" onclick="goToSlide(0)">Start</button>
+        <button class="nav-button" onclick="goToSlide(1)">Do Now</button>
+        <button class="nav-button" onclick="goToSlide(3)">What are Forces?</button>
+        <button class="nav-button" onclick="goToSlide(5)">Buoyancy</button>
+        <button class="nav-button" onclick="goToSlide(10)">Flight Forces</button>
+        <button class="nav-button" onclick="goToSlide(16)">Real Examples</button>
+        <button class="nav-button worksheet" onclick="window.open('forces_worksheet.html', '_blank')">📝 Worksheet</button>
+    </div>
+
+    <!-- Scroll Down Button -->
+    <button class="scroll-indicator" id="scrollBtn" onclick="scrollCurrentSlide()">↓</button>
+
+    <!-- Reveal.js Presentation -->
+    <div class="reveal">
+        <div class="slides">
+
+            <!-- Title Slide -->
+            <section>
+                <h1>⚡ Forces, Buoyancy and Flight</h1>
+                <h3>Understanding Forces Around Us</h3>
+                <p><em>Year 7 Science</em></p>
+                <div class="real-life">
+                    <h4>🔬 What You Learn Today</h4>
+                    <p>Why ships float, planes fly, and balloons rise! All about the invisible forces around us.</p>
+                </div>
+            </section>
+
+            <!-- Do Now Activity -->
+            <section>
+                <div class="do-now">
+                    <h3>🚀 DO NOW - Force Detective (5 minutes)</h3>
+                    <p>Look around and think about forces...</p>
+
+                    <div class="fragment">
+                        <h4>Quick Questions:</h4>
+                        <ul>
+                            <li>Why does a steel ship float but a coin sinks?</li>
+                            <li>How do planes stay up in the air?</li>
+                            <li>Why do helium balloons float upward?</li>
+                            <li>What forces are acting on you right now?</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Do Now Discussion -->
+            <section>
+                <h3>✅ Let's Explore Your Ideas</h3>
+                <div class="content-box">
+                    <h4>Common Thoughts:</h4>
+                    <ul>
+                        <li><strong>Ships float because...?</strong> They're hollow? Made of special materials?</li>
+                        <li><strong>Planes fly because...?</strong> Engines push them? Wings are special shape?</li>
+                        <li><strong>Balloons rise because...?</strong> Gas is lighter? Hot air rises?</li>
+                        <li><strong>Forces on you...?</strong> Gravity pulling down? Chair pushing up?</li>
+                    </ul>
+                </div>
+                <div class="fragment">
+                    <div class="real-life">
+                        <h4>🎯 Today's Mission</h4>
+                        <p>Discover the exact forces that make things float, fly, and fall!</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- What are Forces? -->
+            <section>
+                <h2>💪 What are Forces?</h2>
+                <div class="content-box fragment">
+                    <p><span class="key-term">Forces</span> are pushes and pulls that can make objects move, stop, or change direction.</p>
+                    <p class="simple-explanation">(Think of them as invisible hands pushing and pulling)</p>
+                </div>
+
+                <div class="fragment">
+                    <h4>Forces You Know:</h4>
+                    <ul>
+                        <li class="fragment"><strong>Gravity</strong> - pulls everything down</li>
+                        <li class="fragment"><strong>Friction</strong> - slows things down</li>
+                        <li class="fragment"><strong>Push/Pull</strong> - your muscles applying force</li>
+                        <li class="fragment"><strong>Air resistance</strong> - air pushing back</li>
+                    </ul>
+                </div>
+
+                <div class="fragment">
+                    <div class="diagram-container">
+                        <svg width="500" height="250" viewBox="0 0 500 250" class="hand-drawn">
+                            <defs>
+                                <filter id="roughPaper" x="-20%" y="-20%" width="140%" height="140%">
+                                    <feTurbulence baseFrequency="0.04" numOctaves="5" result="noise" seed="1"/>
+                                    <feDisplacementMap in="SourceGraphic" in2="noise" scale="1"/>
+                                </filter>
+                                <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="0" refY="3.5" orient="auto">
+                                    <polygon points="0 0, 10 3.5, 0 7" fill="#333"/>
+                                </marker>
+                            </defs>
+
+                            <!-- Person -->
+                            <circle cx="250" cy="150" r="40" fill="#FFE082" stroke="#FF9800" stroke-width="3"/>
+                            <circle cx="250" cy="120" r="20" fill="#FFCC80" stroke="#FF9800" stroke-width="2"/>
+
+                            <!-- Force arrows -->
+                            <line x1="250" y1="80" x2="250" y2="50" stroke="#FF5722" class="force-arrow"/>
+                            <text x="260" y="65" font-size="14" fill="#FF5722">Gravity (down)</text>
+
+                            <line x1="250" y1="200" x2="250" y2="230" stroke="#4CAF50" class="force-arrow"/>
+                            <text x="260" y="220" font-size="14" fill="#4CAF50">Ground (up)</text>
+
+                            <line x1="150" y1="150" x2="120" y2="150" stroke="#2196F3" class="force-arrow"/>
+                            <text x="80" y="140" font-size="14" fill="#2196F3">Wind (left)</text>
+
+                            <text x="250" y="30" text-anchor="middle" font-size="16" font-weight="bold" fill="#333">Forces Acting on You Right Now!</text>
+                        </svg>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Balanced vs Unbalanced Forces -->
+            <section>
+                <h2>⚖️ Balanced vs Unbalanced Forces</h2>
+
+                <div class="content-box balanced-forces fragment">
+                    <h4>Balanced Forces:</h4>
+                    <p>When forces are equal and opposite - object stays still or moves at constant speed</p>
+                </div>
+
+                <div class="content-box unbalanced-forces fragment">
+                    <h4>Unbalanced Forces:</h4>
+                    <p>When one force is stronger - object speeds up, slows down, or changes direction</p>
+                </div>
+
+                <div class="fragment">
+                    <div class="diagram-container">
+                        <svg width="600" height="300" viewBox="0 0 600 300" class="hand-drawn">
+                            <!-- Balanced forces example -->
+                            <rect x="50" y="120" width="60" height="40" class="object-floating"/>
+                            <text x="80" y="145" text-anchor="middle" font-size="12" fill="white">Box</text>
+
+                            <line x1="80" y1="100" x2="80" y2="70" stroke="#FF5722" class="force-arrow"/>
+                            <text x="90" y="85" font-size="12" fill="#FF5722">50N down</text>
+
+                            <line x1="80" y1="180" x2="80" y2="210" stroke="#4CAF50" class="force-arrow"/>
+                            <text x="90" y="200" font-size="12" fill="#4CAF50">50N up</text>
+
+                            <text x="80" y="250" text-anchor="middle" font-size="14" font-weight="bold" fill="#4CAF50">BALANCED</text>
+                            <text x="80" y="270" text-anchor="middle" font-size="12" fill="#4CAF50">No movement</text>
+
+                            <!-- Unbalanced forces example -->
+                            <rect x="350" y="120" width="60" height="40" class="object-sinking"/>
+                            <text x="380" y="145" text-anchor="middle" font-size="12" fill="white">Box</text>
+
+                            <line x1="380" y1="100" x2="380" y2="60" stroke="#FF5722" class="force-arrow"/>
+                            <text x="390" y="80" font-size="12" fill="#FF5722">100N down</text>
+
+                            <line x1="380" y1="180" x2="380" y2="210" stroke="#4CAF50" class="force-arrow"/>
+                            <text x="390" y="200" font-size="12" fill="#4CAF50">30N up</text>
+
+                            <text x="380" y="250" text-anchor="middle" font-size="14" font-weight="bold" fill="#FF5722">UNBALANCED</text>
+                            <text x="380" y="270" text-anchor="middle" font-size="12" fill="#FF5722">Falls down</text>
+                        </svg>
+                    </div>
+                </div>
+            </section>
+
+            <!-- What is Buoyancy? -->
+            <section>
+                <h2>🌊 What is Buoyancy?</h2>
+                <div class="content-box fragment">
+                    <p><span class="key-term">Buoyancy</span> is the upward force that water (or any fluid) pushes on objects.</p>
+                    <p class="simple-explanation">(Water always tries to push things up toward the surface)</p>
+                </div>
+
+                <div class="fragment">
+                    <h4>How Buoyancy Works:</h4>
+                    <ul>
+                        <li class="fragment">Water pushes up on the bottom of objects</li>
+                        <li class="fragment">This upward push is called the <strong>buoyant force</strong></li>
+                        <li class="fragment">The force depends on how much water the object pushes away</li>
+                        <li class="fragment">More water displaced = stronger buoyant force</li>
+                    </ul>
+                </div>
+
+                <div class="fragment">
+                    <div class="diagram-container">
+                        <svg width="500" height="300" viewBox="0 0 500 300" class="hand-drawn">
+                            <!-- Water -->
+                            <rect x="50" y="150" width="400" height="100" class="water"/>
+                            <text x="250" y="280" text-anchor="middle" font-size="16" fill="#0277BD">Water</text>
+
+                            <!-- Object in water -->
+                            <circle cx="250" cy="180" r="30" class="object-floating"/>
+
+                            <!-- Buoyant force arrows -->
+                            <line x1="220" y1="210" x2="220" y2="240" stroke="#4CAF50" class="force-arrow"/>
+                            <line x1="250" y1="210" x2="250" y2="240" stroke="#4CAF50" class="force-arrow"/>
+                            <line x1="280" y1="210" x2="280" y2="240" stroke="#4CAF50" class="force-arrow"/>
+
+                            <text x="320" y="230" font-size="14" fill="#4CAF50">Buoyant Force</text>
+                            <text x="320" y="245" font-size="14" fill="#4CAF50">(Water pushes UP)</text>
+
+                            <!-- Weight force -->
+                            <line x1="250" y1="150" x2="250" y2="120" stroke="#FF5722" class="force-arrow"/>
+                            <text x="260" y="135" font-size="14" fill="#FF5722">Weight</text>
+                            <text x="260" y="150" font-size="14" fill="#FF5722">(Gravity pulls DOWN)</text>
+
+                            <text x="250" y="50" text-anchor="middle" font-size="16" font-weight="bold" fill="#333">Buoyant Force vs Weight</text>
+                        </svg>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Floating vs Sinking -->
+            <section>
+                <h2>🛟 When Things Float vs Sink</h2>
+                <div class="content-box fragment">
+                    <p>Whether something floats or sinks depends on which force is stronger:</p>
+                </div>
+
+                <div class="force-comparison balanced-forces fragment">
+                    <h4>🛟 FLOATING (Balanced Forces)</h4>
+                    <p><strong>Buoyant Force UP = Weight DOWN</strong></p>
+                    <p>Object stays at the surface - doesn't sink or rise</p>
+                </div>
+
+                <div class="force-comparison unbalanced-forces fragment">
+                    <h4>⬇️ SINKING (Unbalanced Forces)</h4>
+                    <p><strong>Weight DOWN > Buoyant Force UP</strong></p>
+                    <p>Object falls to the bottom</p>
+                </div>
+
+                <div class="force-comparison fragment" style="background: #FFF3E0; border: 2px solid #FF9800;">
+                    <h4>⬆️ RISING (Unbalanced Forces)</h4>
+                    <p><strong>Buoyant Force UP > Weight DOWN</strong></p>
+                    <p>Object floats up to surface (like a balloon in air)</p>
+                </div>
+
+                <div class="fragment">
+                    <div class="real-life">
+                        <h4>🧠 Memory Trick</h4>
+                        <p>Think of buoyant force and weight having a "tug of war" - whoever wins decides what happens!</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Floating vs Sinking Examples -->
+            <section>
+                <h2>🚢 Real Examples: Float or Sink?</h2>
+                <div class="diagram-container">
+                    <svg width="600" height="400" viewBox="0 0 600 400" class="hand-drawn">
+                        <!-- Water background -->
+                        <rect x="0" y="200" width="600" height="200" class="water"/>
+
+                        <!-- Floating ship -->
+                        <rect x="100" y="180" width="80" height="40" class="object-floating"/>
+                        <polygon points="100,180 120,160 160,160 180,180" class="object-floating"/>
+                        <text x="140" y="200" text-anchor="middle" font-size="12" fill="white">Ship</text>
+
+                        <!-- Ship forces -->
+                        <line x1="140" y1="240" x2="140" y2="270" stroke="#4CAF50" class="force-arrow"/>
+                        <text x="150" y="260" font-size="12" fill="#4CAF50">Buoyant Force</text>
+
+                        <line x1="140" y1="160" x2="140" y2="130" stroke="#FF5722" class="force-arrow"/>
+                        <text x="150" y="145" font-size="12" fill="#FF5722">Weight</text>
+
+                        <text x="140" y="300" text-anchor="middle" font-size="14" fill="#4CAF50">FLOATS!</text>
+                        <text x="140" y="320" text-anchor="middle" font-size="12" fill="#4CAF50">Forces Equal</text>
+
+                        <!-- Sinking coin -->
+                        <circle cx="350" cy="280" r="15" class="object-sinking"/>
+                        <text x="350" y="285" text-anchor="middle" font-size="10" fill="white">Coin</text>
+
+                        <!-- Coin forces -->
+                        <line x1="350" y1="305" x2="350" y2="330" stroke="#4CAF50" class="force-arrow" stroke-width="2"/>
+                        <text x="360" y="320" font-size="12" fill="#4CAF50">Small buoyant</text>
+
+                        <line x1="350" y1="260" x2="350" y2="230" stroke="#FF5722" class="force-arrow" stroke-width="6"/>
+                        <text x="360" y="245" font-size="12" fill="#FF5722">Heavy weight</text>
+
+                        <text x="350" y="360" text-anchor="middle" font-size="14" fill="#FF5722">SINKS!</text>
+                        <text x="350" y="380" text-anchor="middle" font-size="12" fill="#FF5722">Weight > Buoyant</text>
+
+                        <!-- Floating balloon -->
+                        <circle cx="450" cy="120" r="25" class="balloon"/>
+                        <rect x="445" y="145" width="10" height="30" fill="#8BC34A"/>
+                        <text x="450" y="125" text-anchor="middle" font-size="10">Balloon</text>
+
+                        <!-- Balloon forces -->
+                        <line x1="450" y1="90" x2="450" y2="60" stroke="#4CAF50" class="force-arrow" stroke-width="6"/>
+                        <text x="460" y="75" font-size="12" fill="#4CAF50">Air buoyant</text>
+
+                        <line x1="450" y1="150" x2="450" y2="180" stroke="#FF5722" class="force-arrow" stroke-width="2"/>
+                        <text x="460" y="165" font-size="12" fill="#FF5722">Light weight</text>
+
+                        <text x="450" y="50" text-anchor="middle" font-size="14" fill="#4CAF50">RISES!</text>
+                        <text x="450" y="30" text-anchor="middle" font-size="12" fill="#4CAF50">Buoyant > Weight</text>
+
+                        <text x="300" y="30" text-anchor="middle" font-size="18" font-weight="bold" fill="#333">Compare the Forces!</text>
+                    </svg>
+                </div>
+            </section>
+
+            <!-- Why Ships Float -->
+            <section>
+                <h2>🚢 Why Do Ships Float?</h2>
+                <div class="content-box fragment">
+                    <p>Ships are made of steel, which is denser than water. So why don't they sink?</p>
+                </div>
+
+                <div class="fragment">
+                    <h4>The Secret: Shape and Air!</h4>
+                    <ul>
+                        <li class="fragment">Ships are <strong>hollow</strong> - mostly filled with air</li>
+                        <li class="fragment">The <strong>overall density</strong> (ship + air) is less than water</li>
+                        <li class="fragment">Large surface area displaces lots of water</li>
+                        <li class="fragment">More displaced water = stronger buoyant force</li>
+                    </ul>
+                </div>
+
+                <div class="fragment">
+                    <div class="diagram-container">
+                        <svg width="600" height="300" viewBox="0 0 600 300" class="hand-drawn">
+                            <!-- Water -->
+                            <rect x="0" y="150" width="600" height="150" class="water"/>
+
+                            <!-- Ship cross-section -->
+                            <rect x="200" y="120" width="200" height="60" fill="none" stroke="#424242" stroke-width="4"/>
+                            <rect x="205" y="125" width="190" height="50" fill="#E1F5FE" opacity="0.8"/>
+                            <text x="300" y="155" text-anchor="middle" font-size="16" fill="#0277BD">AIR INSIDE</text>
+
+                            <!-- Ship hull -->
+                            <rect x="200" y="170" width="200" height="10" fill="#616161"/>
+                            <text x="300" y="190" text-anchor="middle" font-size="12">Steel Hull</text>
+
+                            <!-- Displaced water -->
+                            <path d="M 200 150 Q 250 140 300 150 Q 350 140 400 150" stroke="#2196F3" stroke-width="3" fill="none"/>
+                            <text x="300" y="135" text-anchor="middle" font-size="12" fill="#2196F3">Water displaced</text>
+
+                            <!-- Force arrows -->
+                            <line x1="250" y1="200" x2="250" y2="230" stroke="#4CAF50" class="force-arrow" stroke-width="6"/>
+                            <line x1="300" y1="200" x2="300" y2="230" stroke="#4CAF50" class="force-arrow" stroke-width="6"/>
+                            <line x1="350" y1="200" x2="350" y2="230" stroke="#4CAF50" class="force-arrow" stroke-width="6"/>
+                            <text x="420" y="220" font-size="14" fill="#4CAF50">HUGE Buoyant Force</text>
+
+                            <line x1="300" y1="120" x2="300" y2="90" stroke="#FF5722" class="force-arrow" stroke-width="4"/>
+                            <text x="310" y="105" font-size="14" fill="#FF5722">Weight (Ship + Air)</text>
+
+                            <text x="300" y="40" text-anchor="middle" font-size="16" font-weight="bold" fill="#333">Ship's Secret: Air Makes It Light!</text>
+                            <text x="300" y="270" text-anchor="middle" font-size="14" fill="#4CAF50">Large volume displaces lots of water = Strong buoyant force</text>
+                        </svg>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Forces on Flying Objects -->
+            <section>
+                <h2>✈️ Forces on Flying Objects</h2>
+                <div class="content-box fragment">
+                    <p>Objects that fly have <strong>four main forces</strong> acting on them:</p>
+                </div>
+
+                <div class="fragment">
+                    <h4>The Four Forces of Flight:</h4>
+                    <ul>
+                        <li class="fragment"><strong style="color: #FF5722;">Weight</strong> - gravity pulls down</li>
+                        <li class="fragment"><strong style="color: #2196F3;">Lift</strong> - air pushes up</li>
+                        <li class="fragment"><strong style="color: #9C27B0;">Thrust</strong> - engines push forward</li>
+                        <li class="fragment"><strong style="color: #FF9800;">Drag</strong> - air resistance pushes back</li>
+                    </ul>
+                </div>
+
+                <div class="fragment">
+                    <div class="diagram-container">
+                        <svg width="500" height="300" viewBox="0 0 500 300" class="hand-drawn">
+                            <!-- Airplane -->
+                            <ellipse cx="250" cy="150" rx="60" ry="15" class="airplane"/>
+                            <ellipse cx="220" cy="140" rx="30" ry="8" class="airplane"/>
+                            <rect x="270" y="145" width="15" height="20" class="airplane"/>
+
+                            <!-- Force arrows -->
+                            <!-- Weight (down) -->
+                            <line x1="250" y1="170" x2="250" y2="200" stroke="#FF5722" class="force-arrow" stroke-width="5"/>
+                            <text x="260" y="190" font-size="14" fill="#FF5722" font-weight="bold">WEIGHT</text>
+
+                            <!-- Lift (up) -->
+                            <line x1="250" y1="130" x2="250" y2="100" stroke="#2196F3" class="force-arrow" stroke-width="5"/>
+                            <text x="260" y="115" font-size="14" fill="#2196F3" font-weight="bold">LIFT</text>
+
+                            <!-- Thrust (forward) -->
+                            <line x1="190" y1="150" x2="160" y2="150" stroke="#9C27B0" class="force-arrow" stroke-width="5"/>
+                            <text x="120" y="145" font-size="14" fill="#9C27B0" font-weight="bold">THRUST</text>
+
+                            <!-- Drag (backward) -->
+                            <line x1="310" y1="150" x2="340" y2="150" stroke="#FF9800" class="force-arrow" stroke-width="5"/>
+                            <text x="350" y="145" font-size="14" fill="#FF9800" font-weight="bold">DRAG</text>
+
+                            <text x="250" y="50" text-anchor="middle" font-size="16" font-weight="bold" fill="#333">Four Forces of Flight</text>
+                            <text x="250" y="270" text-anchor="middle" font-size="14" fill="#666">All four forces must be balanced for steady flight</text>
+                        </svg>
+                    </div>
+                </div>
+            </section>
+
+            <!-- How Lift Works -->
+            <section>
+                <h2>🪁 How Lift Works</h2>
+                <div class="content-box fragment">
+                    <p><span class="key-term">Lift</span> is the upward force that keeps planes in the air.</p>
+                    <p class="simple-explanation">(Air flowing over wings creates an upward push)</p>
+                </div>
+
+                <div class="fragment">
+                    <h4>How Wings Create Lift:</h4>
+                    <ul>
+                        <li class="fragment">Wings have a special curved shape (airfoil)</li>
+                        <li class="fragment">Air moves faster over the top of the wing</li>
+                        <li class="fragment">Faster air creates lower pressure above the wing</li>
+                        <li class="fragment">Higher pressure below pushes the wing up</li>
+                    </ul>
+                </div>
+
+                <div class="fragment">
+                    <div class="diagram-container">
+                        <svg width="600" height="300" viewBox="0 0 600 300" class="hand-drawn">
+                            <!-- Wing shape (airfoil) -->
+                            <path d="M 100 150 Q 200 130 400 150 Q 350 170 100 150" fill="#E0E0E0" stroke="#424242" stroke-width="3"/>
+
+                            <!-- Air flow lines above wing -->
+                            <path d="M 50 120 Q 150 110 250 120 Q 350 110 450 120" stroke="#2196F3" stroke-width="3" fill="none" marker-end="url(#arrowBlue)"/>
+                            <path d="M 50 100 Q 150 90 250 100 Q 350 90 450 100" stroke="#2196F3" stroke-width="3" fill="none" marker-end="url(#arrowBlue)"/>
+                            <text x="300" y="90" font-size="14" fill="#2196F3">Fast air flow (Low pressure)</text>
+
+                            <!-- Air flow lines below wing -->
+                            <path d="M 50 180 Q 200 185 450 180" stroke="#FF5722" stroke-width="3" fill="none" marker-end="url(#arrowRed)"/>
+                            <path d="M 50 200 Q 200 205 450 200" stroke="#FF5722" stroke-width="3" fill="none" marker-end="url(#arrowRed)"/>
+                            <text x="300" y="220" font-size="14" fill="#FF5722">Slow air flow (High pressure)</text>
+
+                            <!-- Lift arrows -->
+                            <line x1="200" y1="130" x2="200" y2="100" stroke="#4CAF50" class="force-arrow" stroke-width="4"/>
+                            <line x1="300" y1="130" x2="300" y2="100" stroke="#4CAF50" class="force-arrow" stroke-width="4"/>
+                            <text x="250" y="80" text-anchor="middle" font-size="16" fill="#4CAF50" font-weight="bold">LIFT FORCE</text>
+
+                            <!-- Pressure indicators -->
+                            <text x="150" y="110" font-size="12" fill="#2196F3">LOW</text>
+                            <text x="150" y="190" font-size="12" fill="#FF5722">HIGH</text>
+
+                            <text x="300" y="40" text-anchor="middle" font-size="16" font-weight="bold" fill="#333">Wing Shape Creates Lift</text>
+                            <text x="300" y="270" text-anchor="middle" font-size="14" fill="#666">High pressure below pushes wing up to low pressure above</text>
+
+                            <defs>
+                                <marker id="arrowBlue" markerWidth="8" markerHeight="6" refX="0" refY="3" orient="auto">
+                                    <polygon points="0 0, 8 3, 0 6" fill="#2196F3"/>
+                                </marker>
+                                <marker id="arrowRed" markerWidth="8" markerHeight="6" refX="0" refY="3" orient="auto">
+                                    <polygon points="0 0, 8 3, 0 6" fill="#FF5722"/>
+                                </marker>
+                            </defs>
+                        </svg>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Thrust and Drag -->
+            <section>
+                <h2>🚀 Thrust vs Drag</h2>
+                <div class="content-box fragment">
+                    <p>For planes to move forward, <span class="key-term">thrust</span> must overcome <span class="key-term">drag</span>.</p>
+                </div>
+
+                <div class="force-comparison fragment" style="background: #F3E5F5; border: 2px solid #9C27B0;">
+                    <h4>🚀 THRUST (Forward Force)</h4>
+                    <ul>
+                        <li>Jet engines push hot gases backward</li>
+                        <li>Propellers pull air backward</li>
+                        <li>Newton's 3rd Law: pushing air back pushes plane forward</li>
+                    </ul>
+                </div>
+
+                <div class="force-comparison fragment" style="background: #FFF3E0; border: 2px solid #FF9800;">
+                    <h4>💨 DRAG (Backward Force)</h4>
+                    <ul>
+                        <li>Air resistance pushing against the plane</li>
+                        <li>Caused by friction with air</li>
+                        <li>Streamlined shapes reduce drag</li>
+                    </ul>
+                </div>
+
+                <div class="fragment">
+                    <div class="diagram-container">
+                        <svg width="500" height="200" viewBox="0 0 500 200" class="hand-drawn">
+                            <!-- Plane -->
+                            <ellipse cx="250" cy="100" rx="60" ry="15" class="airplane"/>
+                            <ellipse cx="220" cy="90" rx="30" ry="8" class="airplane"/>
+
+                            <!-- Engine thrust -->
+                            <path d="M 180 100 Q 150 95 120 100 Q 150 105 180 100" fill="#FFB74D" opacity="0.8"/>
+                            <text x="130" y="85" font-size="12" fill="#FF9800">Jet exhaust</text>
+
+                            <!-- Thrust arrow -->
+                            <line x1="180" y1="100" x2="150" y2="100" stroke="#9C27B0" class="force-arrow" stroke-width="6"/>
+                            <text x="100" y="95" font-size="14" fill="#9C27B0" font-weight="bold">THRUST</text>
+
+                            <!-- Drag arrow -->
+                            <line x1="320" y1="100" x2="350" y2="100" stroke="#FF9800" class="force-arrow" stroke-width="4"/>
+                            <text x="360" y="95" font-size="14" fill="#FF9800" font-weight="bold">DRAG</text>
+
+                            <!-- Air resistance -->
+                            <path d="M 340 95 Q 370 85 390 95" stroke="#FF9800" stroke-width="2" fill="none"/>
+                            <path d="M 340 105 Q 370 115 390 105" stroke="#FF9800" stroke-width="2" fill="none"/>
+                            <text x="370" y="125" font-size="12" fill="#FF9800">Air resistance</text>
+
+                            <text x="250" y="40" text-anchor="middle" font-size="16" font-weight="bold" fill="#333">Moving Forward: Thrust vs Drag</text>
+                            <text x="250" y="170" text-anchor="middle" font-size="14" fill="#666">Thrust > Drag = Speed up | Thrust = Drag = Constant speed</text>
+                        </svg>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Hot Air Balloons -->
+            <section>
+                <h2>🎈 Hot Air Balloons</h2>
+                <div class="content-box fragment">
+                    <p>Hot air balloons use a different type of buoyancy - <span class="key-term">air buoyancy</span>!</p>
+                </div>
+
+                <div class="fragment">
+                    <h4>How Hot Air Balloons Work:</h4>
+                    <ul>
+                        <li class="fragment">Heat makes air inside balloon expand and become less dense</li>
+                        <li class="fragment">Hot air inside is lighter than cool air outside</li>
+                        <li class="fragment">Cool air pushes up on the balloon (buoyant force)</li>
+                        <li class="fragment">If buoyant force > weight, balloon rises</li>
+                    </ul>
+                </div>
+
+                <div class="fragment">
+                    <div class="diagram-container">
+                        <svg width="500" height="400" viewBox="0 0 500 400" class="hand-drawn">
+                            <!-- Balloon -->
+                            <circle cx="250" cy="150" r="80" class="balloon"/>
+                            <rect x="230" y="230" width="40" height="30" fill="#8BC34A" stroke="#2E7D32" stroke-width="2"/>
+                            <line x1="210" y1="230" x2="230" y2="230" stroke="#333" stroke-width="2"/>
+                            <line x1="270" y1="230" x2="290" y2="230" stroke="#333" stroke-width="2"/>
+
+                            <!-- Hot air inside -->
+                            <text x="250" y="140" text-anchor="middle" font-size="14" fill="#FF5722">HOT AIR</text>
+                            <text x="250" y="160" text-anchor="middle" font-size="12" fill="#FF5722">(Less dense)</text>
+
+                            <!-- Cool air outside -->
+                            <text x="120" y="150" font-size="12" fill="#2196F3">COOL AIR</text>
+                            <text x="120" y="165" font-size="12" fill="#2196F3">(More dense)</text>
+                            <text x="350" y="150" font-size="12" fill="#2196F3">COOL AIR</text>
+                            <text x="350" y="165" font-size="12" fill="#2196F3">(More dense)</text>
+
+                            <!-- Forces -->
+                            <!-- Weight -->
+                            <line x1="250" y1="280" x2="250" y2="310" stroke="#FF5722" class="force-arrow" stroke-width="4"/>
+                            <text x="260" y="300" font-size="14" fill="#FF5722">Weight</text>
+
+                            <!-- Buoyant force -->
+                            <line x1="200" y1="220" x2="200" y2="190" stroke="#4CAF50" class="force-arrow" stroke-width="6"/>
+                            <line x1="250" y1="230" x2="250" y2="200" stroke="#4CAF50" class="force-arrow" stroke-width="6"/>
+                            <line x1="300" y1="220" x2="300" y2="190" stroke="#4CAF50" class="force-arrow" stroke-width="6"/>
+                            <text x="320" y="205" font-size="14" fill="#4CAF50">Air Buoyancy</text>
+                            <text x="320" y="220" font-size="14" fill="#4CAF50">(Cool air pushes up)</text>
+
+                            <!-- Flame -->
+                            <ellipse cx="250" cy="240" rx="8" ry="12" fill="#FF5722"/>
+                            <path d="M 242 235 Q 250 225 258 235" fill="#FFB74D"/>
+
+                            <text x="250" y="40" text-anchor="middle" font-size="16" font-weight="bold" fill="#333">Hot Air Balloon: Air Buoyancy</text>
+                            <text x="250" y="370" text-anchor="middle" font-size="14" fill="#666">Hot air is lighter than cool air, so cool air pushes balloon upward</text>
+                        </svg>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Helicopters -->
+            <section>
+                <h2>🚁 Helicopters: Different Way to Fly</h2>
+                <div class="content-box fragment">
+                    <p>Helicopters create lift differently - they use <span class="key-term">rotor blades</span> to push air down!</p>
+                </div>
+
+                <div class="fragment">
+                    <h4>How Helicopters Work:</h4>
+                    <ul>
+                        <li class="fragment">Rotor blades spin very fast (like airplane wings spinning)</li>
+                        <li class="fragment">Blades push lots of air downward</li>
+                        <li class="fragment">Newton's 3rd Law: pushing air down creates upward force</li>
+                        <li class="fragment">Can hover, go up/down, and fly in any direction</li>
+                    </ul>
+                </div>
+
+                <div class="fragment">
+                    <div class="diagram-container">
+                        <svg width="500" height="350" viewBox="0 0 500 350" class="hand-drawn">
+                            <!-- Helicopter body -->
+                            <ellipse cx="250" cy="200" rx="40" ry="20" class="airplane"/>
+                            <rect x="240" y="220" width="20" height="40" class="airplane"/>
+
+                            <!-- Main rotor -->
+                            <line x1="150" y1="170" x2="350" y2="170" stroke="#424242" stroke-width="6"/>
+                            <line x1="250" y1="70" x2="250" y2="270" stroke="#424242" stroke-width="6"/>
+                            <circle cx="250" cy="170" r="5" fill="#424242"/>
+
+                            <!-- Rotor motion -->
+                            <path d="M 200 120 Q 250 100 300 120" stroke="#FFB74D" stroke-width="3" fill="none" opacity="0.7"/>
+                            <path d="M 200 220 Q 250 240 300 220" stroke="#FFB74D" stroke-width="3" fill="none" opacity="0.7"/>
+                            <text x="320" y="115" font-size="12" fill="#FF9800">Spinning blades</text>
+
+                            <!-- Air being pushed down -->
+                            <line x1="200" y1="280" x2="200" y2="310" stroke="#2196F3" class="force-arrow"/>
+                            <line x1="230" y1="285" x2="230" y2="315" stroke="#2196F3" class="force-arrow"/>
+                            <line x1="250" y1="290" x2="250" y2="320" stroke="#2196F3" class="force-arrow"/>
+                            <line x1="270" y1="285" x2="270" y2="315" stroke="#2196F3" class="force-arrow"/>
+                            <line x1="300" y1="280" x2="300" y2="310" stroke="#2196F3" class="force-arrow"/>
+                            <text x="320" y="300" font-size="14" fill="#2196F3">Air pushed DOWN</text>
+
+                            <!-- Lift force -->
+                            <line x1="250" y1="150" x2="250" y2="120" stroke="#4CAF50" class="force-arrow" stroke-width="6"/>
+                            <text x="260" y="135" font-size="14" fill="#4CAF50" font-weight="bold">LIFT UP</text>
+
+                            <!-- Weight -->
+                            <line x1="250" y1="240" x2="250" y2="270" stroke="#FF5722" class="force-arrow"/>
+                            <text x="260" y="260" font-size="14" fill="#FF5722">Weight</text>
+
+                            <text x="250" y="40" text-anchor="middle" font-size="16" font-weight="bold" fill="#333">Helicopter: Push Air Down, Go Up!</text>
+                            <text x="250" y="340" text-anchor="middle" font-size="14" fill="#666">Newton's 3rd Law: For every action, there's an equal and opposite reaction</text>
+                        </svg>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Real Life Applications -->
+            <section>
+                <h2>🌍 Forces in Real Life</h2>
+
+                <div class="real-life fragment">
+                    <h4>🚢 Ships and Submarines</h4>
+                    <p>Submarines control buoyancy by filling/emptying ballast tanks with water. More water = heavier = sink. Less water = lighter = rise.</p>
+                </div>
+
+                <div class="real-life fragment">
+                    <h4>🏊 Swimming and Life Jackets</h4>
+                    <p>Life jackets add buoyancy by trapping air. The extra buoyant force keeps your head above water even if you can't swim.</p>
+                </div>
+
+                <div class="real-life fragment">
+                    <h4>✈️ Airplane Design</h4>
+                    <p>Engineers balance all four forces. Bigger engines = more thrust. Streamlined shapes = less drag. Wing shape determines lift.</p>
+                </div>
+
+                <div class="real-life fragment">
+                    <h4>🎈 Weather Balloons</h4>
+                    <p>Scientists use helium balloons to carry instruments high into the atmosphere. Helium is less dense than air, creating buoyancy.</p>
+                </div>
+
+                <div class="real-life fragment">
+                    <h4>🏗️ Building Foundations</h4>
+                    <p>Heavy buildings need deep foundations to counteract buoyant forces from groundwater trying to push them up.</p>
+                </div>
+            </section>
+
+            <!-- Summary -->
+            <section>
+                <h2>📋 Forces Summary</h2>
+
+                <div class="content-box">
+                    <h4>Key Points to Remember:</h4>
+                    <ol>
+                        <li class="fragment"><strong>Buoyancy:</strong> Upward force from fluids (water/air)</li>
+                        <li class="fragment"><strong>Float/Sink:</strong> Depends on buoyant force vs weight</li>
+                        <li class="fragment"><strong>Ships Float:</strong> Because they're mostly air (low density)</li>
+                        <li class="fragment"><strong>Four Flight Forces:</strong> Weight, lift, thrust, drag</li>
+                        <li class="fragment"><strong>Lift:</strong> Wing shape makes air pressure difference</li>
+                        <li class="fragment"><strong>Balanced Forces:</strong> No change in motion</li>
+                        <li class="fragment"><strong>Unbalanced Forces:</strong> Object speeds up, slows down, or changes direction</li>
+                    </ol>
+                </div>
+
+                <div class="fragment">
+                    <div class="real-life">
+                        <h4>🎯 Remember This</h4>
+                        <p>Forces are everywhere! Understanding them helps us design ships that float, planes that fly, and balloons that rise!</p>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </div>
+
+    <!-- Reveal.js JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.3.1/dist/reveal.js"></script>
+
+    <script>
+        // Initialize Reveal.js
+        Reveal.initialize({
+            hash: true,
+            controls: true,
+            progress: true,
+            center: true,
+            transition: 'slide',
+            backgroundTransition: 'fade'
+        });
+
+        // Navigation functions
+        function goToSlide(slideNumber) {
+            Reveal.slide(slideNumber);
+        }
+
+        // Scroll functionality
+        function scrollCurrentSlide() {
+            const currentSlide = document.querySelector('.reveal .present');
+            if (currentSlide) {
+                currentSlide.scrollBy({
+                    top: 200,
+                    behavior: 'smooth'
+                });
+            }
+        }
+
+        // Show/hide scroll button based on slide content
+        function updateScrollButton() {
+            const currentSlide = document.querySelector('.reveal .present');
+            const scrollBtn = document.getElementById('scrollBtn');
+
+            if (currentSlide && currentSlide.scrollHeight > currentSlide.clientHeight) {
+                scrollBtn.classList.remove('hidden');
+            } else {
+                scrollBtn.classList.add('hidden');
+            }
+        }
+
+        // Update scroll button when slide changes
+        Reveal.addEventListener('slidechanged', updateScrollButton);
+
+        // Initial check
+        setTimeout(updateScrollButton, 1000);
+
+        // Add interactivity to objects
+        document.addEventListener('DOMContentLoaded', function() {
+            const objects = document.querySelectorAll('.interactive-object');
+            objects.forEach(object => {
+                object.addEventListener('click', function() {
+                    this.style.transform = 'scale(1.1) rotate(5deg)';
+                    setTimeout(() => {
+                        this.style.transform = '';
+                    }, 300);
+                });
+            });
+        });
+    </script>
+</body>
+</html>

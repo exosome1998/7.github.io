@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mass, Weight and Gravity Worksheet - Year 7 Science</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Times New Roman', serif;
+            background: #f5f5f5;
+            padding: 20px;
+            font-size: 11pt;
+            line-height: 1.4;
+        }
+
+        .worksheet {
+            background: white;
+            max-width: 210mm;
+            min-height: 297mm;
+            margin: 0 auto;
+            padding: 15mm;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            border: 2px solid #000;
+        }
+
+        .worksheet-header {
+            text-align: center;
+            margin-bottom: 15pt;
+            border-bottom: 2px solid #000;
+            padding-bottom: 10pt;
+        }
+
+        .worksheet-header h1 {
+            margin: 0;
+            font-size: 16pt;
+            font-weight: bold;
+        }
+
+        .student-line {
+            text-align: right;
+            margin-top: 10pt;
+            margin-bottom: 10pt;
+        }
+
+        .controls {
+            text-align: center;
+            margin: 10pt 0;
+            border: 1px solid #ccc;
+            padding: 8pt;
+            background: #f9f9f9;
+        }
+
+        .show-answers-btn {
+            background: #FF6B35;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 10pt;
+        }
+
+        .show-answers-btn:hover {
+            background: #e55a2b;
+        }
+
+        .section {
+            margin-bottom: 15pt;
+            border: 2px solid #000;
+        }
+
+        .section-header {
+            background: #000;
+            color: white;
+            padding: 5pt 10pt;
+            font-weight: bold;
+            font-size: 11pt;
+        }
+
+        .section-content {
+            padding: 10pt;
+        }
+
+        .instructions {
+            font-style: italic;
+            margin-bottom: 8pt;
+            font-size: 10pt;
+        }
+
+        .question {
+            margin-bottom: 12pt;
+        }
+
+        .mc-options {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3pt;
+            margin: 5pt 0;
+        }
+
+        .mc-option {
+            font-size: 10pt;
+        }
+
+        .tf-questions {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8pt;
+        }
+
+        .tf-question {
+            margin-bottom: 6pt;
+            font-size: 10pt;
+        }
+
+        .answer-box {
+            border-bottom: 1px solid #000;
+            min-height: 12pt;
+            min-width: 80pt;
+            display: inline-block;
+            cursor: pointer;
+            position: relative;
+            background: #f9f9f9;
+            padding: 1pt 3pt;
+        }
+
+        .answer-box:hover {
+            background-color: #e9e9e9;
+        }
+
+        .answer-text {
+            color: #d32f2f;
+            font-weight: bold;
+            display: none;
+        }
+
+        .answer-box.revealed .answer-text {
+            display: inline;
+        }
+
+        .answer-space {
+            margin-top: 8pt;
+        }
+
+        .answer-space div {
+            border-bottom: 1px solid #000;
+            min-height: 20pt;
+            margin-bottom: 8pt;
+            cursor: pointer;
+            padding: 2pt;
+        }
+
+        .answer-space div:hover {
+            background-color: #f9f9f9;
+        }
+
+        .answer-space div.revealed .answer-text {
+            display: inline;
+        }
+
+        .answer-space .answer-text {
+            color: #d32f2f;
+            font-weight: bold;
+            display: none;
+        }
+
+        .calculation-space {
+            border: 1px solid #000;
+            min-height: 80pt;
+            margin: 8pt 0;
+            padding: 5pt;
+            background: #f9f9f9;
+            cursor: pointer;
+        }
+
+        .calculation-space:hover {
+            background-color: #e9e9e9;
+        }
+
+        .calculation-space.revealed .answer-text {
+            display: block;
+        }
+
+        .calculation-space .answer-text {
+            display: none;
+            color: #d32f2f;
+            font-weight: bold;
+        }
+
+        .data-table {
+            border: 1px solid #000;
+            border-collapse: collapse;
+            width: 100%;
+            margin: 10pt 0;
+        }
+
+        .data-table th, .data-table td {
+            border: 1px solid #000;
+            padding: 4pt;
+            text-align: center;
+            font-size: 10pt;
+        }
+
+        .data-table th {
+            background: #f0f0f0;
+            font-weight: bold;
+        }
+
+        .formula-box {
+            border: 2px solid #2E86AB;
+            background: #E3F2FD;
+            padding: 8pt;
+            margin: 8pt 0;
+            border-radius: 5px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        /* Print styles */
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            .worksheet {
+                box-shadow: none;
+                margin: 0;
+                max-width: none;
+                min-height: auto;
+            }
+            .controls {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="worksheet">
+        <div class="worksheet-header">
+            <h1>Year 7 Science Quiz: Mass, Weight and Gravity</h1>
+            <div class="student-line">
+                <strong>Student Name:</strong> _________________________
+            </div>
+        </div>
+
+        <div class="controls">
+            <button class="show-answers-btn" onclick="revealAllAnswers()">Click to Show All Answers</button>
+            <div style="font-size: 9pt; margin-top: 4pt; font-style: italic;">
+                Click individual answer areas to reveal answers, or use the button above.
+            </div>
+        </div>
+
+        <!-- Formula Reference -->
+        <div class="formula-box">
+            <strong>Remember: Weight = Mass × Gravity or W = m × g</strong><br>
+            <span style="font-size: 10pt;">Weight (N) = Mass (kg) × Gravity (m/s²)</span>
+        </div>
+
+        <!-- Section 1: Multiple Choice Questions -->
+        <div class="section">
+            <div class="section-header">Section 1: Multiple-Choice Questions (10 points, 1 each)</div>
+            <div class="section-content">
+                <div class="instructions">Circle the correct answer. Options are listed horizontally in two columns.</div>
+
+                <div class="question">
+                    <strong>1. What is mass?</strong><br>
+                    <div class="mc-options">
+                        <div class="mc-option">a) The force of gravity on an object</div>
+                        <div class="mc-option">b) The amount of matter in an object</div>
+                        <div class="mc-option">c) How heavy something feels</div>
+                        <div class="mc-option">d) The size of an object</div>
+                    </div>
+                    <strong>Answer:</strong>
+                    <div class="answer-box" onclick="revealAnswer(this)">
+                        <span class="answer-text">b) The amount of matter in an object</span>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <strong>2. What units do we use to measure weight?</strong><br>
+                    <div class="mc-options">
+                        <div class="mc-option">a) Kilograms (kg)</div>
+                        <div class="mc-option">b) Newtons (N)</div>
+                        <div class="mc-option">c) Metres (m)</div>
+                        <div class="mc-option">d) Grams (g)</div>
+                    </div>
+                    <strong>Answer:</strong>
+                    <div class="answer-box" onclick="revealAnswer(this)">
+                        <span class="answer-text">b) Newtons (N)</span>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <strong>3. What is gravity on Earth?</strong><br>
+                    <div class="mc-options">
+                        <div class="mc-option">a) 9.8 m/s²</div>
+                        <div class="mc-option">b) 1.6 m/s²</div>
+                        <div class="mc-option">c) 3.7 m/s²</div>
+                        <div class="mc-option">d) 24.8 m/s²</div>
+                    </div>
+                    <strong>Answer:</strong>
+                    <div class="answer-box" onclick="revealAnswer(this)">
+                        <span class="answer-text">a) 9.8 m/s²</span>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <strong>4. If you travel to the Moon, what happens to your mass?</strong><br>
+                    <div class="mc-options">
+                        <div class="mc-option">a) It increases</div>
+                        <div class="mc-option">b) It decreases</div>
+                        <div class="mc-option">c) It stays the same</div>
+                        <div class="mc-option">d) It becomes zero</div>
+                    </div>
+                    <strong>Answer:</strong>
+                    <div class="answer-box" onclick="revealAnswer(this)">
+                        <span class="answer-text">c) It stays the same</span>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <strong>5. Which planet has the strongest gravity in our solar system?</strong><br>
+                    <div class="mc-options">
+                        <div class="mc-option">a) Earth</div>
+                        <div class="mc-option">b) Mars</div>
+                        <div class="mc-option">c) Jupiter</div>
+                        <div class="mc-option">d) Venus</div>
+                    </div>
+                    <strong>Answer:</strong>
+                    <div class="answer-box" onclick="revealAnswer(this)">
+                        <span class="answer-text">c) Jupiter</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 2: True/False Questions -->
+        <div class="section">
+            <div class="section-header">Section 2: True/False Questions (8 points, 1 each)</div>
+            <div class="section-content">
+                <div class="instructions">Circle T for True or F for False.</div>
+
+                <div class="tf-questions">
+                    <div class="tf-question">
+                        <strong>1.</strong> Mass and weight are the same thing.
+                        <div class="answer-box" onclick="revealAnswer(this)" style="width: 20pt;">
+                            <span class="answer-text">F</span>
+                        </div>
+                    </div>
+
+                    <div class="tf-question">
+                        <strong>2.</strong> Your weight would be less on the Moon than on Earth.
+                        <div class="answer-box" onclick="revealAnswer(this)" style="width: 20pt;">
+                            <span class="answer-text">T</span>
+                        </div>
+                    </div>
+
+                    <div class="tf-question">
+                        <strong>3.</strong> Gravity pulls all objects towards Earth.
+                        <div class="answer-box" onclick="revealAnswer(this)" style="width: 20pt;">
+                            <span class="answer-text">T</span>
+                        </div>
+                    </div>
+
+                    <div class="tf-question">
+                        <strong>4.</strong> Mass is measured in Newtons.
+                        <div class="answer-box" onclick="revealAnswer(this)" style="width: 20pt;">
+                            <span class="answer-text">F</span>
+                        </div>
+                    </div>
+
+                    <div class="tf-question">
+                        <strong>5.</strong> All planets have the same gravity strength.
+                        <div class="answer-box" onclick="revealAnswer(this)" style="width: 20pt;">
+                            <span class="answer-text">F</span>
+                        </div>
+                    </div>
+
+                    <div class="tf-question">
+                        <strong>6.</strong> Weight = Mass × Gravity is the correct formula.
+                        <div class="answer-box" onclick="revealAnswer(this)" style="width: 20pt;">
+                            <span class="answer-text">T</span>
+                        </div>
+                    </div>
+
+                    <div class="tf-question">
+                        <strong>7.</strong> You would weigh more on Jupiter than on Earth.
+                        <div class="answer-box" onclick="revealAnswer(this)" style="width: 20pt;">
+                            <span class="answer-text">T</span>
+                        </div>
+                    </div>
+
+                    <div class="tf-question">
+                        <strong>8.</strong> Astronauts have no mass when floating in space.
+                        <div class="answer-box" onclick="revealAnswer(this)" style="width: 20pt;">
+                            <span class="answer-text">F</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 3: Calculation Questions -->
+        <div class="section">
+            <div class="section-header">Section 3: Calculation Questions (20 points, 4 each)</div>
+            <div class="section-content">
+                <div class="instructions">Show all working. Use the formula W = m × g.</div>
+
+                <div class="question">
+                    <strong>1. Earth Weight Calculation:</strong> Calculate the weight of a 70 kg person on Earth. (g = 9.8 m/s²)
+                    <div class="calculation-space" onclick="revealAnswer(this)">
+                        <span style="color: #666; font-style: italic;">Click to show working and answer</span>
+                        <div class="answer-text">
+                            <strong>Step 1:</strong> Write what we know<br>
+                            m = 70 kg, g = 9.8 m/s²<br><br>
+                            <strong>Step 2:</strong> Write formula<br>
+                            W = m × g<br><br>
+                            <strong>Step 3:</strong> Substitute values<br>
+                            W = 70 kg × 9.8 m/s²<br><br>
+                            <strong>Step 4:</strong> Calculate<br>
+                            W = 686 N<br><br>
+                            <strong>Answer: 686 N</strong>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <strong>2. Moon Weight Calculation:</strong> Calculate the weight of a 50 kg astronaut on the Moon. (g = 1.6 m/s²)
+                    <div class="calculation-space" onclick="revealAnswer(this)">
+                        <span style="color: #666; font-style: italic;">Click to show working and answer</span>
+                        <div class="answer-text">
+                            <strong>Step 1:</strong> Write what we know<br>
+                            m = 50 kg, g = 1.6 m/s²<br><br>
+                            <strong>Step 2:</strong> Write formula<br>
+                            W = m × g<br><br>
+                            <strong>Step 3:</strong> Substitute values<br>
+                            W = 50 kg × 1.6 m/s²<br><br>
+                            <strong>Step 4:</strong> Calculate<br>
+                            W = 80 N<br><br>
+                            <strong>Answer: 80 N</strong>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <strong>3. Mars Weight Calculation:</strong> Calculate the weight of a 25 kg rover on Mars. (g = 3.7 m/s²)
+                    <div class="calculation-space" onclick="revealAnswer(this)">
+                        <span style="color: #666; font-style: italic;">Click to show working and answer</span>
+                        <div class="answer-text">
+                            <strong>Step 1:</strong> Write what we know<br>
+                            m = 25 kg, g = 3.7 m/s²<br><br>
+                            <strong>Step 2:</strong> Write formula<br>
+                            W = m × g<br><br>
+                            <strong>Step 3:</strong> Substitute values<br>
+                            W = 25 kg × 3.7 m/s²<br><br>
+                            <strong>Step 4:</strong> Calculate<br>
+                            W = 92.5 N<br><br>
+                            <strong>Answer: 92.5 N</strong>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <strong>4. Jupiter Weight Calculation:</strong> Calculate the weight of a 40 kg student on Jupiter. (g = 24.8 m/s²)
+                    <div class="calculation-space" onclick="revealAnswer(this)">
+                        <span style="color: #666; font-style: italic;">Click to show working and answer</span>
+                        <div class="answer-text">
+                            <strong>Step 1:</strong> Write what we know<br>
+                            m = 40 kg, g = 24.8 m/s²<br><br>
+                            <strong>Step 2:</strong> Write formula<br>
+                            W = m × g<br><br>
+                            <strong>Step 3:</strong> Substitute values<br>
+                            W = 40 kg × 24.8 m/s²<br><br>
+                            <strong>Step 4:</strong> Calculate<br>
+                            W = 992 N<br><br>
+                            <strong>Answer: 992 N</strong>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <strong>5. Venus Weight Calculation:</strong> Calculate the weight of a 60 kg person on Venus. (g = 8.9 m/s²)
+                    <div class="calculation-space" onclick="revealAnswer(this)">
+                        <span style="color: #666; font-style: italic;">Click to show working and answer</span>
+                        <div class="answer-text">
+                            <strong>Step 1:</strong> Write what we know<br>
+                            m = 60 kg, g = 8.9 m/s²<br><br>
+                            <strong>Step 2:</strong> Write formula<br>
+                            W = m × g<br><br>
+                            <strong>Step 3:</strong> Substitute values<br>
+                            W = 60 kg × 8.9 m/s²<br><br>
+                            <strong>Step 4:</strong> Calculate<br>
+                            W = 534 N<br><br>
+                            <strong>Answer: 534 N</strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 4: Data Table Completion -->
+        <div class="section">
+            <div class="section-header">Section 4: Complete the Data Table (8 points)</div>
+            <div class="section-content">
+                <div class="instructions">Fill in the missing weights for a 30 kg object on different planets.</div>
+
+                <table class="data-table">
+                    <tr>
+                        <th>Planet</th>
+                        <th>Gravity (m/s²)</th>
+                        <th>Mass (kg)</th>
+                        <th>Weight (N)</th>
+                    </tr>
+                    <tr>
+                        <td>Mercury</td>
+                        <td>3.7</td>
+                        <td>30</td>
+                        <td>
+                            <div class="answer-box" onclick="revealAnswer(this)" style="width: 50pt; border: none; background: white;">
+                                <span class="answer-text">111 N</span>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Venus</td>
+                        <td>8.9</td>
+                        <td>30</td>
+                        <td>
+                            <div class="answer-box" onclick="revealAnswer(this)" style="width: 50pt; border: none; background: white;">
+                                <span class="answer-text">267 N</span>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Earth</td>
+                        <td>9.8</td>
+                        <td>30</td>
+                        <td>
+                            <div class="answer-box" onclick="revealAnswer(this)" style="width: 50pt; border: none; background: white;">
+                                <span class="answer-text">294 N</span>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Mars</td>
+                        <td>3.7</td>
+                        <td>30</td>
+                        <td>
+                            <div class="answer-box" onclick="revealAnswer(this)" style="width: 50pt; border: none; background: white;">
+                                <span class="answer-text">111 N</span>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Jupiter</td>
+                        <td>24.8</td>
+                        <td>30</td>
+                        <td>
+                            <div class="answer-box" onclick="revealAnswer(this)" style="width: 50pt; border: none; background: white;">
+                                <span class="answer-text">744 N</span>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Saturn</td>
+                        <td>10.4</td>
+                        <td>30</td>
+                        <td>
+                            <div class="answer-box" onclick="revealAnswer(this)" style="width: 50pt; border: none; background: white;">
+                                <span class="answer-text">312 N</span>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Uranus</td>
+                        <td>8.7</td>
+                        <td>30</td>
+                        <td>
+                            <div class="answer-box" onclick="revealAnswer(this)" style="width: 50pt; border: none; background: white;">
+                                <span class="answer-text">261 N</span>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Neptune</td>
+                        <td>11.2</td>
+                        <td>30</td>
+                        <td>
+                            <div class="answer-box" onclick="revealAnswer(this)" style="width: 50pt; border: none; background: white;">
+                                <span class="answer-text">336 N</span>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <!-- Section 5: Short Answer Questions -->
+        <div class="section">
+            <div class="section-header">Section 5: Short Answer Questions (6 points, 3 each)</div>
+            <div class="section-content">
+                <div class="instructions">Write your answers in complete sentences.</div>
+
+                <div class="question">
+                    <strong>1. Mass vs Weight:</strong> Explain the difference between mass and weight using an example.
+                    <div class="answer-space">
+                        <div onclick="revealAnswer(this)">
+                            <span class="answer-text">Mass is the amount of matter in an object and never changes. Weight is the force of gravity acting on that mass and changes with different gravity. For example, a 60 kg astronaut has the same mass on Earth and Moon, but weighs 588 N on Earth and only 96 N on the Moon.</span>
+                        </div>
+                        <div onclick="revealAnswer(this)">
+                            <span class="answer-text"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <strong>2. Space Travel:</strong> Explain why understanding weight calculations is important for space missions.
+                    <div class="answer-space">
+                        <div onclick="revealAnswer(this)">
+                            <span class="answer-text">Space missions need to know how much equipment will weigh on other planets for landing calculations, fuel requirements, and designing spacecraft. Astronauts also need to understand how different gravity will affect their movement and the operation of equipment on other worlds.</span>
+                        </div>
+                        <div onclick="revealAnswer(this)">
+                            <span class="answer-text"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 6: Problem Solving -->
+        <div class="section">
+            <div class="section-header">Section 6: Problem Solving Challenge (8 points)</div>
+            <div class="section-content">
+                <div class="instructions">Read the scenario and solve the problems.</div>
+
+                <div class="question">
+                    <strong>Scenario:</strong> A space mission is planning to send a 150 kg rover to Mars and then to Jupiter's moon Europa (g = 1.3 m/s²).
+
+                    <div style="margin-top: 10pt;">
+                        <strong>a)</strong> Calculate the rover's weight on Earth.
+                        <div class="calculation-space" onclick="revealAnswer(this)" style="min-height: 60pt;">
+                            <span style="color: #666; font-style: italic;">Click to show answer</span>
+                            <div class="answer-text">
+                                W = m × g = 150 kg × 9.8 m/s² = 1470 N
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 10pt;">
+                        <strong>b)</strong> Calculate the rover's weight on Mars.
+                        <div class="calculation-space" onclick="revealAnswer(this)" style="min-height: 60pt;">
+                            <span style="color: #666; font-style: italic;">Click to show answer</span>
+                            <div class="answer-text">
+                                W = m × g = 150 kg × 3.7 m/s² = 555 N
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 10pt;">
+                        <strong>c)</strong> Calculate the rover's weight on Europa.
+                        <div class="calculation-space" onclick="revealAnswer(this)" style="min-height: 60pt;">
+                            <span style="color: #666; font-style: italic;">Click to show answer</span>
+                            <div class="answer-text">
+                                W = m × g = 150 kg × 1.3 m/s² = 195 N
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 10pt;">
+                        <strong>d)</strong> On which location would the rover be easiest to move around? Explain why.
+                        <div class="answer-space">
+                            <div onclick="revealAnswer(this)">
+                                <span class="answer-text">Europa would be easiest because the rover weighs the least there (195 N). Lower weight means less force needed to move the rover around, making it easier to operate and requiring less energy for movement.</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function revealAnswer(element) {
+            element.classList.add('revealed');
+        }
+
+        function revealAllAnswers() {
+            document.querySelectorAll('.answer-box, .answer-space div, .calculation-space').forEach(box => {
+                box.classList.add('revealed');
+            });
+        }
+    </script>
+</body>
+</html>
