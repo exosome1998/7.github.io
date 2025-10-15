@@ -1,0 +1,1874 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scientific Models and Universe Building Blocks - Interactive Lesson</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reveal.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/theme/white.min.css">
+    <style>
+        .reveal {
+            font-size: 24px;
+        }
+        .reveal h1 {
+            font-size: 1.8em;
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+        .reveal h2 {
+            font-size: 1.5em;
+            color: #34495e;
+            margin-bottom: 20px;
+        }
+        .reveal h3 {
+            font-size: 1.2em;
+            color: #34495e;
+            margin-bottom: 15px;
+        }
+        .reveal .slides section {
+            text-align: center;
+            padding: 20px;
+            box-sizing: border-box;
+            overflow-y: auto;
+            max-height: 100vh;
+        }
+        .reveal .slides {
+            width: 100%;
+            height: 100%;
+            background-color: white; /* Ensures no content from other slides shows through */
+        }
+        .reveal .slides > section.present { /* Apply flex only to the currently visible slide */
+            width: 100%;
+            height: 100%;
+            padding: 20px;
+            box-sizing: border-box;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+        }
+        .slide-content-wrapper {
+            width: 100%;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px 0;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            background-color: white; /* Fix for content showing through on slide transitions */
+        }
+        .content-block {
+            margin: 15px 0;
+            padding: 10px;
+        }
+        @media (max-width: 768px) {
+            .reveal {
+                font-size: 20px;
+            }
+            .reveal .slides section {
+                padding: 15px;
+            }
+        }
+        .do-now-box {
+            background: linear-gradient(135deg, #4CAF50 0%, #8BC34A 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px auto;
+            max-width: 600px;
+            font-weight: bold;
+        }
+        .topic-header {
+            background: linear-gradient(135deg, #00BCD4 0%, #03A9F4 100%);
+            color: white;
+            padding: 15px;
+            border-radius: 15px;
+            margin: 15px auto;
+            max-width: 500px;
+        }
+        .click-reveal {
+            background: #f0f4f8;
+            border: 2px solid #4a90e2;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 10px auto;
+            max-width: 600px;
+            cursor: pointer;
+            transition: all 0.3s;
+            min-height: 60px;
+        }
+        .click-reveal:hover {
+            background: #e1e8ed;
+            transform: scale(1.02);
+        }
+        .click-reveal.revealed {
+            background: #fff9c4;
+            border-color: #ffc107;
+            cursor: default;
+        }
+        .definition-box {
+            background: #fff9e6;
+            border-left: 5px solid #ffc107;
+            padding: 15px;
+            margin: 15px auto;
+            max-width: 600px;
+            border-radius: 5px;
+            text-align: left;
+        }
+        .keyword-box {
+            background: #f3e5f5;
+            border: 2px solid #9c27b0;
+            padding: 20px;
+            margin: 15px auto;
+            max-width: 700px;
+            border-radius: 10px;
+        }
+        .keyword-item {
+            background: white;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            text-align: left;
+        }
+        .keyword-term {
+            color: #9c27b0;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+        .question-prompt {
+            background: #e3f2fd;
+            border: 2px solid #2196f3;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px auto;
+            max-width: 600px;
+            font-weight: bold;
+        }
+        .answer-choice {
+            background: #f5f5f5;
+            border: 2px solid #9e9e9e;
+            padding: 12px;
+            margin: 8px auto;
+            max-width: 500px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .answer-choice:hover {
+            background: #eeeeee;
+            transform: scale(1.02);
+        }
+        .answer-choice.correct {
+            background: #c8e6c9;
+            border-color: #4caf50;
+        }
+        .answer-choice.incorrect {
+            background: #ffcdd2;
+            border-color: #f44336;
+        }
+        .step-number {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background: #00BCD4;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            z-index: 1000;
+        }
+        .reveal-text {
+            color: #666;
+            font-style: italic;
+            font-size: 0.9em;
+        }
+        .transition-box {
+            background: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%);
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px auto;
+            max-width: 600px;
+            font-weight: bold;
+        }
+        .equation-box {
+            background: linear-gradient(135deg, #ffd93d 0%, #6bcf7f 100%);
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px auto;
+            max-width: 500px;
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #2c3e50;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        .formula-breakdown {
+            background: #f8f9fa;
+            border: 2px solid #6c757d;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px auto;
+            max-width: 600px;
+            text-align: left;
+        }
+        .formula-part {
+            padding: 8px;
+            margin: 5px 0;
+            background: white;
+            border-radius: 5px;
+        }
+        .calculation-step {
+            background: #e8f4f8;
+            border-left: 4px solid #2196f3;
+            padding: 10px;
+            margin: 10px auto;
+            max-width: 600px;
+            text-align: left;
+            font-family: 'Courier New', monospace;
+        }
+        .practice-problem {
+            background: #fff3e0;
+            border: 2px solid #ff9800;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 15px auto;
+            max-width: 650px;
+        }
+        .problem-number {
+            background: #ff9800;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            display: inline-block;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        .connection-arrow {
+            font-size: 2em;
+            color: #667eea;
+            animation: bounce 2s infinite;
+        }
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        .progress-tracker {
+            background: #f0f0f0;
+            padding: 10px;
+            border-radius: 10px;
+            margin: 15px auto;
+            max-width: 600px;
+        }
+        .topic-complete {
+            background: #4caf50;
+            color: white;
+            padding: 10px;
+            border-radius: 10px;
+            font-weight: bold;
+            margin: 20px auto;
+            max-width: 400px;
+        }
+        .force-arrow {
+            font-size: 3em;
+            color: #e74c3c;
+            font-weight: bold;
+            display: inline-block;
+            margin: 10px;
+        }
+        .unit-highlight {
+            background: #ffeb3b;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+        /* Timeline Styles */
+        .timeline {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 800px;
+            margin: 20px auto;
+            position: relative;
+        }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: #4a90e2;
+        }
+        .timeline-item {
+            background: #fff;
+            padding: 10px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            text-align: center;
+            position: relative;
+            z-index: 1;
+            width: 150px;
+        }
+        .timeline-icon {
+            font-size: 2em;
+            margin-bottom: 5px;
+        }
+        /* Image Placeholder Styling */
+        .image-placeholder {
+            width: 100%;
+            max-width: 650px;
+            height: 350px;
+            border: 2px dashed #ccc;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f9f9f9;
+            margin: 20px auto;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+        .image-placeholder:hover {
+            background: #f0f0f0;
+            border-color: #999;
+        }
+        .image-placeholder.has-image {
+            border: none;
+            background: transparent;
+        }
+        .image-placeholder img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            border-radius: 8px;
+        }
+        .placeholder-content {
+            text-align: center;
+            padding: 20px;
+            color: #666;
+        }
+        .placeholder-icon {
+            font-size: 3em;
+            display: block;
+            margin-bottom: 10px;
+            opacity: 0.5;
+        }
+        .placeholder-text {
+            font-size: 1.2em;
+            font-weight: bold;
+            display: block;
+            margin-bottom: 10px;
+        }
+        .placeholder-hint {
+            font-size: 0.9em;
+            color: #999;
+            display: block;
+            font-family: monospace;
+        }
+        /* Minimized image placeholder */
+        .image-placeholder.minimized {
+            height: 40px;
+            background: #e8f4fd;
+            border: 1px solid #b3d9ff;
+            cursor: pointer;
+            border-radius: 20px;
+            margin: 10px auto;
+        }
+        .image-placeholder.minimized .placeholder-content {
+            padding: 8px 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        .image-placeholder.minimized .placeholder-icon {
+            font-size: 1.2em;
+            margin: 0;
+        }
+        .image-placeholder.minimized .placeholder-text {
+            font-size: 0.8em;
+            margin: 0;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 200px;
+        }
+        .image-placeholder.minimized .placeholder-hint {
+            display: none;
+        }
+        /* Drag and drop styling */
+        .image-placeholder.drag-over {
+            border-color: #4CAF50 !important;
+            background: #e8f5e9 !important;
+            transform: scale(1.02);
+            box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3);
+        }
+        .image-placeholder.minimized.drag-over {
+            height: 60px;
+            background: #e8f5e9 !important;
+            border-color: #4CAF50 !important;
+        }
+        /* Drag hint overlay */
+        .drag-hint-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(76, 175, 80, 0.9);
+            color: white;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.1em;
+            border-radius: 10px;
+            z-index: 5;
+        }
+        /* Image controls */
+        .image-controls {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            display: flex;
+            gap: 5px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 10;
+        }
+        .image-placeholder:hover .image-controls,
+        .image-placeholder.minimized .image-controls {
+            opacity: 1;
+        }
+        .image-control-btn {
+            background: rgba(255,255,255,0.8);
+            border: none;
+            padding: 5px 8px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1em;
+        }
+        .image-control-btn:hover {
+            background: white;
+        }
+        .upload-methods {
+            margin-top: 10px;
+        }
+        .upload-method-btn {
+            background: #4a90e2;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 0 5px;
+        }
+        .upload-method-btn:hover {
+            background: #357abd;
+        }
+        .paste-indicator {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            background: #ffeb3b;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 0.8em;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .image-placeholder.paste-ready .paste-indicator {
+            opacity: 1;
+        }
+        .paste-ready {
+            border-color: #ffeb3b !important;
+        }
+        /* Manager Panel */
+        #imageManager {
+            position: fixed;
+            top: 0;
+            right: -400px;
+            width: 400px;
+            height: 100vh;
+            background: white;
+            box-shadow: -2px 0 10px rgba(0,0,0,0.1);
+            transition: right 0.3s;
+            z-index: 1000;
+            padding: 20px;
+            box-sizing: border-box;
+            overflow-y: auto;
+        }
+        #imageManager.open {
+            right: 0;
+        }
+        #managerToggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #4a90e2;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 1001;
+            font-size: 1.2em;
+        }
+        .manager-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 1.5em;
+            cursor: pointer;
+            color: #999;
+        }
+        .progress-bar {
+            background: #f0f0f0;
+            height: 20px;
+            border-radius: 10px;
+            margin: 10px 0;
+            overflow: hidden;
+        }
+        #progressFill {
+            height: 100%;
+            background: linear-gradient(90deg, #4caf50, #8bc34a);
+            width: 0%;
+            transition: width 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 0.8em;
+            font-weight: bold;
+        }
+        .bulk-actions {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .bulk-btn {
+            flex: 1;
+            background: #4a90e2;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .bulk-btn:hover {
+            background: #357abd;
+        }
+        .slide-list {
+            max-height: 60vh;
+            overflow-y: auto;
+            border: 1px solid #eee;
+            border-radius: 5px;
+            padding: 10px;
+        }
+        .slide-item {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .slide-item:hover {
+            background: #f5f5f5;
+        }
+        .slide-item.has-image {
+            background: #e8f5e9;
+        }
+        .slide-item.no-image {
+            background: #fff3e0;
+        }
+        .slide-status {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+        .slide-status.has-image {
+            background: #4caf50;
+        }
+        .slide-status.no-image {
+            background: #ff9800;
+        }
+        .save-notification {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #4caf50;
+            color: white;
+            padding: 15px 30px;
+            border-radius: 5px;
+            z-index: 1002;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .save-notification.show {
+            opacity: 1;
+        }
+        .drop-feedback {
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #4caf50;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            z-index: 6;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .drop-feedback.show {
+            opacity: 1;
+        }
+        /* Quiz Styles for Visual Learners */
+        .quiz-container {
+            max-width: 800px;
+            margin: 20px auto;
+        }
+        .quiz-question {
+            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+            border: 2px solid #2196f3;
+            padding: 20px;
+            border-radius: 15px;
+            margin: 15px auto;
+            max-width: 700px;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+        .quiz-answer {
+            display: none;
+            background: #fff9c4;
+            border: 2px solid #ffc107;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 10px auto;
+            max-width: 650px;
+            text-align: left;
+            font-weight: normal;
+        }
+        .worksheet-question {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border: 2px solid #6c757d;
+            padding: 20px;
+            border-radius: 15px;
+            margin: 15px auto;
+            max-width: 700px;
+            font-weight: bold;
+            font-size: 1.1em;
+            cursor: pointer;
+        }
+        .worksheet-answer {
+            display: none;
+            background: #fff9c4;
+            border: 2px solid #ffc107;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 10px auto;
+            max-width: 650px;
+            text-align: left;
+        }
+        .final-answer {
+            color: red;
+            font-weight: bold;
+            font-size: 1.2em;
+            border-top: 2px solid red;
+            padding-top: 10px;
+            margin-top: 10px;
+        }
+        .step-solution {
+            background: #e8f4f8;
+            border-left: 4px solid #2196f3;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 5px;
+            text-align: left;
+            font-family: 'Courier New', monospace;
+        }
+    </style>
+</head>
+<body>
+    <div class="reveal">
+        <div class="slides">
+            <section>
+                <div class="slide-content-wrapper">
+                    <h1>Scientific Models and Universe Building Blocks</h1>
+                    <div class="topic-header">Year 10, Term 4, Marsden High School</div>
+                    <div class="image-placeholder" id="title-image">
+                        <div class="placeholder-content">
+                            <div class="placeholder-icon">🌌</div>
+                            <div class="placeholder-text">Image: Cosmic Universe Overview</div>
+                            <div class="placeholder-hint">Click • Drag & Drop • Paste (Ctrl+V)</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <div class="slide-content-wrapper">
+                    <div class="do-now-box">
+                        <h3>Do Now (Click to Reveal Answers)</h3>
+                        <div class="quiz-question click-reveal" onclick="this.classList.toggle('revealed'); this.querySelector('.quiz-answer').style.display = this.classList.contains('revealed') ? 'block' : 'none';">
+                            <p>1. Model: A) Full copy B) Simple rep</p>
+                            <div class="quiz-answer">
+                                <p class="final-answer">B) Simple rep</p>
+                            </div>
+                        </div>
+                        <div class="quiz-question click-reveal" onclick="this.classList.toggle('revealed'); this.querySelector('.quiz-answer').style.display = this.classList.contains('revealed') ? 'block' : 'none';">
+                            <p>2. Theory: A) Guess B) Evidence-based</p>
+                            <div class="quiz-answer">
+                                <p class="final-answer">B) Evidence-based</p>
+                            </div>
+                        </div>
+                        <div class="quiz-question click-reveal" onclick="this.classList.toggle('revealed'); this.querySelector('.quiz-answer').style.display = this.classList.contains('revealed') ? 'block' : 'none';">
+                            <p>3. Geocentric: A) Sun center B) Earth center</p>
+                            <div class="quiz-answer">
+                                <p class="final-answer">B) Earth center</p>
+                            </div>
+                        </div>
+                        <div class="quiz-question click-reveal" onclick="this.classList.toggle('revealed'); this.querySelector('.quiz-answer').style.display = this.classList.contains('revealed') ? 'block' : 'none';">
+                            <p>4. Our galaxy: A) Andromeda B) Milky Way</p>
+                            <div class="quiz-answer">
+                                <p class="final-answer">B) Milky Way</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="definition-box">
+                        <h3>Goals</h3>
+                        <p>Grasp models/theories; trace idea shifts; ID cosmic features.</p>
+                        <p>Success: Define + example; explain 1 change; name 1 feature.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <div class="slide-content-wrapper">
+                    <h2>Step 1: Models - Simplified Reality</h2>
+                    <div class="click-reveal" onclick="this.classList.toggle('revealed'); this.querySelector('.hidden-content').style.display = this.classList.contains('revealed') ? 'block' : 'none';">
+                        <p>Model: Basic rep of complex system.</p>
+                        <div class="hidden-content" style="display:none;">
+                            <p>Scientific use: Shows patterns clearly.</p>
+                            <p class="reveal-text">Fact: Models predicted eclipses 2,000 years ago.</p>
+                        </div>
+                    </div>
+                    <div class="image-placeholder" id="model-image">
+                        <div class="placeholder-content">
+                            <div class="placeholder-icon">🗺️</div>
+                            <div class="placeholder-text">Image: Globe Model Example</div>
+                            <div class="placeholder-hint">Click • Drag & Drop • Paste (Ctrl+V)</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <div class="slide-content-wrapper">
+                    <h2>Step 1: Models - Predict & Test</h2>
+                    <div class="click-reveal" onclick="this.classList.toggle('revealed'); this.querySelector('.hidden-content').style.display = this.classList.contains('revealed') ? 'block' : 'none';">
+                        <p>Example: Solar system model predicts eclipses.</p>
+                        <div class="hidden-content" style="display:none;">
+                            <p>Scientific fact: Tests ideas without real risk.</p>
+                            <p class="reveal-text">Fact: Ptolemy's model lasted 1,400 years before update.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <div class="slide-content-wrapper">
+                    <h2>Step 1: Theories - Evidence Engines</h2>
+                    <div class="click-reveal" onclick="this.classList.toggle('revealed'); this.querySelector('.hidden-content').style.display = this.classList.contains('revealed') ? 'block' : 'none';">
+                        <p>Theory: Tested explanation from facts.</p>
+                        <div class="hidden-content" style="display:none;">
+                            <p>Scientific core: Repeated proofs build it.</p>
+                            <p class="reveal-text">Fact: Gravity theory explains black holes bending light.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <div class="slide-content-wrapper">
+                    <h2>Step 1: Theories - Explain Why</h2>
+                    <div class="click-reveal" onclick="this.classList.toggle('revealed'); this.querySelector('.hidden-content').style.display = this.classList.contains('revealed') ? 'block' : 'none';">
+                        <p>E.g., Gravity: Pulls masses together.</p>
+                        <div class="hidden-content" style="display:none;">
+                            <p>Scientific edge: Links "how" to "why."</p>
+                            <p class="reveal-text">Fact: It powers GPS—off by 10 km/day without!</p>
+                        </div>
+                    </div>
+                    <div class="image-placeholder" id="theory-image">
+                        <div class="placeholder-content">
+                            <div class="placeholder-icon">🍎</div>
+                            <div class="placeholder-text">Image: Gravity Apple Fall</div>
+                            <div class="placeholder-hint">Click • Drag & Drop • Paste (Ctrl+V)</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <div class="slide-content-wrapper">
+                    <h2>Step 2: Ideas Evolve - Evidence Drives Change</h2>
+                    <div class="click-reveal" onclick="this.classList.toggle('revealed'); this.querySelector('.hidden-content').style.display = this.classList.contains('revealed') ? 'block' : 'none';">
+                        <p>Scientific process: New data refines models.</p>
+                        <div class="hidden-content" style="display:none;">
+                            <p>Fact: Shifts happen—old fits data; new fits better.</p>
+                            <p class="reveal-text">Fact: Heliocentrism challenged Church views in 1600s.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <div class="slide-content-wrapper">
+                    <h2>Step 2: Geocentric Model - Earth Center</h2>
+                    <div class="click-reveal" onclick="this.classList.toggle('revealed'); this.querySelector('.hidden-content').style.display = this.classList.contains('revealed') ? 'block' : 'none';">
+                        <p>Earth at solar system center.</p>
+                        <div class="hidden-content" style="display:none;">
+                            <p>Scientific limit: Explained daily sky but not retrogrades.</p>
+                            <p class="reveal-text">Fact: Dates to 400 BC Eudoxus—first math model.</p>
+                        </div>
+                    </div>
+                    <div class="image-placeholder" id="geocentric-image">
+                        <div class="placeholder-content">
+                            <div class="placeholder-icon">🌍</div>
+                            <div class="placeholder-text">Image: Geocentric Diagram</div>
+                            <div class="placeholder-hint">Click • Drag & Drop • Paste (Ctrl+V)</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <div class="slide-content-wrapper">
+                    <h2>Step 2: Heliocentric Model - Sun Center</h2>
+                    <div class="click-reveal" onclick="this.classList.toggle('revealed'); this.querySelector('.hidden-content').style.display = this.classList.contains('revealed') ? 'block' : 'none';">
+                        <p>Sun at center; Earth orbits yearly.</p>
+                        <div class="hidden-content" style="display:none;">
+                            <p>Scientific win: Simpler, matches observations.</p>
+                            <p class="reveal-text">Fact: Earth speed: 107,000 km/h around Sun!</p>
+                        </div>
+                    </div>
+                    <div class="image-placeholder" id="heliocentric-image">
+                        <div class="placeholder-content">
+                            <div class="placeholder-icon">☀️</div>
+                            <div class="placeholder-text">Image: Heliocentric Diagram</div>
+                            <div class="placeholder-hint">Click • Drag & Drop • Paste (Ctrl+V)</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <div class="slide-content-wrapper">
+                    <h2>Step 2: Evidence Flip - Galileo's Proof</h2>
+                    <div class="click-reveal" onclick="this.classList.toggle('revealed'); this.querySelector('.hidden-content').style.display = this.classList.contains('revealed') ? 'block' : 'none';">
+                        <p>Copernicus (1543): Proposed Sun center.</p>
+                        <div class="hidden-content" style="display:none;">
+                            <p>Galileo (1610): Moons orbit Jupiter—not Earth.</p>
+                            <p>Scientific shift: Proved non-Earth centers.</p>
+                            <p class="reveal-text">Fact: Galileo faced heresy trial but won long-term.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <div class="slide-content-wrapper">
+                    <h2>Step 2: Timeline - Key Shifts</h2>
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-icon">🌍</div>
+                            <p>Ancient: Geocentric (Ptolemy, 150 AD)</p>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-icon">📖</div>
+                            <p>1543: Heliocentric idea</p>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-icon">🔭</div>
+                            <p>1610: Telescope evidence</p>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-icon">🌌</div>
+                            <p>1920s: Other galaxies found</p>
+                        </div>
+                    </div>
+                    <p class="reveal-text">Fact: Hubble spotted 100B galaxies in Milky Way alone.</p>
+                </div>
+            </section>
+
+            <section>
+                <div class="slide-content-wrapper">
+                    <h2>Step 3: Feature 1 - Galaxies</h2>
+                    <div class="click-reveal" onclick="this.classList.toggle('revealed'); this.querySelector('.hidden-content').style.display = this.classList.contains('revealed') ? 'block' : 'none';">
+                        <p>Galaxy: Star/gas/dust cluster, gravity-bound.</p>
+                        <div class="hidden-content" style="display:none;">
+                            <p>Types: Spiral (arms), elliptical (round), irregular.</p>
+                            <p class="reveal-text">Fact: Largest hold trillions of stars—more than Earth's sand grains.</p>
+                        </div>
+                    </div>
+                    <div class="image-placeholder" id="galaxy-image">
+                        <div class="placeholder-content">
+                            <div class="placeholder-icon">🌀</div>
+                            <div class="placeholder-text">Image: Milky Way Spiral</div>
+                            <div class="placeholder-hint">Click • Drag & Drop • Paste (Ctrl+V)</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <div class="slide-content-wrapper">
+                    <h2>Step 3: Galaxy Example - Milky Way</h2>
+                    <div class="click-reveal" onclick="this.classList.toggle('revealed'); this.querySelector('.hidden-content').style.display = this.classList.contains('revealed') ? 'block' : 'none';">
+                        <p>Our home: 100-400B stars, 100,000 LY wide.</p>
+                        <div class="hidden-content" style="display:none;">
+                            <p>Neighbor: Andromeda, 2.5M LY away.</p>
+                            <p class="reveal-text">Fact: We're in a minor arm—Milky Way's "suburb."</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <div class="slide-content-wrapper">
+                    <h2>Step 3: Feature 2 - Stars</h2>
+                    <div class="click-reveal" onclick="this.classList.toggle('revealed'); this.querySelector('.hidden-content').style.display = this.classList.contains('revealed') ? 'block' : 'none';">
+                        <p>Star: Hot plasma ball; fuses H to He for energy.</p>
+                        <div class="hidden-content" style="display:none;">
+                            <p>Life: Billions of years; Sun mid-age.</p>
+                            <p class="reveal-text">Fact: Stars "sing"—NASA sonified their vibes.</p>
+                        </div>
+                    </div>
+                    <div class="image-placeholder" id="star-image">
+                        <div class="placeholder-content">
+                            <div class="placeholder-icon">⭐</div>
+                            <div class="placeholder-text">Image: Star Lifecycle</div>
+                            <div class="placeholder-hint">Click • Drag & Drop • Paste (Ctrl+V)</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <div class="slide-content-wrapper">
+                    <h2>Step 3: Features 3-4 - Systems & Nebulae</h2>
+                    <div class="click-reveal" onclick="this.classList.toggle('revealed'); this.querySelector('.hidden-content').style.display = this.classList.contains('revealed') ? 'block' : 'none';">
+                        <p>Solar System: Star + orbiting bodies (e.g., Sun + 8 planets).</p>
+                        <div class="hidden-content" style="display:none;">
+                            <p>Nebula: Gas/dust cloud; births stars via gravity.</p>
+                            <p class="reveal-text">Fact: Our system from nebula 4.6B years ago.</p>
+                        </div>
+                    </div>
+                    <div class="image-placeholder" id="system-nebula-image">
+                        <div class="placeholder-content">
+                            <div class="placeholder-icon">🪐</div>
+                            <div class="placeholder-text">Image: Solar System & Nebula</div>
+                            <div class="placeholder-hint">Click • Drag & Drop • Paste (Ctrl+V)</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Quick Quiz Slide 1 -->
+            <section>
+                <div class="slide-content-wrapper">
+                    <h2>Quick Quiz: Models & Theories</h2>
+                    <div class="quiz-container">
+                        <div class="quiz-question click-reveal" onclick="this.classList.toggle('revealed'); this.querySelector('.quiz-answer').style.display = this.classList.contains('revealed') ? 'block' : 'none';">
+                            <p>Q1: What is a scientific model?</p>
+                            <div class="quiz-answer">
+                                <p>A: Simplified representation of a complex system or idea.</p>
+                            </div>
+                        </div>
+                        <div class="quiz-question click-reveal" onclick="
+```.                         ```html
+                            <p>Q2: Why do scientific theories change?</p>
+                            <div class="quiz-answer">
+                                <p>A: New evidence refines them for better accuracy.</p>
+                            </div>
+                        </div>
+                        <div class="quiz-question click-reveal" onclick="this.classList.toggle('revealed'); this.querySelector('.quiz-answer').style.display = this.classList.contains('revealed') ? 'block' : 'none';">
+                            <p>Q3: Example of a theory?</p>
+                            <div class="quiz-answer">
+                                <p>A: Gravity - explains why objects fall and planets orbit.</p>
+                            </div>
+                        </div>
+                        <div class="quiz-question click-reveal" onclick="this.classList.toggle('revealed'); this.querySelector('.quiz-answer').style.display = this.classList.contains('revealed') ? 'block' : 'none';">
+                            <p>Q4: Do models predict the future?</p>
+                            <div class="quiz-answer">
+                                <p>A: Yes, like solar eclipses via orbit models.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Quick Quiz Slide 2 -->
+            <section>
+                <div class="slide-content-wrapper">
+                    <h2>Quick Quiz: Universe Features & Changes</h2>
+                    <div class="quiz-container">
+                        <div class="quiz-question click-reveal" onclick="this.classList.toggle('revealed'); this.querySelector('.quiz-answer').style.display = this.classList.contains('revealed') ? 'block' : 'none';">
+                            <p>Q1: Who proposed the heliocentric model?</p>
+                            <div class="quiz-answer">
+                                <p>A: Copernicus in 1543.</p>
+                            </div>
+                        </div>
+                        <div class="quiz-question click-reveal" onclick="this.classList.toggle('revealed'); this.querySelector('.quiz-answer').style.display = this.classList.contains('revealed') ? 'block' : 'none';">
+                            <p>Q2: What proved the heliocentric model?</p>
+                            <div class="quiz-answer">
+                                <p>A: Galileo's telescope showing Jupiter's moons.</p>
+                            </div>
+                        </div>
+                        <div class="quiz-question click-reveal" onclick="this.classList.toggle('revealed'); this.querySelector('.quiz-answer').style.display = this.classList.contains('revealed') ? 'block' : 'none';">
+                            <p>Q3: Our galaxy's name?</p>
+                            <div class="quiz-answer">
+                                <p>A: Milky Way, with 100-400 billion stars.</p>
+                            </div>
+                        </div>
+                        <div class="quiz-question click-reveal" onclick="this.classList.toggle('revealed'); this.querySelector('.quiz-answer').style.display = this.classList.contains('revealed') ? 'block' : 'none';">
+                            <p>Q4: Role of nebulae?</p>
+                            <div class="quiz-answer">
+                                <p>A: Star nurseries - gas clouds where stars form.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Worksheet Slide 1: Models & Theories Basics -->
+            <section>
+                <div class="slide-content-wrapper">
+                    <h2>Worksheet: Models & Theories (1/4)</h2>
+                    <div class="quiz-container">
+                        <div class="worksheet-question click-reveal" onclick="this.classList.toggle('revealed'); this.querySelector('.worksheet-answer').style.display = this.classList.contains('revealed') ? 'block' : 'none';">
+                            <p>Q1 (Short): Define a scientific model in 1 sentence.</p>
+                            <div class="worksheet-answer">
+                                <p>A simplified representation of a complex system or idea to explain and predict phenomena.</p>
+                                <p class="final-answer">Simplified rep of complex system.</p>
+                            </div>
+                        </div>
+                        <div class="worksheet-question click-reveal" onclick="this.classList.toggle('revealed'); this.querySelector('.worksheet-answer').style.display = this.classList.contains('revealed') ? 'block' : 'none';">
+                            <p>Q2 (Short): Give an everyday example of a model.</p>
+                            <div class="worksheet-answer">
+                                <p>A weather forecast map or a road map.</p>
+                                <p class="final-answer">Weather map.</p>
+                            </div>
+                        </div>
+                        <div class="worksheet-question click-reveal" onclick="this.classList.toggle('revealed'); this.querySelector('.worksheet-answer').style.display = this.classList.contains('revealed') ? 'block' : 'none';">
+                            <p>Q3 (Calc): If a model predicts an eclipse on day 365 of a year, how many days until next year's eclipse (assume 365 days/year)? Step-by-step.</p>
+                            <div class="worksheet-answer">
+                                <div class="step-solution">Step 1: Current day = 365. <br>Step 2: Next year starts day 366. <br>Step 3: Days until next eclipse = 365 (full year cycle).</div>
+                                <p class="final-answer">365 days.</p>
+                            </div>
+                        </div>
+                        <div class="worksheet-question click-reveal" onclick="this.classList.toggle('revealed'); this.querySelector('.worksheet-answer').style.display = this.classList.contains('revealed') ? 'block' : 'none';">
+                            <p>Q4 (Short): Why are theories based on evidence?</p>
+                            <div class="worksheet-answer">
+                                <p>To ensure reliability and testability through repeated observations.</p>
+                                <p class="final-answer">For reliability & testing.</p>
+                            </div>
+                        </div>
+                        <div class="worksheet-question click-reveal" onclick="this.classList.toggle('revealed'); this.querySelector('.worksheet-answer').style.display = this.classList.contains('revealed') ? 'block' : 'none';">
+                            <p>Q5 (Short): Difference between model and theory?</p>
+                            <div class="worksheet-answer">
+                                <p>Model: "How" (representation); Theory: "Why" (explanation).</p>
+                                <p class="final-answer">Model = how; Theory = why.</p>
+                            </div>
+                        </div>
+                        <div class="worksheet-question click-reveal" onclick="this.classList.toggle('revealed'); this.querySelector('.worksheet-answer').style.display = this.classList.contains('revealed') ? 'block' : 'none';">
+                            <p>Q6 (Calc): If evidence updates a model 3 times in 100 years, average years per update?</p>
+                            <div class="worksheet-answer">
+                                <div class="step-solution">Step 1: Total years = 100. <br>Step 2: Updates = 3. <br>Step 3: Average = 100 / 3 ≈ 33.33.</div>
+                                <p class="final-answer">≈33 years.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Worksheet Slide 2: Historical Changes -->
+            <section>
+                <div class="slide-content-wrapper">
+                    <h2>Worksheet: Historical Changes (2/4)</h2>
+                    <div class="quiz-container">
+                        <div class="worksheet-question click-reveal" onclick="this.classList.toggle('revealed'); this.querySelector('.worksheet-answer').style.display = this.classList.contains('revealed') ? 'block' : 'none';">
+                            <p>Q1 (Short): What is the geocentric model?</p>
+                            <div class="worksheet-answer">
+                                <p>Earth at the center of the universe.</p>
+                                <p class="final-answer">Earth-centered universe.</p>
+                            </div>
+                        </div>
+                        <div class="worksheet-question click-reveal" onclick="this.classList.toggle('revealed'); this.querySelector('.worksheet-answer').style.display = this.classList.contains('revealed') ? 'block' : 'none';">
+                            <p>Q2 (Short): Who proposed heliocentric model?</p>
+                            <div class="worksheet-answer">
+                                <p>Copernicus in 1543.</p>
+                                <p class="final-answer">Copernicus (1543).</p>
+                            </div>
+                        </div>
+                        <div class="worksheet-question click-reveal" onclick="this.classList.toggle('revealed'); this.querySelector('.worksheet-answer').style.display = this.classList.contains('revealed') ? 'block' : 'none';">
+                            <p>Q3 (Calc): From Ptolemy (150 AD) to Galileo (1610 AD), years between models?</p>
+                            <div class="worksheet-answer">
+                                <div class="step-solution">Step 1: End year = 1610. <br>Step 2: Start year = 150. <br>Step 3: Difference = 1610 - 150 = 1460.</div>
+                                <p class="final-answer">1460 years.</p>
+                            </div>
+                        </div>
+                        <div class="worksheet-question click-reveal" onclick="this.classList.toggle('revealed'); this.querySelector('.worksheet-answer').style.display = this.classList.contains('revealed') ? 'block' : 'none';">
+                            <p>Q4 (Short): Evidence for heliocentric?</p>
+                            <div class="worksheet-answer">
+                                <p>Galileo's observation of moons orbiting Jupiter.</p>
+                                <p class="final-answer">Jupiter's moons.</p>
+                            </div>
+                        </div>
+                        <div class="worksheet-question click-reveal" onclick="this.classList.toggle('revealed'); this.querySelector('.worksheet-answer').style.display = this.classList.contains('revealed') ? 'block' : 'none';">
+                            <p>Q5 (Short): Why did geocentric fail?</p>
+                            <div class="worksheet-answer">
+                                <p>Couldn't explain retrograde motion perfectly.</p>
+                                <p class="final-answer">Retrograde motion.</p>
+                            </div>
+                        </div>
+                        <div class="worksheet-question click-reveal" onclick="this.classList.toggle('revealed'); this.querySelector('.worksheet-answer').style.display = this.classList.contains('revealed') ? 'block' : 'none';">
+                            <p>Q6 (Calc): If timeline has 4 events over 2000 years, average interval?</p>
+                            <div class="worksheet-answer">
+                                <div class="step-solution">Step 1: Events = 4 (3 intervals). <br>Step 2: Years = 2000. <br>Step 3: Average = 2000 / 3 ≈ 666.67.</div>
+                                <p class="final-answer">≈667 years.</p>
+                            </div>
+                        </div>
+                        <div class="worksheet-question click-reveal" onclick="this.classList.toggle('revealed'); this.querySelector('.worksheet-answer').style.display = this.classList.contains('revealed') ? 'block' : 'none';">
+                            <p>Q7 (Short): Modern discovery in timeline?</p>
+                            <div class="worksheet-answer">
+                                <p>Hubble's galaxies in 1920s.</p>
+                                <p class="final-answer">Galaxies (1920s).</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Worksheet Slide 3: Universe Features -->
+            <section>
+                <div class="slide-content-wrapper">
+                    <h2>Worksheet: Universe Features (3/4)</h2>
+                    <div class="quiz-container">
+                        <div class="worksheet-question click-reveal" onclick="this.classList.toggle('revealed'); this.querySelector('.worksheet-answer').style.display = this.classList.contains('revealed') ? 'block' : 'none';">
+                            <p>Q1 (Short): Define galaxy.</p>
+                            <div class="worksheet-answer">
+                                <p>Massive collection of stars, gas, dust bound by gravity.</p>
+                                <p class="final-answer">Star/gas/dust cluster.</p>
+                            </div>
+                        </div>
+                        <div class="worksheet-question click-reveal" onclick="this.classList.toggle('revealed'); this.querySelector('.worksheet-answer').style.display = this.classList.contains('revealed') ? 'block' : 'none';">
+                            <p>Q2 (Short): Example of spiral galaxy?</p>
+                            <div class="worksheet-answer">
+                                <p>Milky Way.</p>
+                                <p class="final-answer">Milky Way.</p>
+                            </div>
+                        </div>
+                        <div class="worksheet-question click-reveal" onclick="this.classList.toggle('revealed'); this.querySelector('.worksheet-answer').style.display = this.classList.contains('revealed') ? 'block' : 'none';">
+                            <p>Q3 (Short): What is a star made of?</p>
+                            <div class="worksheet-answer">
+                                <p>Hot plasma fusing hydrogen to helium.</p>
+                                <p class="final-answer">Hot plasma (H fusion).</p>
+                            </div>
+                        </div>
+                        <div class="worksheet-question click-reveal" onclick="this.classList.toggle('revealed'); this.querySelector('.worksheet-answer').style.display = this.classList.contains('revealed') ? 'block' : 'none';">
+                            <p>Q4 (Short): Role of nebula?</p>
+                            <div class="worksheet-answer">
+                                <p>Star nursery - gas/dust where stars form.</p>
+                                <p class="final-answer">Star birth cloud.</p>
+                            </div>
+                        </div>
+                        <div class="worksheet-question click-reveal" onclick="this.classList.toggle('revealed'); this.querySelector('.worksheet-answer').style.display = this.classList.contains('revealed') ? 'block' : 'none';">
+                            <p>Q5 (Short): Components of solar system?</p>
+                            <div class="worksheet-answer">
+                                <p>Star + orbiting planets, moons, asteroids.</p>
+                                <p class="final-answer">Star + planets/objects.</p>
+                            </div>
+                        </div>
+                        <div class="worksheet-question click-reveal" onclick="this.classList.toggle('revealed'); this.querySelector('.worksheet-answer').style.display = this.classList.contains('revealed') ? 'block' : 'none';">
+                            <p>Q6 (Calc): Milky Way has 200B stars; our solar system 1 star. Fraction of galaxy?</p>
+                            <div class="worksheet-answer">
+                                <div class="step-solution">Step 1: Stars in system = 1. <br>Step 2: Total stars = 200,000,000,000. <br>Step 3: Fraction = 1 / 200B = 5 × 10^-12.</div>
+                                <p class="final-answer">5 × 10^-12 (tiny fraction).</p>
+                            </div>
+                        </div>
+                        <div class="worksheet-question click-reveal" onclick="this.classList.toggle('revealed'); this.querySelector('.worksheet-answer').style.display = this.classList.contains('revealed') ? 'block' : 'none';">
+                            <p>Q7 (Short): Example nebula?</p>
+                            <div class="worksheet-answer">
+                                <p>Orion Nebula.</p>
+                                <p class="final-answer">Orion.</p>
+                            </div>
+                        </div>
+                        <div class="worksheet-question click-reveal" onclick="this.classList.toggle('revealed'); this.querySelector('.worksheet-answer').style.display = this.classList.contains('revealed') ? 'block' : 'none';">
+                            <p>Q8 (Calc): Sun lifespan 10B years, half done. Years left?</p>
+                            <div class="worksheet-answer">
+                                <div class="step-solution">Step 1: Total = 10 billion. <br>Step 2: Half = 5 billion done. <br>Step 3: Left = 10B - 5B = 5B.</div>
+                                <p class="final-answer">5 billion years.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Worksheet Slide 4: Scales & Comparisons -->
+            <section>
+                <div class="slide-content-wrapper">
+                    <h2>Worksheet: Scales & Comparisons (4/4)</h2>
+                    <div class="quiz-container">
+                        <div class="worksheet-question click-reveal" onclick="this.classList.toggle('revealed'); this.querySelector('.worksheet-answer').style.display = this.classList.contains('revealed') ? 'block' : 'none';">
+                            <p>Q1 (Short): Define AU.</p>
+                            <div class="worksheet-answer">
+                                <p>Earth-Sun distance (~150 million km).</p>
+                                <p class="final-answer">Earth-Sun distance.</p>
+                            </div>
+                        </div>
+                        <div class="worksheet-question click-reveal" onclick="this.classList.toggle('revealed'); this.querySelector('.worksheet-answer').style.display = this.classList.contains('revealed') ? 'block' : 'none';">
+                            <p>Q2 (Short): Best unit for stars?</p>
+                            <div class="worksheet-answer">
+                                <p>Light year.</p>
+                                <p class="final-answer">Light year.</p>
+                            </div>
+                        </div>
+                        <div class="worksheet-question click-reveal" onclick="this.classList.toggle('revealed'); this.querySelector('.worksheet-answer').style.display = this.classList.contains('revealed') ? 'block' : 'none';">
+                            <p>Q3 (Calc): 1 AU = 150M km. Jupiter = 5 AU. Distance to Jupiter?</p>
+                            <div class="worksheet-answer">
+                                <div class="step-solution">Step 1: 1 AU = 150,000,000 km. <br>Step 2: Jupiter = 5 AU. <br>Step 3: Total = 5 × 150M = 750M km.</div>
+                                <p class="final-answer">750 million km.</p>
+                            </div>
+                        </div>
+                        <div class="worksheet-question click-reveal" onclick="this.classList.toggle('revealed'); this.querySelector('.worksheet-answer').style.display = this.classList.contains('revealed') ? 'block' : 'none';">
+                            <p>Q4 (Short): Milky Way diameter?</p>
+                            <div class="worksheet-answer">
+                                <p>~100,000 light years.</p>
+                                <p class="final-answer">100,000 LY.</p>
+                            </div>
+                        </div>
+                        <div class="worksheet-question click-reveal" onclick="this.classList.toggle('revealed'); this.querySelector('.worksheet-answer').style.display = this.classList.contains('revealed') ? 'block' : 'none';">
+                            <p>Q5 (Short): Unit for galaxies?</p>
+                            <div class="worksheet-answer">
+                                <p>Parsec or light year.</p>
+                                <p class="final-answer">Parsec/LY.</p>
+                            </div>
+                        </div>
+                        <div class="worksheet-question click-reveal" onclick="this.classList.toggle('revealed'); this.querySelector('.worksheet-answer').style.display = this.classList.contains('revealed') ? 'block' : 'none';">
+                            <p>Q6 (Calc): Light speed 300,000 km/s, seconds/year ~31.5M. 1 LY in km?</p>
+                            <div class="worksheet-answer">
+                                <div class="step-solution">Step 1: Speed = 300,000 km/s. <br>Step 2: Sec/year = 31,557,600 ≈ 3.16 × 10^7. <br>Step 3: LY = 300k × 3.16e7 ≈ 9.46 × 10^12 km.</div>
+                                <p class="final-answer">9.46 trillion km.</p>
+                            </div>
+                        </div>
+                        <div class="worksheet-question click-reveal" onclick="this.classList.toggle('revealed'); this.querySelector('.worksheet-answer').style.display = this.classList.contains('revealed') ? 'block' : 'none';">
+                            <p>Q7 (Short): Relative size: Planet vs. Galaxy?</p>
+                            <div class="worksheet-answer">
+                                <p>Planet tiny (km); Galaxy vast (100,000 LY).</p>
+                                <p class="final-answer">Planet << Galaxy.</p>
+                            </div>
+                        </div>
+                        <div class="worksheet-question click-reveal" onclick="this.classList.toggle('revealed'); this.querySelector('.worksheet-answer').style.display = this.classList.contains('revealed') ? 'block' : 'none';">
+                            <p>Q8 (Calc): Proxima 4 LY away. In km (use 9.46T km/LY)?</p>
+                            <div class="worksheet-answer">
+                                <div class="step-solution">Step 1: 1 LY = 9.46 × 10^12 km. <br>Step 2: 4 LY = 4 × 9.46T = 37.84T km.</div>
+                                <p class="final-answer">37.84 trillion km.</p>
+                            </div>
+                        </div>
+                        <div class="worksheet-question click-reveal" onclick="this.classList.toggle('revealed'); this.querySelector('.worksheet-answer').style.display = this.classList.contains('revealed') ? 'block' : 'none';">
+                            <p>Q9 (Short): Why use parsec?</p>
+                            <div class="worksheet-answer">
+                                <p>For very large distances, based on parallax.</p>
+                                <p class="final-answer">Large distances (parallax).</p>
+                            </div>
+                        </div>
+                        <div class="worksheet-question click-reveal" onclick="this.classList.toggle('revealed'); this.querySelector('.worksheet-answer').style.display = this.classList.contains('revealed') ? 'block' : 'none';">
+                            <p>Q10 (Calc): 1 pc = 3.26 LY. Andromeda 2.5M LY. In pc?</p>
+                            <div class="worksheet-answer">
+                                <div class="step-solution">Step 1: 1 pc = 3.26 LY. <br>Step 2: pc = 2,500,000 / 3.26 ≈ 766,871 pc.</div>
+                                <p class="final-answer">≈767,000 pc.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Worksheet Slide 5: Additional Calculations -->
+            <section>
+                <div class="slide-content-wrapper">
+                    <h2>Worksheet: Extra Calculations (5/5)</h2>
+                    <div class="quiz-container">
+                        <div class="worksheet-question click-reveal" onclick="this.classList.toggle('revealed'); this.querySelector('.worksheet-answer').style.display = this.classList.contains('revealed') ? 'block' : 'none';">
+                            <p>Q1 (Calc): Earth orbits Sun in 365 days. Days per orbit if 366 days?</p>
+                            <div class="worksheet-answer">
+                                <div class="step-solution">Step 1: New year = 366 days. <br>Step 2: Orbit = 1 year. <br>Step 3: Days per orbit = 366.</div>
+                                <p class="final-answer">366 days.</p>
+                            </div>
+                        </div>
+                        <div class="worksheet-question click-reveal" onclick="this.classList.toggle('revealed'); this.querySelector('.worksheet-answer').style.display = this.classList.contains('revealed') ? 'block' : 'none';">
+                            <p>Q2 (Calc): Milky Way 100,000 LY wide, Sun 26,000 LY from center. Fraction traveled?</p>
+                            <div class="worksheet-answer">
+                                <div class="step-solution">Step 1: Total = 100,000 LY. <br>Step 2: Distance = 26,000 LY. <br>Step 3: Fraction = 26,000 / 100,000 = 0.26.</div>
+                                <p class="final-answer">0.26 (26%).</p>
+                            </div>
+                        </div>
+                        <div class="worksheet-question click-reveal" onclick="this.classList.toggle('revealed'); this.querySelector('.worksheet-answer').style.display = this.classList.contains('revealed') ? 'block' : 'none';">
+                            <p>Q3 (Calc): Light year 9.46T km, 2 LY distance in km?</p>
+                            <div class="worksheet-answer">
+                                <div class="step-solution">Step 1: 1 LY = 9.46 × 10^12 km. <br>Step 2: 2 LY = 2 × 9.46T = 18.92T km.</div>
+                                <p class="final-answer">18.92 trillion km.</p>
+                            </div>
+                        </div>
+                        <div class="worksheet-question click-reveal" onclick="this.classList.toggle('revealed'); this.querySelector('.worksheet-answer').style.display = this.classList.contains('revealed') ? 'block' : 'none';">
+                            <p>Q4 (Calc): 3 AU = 450M km. 1 AU in km?</p>
+                            <div class="worksheet-answer">
+                                <div class="step-solution">Step 1: Total = 450,000,000 km. <br>Step 2: AU = 3. <br>Step 3: 1 AU = 450M / 3 = 150M km.</div>
+                                <p class="final-answer">150 million km.</p>
+                            </div>
+                        </div>
+                        <div class="worksheet-question click-reveal" onclick="this.classList.toggle('revealed'); this.querySelector('.worksheet-answer').style.display = this.classList.contains('revealed') ? 'block' : 'none';">
+                            <p>Q5 (Short): Largest galaxy type?</p>
+                            <div class="worksheet-answer">
+                                <p>Elliptical galaxies can be largest by volume.</p>
+                                <p class="final-answer">Elliptical.</p>
+                            </div>
+                        </div>
+                        <div class="worksheet-question click-reveal" onclick="this.classList.toggle('revealed'); this.querySelector('.worksheet-answer').style.display = this.classList.contains('revealed') ? 'block' : 'none';">
+                            <p>Q6 (Calc): Sun 1.4M km wide, Earth 12,742 km. Ratio?</p>
+                            <div class="worksheet-answer">
+                                <div class="step-solution">Step 1: Sun = 1,400,000 km. <br>Step 2: Earth = 12,742 km. <br>Step 3: Ratio = 1.4M / 12.7k ≈ 110.</div>
+                                <p class="final-answer">≈110:1.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <div class="slide-content-wrapper">
+                    <h2>Wrap-Up</h2>
+                    <div class="keyword-box">
+                        <h3>Key Terms</h3>
+                        <div class="keyword-item">
+                            <span class="keyword-term">Model</span>: Simplified rep.
+                        </div>
+                        <div class="keyword-item">
+                            <span class="keyword-term">Theory</span>: Evidence-based explanation.
+                        </div>
+                        <div class="keyword-item">
+                            <span class="keyword-term">Galaxy</span>: Star cluster.
+                        </div>
+                    </div>
+                    <div class="topic-complete">Key: Models/theories refine with evidence; features form cosmos.</div>
+                    <p>Exit: List 1 fact + 1 term.</p>
+                    <p class="reveal-text">Fact: You're made of star-forged elements!</p>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <!-- Image Manager -->
+    <button id="managerToggle" onclick="toggleManager()">🛠️</button>
+    <div id="imageManager">
+        <div class="manager-header">
+            <h3>Image Manager</h3>
+            <button class="close-btn" onclick="toggleManager()">×</button>
+        </div>
+        <div class="progress-bar">
+            <div id="progressFill">0/7</div>
+        </div>
+        <div class="bulk-actions">
+            <button class="bulk-btn" onclick="bulkUpload()">Bulk Upload</button>
+            <button class="bulk-btn" onclick="downloadWithImages()">Download HTML</button>
+        </div>
+        <div class="bulk-actions">
+            <button class="bulk-btn" onclick="exportImages()">Export Images</button>
+            <button class="bulk-btn" onclick="importImages()">Import Images</button>
+            <button class="bulk-btn" onclick="clearAllImages()">Clear All</button>
+        </div>
+        <div id="slideList" class="slide-list"></div>
+    </div>
+
+    <div id="saveNotification" class="save-notification">HTML Downloaded with Images!</div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reveal.min.js"></script>
+    <script>
+        Reveal.initialize({
+            hash: true,
+            transition: 'slide',
+            backgroundTransition: 'fade'
+        });
+
+        // Image Handling Functions
+        function toggleManager() {
+            const manager = document.getElementById('imageManager');
+            manager.classList.toggle('open');
+        }
+
+        function loadImage(file, callback) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const img = new Image();
+                img.onload = function() {
+                    const canvas = document.createElement('canvas');
+                    const ctx = canvas.getContext('2d');
+                    const maxSize = 800;
+                    let { width, height } = img;
+                    if (width > height) {
+                        if (width > maxSize) {
+                            height = (height * maxSize) / width;
+                            width = maxSize;
+                        }
+                    } else {
+                        if (height > maxSize) {
+                            width = (width * maxSize) / height;
+                            height = maxSize;
+                        }
+                    }
+                    canvas.width = width;
+                    canvas.height = height;
+                    ctx.drawImage(img, 0, 0, width, height);
+                    const dataUrl = canvas.toDataURL('image/jpeg', 0.8);
+                    callback(dataUrl);
+                };
+                img.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function setSlideImage(slideId, imageData, className = 'user-image') {
+            const placeholder = document.getElementById(slideId);
+            if (!placeholder) return;
+
+            const img = document.createElement('img');
+            img.src = imageData;
+            img.alt = `Image for ${slideId}`;
+            img.className = className;
+
+            const existingImg = placeholder.querySelector('img');
+            if (existingImg) {
+                placeholder.replaceChild(img, existingImg);
+            } else {
+                placeholder.appendChild(img);
+            }
+
+            placeholder.classList.add('has-image');
+            placeholder.dataset.embedded = imageData;
+
+            const wasMinimized = placeholder.classList.contains('minimized');
+            if (wasMinimized) {
+                placeholder.classList.add('minimized');
+            }
+            placeholder.tabIndex = 0;
+            setupSinglePlaceholder(placeholder);
+            updateSlideList();
+            updateProgress();
+        }
+
+        function embedImageInHTML(slideId, imageData) {
+            const img = document.createElement('img');
+            img.src = imageData;
+            img.alt = `Image for ${slideId}`;
+            const placeholder = document.getElementById(slideId);
+            placeholder.innerHTML = '';
+            placeholder.appendChild(img);
+            placeholder.classList.add('has-image');
+        }
+
+        function loadImageToSlide(file, slideId) {
+            loadImage(file, function(dataUrl) {
+                setSlideImage(slideId, dataUrl);
+                embedImageInHTML(slideId, dataUrl);
+            });
+        }
+
+        function replaceImage(slideId) {
+            selectImageForSlide(slideId);
+        }
+
+        function removeImage(slideId) {
+            const placeholder = document.getElementById(slideId);
+            if (placeholder && placeholder.classList.contains('has-image')) {
+                placeholder.innerHTML = `
+                    <div class="placeholder-content">
+                        <div class="placeholder-icon">🖼️</div>
+                        <div class="placeholder-text">Image Removed</div>
+                        <div class="placeholder-hint">Click • Drag & Drop • Paste (Ctrl+V)</div>
+                    </div>
+                `;
+                placeholder.classList.remove('has-image');
+                placeholder.dataset.embedded = '';
+                placeholder.tabIndex = 0;
+                setupSinglePlaceholder(placeholder);
+                updateSlideList();
+                updateProgress();
+            }
+        }
+
+        function getOriginalHint(slideId) {
+            const hints = {
+                'title-image': { text: 'Cosmic Universe Overview', hint: 'Click • Drag & Drop • Paste (Ctrl+V)' },
+                'model-image': { text: 'Globe Model Example', hint: 'Click • Drag & Drop • Paste (Ctrl+V)' },
+                'theory-image': { text: 'Gravity Apple Fall', hint: 'Click • Drag & Drop • Paste (Ctrl+V)' },
+                'geocentric-image': { text: 'Geocentric Diagram', hint: 'Click • Drag & Drop • Paste (Ctrl+V)' },
+                'heliocentric-image': { text: 'Heliocentric Diagram', hint: 'Click • Drag & Drop • Paste (Ctrl+V)' },
+                'galaxy-image': { text: 'Milky Way Spiral', hint: 'Click • Drag & Drop • Paste (Ctrl+V)' },
+                'star-image': { text: 'Star Lifecycle', hint: 'Click • Drag & Drop • Paste (Ctrl+V)' },
+                'system-nebula-image': { text: 'Solar System & Nebula', hint: 'Click • Drag & Drop • Paste (Ctrl+V)' }
+            };
+            return hints[slideId] || { text: 'Image Placeholder', hint: 'Click • Drag & Drop • Paste (Ctrl+V)' };
+        }
+
+        function selectImageForSlide(slideId) {
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.accept = 'image/*';
+            input.onchange = function(e) {
+                const file = e.target.files[0];
+                if (file) {
+                    loadImageToSlide(file, slideId);
+                }
+            };
+            input.click();
+        }
+
+        function bulkUpload() {
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.accept = 'image/*';
+            input.multiple = true;
+            input.onchange = function(e) {
+                const files = Array.from(e.target.files);
+                if (files.length > 0) {
+                    processBulkUpload(files);
+                }
+            };
+            input.click();
+        }
+
+        function processBulkUpload(files) {
+            const placeholders = document.querySelectorAll('.image-placeholder:not(.has-image)');
+            files.forEach((file, index) => {
+                if (index < placeholders.length) {
+                    const slideId = placeholders[index].id;
+                    loadImageToSlide(file, slideId);
+                }
+            });
+            if (files.length > placeholders.length) {
+                alert(`Uploaded ${placeholders.length} images. ${files.length - placeholders.length} files skipped.`);
+            }
+        }
+
+        function updateSlideList() {
+            const slideList = document.getElementById('slideList');
+            const placeholders = document.querySelectorAll('.image-placeholder');
+            slideList.innerHTML = '';
+            
+            placeholders.forEach(placeholder => {
+                const slideId = placeholder.id;
+                const slideNum = placeholder.dataset.slide || slideId.match(/\d+/)?.[0] || '';
+                const hasImage = placeholder.classList.contains('has-image');
+                const hint = getOriginalHint(slideId);
+                
+                const item = document.createElement('div');
+                item.className = `slide-item ${hasImage ? 'has-image' : 'no-image'}`;
+                item.innerHTML = `
+                    <div class="slide-status ${hasImage ? 'has-image' : 'no-image'}"></div>
+                    <div>
+                        <div>Slide ${slideNum || 'Title'}</div>
+                        <small>${hint.text}</small>
+                    </div>
+                `;
+                
+                item.addEventListener('click', () => {
+                    if (hasImage) {
+                        Reveal.slide(0); // Go to first slide for demo
+                    } else {
+                        selectImageForSlide(slideId);
+                    }
+                });
+                
+                slideList.appendChild(item);
+            });
+        }
+
+        function updateProgress() {
+            const placeholders = document.querySelectorAll('.image-placeholder');
+            const withImages = document.querySelectorAll('.image-placeholder.has-image');
+            const percentage = (withImages.length / placeholders.length) * 100;
+            
+            const progressFill = document.getElementById('progressFill');
+            progressFill.style.width = percentage + '%';
+            progressFill.textContent = `${withImages.length}/${placeholders.length}`;
+        }
+
+        function downloadWithImages() {
+            const currentHTML = document.documentElement.outerHTML;
+            const blob = new Blob([currentHTML], { type: 'text/html' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'scientific-models-lesson-with-images.html';
+            a.click();
+            URL.revokeObjectURL(url);
+            const notification = document.getElementById('saveNotification');
+            notification.classList.add('show');
+            setTimeout(() => notification.classList.remove('show'), 3000);
+        }
+
+        function exportImages() {
+            const placeholders = document.querySelectorAll('.image-placeholder[data-embedded]');
+            const exportData = {};
+            placeholders.forEach(placeholder => {
+                const slideId = placeholder.id;
+                const embeddedData = placeholder.dataset.embedded;
+                if (embeddedData && embeddedData.trim() !== '') {
+                    exportData[slideId] = embeddedData;
+                }
+            });
+            if (Object.keys(exportData).length > 0) {
+                const blob = new Blob([JSON.stringify(exportData)], { type: 'application/json' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'models-lesson-images-backup.json';
+                a.click();
+                URL.revokeObjectURL(url);
+            } else {
+                alert('No images to export!');
+            }
+        }
+
+        function importImages() {
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.accept = '.json';
+            input.onchange = function(e) {
+                const file = e.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(event) {
+                        try {
+                            const importedData = JSON.parse(event.target.result);
+                            Object.keys(importedData).forEach(slideId => {
+                                const placeholder = document.getElementById(slideId);
+                                if (placeholder) {
+                                    const imageData = importedData[slideId];
+                                    setSlideImage(slideId, imageData, 'imported-image');
+                                    embedImageInHTML(slideId, imageData);
+                                }
+                            });
+                            updateSlideList();
+                            updateProgress();
+                            alert('Images imported successfully!');
+                        } catch (error) {
+                            alert('Error importing images: Invalid file format');
+                        }
+                    };
+                    reader.readAsText(file);
+                }
+            };
+            input.click();
+        }
+
+        function clearAllImages(confirm = true) {
+            if (confirm && !window.confirm('Are you sure you want to remove all images?')) {
+                return;
+            }
+            const placeholders = document.querySelectorAll('.image-placeholder');
+            placeholders.forEach(placeholder => {
+                if (placeholder.classList.contains('has-image')) {
+                    removeImage(placeholder.id);
+                }
+            });
+            updateSlideList();
+            updateProgress();
+        }
+
+        function toggleMinimize(slideId) {
+            const placeholder = document.getElementById(slideId);
+            if (placeholder) {
+                const wasMinimized = placeholder.classList.contains('minimized');
+                placeholder.classList.toggle('minimized');
+                
+                const minimizedState = JSON.parse(localStorage.getItem('minimizedPlaceholdersModels') || '{}');
+                minimizedState[slideId] = placeholder.classList.contains('minimized');
+                localStorage.setItem('minimizedPlaceholdersModels', JSON.stringify(minimizedState));
+                
+                const minimizeBtn = placeholder.querySelector('[onclick*="toggleMinimize"]');
+                if (minimizeBtn) {
+                    if (placeholder.classList.contains('minimized')) {
+                        minimizeBtn.textContent = '📤';
+                        minimizeBtn.title = 'Expand';
+                    } else {
+                        minimizeBtn.textContent = '📦';
+                        minimizeBtn.title = 'Minimize';
+                    }
+                }
+                
+                const message = wasMinimized ? '📤 Expanded' : '📦 Minimized';
+                showDropFeedback(placeholder, message, '#00BCD4');
+                
+                updateSlideList();
+            }
+        }
+
+        function setupSinglePlaceholder(placeholder) {
+            // Drag and drop setup
+            placeholder.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                placeholder.classList.add('drag-over');
+                const overlay = placeholder.querySelector('.drag-hint-overlay');
+                if (overlay) overlay.style.display = 'flex';
+            });
+
+            placeholder.addEventListener('dragleave', (e) => {
+                e.preventDefault();
+                placeholder.classList.remove('drag-over');
+                const overlay = placeholder.querySelector('.drag-hint-overlay');
+                if (overlay) overlay.style.display = 'none';
+            });
+
+            placeholder.addEventListener('drop', (e) => {
+                e.preventDefault();
+                placeholder.classList.remove('drag-over');
+                const overlay = placeholder.querySelector('.drag-hint-overlay');
+                if (overlay) overlay.style.display = 'none';
+
+                const files = e.dataTransfer.files;
+                if (files.length > 0) {
+                    const file = files[0];
+                    if (file.type.startsWith('image/')) {
+                        loadImageToSlide(file, placeholder.id);
+                        showDropFeedback(placeholder, '✅ Image Added!', '#4CAF50');
+                    }
+                }
+            });
+
+            // Paste support
+            placeholder.addEventListener('paste', (e) => {
+                e.preventDefault();
+                const items = e.clipboardData.items;
+                for (let item of items) {
+                    if (item.type.indexOf('image') !== -1) {
+                        const blob = item.getAsFile();
+                        loadImageToSlide(blob, placeholder.id);
+                        showDropFeedback(placeholder, '📋 Pasted!', '#FFEB3B');
+                        break;
+                    }
+                }
+            });
+
+            // Click to upload
+            placeholder.addEventListener('click', () => {
+                if (!placeholder.classList.contains('has-image')) {
+                    selectImageForSlide(placeholder.id);
+                }
+            });
+        }
+
+        function showDropFeedback(placeholder, message, color) {
+            let feedback = placeholder.querySelector('.drop-feedback');
+            if (!feedback) {
+                feedback = document.createElement('div');
+                feedback.className = 'drop-feedback';
+                placeholder.appendChild(feedback);
+            }
+            feedback.textContent = message;
+            feedback.style.background = color;
+            feedback.classList.add('show');
+            setTimeout(() => feedback.classList.remove('show'), 2000);
+        }
+
+        function setupImagePlaceholders() {
+            const placeholders = document.querySelectorAll('.image-placeholder');
+            placeholders.forEach(placeholder => {
+                if (placeholder.querySelector('.drag-hint-overlay')) return;
+
+                const slideId = placeholder.id;
+                const hint = getOriginalHint(slideId);
+
+                const dragHint = document.createElement('div');
+                dragHint.className = 'drag-hint-overlay';
+                dragHint.textContent = '📁 Drop image here';
+                placeholder.appendChild(dragHint);
+
+                const controls = document.createElement('div');
+                controls.className = 'image-controls';
+                controls.innerHTML = `
+                    <button class="image-control-btn" onclick="toggleMinimize('${slideId}')" title="Minimize/Maximize">📦</button>
+                    <button class="image-control-btn" onclick="replaceImage('${slideId}')" title="Upload">📂</button>
+                    <button class="image-control-btn" onclick="removeImage('${slideId}')" title="Remove">🗑️</button>
+                `;
+                placeholder.appendChild(controls);
+
+                const uploadMethods = document.createElement('div');
+                uploadMethods.className = 'upload-methods';
+                uploadMethods.innerHTML = `
+                    <button class="upload-method-btn" onclick="selectImageForSlide('${slideId}')" title="Upload from computer">📁 Upload</button>
+                `;
+                placeholder.appendChild(uploadMethods);
+
+                const pasteIndicator = document.createElement('div');
+                pasteIndicator.className = 'paste-indicator';
+                pasteIndicator.textContent = '📋 Paste Ready';
+                placeholder.appendChild(pasteIndicator);
+
+                setupSinglePlaceholder(placeholder);
+            });
+            updateSlideList();
+            updateProgress();
+        }
+
+        function loadMinimizedStates() {
+            const minimizedState = JSON.parse(localStorage.getItem('minimizedPlaceholdersModels') || '{}');
+            Object.keys(minimizedState).forEach(slideId => {
+                if (minimizedState[slideId]) {
+                    const placeholder = document.getElementById(slideId);
+                    if (placeholder) placeholder.classList.add('minimized');
+                }
+            });
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            setupImagePlaceholders();
+            loadMinimizedStates();
+            updateSlideList();
+            updateProgress();
+
+            // Keyboard shortcuts
+            document.addEventListener('keydown', function(e) {
+                if (e.ctrlKey || e.metaKey) {
+                    const currentSlide = Reveal.getCurrentSlide();
+                    if (currentSlide) {
+                        const placeholder = currentSlide.querySelector('.image-placeholder:not(.has-image)');
+                        if (placeholder) placeholder.classList.add('paste-ready');
+                    }
+                }
+            });
+
+            document.addEventListener('keyup', function(e) {
+                if (!e.ctrlKey && !e.metaKey) {
+                    document.querySelectorAll('.paste-ready').forEach(p => p.classList.remove('paste-ready'));
+                }
+            });
+        });
+    </script>
+</body>
+</html>
