@@ -1,0 +1,1419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Physics: Motion and Forces - Interactive Revision Lesson</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reveal.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/theme/white.min.css">
+    <style>
+        .reveal {
+            font-size: 24px;
+        }
+        .reveal h1 {
+            font-size: 1.8em;
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+        .reveal h2 {
+            font-size: 1.5em;
+            color: #34495e;
+            margin-bottom: 20px;
+        }
+        .reveal h3 {
+            font-size: 1.2em;
+            color: #34495e;
+            margin-bottom: 15px;
+        }
+        .reveal .slides section {
+            text-align: center;
+            padding: 20px;
+            box-sizing: border-box;
+            overflow-y: auto;
+            max-height: 100vh;
+        }
+        .reveal .slides {
+            width: 100%;
+            height: 100%;
+        }
+        .reveal .slides > section {
+            width: 100%;
+            height: 100%;
+            padding: 20px;
+            box-sizing: border-box;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+        }
+        .slide-content-wrapper {
+            width: 100%;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px 0;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+        }
+        .content-block {
+            margin: 15px 0;
+            padding: 10px;
+        }
+        @media (max-width: 768px) {
+            .reveal {
+                font-size: 20px;
+            }
+            .reveal .slides section {
+                padding: 15px;
+            }
+        }
+        .do-now-box {
+            background: linear-gradient(135deg, #4CAF50 0%, #8BC34A 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px auto;
+            max-width: 600px;
+            font-weight: bold;
+        }
+        .topic-header {
+            background: linear-gradient(135deg, #00BCD4 0%, #03A9F4 100%);
+            color: white;
+            padding: 15px;
+            border-radius: 15px;
+            margin: 15px auto;
+            max-width: 500px;
+        }
+        .click-reveal {
+            background: #f0f4f8;
+            border: 2px solid #4a90e2;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 10px auto;
+            max-width: 600px;
+            cursor: pointer;
+            transition: all 0.3s;
+            min-height: 60px;
+        }
+        .click-reveal:hover {
+            background: #e1e8ed;
+            transform: scale(1.02);
+        }
+        .click-reveal.revealed {
+            background: #e8f5e9;
+            border-color: #4caf50;
+            cursor: default;
+        }
+        .reveal-text {
+            color: #666;
+            font-style: italic;
+            font-size: 0.9em;
+            display: none;
+        }
+        .click-reveal.revealed .reveal-text {
+            display: block;
+        }
+        .definition-box {
+            background: #fff9e6;
+            border-left: 5px solid #ffc107;
+            padding: 15px;
+            margin: 15px auto;
+            max-width: 600px;
+            border-radius: 5px;
+            text-align: left;
+        }
+        .equation-box {
+            background: linear-gradient(135deg, #ffd93d 0%, #6bcf7f 100%);
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px auto;
+            max-width: 500px;
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #2c3e50;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        .step-number {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background: #00BCD4;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            z-index: 1000;
+        }
+        .transition-box {
+            background: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%);
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px auto;
+            max-width: 600px;
+            font-weight: bold;
+        }
+        .practice-problem {
+            background: #fff3e0;
+            border: 2px solid #ff9800;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 15px auto;
+            max-width: 650px;
+        }
+        .problem-number {
+            background: #ff9800;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            display: inline-block;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        .question-prompt {
+            background: #e3f2fd;
+            border: 2px solid #2196f3;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px auto;
+            max-width: 600px;
+            font-weight: bold;
+        }
+        .topic-complete {
+            background: #4caf50;
+            color: white;
+            padding: 10px;
+            border-radius: 10px;
+            font-weight: bold;
+            margin: 20px auto;
+            max-width: 400px;
+        }
+        /* Image Placeholder Styling */
+        .image-placeholder {
+            width: 100%;
+            max-width: 650px;
+            height: 350px;
+            border: 2px dashed #ccc;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f9f9f9;
+            margin: 20px auto;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+        .image-placeholder:hover {
+            background: #f0f0f0;
+            border-color: #999;
+        }
+        .image-placeholder.has-image {
+            border: none;
+            background: transparent;
+        }
+        .image-placeholder img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            border-radius: 8px;
+        }
+        .placeholder-content {
+            text-align: center;
+            padding: 20px;
+            color: #666;
+        }
+        .placeholder-icon {
+            font-size: 3em;
+            display: block;
+            margin-bottom: 10px;
+            opacity: 0.5;
+        }
+        .placeholder-text {
+            font-size: 1.2em;
+            font-weight: bold;
+            display: block;
+            margin-bottom: 10px;
+        }
+        .placeholder-hint {
+            font-size: 0.9em;
+            color: #999;
+            display: block;
+            font-family: monospace;
+        }
+        /* Minimized image placeholder */
+        .image-placeholder.minimized {
+            height: 40px;
+            background: #e8f4fd;
+            border: 1px solid #b3d9ff;
+            cursor: pointer;
+            border-radius: 20px;
+            margin: 10px auto;
+        }
+        .image-placeholder.minimized .placeholder-content {
+            padding: 8px 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        .image-placeholder.minimized .placeholder-icon {
+            font-size: 1.2em;
+            margin: 0;
+        }
+        .image-placeholder.minimized .placeholder-text {
+            font-size: 0.8em;
+            margin: 0;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 200px;
+        }
+        .image-placeholder.minimized .placeholder-hint {
+            display: none;
+        }
+        /* Drag and drop styling */
+        .image-placeholder.drag-over {
+            border-color: #4CAF50 !important;
+            background: #e8f5e9 !important;
+            transform: scale(1.02);
+            box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3);
+        }
+        .image-placeholder.minimized.drag-over {
+            height: 60px;
+            background: #e8f5e9 !important;
+            border-color: #4CAF50 !important;
+        }
+        /* Drag hint overlay */
+        .drag-hint-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(76, 175, 80, 0.9);
+            color: white;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.1em;
+            border-radius: 10px;
+            z-index: 5;
+        }
+        /* Image controls */
+        .image-controls {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            display: flex;
+            gap: 5px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 10;
+        }
+        .image-placeholder:hover .image-controls,
+        .image-placeholder.minimized .image-controls {
+            opacity: 1;
+        }
+        .image-control-btn {
+            background: rgba(0,0,0,0.7);
+            color: white;
+            border: none;
+            border-radius: 3px;
+            padding: 5px 8px;
+            cursor: pointer;
+            font-size: 0.8em;
+            transition: background 0.3s;
+        }
+        .image-control-btn:hover {
+            background: rgba(0,0,0,0.9);
+        }
+        /* Upload methods panel */
+        .upload-methods {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            display: flex;
+            gap: 5px;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .image-placeholder:hover .upload-methods {
+            opacity: 1;
+        }
+        .upload-method-btn {
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            padding: 5px 10px;
+            cursor: pointer;
+            font-size: 0.8em;
+        }
+        /* Paste indicator styles */
+        .paste-indicator {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            background: #4caf50;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 0.75em;
+            font-weight: bold;
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+        }
+        .image-placeholder:hover .paste-indicator {
+            opacity: 0.8;
+        }
+        .image-placeholder:focus .paste-indicator {
+            opacity: 1;
+            background: #2196f3;
+        }
+        .image-placeholder.paste-ready {
+            animation: pulseGlow 2s infinite;
+        }
+        @keyframes pulseGlow {
+            0%, 100% { box-shadow: 0 0 5px rgba(102, 126, 234, 0.3); }
+            50% { box-shadow: 0 0 20px rgba(102, 126, 234, 0.6); }
+        }
+        /* Image Management Panel */
+        .image-manager {
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            background: white;
+            border: 2px solid #00BCD4;
+            border-radius: 10px;
+            padding: 15px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+            z-index: 2000;
+            max-width: 300px;
+            max-height: 80vh;
+            overflow-y: auto;
+            transform: translateX(-320px);
+            transition: transform 0.3s ease;
+        }
+        .image-manager.open {
+            transform: translateX(0);
+        }
+        .image-manager-toggle {
+            position: fixed;
+            top: 50px;
+            left: 10px;
+            background: #00BCD4;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            z-index: 2001;
+            font-size: 12px;
+        }
+        .image-manager h3 {
+            margin: 0 0 15px 0;
+            color: #00BCD4;
+            font-size: 1.1em;
+        }
+        .bulk-upload {
+            margin-bottom: 15px;
+            padding: 10px;
+            border: 2px dashed #ccc;
+            border-radius: 5px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .bulk-upload:hover {
+            border-color: #00BCD4;
+            background: #f0f4f8;
+        }
+        .slide-list {
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        .slide-item {
+            display: flex;
+            align-items: center;
+            padding: 5px;
+            margin: 3px 0;
+            border-radius: 3px;
+            font-size: 0.8em;
+        }
+        .slide-item.has-image {
+            background: #e8f5e9;
+            border-left: 3px solid #4caf50;
+        }
+        .slide-item.no-image {
+            background: #ffebee;
+            border-left: 3px solid #f44336;
+        }
+        .slide-status {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+        .slide-status.has-image {
+            background: #4caf50;
+        }
+        .slide-status.no-image {
+            background: #f44336;
+        }
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background: #f0f0f0;
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 10px 0;
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(135deg, #00BCD4 0%, #03A9F4 100%);
+            transition: width 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 0.8em;
+            font-weight: bold;
+        }
+        .action-buttons {
+            display: flex;
+            gap: 5px;
+            margin-top: 10px;
+        }
+        .action-btn {
+            flex: 1;
+            padding: 8px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 0.8em;
+            font-weight: bold;
+        }
+        .action-btn.export {
+            background: #4caf50;
+            color: white;
+        }
+        .action-btn.import {
+            background: #2196f3;
+            color: white;
+        }
+        .action-btn.clear {
+            background: #f44336;
+            color: white;
+        }
+        .action-btn.download {
+            background: #ff9800;
+            color: white;
+        }
+        /* Save notification */
+        .save-notification {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #4caf50;
+            color: white;
+            padding: 20px 30px;
+            border-radius: 10px;
+            font-weight: bold;
+            z-index: 3000;
+            display: none;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+        .save-notification.show {
+            display: block;
+            animation: fadeInOut 3s;
+        }
+        @keyframes fadeInOut {
+            0% { opacity: 0; }
+            20% { opacity: 1; }
+            80% { opacity: 1; }
+            100% { opacity: 0; }
+        }
+    </style>
+</head>
+<body class="reveal-viewport">
+    <div class="reveal">
+        <div class="slides">
+            <!-- Slide 1: Title -->
+            <section>
+                <h1>Physics: Motion and Forces</h1>
+                <p>Interactive Revision Lesson</p>
+                <p>Step-by-step theory and scaffolded questions with click-to-reveal answers.</p>
+            </section>
+
+            <!-- Slide 2: Do Now -->
+            <section>
+                <div class="do-now-box">
+                    <h3>Do Now: Quick Recall</h3>
+                    <p>What causes an object to speed up or slow down? Think about it for 1 minute.</p>
+                </div>
+                <div class="click-reveal" onclick="this.classList.toggle('revealed')">
+                    <p>Click to reveal hint:</p>
+                    <div class="reveal-text">An unbalanced force causes acceleration (change in speed).</div>
+                </div>
+            </section>
+
+            <!-- Slide 3: New Subtopic - Scalar and Vector Quantities -->
+            <section>
+                <div class="topic-header">
+                    <h2>Subtopic 0: Scalar and Vector Quantities</h2>
+                </div>
+                <div class="transition-box">
+                    <p>Start with basic concepts: scalars vs. vectors, including distance/displacement and speed/velocity.</p>
+                </div>
+            </section>
+
+            <!-- Slide 4: Theory - Scalar and Vector Basics -->
+            <section>
+                <h3>Step 1: Scalars and Vectors</h3>
+                <div class="definition-box">
+                    <p><strong>Scalar:</strong> Quantity with magnitude only (e.g., distance, speed, mass).</p>
+                    <p><strong>Vector:</strong> Quantity with magnitude and direction (e.g., displacement, velocity, force).</p>
+                </div>
+                <div class="click-reveal" onclick="this.classList.toggle('revealed')">
+                    <p>Click for breakdown:</p>
+                    <div class="reveal-text">
+                        <ul>
+                            <li>Distance: Total path length (scalar).</li>
+                            <li>Displacement: Shortest path from start to end with direction (vector).</li>
+                            <li>Speed: Distance per time (scalar).</li>
+                            <li>Velocity: Displacement per time (vector).</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 5: Scaffolded Q0.1 - Basic Recall -->
+            <section>
+                <div class="practice-problem">
+                    <span class="problem-number">Scaffolded Q0.1</span>
+                    <div class="question-prompt">Basic Recall: Define scalar and give an example from motion. (1 mark)</div>
+                    <div class="click-reveal" onclick="this.classList.toggle('revealed')">
+                        <p>Click to reveal step-by-step answer:</p>
+                        <div class="reveal-text">
+                            <strong>Step 1:</strong> Scalar has magnitude only, no direction.<br>
+                            <strong>Step 2:</strong> Example: Speed (e.g., 10 m/s).<br>
+                            <strong>Answer:</strong> Scalar: Magnitude only; e.g., speed.
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 6: Scaffolded Q0.2 - Application -->
+            <section>
+                <div class="practice-problem">
+                    <span class="problem-number">Scaffolded Q0.2</span>
+                    <div class="question-prompt">Application: A car travels 5 km east, then 5 km west. Calculate distance and displacement. (2 marks)</div>
+                    <div class="click-reveal" onclick="this.classList.toggle('revealed')">
+                        <p>Click to reveal step-by-step answer:</p>
+                        <div class="reveal-text">
+                            <strong>Step 1:</strong> Distance = total path = 5 + 5 = 10 km (scalar).<br>
+                            <strong>Step 2:</strong> Displacement = net change = 0 km (vector, back to start).<br>
+                            <strong>Answer:</strong> Distance 10 km; displacement 0 km.
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 7: Scaffolded Q0.3 - Analysis -->
+            <section>
+                <div class="practice-problem">
+                    <span class="problem-number">Scaffolded Q0.3</span>
+                    <div class="question-prompt">Analysis: Explain why velocity is vector but speed is scalar, with a real-life driving example. (3 marks)</div>
+                    <div class="click-reveal" onclick="this.classList.toggle('revealed')">
+                        <p>Click to reveal step-by-step answer:</p>
+                        <div class="reveal-text">
+                            <strong>Step 1:</strong> Speed: Magnitude only (e.g., 60 km/h).<br>
+                            <strong>Step 2:</strong> Velocity: Magnitude + direction (e.g., 60 km/h north).<br>
+                            <strong>Step 3:</strong> Example: Turning corner at constant speed—velocity changes due to direction shift.<br>
+                            <strong>Answer:</strong> Velocity includes direction; speed does not—important for navigation.
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 8: Scaffolded Q0.4 - Displacement Calculation -->
+            <section>
+                <div class="practice-problem">
+                    <span class="problem-number">Scaffolded Q0.4</span>
+                    <div class="question-prompt">Displacement Calculation: A hiker walks 3 km north, then 4 km east. Calculate displacement magnitude and direction. (2 marks)</div>
+                    <div class="click-reveal" onclick="this.classList.toggle('revealed')">
+                        <p>Click to reveal step-by-step answer:</p>
+                        <div class="reveal-text">
+                            <strong>Step 1:</strong> Use Pythagoras for magnitude: sqrt(3² + 4²) = sqrt(9 + 16) = 5 km.<br>
+                            <strong>Step 2:</strong> Direction: tan^{-1}(4/3) ≈ 53° east of north.<br>
+                            <strong>Answer:</strong> 5 km at 53° east of north.
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 9: Scaffolded Q0.5 - Velocity Calculation -->
+            <section>
+                <div class="practice-problem">
+                    <span class="problem-number">Scaffolded Q0.5</span>
+                    <div class="question-prompt">Velocity Calculation: A bird flies 100 m south in 20 s. Calculate velocity. (1 mark)</div>
+                    <div class="click-reveal" onclick="this.classList.toggle('revealed')">
+                        <p>Click to reveal step-by-step answer:</p>
+                        <div class="reveal-text">
+                            <strong>Step 1:</strong> Velocity = displacement / time = 100 m south / 20 s.<br>
+                            <strong>Step 2:</strong> Magnitude = 5 m/s, direction south.<br>
+                            <strong>Answer:</strong> 5 m/s south.
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 10: Subtopic 1 Header -->
+            <section>
+                <div class="topic-header">
+                    <h2>Subtopic 1: Acceleration Calculations</h2>
+                </div>
+                <div class="transition-box">
+                    <p>Building on velocity, calculate acceleration as change in velocity over time.</p>
+                </div>
+            </section>
+
+            <!-- Slide 11: Theory - Acceleration Basics -->
+            <section>
+                <h3>Step 1: Understanding Acceleration</h3>
+                <div class="definition-box">
+                    <p><strong>Acceleration:</strong> Change in velocity over time. Vector; positive/negative based on direction.</p>
+                </div>
+                <div class="equation-box">
+                    a = (v - u) / t
+                </div>
+                <div class="click-reveal" onclick="this.classList.toggle('revealed')">
+                    <p>Click for breakdown:</p>
+                    <div class="reveal-text">
+                        <ul>
+                            <li>a = acceleration (m/s²), v = final velocity, u = initial velocity, t = time (s).</li>
+                            <li>For constant speed but direction change, a ≠ 0 (e.g., circular motion).</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 12: Scaffolded Q1 - Basic Recall -->
+            <section>
+                <div class="practice-problem">
+                    <span class="problem-number">Scaffolded Q1</span>
+                    <div class="question-prompt">Basic Recall: Write the formula for acceleration using final velocity, initial velocity, and time. (1 mark)</div>
+                    <div class="click-reveal" onclick="this.classList.toggle('revealed')">
+                        <p>Click to reveal step-by-step answer:</p>
+                        <div class="reveal-text">
+                            <strong>Step 1:</strong> Acceleration is rate of velocity change.<br>
+                            <strong>Step 2:</strong> Formula: a = (change in velocity) / time.<br>
+                            <strong>Answer:</strong> a = (v - u) / t
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 13: Scaffolded Q2 - Application -->
+            <section>
+                <div class="practice-problem">
+                    <span class="problem-number">Scaffolded Q2</span>
+                    <div class="question-prompt">Application: A jogger goes from rest to 6 m/s north in 3 seconds. Calculate acceleration. (1 mark)</div>
+                    <div class="click-reveal" onclick="this.classList.toggle('revealed')">
+                        <p>Click to reveal step-by-step answer:</p>
+                        <div class="reveal-text">
+                            <strong>Step 1:</strong> u = 0 m/s, v = 6 m/s north, t = 3 s.<br>
+                            <strong>Step 2:</strong> a = (6 - 0) / 3 = 2 m/s² north.<br>
+                            <strong>Answer:</strong> 2 m/s² north
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 14: Scaffolded Q3 - Analysis -->
+            <section>
+                <div class="practice-problem">
+                    <span class="problem-number">Scaffolded Q3</span>
+                    <div class="question-prompt">Analysis: If a cyclist doubles time to reach same velocity, how does acceleration change? Link to real biking. (2 marks)</div>
+                    <div class="click-reveal" onclick="this.classList.toggle('revealed')">
+                        <p>Click to reveal step-by-step answer:</p>
+                        <div class="reveal-text">
+                            <strong>Step 1:</strong> a = v / t (u=0); doubling t halves magnitude of a.<br>
+                            <strong>Step 2:</strong> E.g., 10 m/s in 5 s: a=2 m/s²; in 10 s: a=1 m/s².<br>
+                            <strong>Step 3:</strong> In biking uphill, longer time means gentler pedal force for safety.<br>
+                            <strong>Answer:</strong> Acceleration magnitude halves, allowing smoother, safer rides.
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 15: Scaffolded Q4 - Extension -->
+            <section>
+                <div class="practice-problem">
+                    <span class="problem-number">Scaffolded Q4</span>
+                    <div class="question-prompt">Extension: A train slows from 20 m/s east to 0 in 10 s. Compute acceleration and discuss emergency braking. (2 marks)</div>
+                    <div class="click-reveal" onclick="this.classList.toggle('revealed')">
+                        <p>Click to reveal step-by-step answer:</p>
+                        <div class="reveal-text">
+                            <strong>Step 1:</strong> a = (0 - 20) / 10 = -2 m/s² east (or 2 m/s² west).<br>
+                            <strong>Step 2:</strong> Negative sign shows opposite direction to initial velocity.<br>
+                            <strong>Step 3:</strong> In emergencies, higher magnitude a shortens stop but risks skids—balance safety.<br>
+                            <strong>Answer:</strong> -2 m/s² east; controlled braking prevents accidents.
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 16: Subtopic 2 Header -->
+            <section>
+                <div class="topic-header">
+                    <h2>Subtopic 2: Newton's Laws in Everyday Scenarios</h2>
+                </div>
+                <div class="transition-box">
+                    <p>Now, apply Newton's three laws to real-life pushes and pulls.</p>
+                </div>
+            </section>
+
+            <!-- Slide 17: Theory - Newton's Laws -->
+            <section>
+                <h3>Step 1: Newton's Laws Overview</h3>
+                <div class="definition-box">
+                    <p><strong>First Law (Inertia):</strong> Objects stay at rest or in motion unless acted on by a force.</p>
+                    <p><strong>Second Law:</strong> F = m a (force = mass × acceleration).</p>
+                    <p><strong>Third Law:</strong> Every action has an equal/opposite reaction.</p>
+                </div>
+                <div id="slide17-image" class="image-placeholder">
+                    <div class="placeholder-content">
+                        <span class="placeholder-icon">🖼️</span>
+                        <span class="placeholder-text">Image: Diagram illustrating Newton's Laws with everyday examples</span>
+                        <span class="placeholder-hint">Click • Drag & Drop • Paste (Ctrl+V)</span>
+                    </div>
+                    <div class="drag-hint-overlay">📁 Drop image here</div>
+                    <div class="image-controls">
+                        <button class="image-control-btn" onclick="toggleMinimize('slide17-image')" title="Minimize/Maximize">📦</button>
+                        <button class="image-control-btn" onclick="replaceImage('slide17-image')" title="Upload">📂</button>
+                        <button class="image-control-btn" onclick="removeImage('slide17-image')" title="Remove">🗑️</button>
+                    </div>
+                    <div class="upload-methods">
+                        <button class="upload-method-btn" onclick="selectImageForSlide('slide17-image')" title="Upload from computer">📁 Upload</button>
+                    </div>
+                    <div class="paste-indicator">📋 Paste Ready</div>
+                </div>
+                <div class="click-reveal" onclick="this.classList.toggle('revealed')">
+                    <p>Click for examples:</p>
+                    <div class="reveal-text">
+                        <ul>
+                            <li>Seatbelt: Inertia in crashes.</li>
+                            <li>Rocket: Action-reaction thrust.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 18: Scaffolded Q5 - Basic Recall -->
+            <section>
+                <div class="practice-problem">
+                    <span class="problem-number">Scaffolded Q5</span>
+                    <div class="question-prompt">Basic Recall: Name the law that says unbalanced pushes make things speed up or slow down based on mass. (1 mark)</div>
+                    <div class="click-reveal" onclick="this.classList.toggle('revealed')">
+                        <p>Click to reveal step-by-step answer:</p>
+                        <div class="reveal-text">
+                            <strong>Step 1:</strong> This describes net force causing acceleration.<br>
+                            <strong>Step 2:</strong> Proportional to mass (heavier = less a for same F).<br>
+                            <strong>Answer:</strong> Newton's Second Law (F = m a)
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 19: Scaffolded Q6 - Application -->
+            <section>
+                <div class="practice-problem">
+                    <span class="problem-number">Scaffolded Q6</span>
+                    <div class="question-prompt">Application: Describe forces on a bike speeding up from standstill, labeling push and drag. A 800 kg bike reaches 15 m/s in 5 s—find speedup. (2 marks)</div>
+                    <div class="click-reveal" onclick="this.classList.toggle('revealed')">
+                        <p>Click to reveal step-by-step answer:</p>
+                        <div class="reveal-text">
+                            <strong>Step 1:</strong> Forward push (pedal force) > backward drag (air/friction).<br>
+                            <strong>Step 2:</strong> a = (v - u)/t = (15 - 0)/5 = 3 m/s².<br>
+                            <strong>Answer:</strong> Net forward force; a = 3 m/s².
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 20: Scaffolded Q7 - Analysis -->
+            <section>
+                <div class="practice-problem">
+                    <span class="problem-number">Scaffolded Q7</span>
+                    <div class="question-prompt">Analysis: For the bike, calculate push needed for that speedup, then link all three Newton laws to a rider starting on a slope. (3 marks)</div>
+                    <div class="click-reveal" onclick="this.classList.toggle('revealed')">
+                        <p>Click to reveal step-by-step answer:</p>
+                        <div class="reveal-text">
+                            <strong>Step 1:</strong> F = m a = 800 kg × 3 m/s² = 2400 N (net force).<br>
+                            <strong>Step 2:</strong> First: Inertia keeps bike still until push.<br>
+                            <strong>Step 3:</strong> Second: F causes a; Third: Pedal pushes back on ground.<br>
+                            <strong>Answer:</strong> 2400 N; Laws explain start, acceleration, and reaction on slope.
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 21: Scaffolded Q8 - Extension -->
+            <section>
+                <div class="practice-problem">
+                    <span class="problem-number">Scaffolded Q8</span>
+                    <div class="question-prompt">Extension: Explain action-reaction in pushing off a wall during a game, and why a heavier player accelerates less from the same kick. (3 marks)</div>
+                    <div class="click-reveal" onclick="this.classList.toggle('revealed')">
+                        <p>Click to reveal step-by-step answer:</p>
+                        <div class="reveal-text">
+                            <strong>Step 1:</strong> Push wall right → wall pushes left (Third Law).<br>
+                            <strong>Step 2:</strong> Same force, but heavier mass → less a (Second Law).<br>
+                            <strong>Step 3:</strong> Lighter player accelerates more, gaining speed in game.<br>
+                            <strong>Answer:</strong> Equal/opposite forces; inverse mass effect on acceleration.
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 22: Subtopic 3 Header -->
+            <section>
+                <div class="topic-header">
+                    <h2>Subtopic 3: Friction and Balanced Forces</h2>
+                </div>
+                <div class="transition-box">
+                    <p>Explore how opposing forces like friction balance or unbalance motion.</p>
+                </div>
+            </section>
+
+            <!-- Slide 23: Theory - Friction -->
+            <section>
+                <h3>Step 1: Friction and Balance</h3>
+                <div class="definition-box">
+                    <p><strong>Balanced Forces:</strong> Net force = 0, no acceleration (e.g., constant speed).</p>
+                    <p><strong>Friction:</strong> Opposing force between surfaces; static (prevents start), kinetic (during motion).</p>
+                </div>
+                <div id="slide23-image" class="image-placeholder">
+                    <div class="placeholder-content">
+                        <span class="placeholder-icon">🖼️</span>
+                        <span class="placeholder-text">Image: Illustration of friction and balanced forces in everyday scenarios</span>
+                        <span class="placeholder-hint">Click • Drag & Drop • Paste (Ctrl+V)</span>
+                    </div>
+                    <div class="drag-hint-overlay">📁 Drop image here</div>
+                    <div class="image-controls">
+                        <button class="image-control-btn" onclick="toggleMinimize('slide23-image')" title="Minimize/Maximize">📦</button>
+                        <button class="image-control-btn" onclick="replaceImage('slide23-image')" title="Upload">📂</button>
+                        <button class="image-control-btn" onclick="removeImage('slide23-image')" title="Remove">🗑️</button>
+                    </div>
+                    <div class="upload-methods">
+                        <button class="upload-method-btn" onclick="selectImageForSlide('slide23-image')" title="Upload from computer">📁 Upload</button>
+                    </div>
+                    <div class="paste-indicator">📋 Paste Ready</div>
+                </div>
+                <div class="click-reveal" onclick="this.classList.toggle('revealed')">
+                    <p>Click for real-life:</p>
+                    <div class="reveal-text">
+                        <ul>
+                            <li>Car at constant speed: Engine = drag + friction.</li>
+                            <li>Brakes: Increase friction to stop.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 24: Scaffolded Q9 - Basic Recall -->
+            <section>
+                <div class="practice-problem">
+                    <span class="problem-number">Scaffolded Q9</span>
+                    <div class="question-prompt">Basic Recall: What keeps a book at rest on a desk despite gravity? (1 mark)</div>
+                    <div class="click-reveal" onclick="this.classList.toggle('revealed')">
+                        <p>Click to reveal step-by-step answer:</p>
+                        <div class="reveal-text">
+                            <strong>Step 1:</strong> Gravity pulls down (weight force).<br>
+                            <strong>Step 2:</strong> Desk pushes up equally (normal force).<br>
+                            <strong>Answer:</strong> Balanced forces (normal force opposes gravity).
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 25: Scaffolded Q10 - Application -->
+            <section>
+                <div class="practice-problem">
+                    <span class="problem-number">Scaffolded Q10</span>
+                    <div class="question-prompt">Application: Estimate friction force on sliding shoes (mass 2 kg) slowing over 4 m from 4 m/s. (2 marks)</div>
+                    <div class="click-reveal" onclick="this.classList.toggle('revealed')">
+                        <p>Click to reveal step-by-step answer:</p>
+                        <div class="reveal-text">
+                            <strong>Step 1:</strong> Find time: Average speed 2 m/s, t = 4 m / 2 m/s = 2 s.<br>
+                            <strong>Step 2:</strong> a = (0 - 4)/2 = -2 m/s²; F = 2 kg × -2 = -4 N.<br>
+                            <strong>Answer:</strong> Friction ≈ 4 N opposing motion.
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 26: Scaffolded Q11 - Analysis -->
+            <section>
+                <div class="practice-problem">
+                    <span class="problem-number">Scaffolded Q11</span>
+                    <div class="question-prompt">Analysis: Discuss how tire grip affects car stopping distance on wet roads, using balanced vs. unbalanced forces. (3 marks)</div>
+                    <div class="click-reveal" onclick="this.classList.toggle('revealed')">
+                        <p>Click to reveal step-by-step answer:</p>
+                        <div class="reveal-text">
+                            <strong>Step 1:</strong> Wet roads reduce friction (less grip).<br>
+                            <strong>Step 2:</strong> Braking: Friction unbalanced initially, but lower max friction → longer distance.<br>
+                            <strong>Step 3:</strong> Balanced at stop (0 velocity); e.g., 50 m dry vs. 100 m wet.<br>
+                            <strong>Answer:</strong> Lower friction increases stopping distance due to slower deceleration.
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 27: Additional Practice Header -->
+            <section>
+                <div class="topic-header">
+                    <h2>Additional Practice Questions</h2>
+                </div>
+                <div class="transition-box">
+                    <p>Now test your understanding with more questions. Click to reveal answers.</p>
+                </div>
+            </section>
+
+            <!-- Slide 28: Extra Q1 -->
+            <section>
+                <div class="practice-problem">
+                    <span class="problem-number">Extra Q1</span>
+                    <div class="question-prompt">A skateboarder accelerates from 0 to 8 m/s in 4 s. Find acceleration. (1 mark)</div>
+                    <div class="click-reveal" onclick="this.classList.toggle('revealed')">
+                        <p>Click to reveal answer:</p>
+                        <div class="reveal-text">a = (8 - 0)/4 = 2 m/s².</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 29: Extra Q2 -->
+            <section>
+                <div class="practice-problem">
+                    <span class="problem-number">Extra Q2</span>
+                    <div class="question-prompt">Why does a bus lurch forward when starting? Link to Newton's First Law. (2 marks)</div>
+                    <div class="click-reveal" onclick="this.classList.toggle('revealed')">
+                        <p>Click to reveal answer:</p>
+                        <div class="reveal-text">Passengers' inertia keeps them at rest; bus accelerates, causing relative motion (First Law).</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 30: Extra Q3 -->
+            <section>
+                <div class="practice-problem">
+                    <span class="problem-number">Extra Q3</span>
+                    <div class="question-prompt">Calculate force to accelerate a 50 kg cart at 4 m/s². (1 mark)</div>
+                    <div class="click-reveal" onclick="this.classList.toggle('revealed')">
+                        <p>Click to reveal answer:</p>
+                        <div class="reveal-text">F = m a = 50 × 4 = 200 N.</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 31: Extra Q4 -->
+            <section>
+                <div class="practice-problem">
+                    <span class="problem-number">Extra Q4</span>
+                    <div class="question-prompt">How does oil reduce friction in engines? (2 marks)</div>
+                    <div class="click-reveal" onclick="this.classList.toggle('revealed')">
+                        <p>Click to reveal answer:</p>
+                        <div class="reveal-text">Oil creates a lubricant layer, reducing surface contact and kinetic friction, allowing smoother motion with less energy loss.</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 32: Extra Q5 - Velocity Calculation -->
+            <section>
+                <div class="practice-problem">
+                    <span class="problem-number">Extra Q5</span>
+                    <div class="question-prompt">Velocity Calculation: A plane flies 500 km west in 2 hours. What is its velocity? (1 mark)</div>
+                    <div class="click-reveal" onclick="this.classList.toggle('revealed')">
+                        <p>Click to reveal answer:</p>
+                        <div class="reveal-text">Velocity = displacement / time = 500 km west / 2 h = 250 km/h west.</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 33: Extra Q6 - Displacement Calculation -->
+            <section>
+                <div class="practice-problem">
+                    <span class="problem-number">Extra Q6</span>
+                    <div class="question-prompt">Displacement Calculation: A runner jogs 2 km north, then 2 km south, then 3 km east. What is the displacement? (2 marks)</div>
+                    <div class="click-reveal" onclick="this.classList.toggle('revealed')">
+                        <p>Click to reveal answer:</p>
+                        <div class="reveal-text">Net north-south = 0 km; east = 3 km. Magnitude = 3 km east.</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 34: End -->
+            <section>
+                <h2>Lesson Complete!</h2>
+                <p>Review key concepts like scalars/vectors, velocity, and laws. Ready for the next topic?</p>
+                <div class="topic-complete">
+                    Progress: 100% - Great job!
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <!-- Image Manager -->
+    <button class="image-manager-toggle" onclick="toggleImageManager()" title="Image Manager">🖼️</button>
+    <div id="imageManager" class="image-manager">
+        <h3>Image Manager</h3>
+        <div class="bulk-upload" onclick="bulkUpload()">📁 Bulk Upload Images</div>
+        <div id="slideList" class="slide-list"></div>
+        <div class="progress-bar">
+            <div id="progressFill" class="progress-fill">0/0</div>
+        </div>
+        <div class="action-buttons">
+            <button class="action-btn export" onclick="exportImages()">Export Images</button>
+            <button class="action-btn import" onclick="importImages()">Import Images</button>
+            <button class="action-btn clear" onclick="clearAllImages()">Clear All</button>
+            <button class="action-btn download" onclick="downloadWithImages()">Download Lesson</button>
+        </div>
+    </div>
+    <div id="saveNotification" class="save-notification">Saved with Images!</div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reveal.min.js"></script>
+    <script>
+        Reveal.initialize({
+            hash: true,
+            transition: 'slide',
+            width: '100%',
+            height: '100%'
+        });
+
+        // Image Management Functions (adapted from provided code)
+        let slideImages = JSON.parse(localStorage.getItem('motionForcesImages') || '{}');
+
+        function toggleImageManager() {
+            const manager = document.getElementById('imageManager');
+            manager.classList.toggle('open');
+        }
+
+        // Drag and Drop Setup
+        document.addEventListener('DOMContentLoaded', function() {
+            const placeholders = document.querySelectorAll('.image-placeholder');
+            placeholders.forEach(placeholder => {
+                placeholder.addEventListener('dragover', (e) => {
+                    e.preventDefault();
+                    placeholder.classList.add('drag-over');
+                    const overlay = placeholder.querySelector('.drag-hint-overlay');
+                    if (overlay) overlay.style.display = 'flex';
+                });
+                placeholder.addEventListener('dragleave', () => {
+                    placeholder.classList.remove('drag-over');
+                    const overlay = placeholder.querySelector('.drag-hint-overlay');
+                    if (overlay) overlay.style.display = 'none';
+                });
+                placeholder.addEventListener('drop', (e) => {
+                    e.preventDefault();
+                    placeholder.classList.remove('drag-over');
+                    const overlay = placeholder.querySelector('.drag-hint-overlay');
+                    if (overlay) overlay.style.display = 'none';
+                    const files = e.dataTransfer.files;
+                    if (files.length > 0) {
+                        loadImageToSlide(files[0], placeholder.id);
+                    }
+                });
+                placeholder.addEventListener('paste', (e) => {
+                    const items = e.clipboardData.items;
+                    for (let item of items) {
+                        if (item.type.indexOf('image') !== -1) {
+                            const blob = item.getAsFile();
+                            loadImageToSlide(blob, placeholder.id);
+                            break;
+                        }
+                    }
+                });
+            });
+            loadMinimizedStates();
+            updateSlideList();
+            updateProgress();
+        });
+
+        function loadImageToSlide(file, slideId) {
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                const imageData = event.target.result;
+                setSlideImage(slideId, imageData, file.name);
+                embedImageInHTML(slideId, imageData);
+                updateSlideList();
+                updateProgress();
+                localStorage.setItem('motionForcesImages', JSON.stringify(slideImages));
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function setSlideImage(slideId, imageData, filename = '') {
+            const placeholder = document.getElementById(slideId);
+            if (placeholder) {
+                const wasMinimized = placeholder.classList.contains('minimized');
+                placeholder.innerHTML = `
+                    <img src="${imageData}" alt="Slide image: ${filename}">
+                    <div class="image-controls">
+                        <button class="image-control-btn" onclick="toggleMinimize('${slideId}')" title="${wasMinimized ? 'Expand' : 'Minimize'}">${wasMinimized ? '📤' : '📦'}</button>
+                        <button class="image-control-btn" onclick="replaceImage('${slideId}')" title="Replace">🔄</button>
+                        <button class="image-control-btn" onclick="removeImage('${slideId}')" title="Remove">🗑️</button>
+                    </div>
+                `;
+                placeholder.classList.add('has-image');
+                if (wasMinimized) {
+                    placeholder.classList.add('minimized');
+                }
+                slideImages[slideId] = imageData;
+            }
+        }
+
+        function replaceImage(slideId) {
+            selectImageForSlide(slideId);
+        }
+
+        function removeImage(slideId) {
+            const placeholder = document.getElementById(slideId);
+            if (placeholder) {
+                const wasMinimized = placeholder.classList.contains('minimized');
+                const originalHint = getOriginalHint(slideId);
+                placeholder.innerHTML = `
+                    <div class="placeholder-content">
+                        <span class="placeholder-icon">🖼️</span>
+                        <span class="placeholder-text">${originalHint.text}</span>
+                        <span class="placeholder-hint">${originalHint.hint}</span>
+                    </div>
+                    <div class="drag-hint-overlay">
+                        📁 Drop image here
+                    </div>
+                    <div class="image-controls">
+                        <button class="image-control-btn" onclick="toggleMinimize('${slideId}')" title="${wasMinimized ? 'Expand' : 'Minimize'}">${wasMinimized ? '📤' : '📦'}</button>
+                        <button class="image-control-btn" onclick="replaceImage('${slideId}')" title="Upload">📂</button>
+                        <button class="image-control-btn" onclick="removeImage('${slideId}')" title="Remove">🗑️</button>
+                    </div>
+                    <div class="upload-methods">
+                        <button class="upload-method-btn" onclick="selectImageForSlide('${slideId}')" title="Upload from computer">📁 Upload</button>
+                    </div>
+                    <div class="paste-indicator">📋 Paste Ready</div>
+                `;
+                placeholder.classList.remove('has-image');
+                if (wasMinimized) {
+                    placeholder.classList.add('minimized');
+                }
+                placeholder.dataset.embedded = '';
+                placeholder.tabIndex = 0;
+                delete slideImages[slideId];
+                localStorage.setItem('motionForcesImages', JSON.stringify(slideImages));
+                updateSlideList();
+                updateProgress();
+            }
+        }
+
+        function getOriginalHint(slideId) {
+            const hints = {
+                'slide17-image': { text: 'Image: Diagram illustrating Newton\'s Laws with everyday examples', hint: 'Click • Drag & Drop • Paste (Ctrl+V)' },
+                'slide23-image': { text: 'Image: Illustration of friction and balanced forces in everyday scenarios', hint: 'Click • Drag & Drop • Paste (Ctrl+V)' }
+            };
+            return hints[slideId] || { text: 'Image Placeholder', hint: 'Click • Drag & Drop • Paste (Ctrl+V)' };
+        }
+
+        function selectImageForSlide(slideId) {
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.accept = 'image/*';
+            input.onchange = function(e) {
+                const file = e.target.files[0];
+                if (file) {
+                    loadImageToSlide(file, slideId);
+                }
+            };
+            input.click();
+        }
+
+        function bulkUpload() {
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.accept = 'image/*';
+            input.multiple = true;
+            input.onchange = function(e) {
+                const files = Array.from(e.target.files);
+                if (files.length > 0) {
+                    processBulkUpload(files);
+                }
+            };
+            input.click();
+        }
+
+        function processBulkUpload(files) {
+            const placeholders = document.querySelectorAll('.image-placeholder:not(.has-image)');
+            files.forEach((file, index) => {
+                if (index < placeholders.length) {
+                    const slideId = placeholders[index].id;
+                    loadImageToSlide(file, slideId);
+                }
+            });
+            if (files.length > placeholders.length) {
+                alert(`Uploaded ${placeholders.length} images. ${files.length - placeholders.length} files skipped.`);
+            }
+        }
+
+        function updateSlideList() {
+            const slideList = document.getElementById('slideList');
+            slideList.innerHTML = '';
+            const placeholders = document.querySelectorAll('.image-placeholder');
+            placeholders.forEach(placeholder => {
+                const slideId = placeholder.id;
+                const slideNum = slideId.match(/\d+/)?.[0] || '';
+                const hasImage = placeholder.classList.contains('has-image');
+                const hint = getOriginalHint(slideId);
+                const item = document.createElement('div');
+                item.className = `slide-item ${hasImage ? 'has-image' : 'no-image'}`;
+                item.innerHTML = `
+                    <div class="slide-status ${hasImage ? 'has-image' : 'no-image'}"></div>
+                    <div>
+                        <div>Slide ${slideNum}</div>
+                        <small>${hint.text}</small>
+                    </div>
+                `;
+                item.addEventListener('click', () => {
+                    if (hasImage) {
+                        Reveal.slide(parseInt(slideNum) - 1);
+                    } else {
+                        selectImageForSlide(slideId);
+                    }
+                });
+                slideList.appendChild(item);
+            });
+        }
+
+        function updateProgress() {
+            const placeholders = document.querySelectorAll('.image-placeholder');
+            const withImages = document.querySelectorAll('.image-placeholder.has-image');
+            const percentage = (withImages.length / placeholders.length) * 100;
+            const progressFill = document.getElementById('progressFill');
+            progressFill.style.width = percentage + '%';
+            progressFill.textContent = `${withImages.length}/${placeholders.length}`;
+        }
+
+        function downloadWithImages() {
+            const currentHTML = document.documentElement.outerHTML;
+            const blob = new Blob([currentHTML], { type: 'text/html' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'physics-motion-forces-lesson-with-images.html';
+            a.click();
+            URL.revokeObjectURL(url);
+            const notification = document.getElementById('saveNotification');
+            notification.classList.add('show');
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
+
+        function exportImages() {
+            if (Object.keys(slideImages).length > 0) {
+                const blob = new Blob([JSON.stringify(slideImages)], { type: 'application/json' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'motion-forces-images-backup.json';
+                a.click();
+                URL.revokeObjectURL(url);
+            } else {
+                alert('No images to export!');
+            }
+        }
+
+        function importImages() {
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.accept = '.json';
+            input.onchange = function(e) {
+                const file = e.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(event) {
+                        try {
+                            const importedData = JSON.parse(event.target.result);
+                            Object.keys(importedData).forEach(slideId => {
+                                const placeholder = document.getElementById(slideId);
+                                if (placeholder) {
+                                    setSlideImage(slideId, importedData[slideId], 'imported');
+                                }
+                            });
+                            slideImages = { ...slideImages, ...importedData };
+                            localStorage.setItem('motionForcesImages', JSON.stringify(slideImages));
+                            updateSlideList();
+                            updateProgress();
+                            alert('Images imported successfully!');
+                        } catch (error) {
+                            alert('Error importing images: Invalid file format');
+                        }
+                    };
+                    reader.readAsText(file);
+                }
+            };
+            input.click();
+        }
+
+        function clearAllImages() {
+            if (window.confirm('Are you sure you want to remove all images?')) {
+                Object.keys(slideImages).forEach(slideId => removeImage(slideId));
+                localStorage.removeItem('motionForcesImages');
+            }
+        }
+
+        function toggleMinimize(slideId) {
+            const placeholder = document.getElementById(slideId);
+            if (placeholder) {
+                placeholder.classList.toggle('minimized');
+                const minimizedState = JSON.parse(localStorage.getItem('minimizedPlaceholdersMotion') || '{}');
+                minimizedState[slideId] = placeholder.classList.contains('minimized');
+                localStorage.setItem('minimizedPlaceholdersMotion', JSON.stringify(minimizedState));
+                const minimizeBtn = placeholder.querySelector('[onclick*="toggleMinimize"]');
+                if (minimizeBtn) {
+                    minimizeBtn.textContent = placeholder.classList.contains('minimized') ? '📤' : '📦';
+                    minimizeBtn.title = placeholder.classList.contains('minimized') ? 'Expand' : 'Minimize';
+                }
+            }
+        }
+
+        function loadMinimizedStates() {
+            const minimizedState = JSON.parse(localStorage.getItem('minimizedPlaceholdersMotion') || '{}');
+            Object.keys(minimizedState).forEach(slideId => {
+                if (minimizedState[slideId]) {
+                    const placeholder = document.getElementById(slideId);
+                    if (placeholder) placeholder.classList.add('minimized');
+                }
+            });
+        }
+
+        function embedImageInHTML(slideId, imageData) {
+            const placeholder = document.getElementById(slideId);
+            if (placeholder) placeholder.dataset.embedded = imageData;
+        }
+
+        // Load saved images on start
+        document.addEventListener('DOMContentLoaded', function() {
+            Object.keys(slideImages).forEach(slideId => {
+                const placeholder = document.getElementById(slideId);
+                if (placeholder && slideImages[slideId]) {
+                    setSlideImage(slideId, slideImages[slideId], 'saved');
+                }
+            });
+            updateSlideList();
+            updateProgress();
+        });
+    </script>
+</body>
+</html>
