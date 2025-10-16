@@ -1,0 +1,1542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Earth & Space: Interactive Worksheet Game</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-blue: #2563eb;
+            --primary-purple: #7c3aed;
+            --success-green: #10b981;
+            --warning-orange: #f59e0b;
+            --error-red: #ef4444;
+            --accent-cyan: #06b6d4;
+            --text-dark: #1e293b;
+            --bg-light: #f8fafc;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            background: linear-gradient(135deg, var(--primary-blue), var(--primary-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+        }
+
+        .score-board {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 20px;
+        }
+
+        .score-item {
+            background: linear-gradient(135deg, #f0f9ff, #e0f2fe);
+            padding: 15px 30px;
+            border-radius: 15px;
+            border: 2px solid var(--accent-cyan);
+        }
+
+        .score-label {
+            font-size: 0.9em;
+            color: #64748b;
+            margin-bottom: 5px;
+        }
+
+        .score-value {
+            font-size: 2em;
+            font-weight: 700;
+            color: var(--primary-blue);
+        }
+
+        .game-section {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            margin-bottom: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .section-title {
+            font-size: 1.8em;
+            color: var(--text-dark);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .section-icon {
+            font-size: 1.5em;
+        }
+
+        /* Drag and Drop Game */
+        .drag-drop-area {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-top: 20px;
+        }
+
+        .draggable-items {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .drag-item {
+            background: linear-gradient(135deg, #fef3c7, #fde68a);
+            padding: 15px;
+            border-radius: 12px;
+            cursor: move;
+            border: 2px solid var(--warning-orange);
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .drag-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .drag-item.dragging {
+            opacity: 0.5;
+        }
+
+        .drop-zones {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .drop-zone {
+            background: #f8fafc;
+            border: 3px dashed #cbd5e1;
+            padding: 20px;
+            border-radius: 12px;
+            min-height: 60px;
+            transition: all 0.3s;
+        }
+
+        .drop-zone.drag-over {
+            background: #dcfce7;
+            border-color: var(--success-green);
+        }
+
+        .drop-zone.correct {
+            background: linear-gradient(135deg, #dcfce7, #bbf7d0);
+            border-color: var(--success-green);
+            border-style: solid;
+        }
+
+        .drop-zone.incorrect {
+            background: linear-gradient(135deg, #fee2e2, #fecaca);
+            border-color: var(--error-red);
+            border-style: solid;
+        }
+
+        .drop-zone-label {
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 10px;
+        }
+
+        /* Multiple Choice */
+        .mcq-question {
+            background: #f8fafc;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+        }
+
+        .question-text {
+            font-size: 1.2em;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 15px;
+        }
+
+        .mcq-options {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .mcq-option {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            border: 2px solid #e2e8f0;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+
+        .mcq-option:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border-color: var(--primary-blue);
+        }
+
+        .mcq-option.selected {
+            background: linear-gradient(135deg, #dbeafe, #bfdbfe);
+            border-color: var(--primary-blue);
+        }
+
+        .mcq-option.correct {
+            background: linear-gradient(135deg, #dcfce7, #bbf7d0);
+            border-color: var(--success-green);
+        }
+
+        .mcq-option.incorrect {
+            background: linear-gradient(135deg, #fee2e2, #fecaca);
+            border-color: var(--error-red);
+        }
+
+        /* Fill in the Blanks */
+        .fill-blank-question {
+            background: #f8fafc;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+        }
+
+        .blank-input {
+            background: white;
+            border: 2px solid #e2e8f0;
+            padding: 10px 15px;
+            border-radius: 8px;
+            font-size: 1em;
+            font-weight: 600;
+            width: 200px;
+            transition: all 0.3s;
+        }
+
+        .blank-input:focus {
+            outline: none;
+            border-color: var(--primary-blue);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        .blank-input.correct {
+            background: linear-gradient(135deg, #dcfce7, #bbf7d0);
+            border-color: var(--success-green);
+        }
+
+        .blank-input.incorrect {
+            background: linear-gradient(135deg, #fee2e2, #fecaca);
+            border-color: var(--error-red);
+        }
+
+        /* Matching Game */
+        .matching-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-top: 20px;
+        }
+
+        .matching-column {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .match-item {
+            background: linear-gradient(135deg, #e0f2fe, #bae6fd);
+            padding: 15px;
+            border-radius: 10px;
+            border: 2px solid var(--accent-cyan);
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+        }
+
+        .match-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .match-item.selected {
+            background: linear-gradient(135deg, #fef3c7, #fde68a);
+            border-color: var(--warning-orange);
+        }
+
+        .match-item.matched {
+            background: linear-gradient(135deg, #dcfce7, #bbf7d0);
+            border-color: var(--success-green);
+            cursor: default;
+        }
+
+        /* True/False */
+        .tf-question {
+            background: #f8fafc;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+        }
+
+        .tf-buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .tf-button {
+            flex: 1;
+            padding: 15px;
+            border: 2px solid #e2e8f0;
+            background: white;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 1.1em;
+            transition: all 0.3s;
+        }
+
+        .tf-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .tf-button.true-btn {
+            color: var(--success-green);
+        }
+
+        .tf-button.false-btn {
+            color: var(--error-red);
+        }
+
+        .tf-button.correct {
+            background: linear-gradient(135deg, #dcfce7, #bbf7d0);
+            border-color: var(--success-green);
+        }
+
+        .tf-button.incorrect {
+            background: linear-gradient(135deg, #fee2e2, #fecaca);
+            border-color: var(--error-red);
+        }
+
+        /* Ordering Game */
+        .ordering-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .order-item {
+            background: linear-gradient(135deg, #fef3c7, #fde68a);
+            padding: 15px;
+            border-radius: 10px;
+            border: 2px solid var(--warning-orange);
+            cursor: move;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            transition: all 0.3s;
+        }
+
+        .order-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .order-number {
+            background: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: var(--primary-blue);
+        }
+
+        /* Buttons */
+        .button-group {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .btn {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 1em;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-blue), var(--primary-purple));
+            color: white;
+        }
+
+        .btn-success {
+            background: var(--success-green);
+            color: white;
+        }
+
+        .btn-reset {
+            background: #64748b;
+            color: white;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        /* Feedback Messages */
+        .feedback {
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 15px;
+            font-weight: 600;
+            display: none;
+        }
+
+        .feedback.success {
+            background: linear-gradient(135deg, #dcfce7, #bbf7d0);
+            color: #065f46;
+            border: 2px solid var(--success-green);
+        }
+
+        .feedback.error {
+            background: linear-gradient(135deg, #fee2e2, #fecaca);
+            color: #991b1b;
+            border: 2px solid var(--error-red);
+        }
+
+        .feedback.show {
+            display: block;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Progress Bar */
+        .progress-container {
+            background: #e2e8f0;
+            height: 30px;
+            border-radius: 15px;
+            overflow: hidden;
+            margin: 20px 0;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--success-green), #34d399);
+            width: 0%;
+            transition: width 0.5s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+        }
+
+        /* Final Results */
+        .results-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.8);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .results-modal.show {
+            display: flex;
+        }
+
+        .results-content {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            max-width: 600px;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+
+        .results-score {
+            font-size: 4em;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary-blue), var(--primary-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin: 20px 0;
+        }
+
+        .results-message {
+            font-size: 1.5em;
+            margin: 20px 0;
+        }
+
+        .emoji-large {
+            font-size: 5em;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .drag-drop-area,
+            .mcq-options,
+            .matching-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .score-board {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>🌌 Earth & Space Challenge</h1>
+            <p style="font-size: 1.1em; color: #64748b;">Test Your Knowledge!</p>
+            
+            <div class="score-board">
+                <div class="score-item">
+                    <div class="score-label">Score</div>
+                    <div class="score-value" id="score">0</div>
+                </div>
+                <div class="score-item">
+                    <div class="score-label">Completed</div>
+                    <div class="score-value" id="completed">0/10</div>
+                </div>
+            </div>
+
+            <div class="progress-container">
+                <div class="progress-bar" id="progressBar">0%</div>
+            </div>
+        </div>
+
+        <!-- Game 1: Drag and Drop - Models vs Theories -->
+        <div class="game-section">
+            <div class="section-title">
+                <span class="section-icon">🎯</span>
+                Game 1: Sort Models and Theories
+            </div>
+            <p style="color: #64748b; margin-bottom: 20px;">Drag each item to the correct category</p>
+            
+            <div class="drag-drop-area">
+                <div class="draggable-items" id="dragItems1">
+                    <div class="drag-item" draggable="true" data-answer="model">Shows HOW things work</div>
+                    <div class="drag-item" draggable="true" data-answer="theory">Explains WHY things happen</div>
+                    <div class="drag-item" draggable="true" data-answer="model">Visual representation</div>
+                    <div class="drag-item" draggable="true" data-answer="theory">Based on evidence</div>
+                    <div class="drag-item" draggable="true" data-answer="model">Solar system diagram</div>
+                    <div class="drag-item" draggable="true" data-answer="theory">Gravity theory</div>
+                </div>
+
+                <div class="drop-zones">
+                    <div class="drop-zone-label">📊 Scientific Model</div>
+                    <div class="drop-zone" data-category="model"></div>
+                    
+                    <div class="drop-zone-label" style="margin-top: 20px;">🔬 Scientific Theory</div>
+                    <div class="drop-zone" data-category="theory"></div>
+                </div>
+            </div>
+
+            <div class="button-group">
+                <button class="btn btn-primary" onclick="checkDragDrop1()">Check Answers</button>
+                <button class="btn btn-reset" onclick="resetDragDrop1()">Reset</button>
+            </div>
+            <div class="feedback" id="feedback1"></div>
+        </div>
+
+        <!-- Game 2: Multiple Choice -->
+        <div class="game-section">
+            <div class="section-title">
+                <span class="section-icon">🤔</span>
+                Game 2: Multiple Choice Challenge
+            </div>
+
+            <div class="mcq-question">
+                <div class="question-text">1. Who proposed the heliocentric model?</div>
+                <div class="mcq-options">
+                    <div class="mcq-option" onclick="selectMCQ(this, 'q1', false)">A) Ptolemy</div>
+                    <div class="mcq-option" onclick="selectMCQ(this, 'q1', true)">B) Copernicus</div>
+                    <div class="mcq-option" onclick="selectMCQ(this, 'q1', false)">C) Newton</div>
+                    <div class="mcq-option" onclick="selectMCQ(this, 'q1', false)">D) Einstein</div>
+                </div>
+            </div>
+
+            <div class="mcq-question">
+                <div class="question-text">2. What is our galaxy called?</div>
+                <div class="mcq-options">
+                    <div class="mcq-option" onclick="selectMCQ(this, 'q2', false)">A) Andromeda</div>
+                    <div class="mcq-option" onclick="selectMCQ(this, 'q2', true)">B) Milky Way</div>
+                    <div class="mcq-option" onclick="selectMCQ(this, 'q2', false)">C) Orion</div>
+                    <div class="mcq-option" onclick="selectMCQ(this, 'q2', false)">D) Sombrero</div>
+                </div>
+            </div>
+
+            <div class="mcq-question">
+                <div class="question-text">3. How long does light from the Sun take to reach Earth?</div>
+                <div class="mcq-options">
+                    <div class="mcq-option" onclick="selectMCQ(this, 'q3', false)">A) Instant</div>
+                    <div class="mcq-option" onclick="selectMCQ(this, 'q3', true)">B) 8.3 minutes</div>
+                    <div class="mcq-option" onclick="selectMCQ(this, 'q3', false)">C) 1 hour</div>
+                    <div class="mcq-option" onclick="selectMCQ(this, 'q3', false)">D) 1 day</div>
+                </div>
+            </div>
+
+            <div class="feedback" id="feedback2"></div>
+        </div>
+
+        <!-- Game 3: Fill in the Blanks -->
+        <div class="game-section">
+            <div class="section-title">
+                <span class="section-icon">✍️</span>
+                Game 3: Fill in the Blanks
+            </div>
+
+            <div class="fill-blank-question">
+                <div class="question-text">
+                    1. The <input type="text" class="blank-input" id="blank1" data-answer="geocentric"> model placed Earth at the center of the universe.
+                </div>
+            </div>
+
+            <div class="fill-blank-question">
+                <div class="question-text">
+                    2. A <input type="text" class="blank-input" id="blank2" data-answer="nebula"> is a giant cloud of gas and dust where stars are born.
+                </div>
+            </div>
+
+            <div class="fill-blank-question">
+                <div class="question-text">
+                    3. One <input type="text" class="blank-input" id="blank3" data-answer="au"> equals the distance from Earth to the Sun.
+                </div>
+            </div>
+
+            <div class="fill-blank-question">
+                <div class="question-text">
+                    4. The Milky Way is approximately <input type="text" class="blank-input" id="blank4" data-answer="100000"> light-years across.
+                </div>
+            </div>
+
+            <div class="button-group">
+                <button class="btn btn-primary" onclick="checkBlanks()">Check Answers</button>
+                <button class="btn btn-reset" onclick="resetBlanks()">Reset</button>
+            </div>
+            <div class="feedback" id="feedback3"></div>
+        </div>
+
+        <!-- Game 4: Matching Game -->
+        <div class="game-section">
+            <div class="section-title">
+                <span class="section-icon">🔗</span>
+                Game 4: Match the Terms
+            </div>
+            <p style="color: #64748b; margin-bottom: 20px;">Click one term from each column to match them</p>
+
+            <div class="matching-grid">
+                <div class="matching-column" id="matchCol1">
+                    <div class="match-item" data-id="1" onclick="selectMatch(this, 1)">Galaxy</div>
+                    <div class="match-item" data-id="2" onclick="selectMatch(this, 1)">Star</div>
+                    <div class="match-item" data-id="3" onclick="selectMatch(this, 1)">Solar System</div>
+                    <div class="match-item" data-id="4" onclick="selectMatch(this, 1)">Light Year</div>
+                </div>
+
+                <div class="matching-column" id="matchCol2">
+                    <div class="match-item" data-id="4" onclick="selectMatch(this, 2)">Distance light travels in 1 year</div>
+                    <div class="match-item" data-id="1" onclick="selectMatch(this, 2)">Billions of stars held by gravity</div>
+                    <div class="match-item" data-id="3" onclick="selectMatch(this, 2)">Star with orbiting planets</div>
+                    <div class="match-item" data-id="2" onclick="selectMatch(this, 2)">Hot ball of gas producing energy</div>
+                </div>
+            </div>
+
+            <div class="button-group">
+                <button class="btn btn-reset" onclick="resetMatching()">Reset</button>
+            </div>
+            <div class="feedback" id="feedback4"></div>
+        </div>
+
+        <!-- Game 5: True or False -->
+        <div class="game-section">
+            <div class="section-title">
+                <span class="section-icon">✅</span>
+                Game 5: True or False
+            </div>
+
+            <div class="tf-question">
+                <div class="question-text">1. The geocentric model is currently accepted by scientists.</div>
+                <div class="tf-buttons">
+                    <button class="tf-button true-btn" onclick="checkTF(this, false, 'tf1')">TRUE</button>
+                    <button class="tf-button false-btn" onclick="checkTF(this, true, 'tf1')">FALSE</button>
+                </div>
+            </div>
+
+            <div class="tf-question">
+                <div class="question-text">2. Stars produce energy through nuclear fusion.</div>
+                <div class="tf-buttons">
+                    <button class="tf-button true-btn" onclick="checkTF(this, true, 'tf2')">TRUE</button>
+                    <button class="tf-button false-btn" onclick="checkTF(this, false, 'tf2')">FALSE</button>
+                </div>
+            </div>
+
+            <div class="tf-question">
+                <div class="question-text">3. A parsec is smaller than an AU.</div>
+                <div class="tf-buttons">
+                    <button class="tf-button true-btn" onclick="checkTF(this, false, 'tf3')">TRUE</button>
+                    <button class="tf-button false-btn" onclick="checkTF(this, true, 'tf3')">FALSE</button>
+                </div>
+            </div>
+
+            <div class="feedback" id="feedback5"></div>
+        </div>
+
+        <!-- Game 6: Order the Sizes -->
+        <div class="game-section">
+            <div class="section-title">
+                <span class="section-icon">📏</span>
+                Game 6: Order from Smallest to Largest
+            </div>
+            <p style="color: #64748b; margin-bottom: 20px;">Drag to reorder the items from smallest to largest</p>
+
+            <div class="ordering-list" id="orderingList">
+                <div class="order-item" draggable="true" data-order="3">
+                    <div class="order-number">?</div>
+                    <div>Solar System</div>
+                </div>
+                <div class="order-item" draggable="true" data-order="5">
+                    <div class="order-number">?</div>
+                    <div>Galaxy</div>
+                </div>
+                <div class="order-item" draggable="true" data-order="1">
+                    <div class="order-number">?</div>
+                    <div>Planet</div>
+                </div>
+                <div class="order-item" draggable="true" data-order="2">
+                    <div class="order-number">?</div>
+                    <div>Star</div>
+                </div>
+                <div class="order-item" draggable="true" data-order="4">
+                    <div class="order-number">?</div>
+                    <div>Nebula</div>
+                </div>
+            </div>
+
+            <div class="button-group">
+                <button class="btn btn-primary" onclick="checkOrdering()">Check Order</button>
+                <button class="btn btn-reset" onclick="resetOrdering()">Reset</button>
+            </div>
+            <div class="feedback" id="feedback6"></div>
+        </div>
+
+        <!-- Game 7: Calculate Distances - Part 1 -->
+        <div class="game-section">
+            <div class="section-title">
+                <span class="section-icon">🧮</span>
+                Game 7: Distance Calculations - Part 1
+            </div>
+            <p style="color: #64748b; margin-bottom: 20px;">Use these conversions: 1 AU = 150 million km | 1 light-year ≈ 9.5 trillion km</p>
+
+            <div class="fill-blank-question">
+                <div class="question-text">
+                    1. If Jupiter is 5 AU from the Sun, and 1 AU = 150 million km, how far is Jupiter in millions of km?<br>
+                    <input type="number" class="blank-input" id="calc1" data-answer="750"> million km
+                </div>
+            </div>
+
+            <div class="fill-blank-question">
+                <div class="question-text">
+                    2. If a star is 4 light-years away, and 1 light-year ≈ 9.5 trillion km, how far is the star in trillion km?<br>
+                    <input type="number" class="blank-input" id="calc2" data-answer="38"> trillion km
+                </div>
+            </div>
+
+            <div class="fill-blank-question">
+                <div class="question-text">
+                    3. Mars is 228 million km from the Sun. How many AU is this? (Round to 2 decimals)<br>
+                    <input type="number" step="0.01" class="blank-input" id="calc3" data-answer="1.52"> AU
+                </div>
+            </div>
+
+            <div class="button-group">
+                <button class="btn btn-primary" onclick="checkCalculations()">Check Answers</button>
+                <button class="btn btn-reset" onclick="resetCalculations()">Reset</button>
+            </div>
+            <div class="feedback" id="feedback7"></div>
+        </div>
+
+        <!-- Game 7B: More Distance Calculations -->
+        <div class="game-section">
+            <div class="section-title">
+                <span class="section-icon">📐</span>
+                Game 7B: Distance Calculations - Part 2
+            </div>
+            <p style="color: #64748b; margin-bottom: 20px;">Use these conversions: 1 parsec ≈ 3.26 light-years | 1 parsec ≈ 206,265 AU</p>
+
+            <div class="fill-blank-question">
+                <div class="question-text">
+                    1. Proxima Centauri is 1.3 parsecs away. How many light-years is this? (Round to 1 decimal)<br>
+                    <input type="number" step="0.1" class="blank-input" id="calc4" data-answer="4.2"> light-years
+                </div>
+            </div>
+
+            <div class="fill-blank-question">
+                <div class="question-text">
+                    2. A nebula is 0.5 parsecs away. How many AU is this?<br>
+                    <input type="number" class="blank-input" id="calc5" data-answer="103132"> AU (round to nearest whole number)
+                </div>
+            </div>
+
+            <div class="fill-blank-question">
+                <div class="question-text">
+                    3. If Saturn is 9.5 AU from the Sun, how many million km is this?<br>
+                    <input type="number" class="blank-input" id="calc6" data-answer="1425"> million km
+                </div>
+            </div>
+
+            <div class="button-group">
+                <button class="btn btn-primary" onclick="checkCalculations2()">Check Answers</button>
+                <button class="btn btn-reset" onclick="resetCalculations2()">Reset</button>
+            </div>
+            <div class="feedback" id="feedback7b"></div>
+        </div>
+
+        <!-- Game 7C: Light Travel Time Calculations -->
+        <div class="game-section">
+            <div class="section-title">
+                <span class="section-icon">⚡</span>
+                Game 7C: Light Travel Time Calculations
+            </div>
+            <p style="color: #64748b; margin-bottom: 20px;">Light travels at 300,000 km/s. Use this to calculate travel times!</p>
+
+            <div class="fill-blank-question">
+                <div class="question-text">
+                    1. How many seconds does light take to travel 1 AU (150 million km)?<br>
+                    <input type="number" class="blank-input" id="calc7" data-answer="500"> seconds
+                </div>
+            </div>
+
+            <div class="fill-blank-question">
+                <div class="question-text">
+                    2. Convert 500 seconds to minutes. (Round to 1 decimal)<br>
+                    <input type="number" step="0.1" class="blank-input" id="calc8" data-answer="8.3"> minutes
+                </div>
+            </div>
+
+            <div class="fill-blank-question">
+                <div class="question-text">
+                    3. If Neptune is 30 AU away, how many minutes does light take to reach it? (30 × 8.3)<br>
+                    <input type="number" class="blank-input" id="calc9" data-answer="249"> minutes
+                </div>
+            </div>
+
+            <div class="fill-blank-question">
+                <div class="question-text">
+                    4. Convert 249 minutes to hours. (Round to 1 decimal)<br>
+                    <input type="number" step="0.1" class="blank-input" id="calc10" data-answer="4.2"> hours
+                </div>
+            </div>
+
+            <div class="button-group">
+                <button class="btn btn-primary" onclick="checkCalculations3()">Check Answers</button>
+                <button class="btn btn-reset" onclick="resetCalculations3()">Reset</button>
+            </div>
+            <div class="feedback" id="feedback7c"></div>
+        </div>
+
+        <!-- Game 8: Universe Features Grid -->
+        <div class="game-section">
+            <div class="section-title">
+                <span class="section-icon">🌌</span>
+                Game 8: Universe Features Quiz
+            </div>
+
+            <div class="mcq-question">
+                <div class="question-text">1. What is the main role of a nebula?</div>
+                <div class="mcq-options">
+                    <div class="mcq-option" onclick="selectMCQ(this, 'uf1', false)">A) Absorb light</div>
+                    <div class="mcq-option" onclick="selectMCQ(this, 'uf1', true)">B) Birthplace of stars</div>
+                    <div class="mcq-option" onclick="selectMCQ(this, 'uf1', false)">C) Hold planets</div>
+                    <div class="mcq-option" onclick="selectMCQ(this, 'uf1', false)">D) Create gravity</div>
+                </div>
+            </div>
+
+            <div class="mcq-question">
+                <div class="question-text">2. What holds a galaxy together?</div>
+                <div class="mcq-options">
+                    <div class="mcq-option" onclick="selectMCQ(this, 'uf2', false)">A) Magnetism</div>
+                    <div class="mcq-option" onclick="selectMCQ(this, 'uf2', true)">B) Gravity</div>
+                    <div class="mcq-option" onclick="selectMCQ(this, 'uf2', false)">C) Light</div>
+                    <div class="mcq-option" onclick="selectMCQ(this, 'uf2', false)">D) Heat</div>
+                </div>
+            </div>
+
+            <div class="mcq-question">
+                <div class="question-text">3. How old is our Sun?</div>
+                <div class="mcq-options">
+                    <div class="mcq-option" onclick="selectMCQ(this, 'uf3', false)">A) 1 billion years</div>
+                    <div class="mcq-option" onclick="selectMCQ(this, 'uf3', true)">B) 4.6 billion years</div>
+                    <div class="mcq-option" onclick="selectMCQ(this, 'uf3', false)">C) 10 billion years</div>
+                    <div class="mcq-option" onclick="selectMCQ(this, 'uf3', false)">D) 13.8 billion years</div>
+                </div>
+            </div>
+
+            <div class="feedback" id="feedback8"></div>
+        </div>
+
+        <!-- Final Submit Button -->
+        <div class="game-section" style="text-align: center;">
+            <h2 style="margin-bottom: 20px;">Ready to see your final score?</h2>
+            <button class="btn btn-success" style="font-size: 1.2em; padding: 20px 40px;" onclick="showFinalResults()">🎉 Submit & See Results</button>
+        </div>
+    </div>
+
+    <!-- Results Modal -->
+    <div class="results-modal" id="resultsModal">
+        <div class="results-content">
+            <div class="emoji-large" id="resultEmoji">🎉</div>
+            <h2 id="resultTitle">Congratulations!</h2>
+            <div class="results-score" id="finalScore">0%</div>
+            <div class="results-message" id="resultMessage"></div>
+            <button class="btn btn-primary" onclick="closeResults()" style="margin-top: 20px;">Close</button>
+            <button class="btn btn-reset" onclick="resetAll()" style="margin-top: 20px;">Start Over</button>
+        </div>
+    </div>
+
+    <script>
+        // Game State
+        let gameState = {
+            score: 0,
+            totalGames: 10,
+            completedGames: 0,
+            answers: {
+                mcq: {},
+                tf: {},
+                matching: {
+                    selected1: null,
+                    selected2: null,
+                    matches: 0
+                }
+            }
+        };
+
+        // Update Score Display
+        function updateScore(points) {
+            gameState.score += points;
+            document.getElementById('score').textContent = gameState.score;
+        }
+
+        function updateCompleted() {
+            gameState.completedGames++;
+            document.getElementById('completed').textContent = `${gameState.completedGames}/${gameState.totalGames}`;
+            updateProgressBar();
+        }
+
+        function updateProgressBar() {
+            const percentage = (gameState.completedGames / gameState.totalGames) * 100;
+            const progressBar = document.getElementById('progressBar');
+            progressBar.style.width = percentage + '%';
+            progressBar.textContent = Math.round(percentage) + '%';
+        }
+
+        // Game 1: Drag and Drop
+        let draggedElement = null;
+
+        document.addEventListener('DOMContentLoaded', function() {
+            setupDragDrop();
+            setupOrdering();
+        });
+
+        function setupDragDrop() {
+            const draggables = document.querySelectorAll('.drag-item');
+            const dropZones = document.querySelectorAll('.drop-zone');
+
+            draggables.forEach(item => {
+                item.addEventListener('dragstart', function(e) {
+                    draggedElement = this;
+                    this.classList.add('dragging');
+                });
+
+                item.addEventListener('dragend', function() {
+                    this.classList.remove('dragging');
+                });
+            });
+
+            dropZones.forEach(zone => {
+                zone.addEventListener('dragover', function(e) {
+                    e.preventDefault();
+                    this.classList.add('drag-over');
+                });
+
+                zone.addEventListener('dragleave', function() {
+                    this.classList.remove('drag-over');
+                });
+
+                zone.addEventListener('drop', function(e) {
+                    e.preventDefault();
+                    this.classList.remove('drag-over');
+                    if (draggedElement) {
+                        this.appendChild(draggedElement);
+                    }
+                });
+            });
+        }
+
+        function checkDragDrop1() {
+            const dropZones = document.querySelectorAll('.drop-zone');
+            let correct = 0;
+            let total = 0;
+
+            dropZones.forEach(zone => {
+                const category = zone.dataset.category;
+                const items = zone.querySelectorAll('.drag-item');
+                
+                items.forEach(item => {
+                    total++;
+                    if (item.dataset.answer === category) {
+                        correct++;
+                        zone.classList.add('correct');
+                    } else {
+                        zone.classList.add('incorrect');
+                    }
+                });
+            });
+
+            const feedback = document.getElementById('feedback1');
+            if (correct === total && total > 0) {
+                feedback.className = 'feedback success show';
+                feedback.textContent = `🎉 Perfect! You got all ${correct} correct!`;
+                updateScore(15);
+                updateCompleted();
+            } else {
+                feedback.className = 'feedback error show';
+                feedback.textContent = `You got ${correct} out of ${total} correct. Try again!`;
+            }
+        }
+
+        function resetDragDrop1() {
+            const itemsContainer = document.getElementById('dragItems1');
+            const items = document.querySelectorAll('.drag-item');
+            items.forEach(item => {
+                itemsContainer.appendChild(item);
+            });
+
+            document.querySelectorAll('.drop-zone').forEach(zone => {
+                zone.classList.remove('correct', 'incorrect');
+            });
+
+            document.getElementById('feedback1').classList.remove('show');
+        }
+
+        // Game 2: Multiple Choice
+        function selectMCQ(element, questionId, isCorrect) {
+            // Remove previous selections for this question
+            const question = element.closest('.mcq-question');
+            question.querySelectorAll('.mcq-option').forEach(opt => {
+                opt.classList.remove('selected', 'correct', 'incorrect');
+            });
+
+            // Mark this option
+            element.classList.add('selected');
+            
+            if (isCorrect) {
+                element.classList.add('correct');
+                if (!gameState.answers.mcq[questionId]) {
+                    gameState.answers.mcq[questionId] = true;
+                    updateScore(5);
+                    
+                    // Check if all MCQ questions are answered
+                    const allAnswered = ['q1', 'q2', 'q3', 'uf1', 'uf2', 'uf3'].every(q => gameState.answers.mcq[q]);
+                    if (allAnswered) {
+                        const correct = Object.values(gameState.answers.mcq).filter(v => v).length;
+                        const feedback = document.getElementById('feedback2');
+                        feedback.className = 'feedback success show';
+                        feedback.textContent = `✅ Great job! You completed all multiple choice questions!`;
+                        updateCompleted();
+                    }
+                }
+            } else {
+                element.classList.add('incorrect');
+                gameState.answers.mcq[questionId] = false;
+            }
+        }
+
+        // Game 3: Fill in the Blanks
+        function checkBlanks() {
+            let correct = 0;
+            let total = 4;
+
+            for (let i = 1; i <= total; i++) {
+                const input = document.getElementById(`blank${i}`);
+                const answer = input.dataset.answer.toLowerCase();
+                const userAnswer = input.value.toLowerCase().trim();
+
+                input.classList.remove('correct', 'incorrect');
+                
+                if (userAnswer === answer) {
+                    input.classList.add('correct');
+                    correct++;
+                } else {
+                    input.classList.add('incorrect');
+                }
+            }
+
+            const feedback = document.getElementById('feedback3');
+            if (correct === total) {
+                feedback.className = 'feedback success show';
+                feedback.textContent = `🎉 Perfect! All ${correct} answers correct!`;
+                updateScore(20);
+                updateCompleted();
+            } else {
+                feedback.className = 'feedback error show';
+                feedback.textContent = `You got ${correct} out of ${total} correct. Keep trying!`;
+            }
+        }
+
+        function resetBlanks() {
+            for (let i = 1; i <= 4; i++) {
+                const input = document.getElementById(`blank${i}`);
+                input.value = '';
+                input.classList.remove('correct', 'incorrect');
+            }
+            document.getElementById('feedback3').classList.remove('show');
+        }
+
+        // Game 4: Matching
+        function selectMatch(element, column) {
+            if (element.classList.contains('matched')) return;
+
+            const id = element.dataset.id;
+
+            if (column === 1) {
+                // Deselect previous selection in column 1
+                document.querySelectorAll('#matchCol1 .match-item').forEach(item => {
+                    item.classList.remove('selected');
+                });
+                element.classList.add('selected');
+                gameState.answers.matching.selected1 = id;
+            } else {
+                // Deselect previous selection in column 2
+                document.querySelectorAll('#matchCol2 .match-item').forEach(item => {
+                    item.classList.remove('selected');
+                });
+                element.classList.add('selected');
+                gameState.answers.matching.selected2 = id;
+            }
+
+            // Check if both are selected
+            if (gameState.answers.matching.selected1 && gameState.answers.matching.selected2) {
+                if (gameState.answers.matching.selected1 === gameState.answers.matching.selected2) {
+                    // Correct match!
+                    const items1 = document.querySelectorAll(`#matchCol1 .match-item[data-id="${gameState.answers.matching.selected1}"]`);
+                    const items2 = document.querySelectorAll(`#matchCol2 .match-item[data-id="${gameState.answers.matching.selected2}"]`);
+                    
+                    items1.forEach(item => {
+                        item.classList.remove('selected');
+                        item.classList.add('matched');
+                    });
+                    items2.forEach(item => {
+                        item.classList.remove('selected');
+                        item.classList.add('matched');
+                    });
+
+                    gameState.answers.matching.matches++;
+                    updateScore(5);
+
+                    if (gameState.answers.matching.matches === 4) {
+                        const feedback = document.getElementById('feedback4');
+                        feedback.className = 'feedback success show';
+                        feedback.textContent = '🎉 Perfect! All matches completed!';
+                        updateCompleted();
+                    }
+                } else {
+                    // Wrong match
+                    setTimeout(() => {
+                        document.querySelectorAll('.match-item.selected').forEach(item => {
+                            item.classList.remove('selected');
+                        });
+                    }, 500);
+                }
+
+                gameState.answers.matching.selected1 = null;
+                gameState.answers.matching.selected2 = null;
+            }
+        }
+
+        function resetMatching() {
+            document.querySelectorAll('.match-item').forEach(item => {
+                item.classList.remove('selected', 'matched');
+            });
+            gameState.answers.matching = { selected1: null, selected2: null, matches: 0 };
+            document.getElementById('feedback4').classList.remove('show');
+        }
+
+        // Game 5: True/False
+        function checkTF(button, isCorrect, questionId) {
+            const buttons = button.parentElement.querySelectorAll('.tf-button');
+            buttons.forEach(btn => {
+                btn.classList.remove('correct', 'incorrect');
+                btn.disabled = true;
+            });
+
+            if (isCorrect) {
+                button.classList.add('correct');
+                if (!gameState.answers.tf[questionId]) {
+                    gameState.answers.tf[questionId] = true;
+                    updateScore(5);
+
+                    const allAnswered = ['tf1', 'tf2', 'tf3'].every(q => gameState.answers.tf[q]);
+                    if (allAnswered) {
+                        const feedback = document.getElementById('feedback5');
+                        feedback.className = 'feedback success show';
+                        feedback.textContent = '✅ All True/False questions completed!';
+                        updateCompleted();
+                    }
+                }
+            } else {
+                button.classList.add('incorrect');
+                gameState.answers.tf[questionId] = false;
+            }
+        }
+
+        // Game 6: Ordering
+        let draggedOrderItem = null;
+
+        function setupOrdering() {
+            const items = document.querySelectorAll('.order-item');
+
+            items.forEach(item => {
+                item.addEventListener('dragstart', function() {
+                    draggedOrderItem = this;
+                    setTimeout(() => this.style.opacity = '0.5', 0);
+                });
+
+                item.addEventListener('dragend', function() {
+                    this.style.opacity = '1';
+                });
+
+                item.addEventListener('dragover', function(e) {
+                    e.preventDefault();
+                });
+
+                item.addEventListener('drop', function(e) {
+                    e.preventDefault();
+                    if (draggedOrderItem !== this) {
+                        const list = document.getElementById('orderingList');
+                        const allItems = [...list.children];
+                        const draggedIndex = allItems.indexOf(draggedOrderItem);
+                        const targetIndex = allItems.indexOf(this);
+
+                        if (draggedIndex < targetIndex) {
+                            this.parentNode.insertBefore(draggedOrderItem, this.nextSibling);
+                        } else {
+                            this.parentNode.insertBefore(draggedOrderItem, this);
+                        }
+                    }
+                });
+            });
+        }
+
+        function checkOrdering() {
+            const items = document.querySelectorAll('.order-item');
+            let correct = true;
+
+            items.forEach((item, index) => {
+                const expectedOrder = parseInt(item.dataset.order);
+                const actualOrder = index + 1;
+                const numberDiv = item.querySelector('.order-number');
+                
+                numberDiv.textContent = actualOrder;
+
+                if (expectedOrder !== actualOrder) {
+                    correct = false;
+                }
+            });
+
+            const feedback = document.getElementById('feedback6');
+            if (correct) {
+                feedback.className = 'feedback success show';
+                feedback.textContent = '🎉 Perfect order! Planet → Star → Solar System → Nebula → Galaxy';
+                updateScore(15);
+                updateCompleted();
+            } else {
+                feedback.className = 'feedback error show';
+                feedback.textContent = 'Not quite right. Try again! Remember: smallest to largest.';
+            }
+        }
+
+        function resetOrdering() {
+            const items = document.querySelectorAll('.order-item .order-number');
+            items.forEach(item => item.textContent = '?');
+            document.getElementById('feedback6').classList.remove('show');
+        }
+
+        // Game 7: Calculations Part 1
+        function checkCalculations() {
+            let correct = 0;
+            let total = 3;
+
+            const calc1 = document.getElementById('calc1');
+            const calc2 = document.getElementById('calc2');
+            const calc3 = document.getElementById('calc3');
+
+            calc1.classList.remove('correct', 'incorrect');
+            calc2.classList.remove('correct', 'incorrect');
+            calc3.classList.remove('correct', 'incorrect');
+
+            if (parseInt(calc1.value) === 750) {
+                calc1.classList.add('correct');
+                correct++;
+            } else {
+                calc1.classList.add('incorrect');
+            }
+
+            if (parseInt(calc2.value) === 38) {
+                calc2.classList.add('correct');
+                correct++;
+            } else {
+                calc2.classList.add('incorrect');
+            }
+
+            if (parseFloat(calc3.value) === 1.52) {
+                calc3.classList.add('correct');
+                correct++;
+            } else {
+                calc3.classList.add('incorrect');
+            }
+
+            const feedback = document.getElementById('feedback7');
+            if (correct === total) {
+                feedback.className = 'feedback success show';
+                feedback.textContent = '🎉 Excellent calculations! All correct!';
+                updateScore(15);
+                updateCompleted();
+            } else {
+                feedback.className = 'feedback error show';
+                feedback.textContent = `You got ${correct} out of ${total} correct. Check your math!`;
+            }
+        }
+
+        function resetCalculations() {
+            document.getElementById('calc1').value = '';
+            document.getElementById('calc2').value = '';
+            document.getElementById('calc3').value = '';
+            document.querySelectorAll('#calc1, #calc2, #calc3').forEach(input => {
+                input.classList.remove('correct', 'incorrect');
+            });
+            document.getElementById('feedback7').classList.remove('show');
+        }
+
+        // Game 7B: Calculations Part 2
+        function checkCalculations2() {
+            let correct = 0;
+            let total = 3;
+
+            const calc4 = document.getElementById('calc4');
+            const calc5 = document.getElementById('calc5');
+            const calc6 = document.getElementById('calc6');
+
+            calc4.classList.remove('correct', 'incorrect');
+            calc5.classList.remove('correct', 'incorrect');
+            calc6.classList.remove('correct', 'incorrect');
+
+            if (Math.abs(parseFloat(calc4.value) - 4.2) < 0.05) {
+                calc4.classList.add('correct');
+                correct++;
+            } else {
+                calc4.classList.add('incorrect');
+            }
+
+            if (parseInt(calc5.value) === 103132 || parseInt(calc5.value) === 103133) {
+                calc5.classList.add('correct');
+                correct++;
+            } else {
+                calc5.classList.add('incorrect');
+            }
+
+            if (parseInt(calc6.value) === 1425) {
+                calc6.classList.add('correct');
+                correct++;
+            } else {
+                calc6.classList.add('incorrect');
+            }
+
+            const feedback = document.getElementById('feedback7b');
+            if (correct === total) {
+                feedback.className = 'feedback success show';
+                feedback.textContent = '🎉 Outstanding! All parsec calculations correct!';
+                updateScore(15);
+                updateCompleted();
+            } else {
+                feedback.className = 'feedback error show';
+                feedback.textContent = `You got ${correct} out of ${total} correct. Review the conversions!`;
+            }
+        }
+
+        function resetCalculations2() {
+            document.getElementById('calc4').value = '';
+            document.getElementById('calc5').value = '';
+            document.getElementById('calc6').value = '';
+            document.querySelectorAll('#calc4, #calc5, #calc6').forEach(input => {
+                input.classList.remove('correct', 'incorrect');
+            });
+            document.getElementById('feedback7b').classList.remove('show');
+        }
+
+        // Game 7C: Light Travel Time
+        function checkCalculations3() {
+            let correct = 0;
+            let total = 4;
+
+            const calc7 = document.getElementById('calc7');
+            const calc8 = document.getElementById('calc8');
+            const calc9 = document.getElementById('calc9');
+            const calc10 = document.getElementById('calc10');
+
+            calc7.classList.remove('correct', 'incorrect');
+            calc8.classList.remove('correct', 'incorrect');
+            calc9.classList.remove('correct', 'incorrect');
+            calc10.classList.remove('correct', 'incorrect');
+
+            if (parseInt(calc7.value) === 500) {
+                calc7.classList.add('correct');
+                correct++;
+            } else {
+                calc7.classList.add('incorrect');
+            }
+
+            if (Math.abs(parseFloat(calc8.value) - 8.3) < 0.05) {
+                calc8.classList.add('correct');
+                correct++;
+            } else {
+                calc8.classList.add('incorrect');
+            }
+
+            if (parseInt(calc9.value) === 249) {
+                calc9.classList.add('correct');
+                correct++;
+            } else {
+                calc9.classList.add('incorrect');
+            }
+
+            if (Math.abs(parseFloat(calc10.value) - 4.2) < 0.05) {
+                calc10.classList.add('correct');
+                correct++;
+            } else {
+                calc10.classList.add('incorrect');
+            }
+
+            const feedback = document.getElementById('feedback7c');
+            if (correct === total) {
+                feedback.className = 'feedback success show';
+                feedback.textContent = '🎉 Perfect! You mastered light travel calculations!';
+                updateScore(15);
+                updateCompleted();
+            } else {
+                feedback.className = 'feedback error show';
+                feedback.textContent = `You got ${correct} out of ${total} correct. Double-check your work!`;
+            }
+        }
+
+        function resetCalculations3() {
+            document.getElementById('calc7').value = '';
+            document.getElementById('calc8').value = '';
+            document.getElementById('calc9').value = '';
+            document.getElementById('calc10').value = '';
+            document.querySelectorAll('#calc7, #calc8, #calc9, #calc10').forEach(input => {
+                input.classList.remove('correct', 'incorrect');
+            });
+            document.getElementById('feedback7c').classList.remove('show');
+        }
+
+        // Final Results
+        function showFinalResults() {
+            const maxScore = 120; // Updated max score
+            const percentage = Math.min(100, Math.round((gameState.score / maxScore) * 100));
+            
+            const modal = document.getElementById('resultsModal');
+            const emoji = document.getElementById('resultEmoji');
+            const title = document.getElementById('resultTitle');
+            const scoreDiv = document.getElementById('finalScore');
+            const message = document.getElementById('resultMessage');
+
+            scoreDiv.textContent = percentage + '%';
+
+            if (percentage >= 90) {
+                emoji.textContent = '🏆';
+                title.textContent = 'Outstanding!';
+                message.textContent = 'You\'re a space expert! Perfect understanding of scientific models and the universe!';
+            } else if (percentage >= 75) {
+                emoji.textContent = '🌟';
+                title.textContent = 'Excellent Work!';
+                message.textContent = 'Great job! You have a strong grasp of the concepts!';
+            } else if (percentage >= 60) {
+                emoji.textContent = '👍';
+                title.textContent = 'Good Effort!';
+                message.textContent = 'Nice work! Review the lesson to improve your understanding.';
+            } else {
+                emoji.textContent = '📚';
+                title.textContent = 'Keep Learning!';
+                message.textContent = 'Good try! Review the lesson and try again to improve your score.';
+            }
+
+            modal.classList.add('show');
+        }
+
+        function closeResults() {
+            document.getElementById('resultsModal').classList.remove('show');
+        }
+
+        function resetAll() {
+            location.reload();
+        }
+    </script>
+</body>
+</html>
