@@ -1,0 +1,1830 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Science Vocabulary Study Guide</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Calibri', 'Arial', sans-serif;
+            background: #ffffff;
+            padding: 40px 20px;
+            color: #000000;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 850px;
+            margin: 0 auto;
+            background: white;
+            padding: 60px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+
+        .header {
+            text-align: center;
+            border-bottom: 3px solid #000;
+            padding-bottom: 20px;
+            margin-bottom: 40px;
+        }
+
+        h1 {
+            font-size: 32px;
+            font-weight: bold;
+            color: #000;
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+        }
+
+        .subtitle {
+            font-size: 14px;
+            color: #555;
+            font-style: italic;
+        }
+
+        .term-entry {
+            margin-bottom: 35px;
+            page-break-inside: avoid;
+        }
+
+        .term-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #000;
+            margin-bottom: 8px;
+            border-bottom: 2px solid #ddd;
+            padding-bottom: 5px;
+        }
+
+        .term-definition {
+            font-size: 14px;
+            color: #333;
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+
+        .visual-box {
+            background: #f9f9f9;
+            border: 1px solid #ddd;
+            padding: 20px;
+            margin-top: 10px;
+            text-align: center;
+            border-radius: 4px;
+        }
+
+        canvas {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .diagram-label {
+            font-size: 11px;
+            color: #666;
+            margin-top: 8px;
+            font-style: italic;
+        }
+
+        .section-header {
+            font-size: 22px;
+            font-weight: bold;
+            color: #000;
+            margin: 40px 0 20px 0;
+            padding: 10px 0;
+            border-top: 2px solid #000;
+            border-bottom: 2px solid #000;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .ascii-diagram {
+            font-family: 'Courier New', monospace;
+            background: #f5f5f5;
+            padding: 15px;
+            border: 1px solid #ccc;
+            font-size: 12px;
+            line-height: 1.4;
+            white-space: pre;
+            overflow-x: auto;
+        }
+
+        .image-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-top: 10px;
+        }
+
+        .grid-item {
+            background: #f0f0f0;
+            padding: 15px;
+            border: 1px solid #ccc;
+            text-align: center;
+            border-radius: 3px;
+        }
+
+        .grid-item-title {
+            font-weight: bold;
+            font-size: 13px;
+            margin-top: 8px;
+        }
+
+        svg {
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>SCIENCE VOCABULARY STUDY GUIDE</h1>
+            <p class="subtitle">Complete Visual Reference for Key Scientific Terms</p>
+        </div>
+
+        <!-- PHYSICS & WAVES -->
+        <div class="section-header">Physics & Waves</div>
+
+        <div class="term-entry">
+            <div class="term-title">Wavelength</div>
+            <div class="term-definition">The distance between two identical points of a wave.</div>
+            <div class="visual-box">
+                <canvas id="wavelengthCanvas" width="600" height="150"></canvas>
+                <div class="diagram-label">Figure 1: Wavelength (λ) measured between identical points on a wave</div>
+            </div>
+        </div>
+
+        <div class="term-entry">
+            <div class="term-title">Crests</div>
+            <div class="term-definition">The highest point of a wave or the very top of the wave.</div>
+            <div class="visual-box">
+                <canvas id="crestsCanvas" width="600" height="150"></canvas>
+                <div class="diagram-label">Figure 2: Crests marked at the peak of each wave</div>
+            </div>
+        </div>
+
+        <div class="term-entry">
+            <div class="term-title">Troughs</div>
+            <div class="term-definition">The regions of a wave where the wave is at its lowest point.</div>
+            <div class="visual-box">
+                <canvas id="troughsCanvas" width="600" height="150"></canvas>
+                <div class="diagram-label">Figure 3: Troughs marked at the lowest points of the wave</div>
+            </div>
+        </div>
+
+        <div class="term-entry">
+            <div class="term-title">Wave Model</div>
+            <div class="term-definition">A representation showing how energy travels through space as oscillating waves, characterized by wavelength, frequency, and amplitude.</div>
+            <div class="visual-box">
+                <canvas id="waveModelCanvas" width="600" height="180"></canvas>
+                <div class="diagram-label">Figure 4: Complete wave model showing amplitude, wavelength, crests, and troughs</div>
+            </div>
+        </div>
+
+        <div class="term-entry">
+            <div class="term-title">Accelerate</div>
+            <div class="term-definition">To move faster; an increase in velocity over time.</div>
+            <div class="visual-box">
+                <canvas id="accelerateCanvas" width="600" height="100"></canvas>
+                <div class="diagram-label">Figure 5: Object accelerating - increasing speed over time</div>
+            </div>
+        </div>
+
+        <div class="term-entry">
+            <div class="term-title">Decelerate</div>
+            <div class="term-definition">To move slower; a decrease in velocity over time.</div>
+            <div class="visual-box">
+                <canvas id="decelerateCanvas" width="600" height="100"></canvas>
+                <div class="diagram-label">Figure 6: Object decelerating - decreasing speed over time</div>
+            </div>
+        </div>
+
+        <div class="term-entry">
+            <div class="term-title">Particle Model</div>
+            <div class="term-definition">A model representing matter as being made up of tiny particles (atoms or molecules) that are in constant motion, with spaces between them.</div>
+            <div class="visual-box">
+                <canvas id="particleCanvas" width="600" height="200"></canvas>
+                <div class="diagram-label">Figure 7: Particle model showing solid, liquid, and gas states</div>
+            </div>
+        </div>
+
+        <!-- HEAT TRANSFER -->
+        <div class="section-header">Heat Transfer</div>
+
+        <div class="term-entry">
+            <div class="term-title">Conduction</div>
+            <div class="term-definition">The transfer of heat through direct contact between particles of matter, typically in solids.</div>
+            <div class="visual-box">
+                <canvas id="conductionCanvas" width="600" height="150"></canvas>
+                <div class="diagram-label">Figure 8: Heat conduction through a metal rod</div>
+            </div>
+        </div>
+
+        <div class="term-entry">
+            <div class="term-title">Convection</div>
+            <div class="term-definition">The transfer of heat through the movement of fluids (liquids or gases) where hot material rises and cool material sinks.</div>
+            <div class="visual-box">
+                <canvas id="convectionCanvas" width="600" height="200"></canvas>
+                <div class="diagram-label">Figure 9: Convection currents in a heated fluid</div>
+            </div>
+        </div>
+
+        <!-- CHEMISTRY & ATOMS -->
+        <div class="section-header">Chemistry & Atoms</div>
+
+        <div class="term-entry">
+            <div class="term-title">Atom</div>
+            <div class="term-definition">The smallest unit into which matter can be divided without the release of electrically charged particles.</div>
+            <div class="visual-box">
+                <canvas id="atomCanvas" width="300" height="300"></canvas>
+                <div class="diagram-label">Figure 10: Atom structure with nucleus and electron shells</div>
+            </div>
+        </div>
+
+        <div class="term-entry">
+            <div class="term-title">Mass</div>
+            <div class="term-definition">The amount of matter in an object, measured in kilograms (kg) or grams (g).</div>
+            <div class="visual-box">
+                <canvas id="massCanvas" width="400" height="200"></canvas>
+                <div class="diagram-label">Figure 11: Balance scale demonstrating mass measurement</div>
+            </div>
+        </div>
+
+        <div class="term-entry">
+            <div class="term-title">Exothermic Chemical Reaction</div>
+            <div class="term-definition">A chemical reaction that involves the release of energy in the form of heat or light.</div>
+            <div class="visual-box">
+                <canvas id="exothermicCanvas" width="600" height="150"></canvas>
+                <div class="diagram-label">Figure 12: Exothermic reaction releasing heat energy</div>
+            </div>
+        </div>
+
+        <!-- BIOLOGY & GENETICS -->
+        <div class="section-header">Biology & Genetics</div>
+
+        <div class="term-entry">
+            <div class="term-title">Nucleotide</div>
+            <div class="term-definition">A molecule that is the basic building block of the nucleic acids DNA and RNA. It is made up from nitrogen base, sugar, and phosphate.</div>
+            <div class="visual-box">
+                <canvas id="nucleotideCanvas" width="300" height="280"></canvas>
+                <div class="diagram-label">Figure 13: Nucleotide structure with three components</div>
+            </div>
+        </div>
+
+        <div class="term-entry">
+            <div class="term-title">Base Pairing</div>
+            <div class="term-definition">When two bases in DNA and RNA connect to form a rung on the twisted ladder-like structure of the DNA molecule. Adenine (A) pairs with Thymine (T), and Cytosine (C) pairs with Guanine (G).</div>
+            <div class="visual-box">
+                <canvas id="basePairCanvas" width="400" height="250"></canvas>
+                <div class="diagram-label">Figure 14: DNA base pairing - A-T and C-G pairs</div>
+            </div>
+        </div>
+
+        <div class="term-entry">
+            <div class="term-title">Proteins</div>
+            <div class="term-definition">Made up of chains of amino acids and needed to grow and repair cells.</div>
+            <div class="visual-box">
+                <canvas id="proteinCanvas" width="600" height="120"></canvas>
+                <div class="diagram-label">Figure 15: Amino acid chain forming a protein</div>
+            </div>
+        </div>
+
+        <div class="term-entry">
+            <div class="term-title">Enzymes</div>
+            <div class="term-definition">Proteins that help speed up chemical reactions in the body.</div>
+            <div class="visual-box">
+                <canvas id="enzymeCanvas" width="600" height="180"></canvas>
+                <div class="diagram-label">Figure 16: Enzyme-substrate interaction (Lock and Key Model)</div>
+            </div>
+        </div>
+
+        <div class="term-entry">
+            <div class="term-title">Lipids</div>
+            <div class="term-definition">Any organic compound that is insoluble in water, such as fats, waxes, and oils.</div>
+            <div class="visual-box">
+                <div class="image-grid">
+                    <div class="grid-item">
+                        <canvas id="fatCanvas" width="120" height="120"></canvas>
+                        <div class="grid-item-title">Fats</div>
+                    </div>
+                    <div class="grid-item">
+                        <canvas id="oilCanvas" width="120" height="120"></canvas>
+                        <div class="grid-item-title">Oils</div>
+                    </div>
+                    <div class="grid-item">
+                        <canvas id="waxCanvas" width="120" height="120"></canvas>
+                        <div class="grid-item-title">Waxes</div>
+                    </div>
+                </div>
+                <div class="diagram-label">Figure 17: Examples of lipids - all insoluble in water</div>
+            </div>
+        </div>
+
+        <div class="term-entry">
+            <div class="term-title">Organism</div>
+            <div class="term-definition">Any living thing, such as a plant, animal, bacteria, or fungus.</div>
+            <div class="visual-box">
+                <div class="image-grid">
+                    <div class="grid-item">
+                        <div style="font-size: 40px;">🌱</div>
+                        <div class="grid-item-title">Plant</div>
+                    </div>
+                    <div class="grid-item">
+                        <div style="font-size: 40px;">🐕</div>
+                        <div class="grid-item-title">Animal</div>
+                    </div>
+                    <div class="grid-item">
+                        <div style="font-size: 40px;">🦠</div>
+                        <div class="grid-item-title">Bacteria</div>
+                    </div>
+                    <div class="grid-item">
+                        <div style="font-size: 40px;">🍄</div>
+                        <div class="grid-item-title">Fungus</div>
+                    </div>
+                </div>
+                <div class="diagram-label">Figure 18: Different types of organisms</div>
+            </div>
+        </div>
+
+        <div class="term-entry">
+            <div class="term-title">Mutation</div>
+            <div class="term-definition">A change in the DNA sequence of an organism.</div>
+            <div class="visual-box">
+                <canvas id="mutationCanvas" width="600" height="150"></canvas>
+                <div class="diagram-label">Figure 19: DNA mutation - change in genetic sequence</div>
+            </div>
+        </div>
+
+        <div class="term-entry">
+            <div class="term-title">Sequence</div>
+            <div class="term-definition">The order in which things happen; the order of elements in a chain.</div>
+            <div class="visual-box">
+                <canvas id="sequenceCanvas" width="600" height="100"></canvas>
+                <div class="diagram-label">Figure 20: A sequence showing ordered progression</div>
+            </div>
+        </div>
+
+        <div class="term-entry">
+            <div class="term-title">Genetic</div>
+            <div class="term-definition">How traits are passed from parents to their children through genes.</div>
+            <div class="visual-box">
+                <canvas id="geneticCanvas" width="500" height="220"></canvas>
+                <div class="diagram-label">Figure 21: Genetic inheritance from parents to offspring</div>
+            </div>
+        </div>
+
+        <div class="term-entry">
+            <div class="term-title">Heredity</div>
+            <div class="term-definition">Biological traits passed on from one generation to the next.</div>
+            <div class="visual-box">
+                <canvas id="heredityCanvas" width="600" height="180"></canvas>
+                <div class="diagram-label">Figure 22: Heredity across three generations</div>
+            </div>
+        </div>
+
+        <!-- SPACE & ASTRONOMY -->
+        <div class="section-header">Space & Astronomy</div>
+
+        <div class="term-entry">
+            <div class="term-title">Galaxy</div>
+            <div class="term-definition">Make up the universe. A collection of stars, dust, gas, and dark matter held together by gravity. They vary in shape and size – spiral, elliptical, irregular.</div>
+            <div class="visual-box">
+                <canvas id="galaxyCanvas" width="600" height="200"></canvas>
+                <div class="diagram-label">Figure 23: Different galaxy types - Spiral, Elliptical, Irregular</div>
+            </div>
+        </div>
+
+        <div class="term-entry">
+            <div class="term-title">Nebula</div>
+            <div class="term-definition">A giant cloud of dust and gas in space (mostly hydrogen and helium), smaller than a galaxy.</div>
+            <div class="visual-box">
+                <canvas id="nebulaCanvas" width="400" height="250"></canvas>
+                <div class="diagram-label">Figure 24: Nebula - cloud of gas and dust in space</div>
+            </div>
+        </div>
+
+        <div class="term-entry">
+            <div class="term-title">Orbiting</div>
+            <div class="term-definition">The curved path of a celestial object that moves around something else that has gravity, like the Moon around the Earth.</div>
+            <div class="visual-box">
+                <canvas id="orbitCanvas" width="400" height="400"></canvas>
+                <div class="diagram-label">Figure 25: Moon orbiting Earth in a circular path</div>
+            </div>
+        </div>
+
+        <div class="term-entry">
+            <div class="term-title">Light Years</div>
+            <div class="term-definition">The distance that light travels in one year (1 light year = 9.4 trillion kilometers).</div>
+            <div class="visual-box">
+                <canvas id="lightYearCanvas" width="600" height="150"></canvas>
+                <div class="diagram-label">Figure 26: Light year distance measurement</div>
+            </div>
+        </div>
+
+        <!-- GENERAL CONCEPTS -->
+        <div class="section-header">General Scientific Concepts</div>
+
+        <div class="term-entry">
+            <div class="term-title">Replicate</div>
+            <div class="term-definition">Make a close or exact copy; reproduce.</div>
+            <div class="visual-box">
+                <canvas id="replicateCanvas" width="400" height="150"></canvas>
+                <div class="diagram-label">Figure 27: Replication producing identical copies</div>
+            </div>
+        </div>
+
+        <div class="term-entry">
+            <div class="term-title">Reflect</div>
+            <div class="term-definition">Think about something carefully; also refers to light bouncing off a surface.</div>
+            <div class="visual-box">
+                <canvas id="reflectCanvas" width="400" height="200"></canvas>
+                <div class="diagram-label">Figure 28: Light reflection and thinking/contemplation</div>
+            </div>
+        </div>
+
+        <div class="term-entry">
+            <div class="term-title">Identical</div>
+            <div class="term-definition">The same; equal in every way.</div>
+            <div class="visual-box">
+                <canvas id="identicalCanvas" width="400" height="120"></canvas>
+                <div class="diagram-label">Figure 29: Identical objects - exactly the same</div>
+            </div>
+        </div>
+
+        <div class="term-entry">
+            <div class="term-title">Fossil</div>
+            <div class="term-definition">Remains or traces of living things such as plants or animals preserved in rock layers.</div>
+            <div class="visual-box">
+                <canvas id="fossilCanvas" width="500" height="250"></canvas>
+                <div class="diagram-label">Figure 30: Fossil preserved in sedimentary rock layers</div>
+            </div>
+        </div>
+
+        <div class="term-entry">
+            <div class="term-title">Random</div>
+            <div class="term-definition">An outcome that occurs without a predictable pattern.</div>
+            <div class="visual-box">
+                <canvas id="randomCanvas" width="400" height="180"></canvas>
+                <div class="diagram-label">Figure 31: Random outcomes - unpredictable results</div>
+            </div>
+        </div>
+
+        <div class="term-entry">
+            <div class="term-title">Trends</div>
+            <div class="term-definition">A general pattern or direction in which something is changing or developing over time.</div>
+            <div class="visual-box">
+                <canvas id="trendsCanvas" width="500" height="250"></canvas>
+                <div class="diagram-label">Figure 32: Graph showing upward and downward trends</div>
+            </div>
+        </div>
+
+        <div class="term-entry">
+            <div class="term-title">Frequent</div>
+            <div class="term-definition">Occurring or appearing often; happening at short intervals.</div>
+            <div class="visual-box">
+                <canvas id="frequentCanvas" width="600" height="120"></canvas>
+                <div class="diagram-label">Figure 33: Frequent events occurring regularly over time</div>
+            </div>
+        </div>
+
+        <div class="term-entry">
+            <div class="term-title">Fundamental Role</div>
+            <div class="term-definition">An essential, basic, or primary function that is critically important to a system or process.</div>
+            <div class="visual-box">
+                <canvas id="fundamentalCanvas" width="400" height="200"></canvas>
+                <div class="diagram-label">Figure 34: Fundamental building blocks supporting a structure</div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // Wavelength Canvas
+        const wlCanvas = document.getElementById('wavelengthCanvas');
+        const wlCtx = wlCanvas.getContext('2d');
+        wlCtx.strokeStyle = '#000';
+        wlCtx.lineWidth = 2;
+        wlCtx.beginPath();
+        for(let x = 0; x < 600; x++) {
+            const y = 75 + Math.sin(x * 0.02) * 40;
+            if(x === 0) wlCtx.moveTo(x, y);
+            else wlCtx.lineTo(x, y);
+        }
+        wlCtx.stroke();
+        
+        // Wavelength markers
+        wlCtx.strokeStyle = '#cc0000';
+        wlCtx.lineWidth = 2;
+        wlCtx.setLineDash([5, 5]);
+        wlCtx.beginPath();
+        wlCtx.moveTo(50, 75);
+        wlCtx.lineTo(365, 75);
+        wlCtx.stroke();
+        wlCtx.setLineDash([]);
+        
+        // Arrows
+        wlCtx.beginPath();
+        wlCtx.moveTo(50, 65);
+        wlCtx.lineTo(50, 85);
+        wlCtx.stroke();
+        wlCtx.beginPath();
+        wlCtx.moveTo(365, 65);
+        wlCtx.lineTo(365, 85);
+        wlCtx.stroke();
+        
+        // Label
+        wlCtx.fillStyle = '#cc0000';
+        wlCtx.font = 'bold 16px Arial';
+        wlCtx.fillText('λ (Wavelength)', 180, 55);
+
+        // Crests Canvas
+        const cCanvas = document.getElementById('crestsCanvas');
+        const cCtx = cCanvas.getContext('2d');
+        cCtx.strokeStyle = '#000';
+        cCtx.lineWidth = 2;
+        cCtx.beginPath();
+        for(let x = 0; x < 600; x++) {
+            const y = 75 + Math.sin(x * 0.015) * 45;
+            if(x === 0) cCtx.moveTo(x, y);
+            else cCtx.lineTo(x, y);
+        }
+        cCtx.stroke();
+        
+        // Mark crests
+        const crests = [104, 314, 524];
+        crests.forEach(x => {
+            cCtx.fillStyle = '#cc0000';
+            cCtx.beginPath();
+            cCtx.arc(x, 30, 6, 0, Math.PI * 2);
+            cCtx.fill();
+            cCtx.font = 'bold 14px Arial';
+            cCtx.fillText('CREST', x - 25, 20);
+        });
+
+        // Troughs Canvas
+        const tCanvas = document.getElementById('troughsCanvas');
+        const tCtx = tCanvas.getContext('2d');
+        tCtx.strokeStyle = '#000';
+        tCtx.lineWidth = 2;
+        tCtx.beginPath();
+        for(let x = 0; x < 600; x++) {
+            const y = 75 + Math.sin(x * 0.015) * 45;
+            if(x === 0) tCtx.moveTo(x, y);
+            else tCtx.lineTo(x, y);
+        }
+        tCtx.stroke();
+        
+        // Mark troughs
+        const troughs = [209, 419];
+        troughs.forEach(x => {
+            tCtx.fillStyle = '#0066cc';
+            tCtx.beginPath();
+            tCtx.arc(x, 120, 6, 0, Math.PI * 2);
+            tCtx.fill();
+            tCtx.font = 'bold 14px Arial';
+            tCtx.fillText('TROUGH', x - 30, 140);
+        });
+
+        // Wave Model Canvas
+        const wmCanvas = document.getElementById('waveModelCanvas');
+        const wmCtx = wmCanvas.getContext('2d');
+        
+        // Center line
+        wmCtx.strokeStyle = '#888';
+        wmCtx.lineWidth = 1;
+        wmCtx.setLineDash([5, 5]);
+        wmCtx.beginPath();
+        wmCtx.moveTo(0, 90);
+        wmCtx.lineTo(600, 90);
+        wmCtx.stroke();
+        wmCtx.setLineDash([]);
+        
+        // Wave
+        wmCtx.strokeStyle = '#000';
+        wmCtx.lineWidth = 2;
+        wmCtx.beginPath();
+        for(let x = 0; x < 600; x++) {
+            const y = 90 + Math.sin(x * 0.015) * 50;
+            if(x === 0) wmCtx.moveTo(x, y);
+            else wmCtx.lineTo(x, y);
+        }
+        wmCtx.stroke();
+        
+        // Amplitude
+        wmCtx.strokeStyle = '#cc0000';
+        wmCtx.lineWidth = 2;
+        wmCtx.beginPath();
+        wmCtx.moveTo(50, 90);
+        wmCtx.lineTo(50, 40);
+        wmCtx.stroke();
+        wmCtx.fillStyle = '#cc0000';
+        wmCtx.font = 'bold 13px Arial';
+        wmCtx.fillText('Amplitude', 5, 70);
+
+        // Accelerate Canvas
+        const aCanvas = document.getElementById('accelerateCanvas');
+        const aCtx = aCanvas.getContext('2d');
+        
+        const positions = [80, 180, 300, 450];
+        const speeds = ['Slow', 'Medium', 'Fast', 'Faster'];
+        positions.forEach((x, i) => {
+            aCtx.fillStyle = i === 0 ? '#009900' : `rgba(0, 153, 0, ${1 - i * 0.15})`;
+            aCtx.beginPath();
+            aCtx.arc(x, 50, 20, 0, Math.PI * 2);
+            aCtx.fill();
+            aCtx.fillStyle = '#000';
+            aCtx.font = '11px Arial';
+            aCtx.fillText(speeds[i], x - 18, 80);
+        });
+        
+        // Arrow
+        aCtx.strokeStyle = '#000';
+        aCtx.lineWidth = 3;
+        aCtx.beginPath();
+        aCtx.moveTo(500, 50);
+        aCtx.lineTo(560, 50);
+        aCtx.lineTo(550, 42);
+        aCtx.moveTo(560, 50);
+        aCtx.lineTo(550, 58);
+        aCtx.stroke();
+
+        // Decelerate Canvas
+        const dCanvas = document.getElementById('decelerateCanvas');
+        const dCtx = dCanvas.getContext('2d');
+        
+        const dPositions = [520, 420, 300, 150];
+        dPositions.forEach((x, i) => {
+            dCtx.fillStyle = i === 0 ? '#cc0000' : `rgba(204, 0, 0, ${1 - i * 0.15})`;
+            dCtx.beginPath();
+            dCtx.arc(x, 50, 20, 0, Math.PI * 2);
+            dCtx.fill();
+        });
+        
+        // Arrow
+        dCtx.strokeStyle = '#000';
+        dCtx.lineWidth = 3;
+        dCtx.beginPath();
+        dCtx.moveTo(100, 50);
+        dCtx.lineTo(40, 50);
+        dCtx.lineTo(50, 42);
+        dCtx.moveTo(40, 50);
+        dCtx.lineTo(50, 58);
+        dCtx.stroke();
+
+        // Particle Model Canvas
+        const pCanvas = document.getElementById('particleCanvas');
+        const pCtx = pCanvas.getContext('2d');
+        
+        // Solid
+        pCtx.fillStyle = '#000';
+        pCtx.font = 'bold 14px Arial';
+        pCtx.fillText('SOLID', 80, 25);
+        for(let i = 0; i < 5; i++) {
+            for(let j = 0; j < 5; j++) {
+                pCtx.fillStyle = '#0066cc';
+                pCtx.beginPath();
+                pCtx.arc(50 + i * 25, 50 + j * 25, 8, 0, Math.PI * 2);
+                pCtx.fill();
+            }
+        }
+        
+        // Liquid
+        pCtx.fillStyle = '#000';
+        pCtx.fillText('LIQUID', 280, 25);
+        for(let i = 0; i < 20; i++) {
+            pCtx.fillStyle = '#009900';
+            pCtx.beginPath();
+            pCtx.arc(230 + Math.random() * 100, 40 + Math.random() * 110, 7, 0, Math.PI * 2);
+            pCtx.fill();
+        }
+        
+        // Gas
+        pCtx.fillStyle = '#000';
+        pCtx.fillText('GAS', 490, 25);
+        for(let i = 0; i < 10; i++) {
+            pCtx.fillStyle = '#cc0000';
+            pCtx.beginPath();
+            pCtx.arc(420 + Math.random() * 140, 40 + Math.random() * 140, 6, 0, Math.PI * 2);
+            pCtx.fill();
+        }
+
+        // Conduction Canvas
+        const condCanvas = document.getElementById('conductionCanvas');
+        const condCtx = condCanvas.getContext('2d');
+        
+        // Metal rod
+        condCtx.fillStyle = '#999';
+        condCtx.fillRect(50, 60, 500, 30);
+        
+        // Hot end (flame)
+        condCtx.fillStyle = '#ff6600';
+        condCtx.beginPath();
+        condCtx.moveTo(40, 90);
+        condCtx.lineTo(30, 110);
+        condCtx.lineTo(35, 110);
+        condCtx.lineTo(25, 125);
+        condCtx.lineTo(33, 125);
+        condCtx.lineTo(27, 135);
+        condCtx.lineTo(40, 120);
+        condCtx.lineTo(53, 135);
+        condCtx.lineTo(47, 125);
+        condCtx.lineTo(55, 125);
+        condCtx.lineTo(45, 110);
+        condCtx.lineTo(50, 110);
+        condCtx.closePath();
+        condCtx.fill();
+        
+        // Heat arrows
+        for(let i = 0; i < 5; i++) {
+            const x = 150 + i * 70;
+            condCtx.strokeStyle = '#ff3300';
+            condCtx.lineWidth = 2;
+            condCtx.beginPath();
+            condCtx.moveTo(x, 75);
+            condCtx.lineTo(x + 40, 75);
+            condCtx.lineTo(x + 35, 70);
+            condCtx.moveTo(x + 40, 75);
+            condCtx.lineTo(x + 35, 80);
+            condCtx.stroke();
+        }
+        
+        condCtx.fillStyle = '#000';
+        condCtx.font = 'bold 14px Arial';
+        condCtx.fillText('HOT', 20, 50);
+        condCtx.fillText('COLD', 530, 50);
+
+        // Convection Canvas
+        const convCanvas = document.getElementById('convectionCanvas');
+        const convCtx = convCanvas.getContext('2d');
+        
+        // Container
+        convCtx.strokeStyle = '#000';
+        convCtx.lineWidth = 3;
+        convCtx.strokeRect(100, 50, 400, 120);
+        
+        // Heat source
+        convCtx.fillStyle = '#ff6600';
+        convCtx.fillRect(250, 170, 100, 10);
+        convCtx.font = 'bold 12px Arial';
+        convCtx.fillText('HEAT', 275, 195);
+        
+        // Convection arrows - rising hot
+        convCtx.strokeStyle = '#cc0000';
+        convCtx.lineWidth = 3;
+        convCtx.beginPath();
+        convCtx.moveTo(300, 165);
+        convCtx.lineTo(300, 60);
+        convCtx.lineTo(295, 68);
+        convCtx.moveTo(300, 60);
+        convCtx.lineTo(305, 68);
+        convCtx.stroke();
+        
+        // Arrows spreading
+        convCtx.beginPath();
+        convCtx.moveTo(300, 60);
+        convCtx.lineTo(200, 60);
+        convCtx.lineTo(208, 55);
+        convCtx.moveTo(200, 60);
+        convCtx.lineTo(208, 65);
+        convCtx.stroke();
+        
+        convCtx.beginPath();
+        convCtx.moveTo(300, 60);
+        convCtx.lineTo(400, 60);
+        convCtx.lineTo(392, 55);
+        convCtx.moveTo(400, 60);
+        convCtx.lineTo(392, 65);
+        convCtx.stroke();
+        
+        // Falling cool
+        convCtx.strokeStyle = '#0066cc';
+        convCtx.beginPath();
+        convCtx.moveTo(150, 60);
+        convCtx.lineTo(150, 160);
+        convCtx.lineTo(145, 152);
+        convCtx.moveTo(150, 160);
+        convCtx.lineTo(155, 152);
+        convCtx.stroke();
+        
+        convCtx.beginPath();
+        convCtx.moveTo(450, 60);
+        convCtx.lineTo(450, 160);
+        convCtx.lineTo(445, 152);
+        convCtx.moveTo(450, 160);
+        convCtx.lineTo(455, 152);
+        convCtx.stroke();
+        
+        convCtx.fillStyle = '#cc0000';
+        convCtx.font = 'bold 12px Arial';
+        convCtx.fillText('Hot rises', 310, 100);
+        convCtx.fillStyle = '#0066cc';
+        convCtx.fillText('Cool sinks', 120, 110);
+        convCtx.fillText('Cool sinks', 420, 110);
+
+        // Atom Canvas
+        const atomCanvas = document.getElementById('atomCanvas');
+        const atomCtx = atomCanvas.getContext('2d');
+        
+        // Nucleus
+        atomCtx.fillStyle = '#cc0000';
+        atomCtx.beginPath();
+        atomCtx.arc(150, 150, 30, 0, Math.PI * 2);
+        atomCtx.fill();
+        atomCtx.fillStyle = '#fff';
+        atomCtx.font = 'bold 18px Arial';
+        atomCtx.fillText('N', 142, 158);
+        
+        // Electron orbits
+        atomCtx.strokeStyle = '#0066cc';
+        atomCtx.lineWidth = 2;
+        atomCtx.setLineDash([3, 3]);
+        atomCtx.beginPath();
+        atomCtx.arc(150, 150, 70, 0, Math.PI * 2);
+        atomCtx.stroke();
+        atomCtx.beginPath();
+        atomCtx.arc(150, 150, 110, 0, Math.PI * 2);
+        atomCtx.stroke();
+        atomCtx.setLineDash([]);
+        
+        // Electrons
+        const electronPos = [[220, 150], [150, 80], [80, 150], [150, 220], [260, 150], [150, 40]];
+        electronPos.forEach(([x, y]) => {
+            atomCtx.fillStyle = '#0066cc';
+            atomCtx.beginPath();
+            atomCtx.arc(x, y, 8, 0, Math.PI * 2);
+            atomCtx.fill();
+            atomCtx.fillStyle = '#fff';
+            atomCtx.font = '10px Arial';
+            atomCtx.fillText('e⁻', x - 6, y + 4);
+        });
+        
+        atomCtx.fillStyle = '#000';
+        atomCtx.font = 'bold 14px Arial';
+        atomCtx.fillText('Nucleus', 120, 200);
+        atomCtx.fillText('Electrons', 180, 100);
+
+        // Mass Canvas
+        const massCanvas = document.getElementById('massCanvas');
+        const massCtx = massCanvas.getContext('2d');
+        
+        // Scale base
+        massCtx.fillStyle = '#333';
+        massCtx.fillRect(170, 100, 60, 10);
+        massCtx.fillRect(195, 50, 10, 50);
+        
+        // Left pan
+        massCtx.strokeStyle = '#666';
+        massCtx.lineWidth = 2;
+        massCtx.beginPath();
+        massCtx.moveTo(200, 100);
+        massCtx.lineTo(100, 120);
+        massCtx.stroke();
+        massCtx.fillStyle = '#999';
+        massCtx.fillRect(80, 120, 40, 5);
+        massCtx.fillRect(60, 125, 80, 30);
+        
+        // Right pan
+        massCtx.beginPath();
+        massCtx.moveTo(200, 100);
+        massCtx.lineTo(300, 120);
+        massCtx.stroke();
+        massCtx.fillRect(280, 120, 40, 5);
+        massCtx.fillRect(260, 125, 80, 30);
+        
+        // Objects on pans
+        massCtx.fillStyle = '#cc6600';
+        massCtx.fillRect(75, 105, 30, 20);
+        massCtx.fillRect(275, 105, 30, 20);
+        
+        massCtx.fillStyle = '#000';
+        massCtx.font = 'bold 12px Arial';
+        massCtx.fillText('5kg', 80, 180);
+        massCtx.fillText('5kg', 280, 180);
+
+        // Exothermic Canvas
+        const exoCanvas = document.getElementById('exothermicCanvas');
+        const exoCtx = exoCanvas.getContext('2d');
+        
+        // Reactants
+        exoCtx.fillStyle = '#0066cc';
+        exoCtx.beginPath();
+        exoCtx.arc(80, 75, 25, 0, Math.PI * 2);
+        exoCtx.fill();
+        exoCtx.fillStyle = '#fff';
+        exoCtx.font = 'bold 16px Arial';
+        exoCtx.fillText('A', 72, 82);
+        
+        exoCtx.fillStyle = '#009900';
+        exoCtx.beginPath();
+        exoCtx.arc(140, 75, 25, 0, Math.PI * 2);
+        exoCtx.fill();
+        exoCtx.fillStyle = '#fff';
+        exoCtx.fillText('B', 132, 82);
+        
+        // Plus sign
+        exoCtx.fillStyle = '#000';
+        exoCtx.font = 'bold 20px Arial';
+        exoCtx.fillText('+', 105, 82);
+        
+        // Arrow
+        exoCtx.strokeStyle = '#000';
+        exoCtx.lineWidth = 3;
+        exoCtx.beginPath();
+        exoCtx.moveTo(175, 75);
+        exoCtx.lineTo(235, 75);
+        exoCtx.lineTo(228, 68);
+        exoCtx.moveTo(235, 75);
+        exoCtx.lineTo(228, 82);
+        exoCtx.stroke();
+        
+        // Product
+        exoCtx.fillStyle = '#9933cc';
+        exoCtx.beginPath();
+        exoCtx.arc(290, 75, 30, 0, Math.PI * 2);
+        exoCtx.fill();
+        exoCtx.fillStyle = '#fff';
+        exoCtx.font = 'bold 16px Arial';
+        exoCtx.fillText('AB', 277, 82);
+        
+        // Heat/Energy
+        exoCtx.fillStyle = '#ff6600';
+        exoCtx.font = 'bold 14px Arial';
+        exoCtx.fillText('+ ENERGY', 340, 70);
+        exoCtx.fillText('(Heat/Light)', 335, 90);
+        
+        // Flame
+        exoCtx.fillStyle = '#ff6600';
+        exoCtx.beginPath();
+        exoCtx.moveTo(380, 55);
+        exoCtx.lineTo(370, 35);
+        exoCtx.lineTo(375, 35);
+        exoCtx.lineTo(368, 25);
+        exoCtx.lineTo(380, 30);
+        exoCtx.lineTo(392, 25);
+        exoCtx.lineTo(385, 35);
+        exoCtx.lineTo(390, 35);
+        exoCtx.closePath();
+        exoCtx.fill();
+
+        // Nucleotide Canvas
+        const nucCanvas = document.getElementById('nucleotideCanvas');
+        const nucCtx = nucCanvas.getContext('2d');
+        
+        // Phosphate
+        nucCtx.fillStyle = '#cc0000';
+        nucCtx.beginPath();
+        nucCtx.arc(150, 50, 35, 0, Math.PI * 2);
+        nucCtx.fill();
+        nucCtx.fillStyle = '#fff';
+        nucCtx.font = 'bold 14px Arial';
+        nucCtx.fillText('Phosphate', 115, 55);
+        
+        // Connection
+        nucCtx.strokeStyle = '#000';
+        nucCtx.lineWidth = 3;
+        nucCtx.beginPath();
+        nucCtx.moveTo(150, 85);
+        nucCtx.lineTo(150, 120);
+        nucCtx.stroke();
+        
+        // Sugar
+        nucCtx.fillStyle = '#0099cc';
+        nucCtx.fillRect(105, 120, 90, 60);
+        nucCtx.fillStyle = '#fff';
+        nucCtx.fillText('Sugar', 128, 155);
+        
+        // Connection
+        nucCtx.beginPath();
+        nucCtx.moveTo(150, 180);
+        nucCtx.lineTo(150, 205);
+        nucCtx.stroke();
+        
+        // Nitrogen Base
+        nucCtx.fillStyle = '#66cc66';
+        nucCtx.beginPath();
+        nucCtx.moveTo(150, 205);
+        nucCtx.lineTo(105, 255);
+        nucCtx.lineTo(195, 255);
+        nucCtx.closePath();
+        nucCtx.fill();
+        nucCtx.fillStyle = '#fff';
+        nucCtx.fillText('Base', 130, 240);
+
+        // Base Pair Canvas
+        const bpCanvas = document.getElementById('basePairCanvas');
+        const bpCtx = bpCanvas.getContext('2d');
+        
+        // DNA strands
+        bpCtx.strokeStyle = '#666';
+        bpCtx.lineWidth = 6;
+        bpCtx.beginPath();
+        bpCtx.moveTo(50, 30);
+        bpCtx.lineTo(50, 220);
+        bpCtx.stroke();
+        bpCtx.beginPath();
+        bpCtx.moveTo(350, 30);
+        bpCtx.lineTo(350, 220);
+        bpCtx.stroke();
+        
+        // Base pairs
+        const pairs = [
+            {y: 60, left: 'A', right: 'T', color1: '#0066cc', color2: '#cc0000'},
+            {y: 110, left: 'T', right: 'A', color1: '#cc0000', color2: '#0066cc'},
+            {y: 160, left: 'C', right: 'G', color1: '#009900', color2: '#ff9900'},
+            {y: 210, left: 'G', right: 'C', color1: '#ff9900', color2: '#009900'}
+        ];
+        
+        pairs.forEach(pair => {
+            // Connection line
+            bpCtx.strokeStyle = '#999';
+            bpCtx.lineWidth = 2;
+            bpCtx.setLineDash([3, 3]);
+            bpCtx.beginPath();
+            bpCtx.moveTo(80, pair.y);
+            bpCtx.lineTo(320, pair.y);
+            bpCtx.stroke();
+            bpCtx.setLineDash([]);
+            
+            // Left base
+            bpCtx.fillStyle = pair.color1;
+            bpCtx.beginPath();
+            bpCtx.arc(120, pair.y, 20, 0, Math.PI * 2);
+            bpCtx.fill();
+            bpCtx.fillStyle = '#fff';
+            bpCtx.font = 'bold 18px Arial';
+            bpCtx.fillText(pair.left, 112, pair.y + 6);
+            
+            // Right base
+            bpCtx.fillStyle = pair.color2;
+            bpCtx.beginPath();
+            bpCtx.arc(280, pair.y, 20, 0, Math.PI * 2);
+            bpCtx.fill();
+            bpCtx.fillStyle = '#fff';
+            bpCtx.fillText(pair.right, 272, pair.y + 6);
+        });
+
+        // Protein Canvas
+        const protCanvas = document.getElementById('proteinCanvas');
+        const protCtx = protCanvas.getContext('2d');
+        
+        const aaColors = ['#cc0000', '#0066cc', '#009900', '#ff9900', '#9933cc', '#cc6600'];
+        for(let i = 0; i < 6; i++) {
+            protCtx.fillStyle = aaColors[i];
+            protCtx.beginPath();
+            protCtx.arc(70 + i * 90, 60, 25, 0, Math.PI * 2);
+            protCtx.fill();
+            protCtx.fillStyle = '#fff';
+            protCtx.font = 'bold 12px Arial';
+            protCtx.fillText('AA', 60 + i * 90, 65);
+            
+            if(i < 5) {
+                protCtx.strokeStyle = '#000';
+                protCtx.lineWidth = 3;
+                protCtx.beginPath();
+                protCtx.moveTo(95 + i * 90, 60);
+                protCtx.lineTo(115 + i * 90, 60);
+                protCtx.stroke();
+            }
+        }
+        
+        protCtx.fillStyle = '#000';
+        protCtx.font = 'bold 16px Arial';
+        protCtx.fillText('Amino Acid Chain = PROTEIN', 160, 20);
+
+        // Enzyme Canvas
+        const enzCanvas = document.getElementById('enzymeCanvas');
+        const enzCtx = enzCanvas.getContext('2d');
+        
+        // Substrate
+        enzCtx.fillStyle = '#0066cc';
+        enzCtx.fillRect(50, 70, 40, 40);
+        enzCtx.fillStyle = '#fff';
+        enzCtx.font = 'bold 16px Arial';
+        enzCtx.fillText('S', 64, 95);
+        
+        // Arrow
+        enzCtx.strokeStyle = '#000';
+        enzCtx.lineWidth = 2;
+        enzCtx.beginPath();
+        enzCtx.moveTo(100, 90);
+        enzCtx.lineTo(140, 90);
+        enzCtx.lineTo(133, 83);
+        enzCtx.moveTo(140, 90);
+        enzCtx.lineTo(133, 97);
+        enzCtx.stroke();
+        
+        // Enzyme
+        enzCtx.fillStyle = '#cc0000';
+        enzCtx.beginPath();
+        enzCtx.ellipse(220, 90, 50, 40, 0, 0, Math.PI * 2);
+        enzCtx.fill();
+        
+        // Active site
+        enzCtx.fillStyle = '#fff';
+        enzCtx.beginPath();
+        enzCtx.arc(200, 90, 15, 0, Math.PI * 2);
+        enzCtx.fill();
+        
+        enzCtx.fillStyle = '#fff';
+        enzCtx.font = 'bold 14px Arial';
+        enzCtx.fillText('ENZYME', 190, 95);
+        
+        // Arrow
+        enzCtx.strokeStyle = '#000';
+        enzCtx.beginPath();
+        enzCtx.moveTo(280, 90);
+        enzCtx.lineTo(320, 90);
+        enzCtx.lineTo(313, 83);
+        enzCtx.moveTo(320, 90);
+        enzCtx.lineTo(313, 97);
+        enzCtx.stroke();
+        
+        // Products
+        enzCtx.fillStyle = '#009900';
+        enzCtx.beginPath();
+        enzCtx.arc(360, 80, 18, 0, Math.PI * 2);
+        enzCtx.fill();
+        enzCtx.fillStyle = '#fff';
+        enzCtx.font = '12px Arial';
+        enzCtx.fillText('P1', 352, 85);
+        
+        enzCtx.fillStyle = '#009900';
+        enzCtx.beginPath();
+        enzCtx.arc(380, 100, 18, 0, Math.PI * 2);
+        enzCtx.fill();
+        enzCtx.fillStyle = '#fff';
+        enzCtx.fillText('P2', 372, 105);
+        
+        enzCtx.fillStyle = '#cc0000';
+        enzCtx.font = 'bold 14px Arial';
+        enzCtx.fillText('SPEEDS UP REACTION!', 180, 140);
+
+        // Fat Canvas
+        const fatCanvas = document.getElementById('fatCanvas');
+        const fatCtx = fatCanvas.getContext('2d');
+        fatCtx.fillStyle = '#ffcc66';
+        fatCtx.beginPath();
+        fatCtx.arc(60, 60, 35, 0, Math.PI * 2);
+        fatCtx.fill();
+        fatCtx.strokeStyle = '#cc9933';
+        fatCtx.lineWidth = 2;
+        fatCtx.stroke();
+
+        // Oil Canvas
+        const oilCanvas = document.getElementById('oilCanvas');
+        const oilCtx = oilCanvas.getContext('2d');
+        oilCtx.fillStyle = '#99cc33';
+        for(let i = 0; i < 8; i++) {
+            oilCtx.beginPath();
+            oilCtx.arc(30 + (i % 3) * 25, 40 + Math.floor(i / 3) * 20, 8, 0, Math.PI * 2);
+            oilCtx.fill();
+        }
+
+        // Wax Canvas
+        const waxCanvas = document.getElementById('waxCanvas');
+        const waxCtx = waxCanvas.getContext('2d');
+        waxCtx.fillStyle = '#ffff99';
+        waxCtx.fillRect(40, 40, 40, 60);
+        waxCtx.fillStyle = '#ff6600';
+        waxCtx.beginPath();
+        waxCtx.moveTo(60, 40);
+        waxCtx.lineTo(55, 25);
+        waxCtx.lineTo(58, 25);
+        waxCtx.lineTo(54, 15);
+        waxCtx.lineTo(60, 18);
+        waxCtx.lineTo(66, 15);
+        waxCtx.lineTo(62, 25);
+        waxCtx.lineTo(65, 25);
+        waxCtx.closePath();
+        waxCtx.fill();
+
+        // Mutation Canvas
+        const mutCanvas = document.getElementById('mutationCanvas');
+        const mutCtx = mutCanvas.getContext('2d');
+        
+        // Normal DNA
+        mutCtx.fillStyle = '#000';
+        mutCtx.font = 'bold 13px Arial';
+        mutCtx.fillText('Normal DNA:', 30, 30);
+        
+        const normalBases = [{base: 'A', color: '#0066cc'}, {base: 'T', color: '#cc0000'}, 
+                             {base: 'C', color: '#009900'}, {base: 'G', color: '#ff9900'}, 
+                             {base: 'A', color: '#0066cc'}];
+        normalBases.forEach((b, i) => {
+            mutCtx.fillStyle = b.color;
+            mutCtx.fillRect(30 + i * 50, 40, 40, 40);
+            mutCtx.fillStyle = '#fff';
+            mutCtx.font = 'bold 18px Arial';
+            mutCtx.fillText(b.base, 43 + i * 50, 68);
+        });
+        
+        // Mutation arrow
+        mutCtx.fillStyle = '#ff0000';
+        mutCtx.font = 'bold 20px Arial';
+        mutCtx.fillText('⚠ MUTATION', 320, 65);
+        
+        // Mutated DNA
+        mutCtx.fillStyle = '#000';
+        mutCtx.font = 'bold 13px Arial';
+        mutCtx.fillText('Mutated DNA:', 30, 105);
+        
+        const mutatedBases = [{base: 'A', color: '#0066cc'}, {base: 'T', color: '#cc0000'}, 
+                              {base: 'G', color: '#ff9900'}, {base: 'G', color: '#ff9900'}, 
+                              {base: 'A', color: '#0066cc'}];
+        mutatedBases.forEach((b, i) => {
+            mutCtx.fillStyle = b.color;
+            mutCtx.fillRect(30 + i * 50, 115, 40, 40);
+            if(i === 2) {
+                mutCtx.strokeStyle = '#ff0000';
+                mutCtx.lineWidth = 3;
+                mutCtx.strokeRect(30 + i * 50, 115, 40, 40);
+            }
+            mutCtx.fillStyle = '#fff';
+            mutCtx.font = 'bold 18px Arial';
+            mutCtx.fillText(b.base, 43 + i * 50, 143);
+        });
+
+        // Sequence Canvas
+        const seqCanvas = document.getElementById('sequenceCanvas');
+        const seqCtx = seqCanvas.getContext('2d');
+        
+        const steps = ['1st', '2nd', '3rd', '4th'];
+        const colors = ['#0066cc', '#009900', '#ff9900', '#cc0000'];
+        steps.forEach((step, i) => {
+            seqCtx.fillStyle = colors[i];
+            seqCtx.beginPath();
+            seqCtx.arc(100 + i * 120, 50, 30, 0, Math.PI * 2);
+            seqCtx.fill();
+            seqCtx.fillStyle = '#fff';
+            seqCtx.font = 'bold 16px Arial';
+            seqCtx.fillText(step, 85 + i * 120, 58);
+            
+            if(i < 3) {
+                seqCtx.strokeStyle = '#000';
+                seqCtx.lineWidth = 3;
+                seqCtx.beginPath();
+                seqCtx.moveTo(130 + i * 120, 50);
+                seqCtx.lineTo(190 + i * 120, 50);
+                seqCtx.lineTo(183 + i * 120, 43);
+                seqCtx.moveTo(190 + i * 120, 50);
+                seqCtx.lineTo(183 + i * 120, 57);
+                seqCtx.stroke();
+            }
+        });
+
+        // Genetic Canvas
+        const genCanvas = document.getElementById('geneticCanvas');
+        const genCtx = genCanvas.getContext('2d');
+        
+        // Parent 1
+        genCtx.fillStyle = '#0066cc';
+        genCtx.beginPath();
+        genCtx.arc(120, 50, 30, 0, Math.PI * 2);
+        genCtx.fill();
+        genCtx.fillStyle = '#fff';
+        genCtx.font = 'bold 14px Arial';
+        genCtx.fillText('Parent 1', 90, 55);
+        genCtx.font = '20px Arial';
+        genCtx.fillText('👨', 108, 60);
+        
+        // Parent 2
+        genCtx.fillStyle = '#cc0000';
+        genCtx.beginPath();
+        genCtx.arc(380, 50, 30, 0, Math.PI * 2);
+        genCtx.fill();
+        genCtx.fillStyle = '#fff';
+        genCtx.font = 'bold 14px Arial';
+        genCtx.fillText('Parent 2', 350, 55);
+        genCtx.font = '20px Arial';
+        genCtx.fillText('👩', 368, 60);
+        
+        // DNA symbols
+        genCtx.font = '24px Arial';
+        genCtx.fillText('🧬', 110, 110);
+        genCtx.fillText('🧬', 370, 110);
+        
+        // Arrows to child
+        genCtx.strokeStyle = '#000';
+        genCtx.lineWidth = 2;
+        genCtx.beginPath();
+        genCtx.moveTo(130, 120);
+        genCtx.lineTo(230, 160);
+        genCtx.stroke();
+        genCtx.beginPath();
+        genCtx.moveTo(370, 120);
+        genCtx.lineTo(270, 160);
+        genCtx.stroke();
+        
+        // Child
+        genCtx.fillStyle = '#9933cc';
+        genCtx.beginPath();
+        genCtx.arc(250, 180, 30, 0, Math.PI * 2);
+        genCtx.fill();
+        genCtx.fillStyle = '#fff';
+        genCtx.font = '24px Arial';
+        genCtx.fillText('👶', 236, 192);
+        genCtx.font = 'bold 12px Arial';
+        genCtx.fillText('Child (inherited traits)', 190, 220);
+
+        // Heredity Canvas
+        const herCanvas = document.getElementById('heredityCanvas');
+        const herCtx = herCanvas.getContext('2d');
+        
+        // Generation 1
+        herCtx.fillStyle = '#000';
+        herCtx.font = 'bold 13px Arial';
+        herCtx.fillText('Generation 1', 250, 25);
+        herCtx.fillStyle = '#cc6600';
+        herCtx.fillRect(270, 35, 60, 30);
+        
+        // Arrow down
+        herCtx.strokeStyle = '#000';
+        herCtx.lineWidth = 2;
+        herCtx.beginPath();
+        herCtx.moveTo(300, 65);
+        herCtx.lineTo(300, 85);
+        herCtx.lineTo(295, 78);
+        herCtx.moveTo(300, 85);
+        herCtx.lineTo(305, 78);
+        herCtx.stroke();
+        
+        // Generation 2
+        herCtx.fillStyle = '#000';
+        herCtx.fillText('Generation 2', 250, 105);
+        herCtx.fillStyle = '#cc6600';
+        herCtx.fillRect(220, 115, 50, 25);
+        herCtx.fillRect(285, 115, 50, 25);
+        herCtx.fillRect(350, 115, 50, 25);
+        
+        // Arrow down
+        herCtx.beginPath();
+        herCtx.moveTo(300, 140);
+        herCtx.lineTo(300, 160);
+        herCtx.lineTo(295, 153);
+        herCtx.moveTo(300, 160);
+        herCtx.lineTo(305, 153);
+        herCtx.stroke();
+        
+        // Generation 3
+        herCtx.fillStyle = '#000';
+        herCtx.fillText('Generation 3', 240, 178);
+        herCtx.fillStyle = '#cc6600';
+        for(let i = 0; i < 5; i++) {
+            herCtx.fillRect(160 + i * 70, 185, 40, 20);
+        }
+
+        // Galaxy Canvas
+        const galCanvas = document.getElementById('galaxyCanvas');
+        const galCtx = galCanvas.getContext('2d');
+        
+        // Spiral
+        galCtx.fillStyle = '#000';
+        galCtx.font = 'bold 12px Arial';
+        galCtx.fillText('SPIRAL', 75, 20);
+        galCtx.fillStyle = '#ffff99';
+        galCtx.beginPath();
+        galCtx.arc(100, 100, 15, 0, Math.PI * 2);
+        galCtx.fill();
+        galCtx.strokeStyle = '#ccc';
+        galCtx.lineWidth = 8;
+        for(let i = 0; i < 4; i++) {
+            galCtx.beginPath();
+            galCtx.arc(100, 100, 20 + i * 15, i * Math.PI/2, i * Math.PI/2 + Math.PI/2);
+            galCtx.stroke();
+        }
+        
+        // Elliptical
+        galCtx.fillStyle = '#000';
+        galCtx.fillText('ELLIPTICAL', 265, 20);
+        galCtx.fillStyle = '#ffcc66';
+        galCtx.beginPath();
+        galCtx.ellipse(300, 100, 60, 40, 0, 0, Math.PI * 2);
+        galCtx.fill();
+        
+        // Irregular
+        galCtx.fillStyle = '#000';
+        galCtx.fillText('IRREGULAR', 470, 20);
+        galCtx.fillStyle = '#cc99ff';
+        galCtx.beginPath();
+        galCtx.moveTo(500, 60);
+        galCtx.lineTo(520, 80);
+        galCtx.lineTo(510, 110);
+        galCtx.lineTo(530, 130);
+        galCtx.lineTo(505, 140);
+        galCtx.lineTo(480, 125);
+        galCtx.lineTo(475, 95);
+        galCtx.lineTo(485, 70);
+        galCtx.closePath();
+        galCtx.fill();
+
+        // Nebula Canvas
+        const nebCanvas = document.getElementById('nebulaCanvas');
+        const nebCtx = nebCanvas.getContext('2d');
+        
+        // Cloud layers
+        const gradient1 = nebCtx.createRadialGradient(200, 125, 20, 200, 125, 100);
+        gradient1.addColorStop(0, 'rgba(153, 51, 255, 0.6)');
+        gradient1.addColorStop(1, 'rgba(153, 51, 255, 0)');
+        nebCtx.fillStyle = gradient1;
+        nebCtx.fillRect(100, 25, 200, 200);
+        
+        const gradient2 = nebCtx.createRadialGradient(180, 140, 20, 180, 140, 80);
+        gradient2.addColorStop(0, 'rgba(102, 51, 255, 0.5)');
+        gradient2.addColorStop(1, 'rgba(102, 51, 255, 0)');
+        nebCtx.fillStyle = gradient2;
+        nebCtx.fillRect(100, 60, 160, 160);
+        
+        // Stars
+        nebCtx.fillStyle = '#fff';
+        for(let i = 0; i < 15; i++) {
+            const x = 120 + Math.random() * 160;
+            const y = 50 + Math.random() * 160;
+            nebCtx.beginPath();
+            nebCtx.arc(x, y, 1 + Math.random() * 2, 0, Math.PI * 2);
+            nebCtx.fill();
+        }
+
+        // Orbit Canvas
+        const orbCanvas = document.getElementById('orbitCanvas');
+        const orbCtx = orbCanvas.getContext('2d');
+        
+        // Earth
+        orbCtx.fillStyle = '#0066cc';
+        orbCtx.beginPath();
+        orbCtx.arc(200, 200, 40, 0, Math.PI * 2);
+        orbCtx.fill();
+        orbCtx.fillStyle = '#009900';
+        orbCtx.beginPath();
+        orbCtx.arc(185, 190, 15, 0, Math.PI * 2);
+        orbCtx.fill();
+        orbCtx.fillStyle = '#000';
+        orbCtx.font = 'bold 14px Arial';
+        orbCtx.fillText('EARTH', 170, 260);
+        
+        // Orbit path
+        orbCtx.strokeStyle = '#999';
+        orbCtx.lineWidth = 2;
+        orbCtx.setLineDash([5, 5]);
+        orbCtx.beginPath();
+        orbCtx.arc(200, 200, 120, 0, Math.PI * 2);
+        orbCtx.stroke();
+        orbCtx.setLineDash([]);
+        
+        // Moon
+        orbCtx.fillStyle = '#ccc';
+        orbCtx.beginPath();
+        orbCtx.arc(320, 200, 20, 0, Math.PI * 2);
+        orbCtx.fill();
+        orbCtx.fillStyle = '#999';
+        orbCtx.beginPath();
+        orbCtx.arc(315, 195, 7, 0, Math.PI * 2);
+        orbCtx.fill();
+        orbCtx.fillStyle = '#000';
+        orbCtx.font = 'bold 14px Arial';
+        orbCtx.fillText('MOON', 300, 240);
+        
+        // Motion arrow
+        orbCtx.strokeStyle = '#cc0000';
+        orbCtx.lineWidth = 3;
+        orbCtx.beginPath();
+        orbCtx.moveTo(320, 170);
+        orbCtx.lineTo(340, 150);
+        orbCtx.lineTo(335, 155);
+        orbCtx.moveTo(340, 150);
+        orbCtx.lineTo(333, 152);
+        orbCtx.stroke();
+
+        // Light Year Canvas
+        const lyCanvas = document.getElementById('lightYearCanvas');
+        const lyCtx = lyCanvas.getContext('2d');
+        
+        // Star
+        lyCtx.fillStyle = '#ffcc00';
+        lyCtx.beginPath();
+        lyCtx.arc(50, 75, 25, 0, Math.PI * 2);
+        lyCtx.fill();
+        
+        // Light beam
+        const lgradient = lyCtx.createLinearGradient(80, 75, 550, 75);
+        lgradient.addColorStop(0, 'rgba(255, 204, 0, 0.7)');
+        lgradient.addColorStop(1, 'rgba(255, 204, 0, 0)');
+        lyCtx.fillStyle = lgradient;
+        lyCtx.fillRect(80, 55, 470, 40);
+        
+        // Arrow
+        lyCtx.strokeStyle = '#ff6600';
+        lyCtx.lineWidth = 3;
+        lyCtx.beginPath();
+        lyCtx.moveTo(520, 75);
+        lyCtx.lineTo(570, 75);
+        lyCtx.lineTo(563, 68);
+        lyCtx.moveTo(570, 75);
+        lyCtx.lineTo(563, 82);
+        lyCtx.stroke();
+        
+        lyCtx.fillStyle = '#000';
+        lyCtx.font = 'bold 14px Arial';
+        lyCtx.fillText('9.4 Trillion km!', 240, 40);
+        lyCtx.font = '12px Arial';
+        lyCtx.fillText('Distance light travels in 1 year', 210, 120);
+
+        // Replicate Canvas
+        const repCanvas = document.getElementById('replicateCanvas');
+        const repCtx = repCanvas.getContext('2d');
+        
+        // Original
+        repCtx.fillStyle = '#0066cc';
+        repCtx.fillRect(50, 50, 80, 60);
+        repCtx.fillStyle = '#fff';
+        repCtx.font = 'bold 24px Arial';
+        repCtx.fillText('A', 78, 90);
+        
+        // Arrow
+        repCtx.strokeStyle = '#000';
+        repCtx.lineWidth = 3;
+        repCtx.beginPath();
+        repCtx.moveTo(140, 80);
+        repCtx.lineTo(190, 80);
+        repCtx.lineTo(183, 73);
+        repCtx.moveTo(190, 80);
+        repCtx.lineTo(183, 87);
+        repCtx.stroke();
+        
+        // Copies
+        repCtx.fillStyle = '#0066cc';
+        repCtx.fillRect(210, 50, 80, 60);
+        repCtx.fillRect(310, 50, 80, 60);
+        repCtx.fillStyle = '#fff';
+        repCtx.fillText('A', 238, 90);
+        repCtx.fillText('A', 338, 90);
+        
+        repCtx.fillStyle = '#009900';
+        repCtx.font = 'bold 14px Arial';
+        repCtx.fillText('IDENTICAL COPIES', 220, 130);
+
+        // Reflect Canvas
+        const refCanvas = document.getElementById('reflectCanvas');
+        const refCtx = refCanvas.getContext('2d');
+        
+        // Mirror/surface
+        refCtx.strokeStyle = '#666';
+        refCtx.lineWidth = 4;
+        refCtx.beginPath();
+        refCtx.moveTo(200, 50);
+        refCtx.lineTo(200, 150);
+        refCtx.stroke();
+        
+        // Incoming light ray
+        refCtx.strokeStyle = '#ff0000';
+        refCtx.lineWidth = 3;
+        refCtx.beginPath();
+        refCtx.moveTo(50, 50);
+        refCtx.lineTo(200, 100);
+        refCtx.lineTo(195, 93);
+        refCtx.moveTo(200, 100);
+        refCtx.lineTo(193, 100);
+        refCtx.stroke();
+        
+        // Reflected ray
+        refCtx.beginPath();
+        refCtx.moveTo(200, 100);
+        refCtx.lineTo(350, 50);
+        refCtx.lineTo(343, 50);
+        refCtx.moveTo(350, 50);
+        refCtx.lineTo(345, 57);
+        refCtx.stroke();
+        
+        refCtx.fillStyle = '#000';
+        refCtx.font = 'bold 13px Arial';
+        refCtx.fillText('Incoming', 80, 45);
+        refCtx.fillText('Reflected', 280, 45);
+        refCtx.fillText('Mirror', 205, 110);
+        
+        // Thinking person
+        refCtx.font = '40px Arial';
+        refCtx.fillText('🤔', 170, 185);
+        refCtx.font = 'bold 12px Arial';
+        refCtx.fillText('Thinking/Reflection', 140, 200);
+
+        // Identical Canvas
+        const idCanvas = document.getElementById('identicalCanvas');
+        const idCtx = idCanvas.getContext('2d');
+        
+        // Two identical objects
+        idCtx.fillStyle = '#cc0000';
+        idCtx.beginPath();
+        idCtx.arc(120, 60, 30, 0, Math.PI * 2);
+        idCtx.fill();
+        
+        idCtx.fillStyle = '#cc0000';
+        idCtx.beginPath();
+        idCtx.arc(280, 60, 30, 0, Math.PI * 2);
+        idCtx.fill();
+        
+        // Equals sign
+        idCtx.fillStyle = '#000';
+        idCtx.font = 'bold 40px Arial';
+        idCtx.fillText('=', 190, 75);
+        
+        idCtx.font = 'bold 14px Arial';
+        idCtx.fillText('EXACTLY THE SAME', 125, 110);
+
+        // Fossil Canvas
+        const fosCanvas = document.getElementById('fossilCanvas');
+        const fosCtx = fosCanvas.getContext('2d');
+        
+        // Rock layers
+        fosCtx.fillStyle = '#8b7355';
+        fosCtx.fillRect(50, 50, 400, 50);
+        fosCtx.fillStyle = '#a0826d';
+        fosCtx.fillRect(50, 100, 400, 60);
+        fosCtx.fillStyle = '#8b7355';
+        fosCtx.fillRect(50, 160, 400, 50);
+        
+        // Fossil in middle layer
+        fosCtx.strokeStyle = '#4d4d4d';
+        fosCtx.lineWidth = 3;
+        fosCtx.fillStyle = '#666';
+        
+        // Fish fossil
+        fosCtx.beginPath();
+        fosCtx.ellipse(250, 130, 60, 25, 0, 0, Math.PI * 2);
+        fosCtx.fill();
+        fosCtx.stroke();
+        
+        // Head
+        fosCtx.beginPath();
+        fosCtx.arc(200, 130, 15, 0, Math.PI * 2);
+        fosCtx.fill();
+        fosCtx.stroke();
+        
+        // Tail
+        fosCtx.beginPath();
+        fosCtx.moveTo(310, 130);
+        fosCtx.lineTo(340, 115);
+        fosCtx.lineTo(340, 145);
+        fosCtx.closePath();
+        fosCtx.fill();
+        fosCtx.stroke();
+        
+        fosCtx.fillStyle = '#000';
+        fosCtx.font = 'bold 14px Arial';
+        fosCtx.fillText('Sedimentary Rock Layers', 160, 30);
+        fosCtx.fillText('FOSSIL', 220, 230);
+
+        // Random Canvas
+        const randCanvas = document.getElementById('randomCanvas');
+        const randCtx = randCanvas.getContext('2d');
+        
+        // Dice
+        const drawDice = (x, y, num) => {
+            randCtx.fillStyle = '#fff';
+            randCtx.fillRect(x, y, 50, 50);
+            randCtx.strokeStyle = '#000';
+            randCtx.lineWidth = 2;
+            randCtx.strokeRect(x, y, 50, 50);
+            
+            randCtx.fillStyle = '#000';
+            const positions = {
+                1: [[25, 25]],
+                2: [[15, 15], [35, 35]],
+                3: [[15, 15], [25, 25], [35, 35]],
+                4: [[15, 15], [35, 15], [15, 35], [35, 35]],
+                5: [[15, 15], [35, 15], [25, 25], [15, 35], [35, 35]],
+                6: [[15, 15], [35, 15], [15, 25], [35, 25], [15, 35], [35, 35]]
+            };
+            
+            positions[num].forEach(([dx, dy]) => {
+                randCtx.beginPath();
+                randCtx.arc(x + dx, y + dy, 4, 0, Math.PI * 2);
+                randCtx.fill();
+            });
+        };
+        
+        drawDice(50, 60, 3);
+        drawDice(130, 60, 5);
+        drawDice(210, 60, 1);
+        drawDice(290, 60, 6);
+        
+        randCtx.fillStyle = '#cc0000';
+        randCtx.font = 'bold 20px Arial';
+        randCtx.fillText('? ? ?', 150, 40);
+        randCtx.font = 'bold 14px Arial';
+        randCtx.fillText('UNPREDICTABLE OUTCOMES', 105, 140);
+
+        // Trends Canvas
+        const trendCanvas = document.getElementById('trendsCanvas');
+        const trendCtx = trendCanvas.getContext('2d');
+        
+        // Axes
+        trendCtx.strokeStyle = '#000';
+        trendCtx.lineWidth = 2;
+        trendCtx.beginPath();
+        trendCtx.moveTo(50, 220);
+        trendCtx.lineTo(450, 220);
+        trendCtx.stroke();
+        trendCtx.beginPath();
+        trendCtx.moveTo(50, 220);
+        trendCtx.lineTo(50, 30);
+        trendCtx.stroke();
+        
+        // Labels
+        trendCtx.fillStyle = '#000';
+        trendCtx.font = 'bold 12px Arial';
+        trendCtx.fillText('Value', 10, 120);
+        trendCtx.fillText('Time', 220, 240);
+        
+        // Upward trend
+        trendCtx.strokeStyle = '#009900';
+        trendCtx.lineWidth = 3;
+        trendCtx.beginPath();
+        trendCtx.moveTo(60, 200);
+        trendCtx.lineTo(120, 170);
+        trendCtx.lineTo(180, 130);
+        trendCtx.lineTo(240, 80);
+        trendCtx.stroke();
+        trendCtx.fillStyle = '#009900';
+        trendCtx.fillText('Upward Trend', 180, 70);
+        
+        // Downward trend
+        trendCtx.strokeStyle = '#cc0000';
+        trendCtx.beginPath();
+        trendCtx.moveTo(270, 80);
+        trendCtx.lineTo(320, 120);
+        trendCtx.lineTo(370, 150);
+        trendCtx.lineTo(430, 190);
+        trendCtx.stroke();
+        trendCtx.fillStyle = '#cc0000';
+        trendCtx.fillText('Downward Trend', 320, 200);
+
+        // Frequent Canvas
+        const freqCanvas = document.getElementById('frequentCanvas');
+        const freqCtx = freqCanvas.getContext('2d');
+        
+        // Timeline
+        freqCtx.strokeStyle = '#000';
+        freqCtx.lineWidth = 2;
+        freqCtx.beginPath();
+        freqCtx.moveTo(50, 60);
+        freqCtx.lineTo(550, 60);
+        freqCtx.stroke();
+        
+        // Frequent events
+        for(let i = 0; i < 10; i++) {
+            freqCtx.fillStyle = '#0066cc';
+            freqCtx.beginPath();
+            freqCtx.arc(80 + i * 50, 60, 8, 0, Math.PI * 2);
+            freqCtx.fill();
+            
+            freqCtx.strokeStyle = '#0066cc';
+            freqCtx.lineWidth = 2;
+            freqCtx.beginPath();
+            freqCtx.moveTo(80 + i * 50, 60);
+            freqCtx.lineTo(80 + i * 50, 90);
+            freqCtx.stroke();
+        }
+        
+        freqCtx.fillStyle = '#000';
+        freqCtx.font = 'bold 14px Arial';
+        freqCtx.fillText('Events occurring FREQUENTLY (often)', 180, 35);
+        freqCtx.font = '12px Arial';
+        freqCtx.fillText('Short intervals between events', 210, 110);
+
+        // Fundamental Canvas
+        const fundCanvas = document.getElementById('fundamentalCanvas');
+        const fundCtx = fundCanvas.getContext('2d');
+        
+        // Base/foundation
+        fundCtx.fillStyle = '#8b4513';
+        fundCtx.fillRect(50, 140, 300, 40);
+        fundCtx.fillStyle = '#fff';
+        fundCtx.font = 'bold 14px Arial';
+        fundCtx.fillText('FUNDAMENTAL BASE', 125, 165);
+        
+        // Building blocks on top
+        fundCtx.fillStyle = '#cc6600';
+        fundCtx.fillRect(80, 110, 60, 30);
+        fundCtx.fillRect(160, 110, 60, 30);
+        fundCtx.fillRect(240, 110, 60, 30);
+        
+        fundCtx.fillStyle = '#ff9900';
+        fundCtx.fillRect(120, 80, 60, 30);
+        fundCtx.fillRect(200, 80, 60, 30);
+        
+        fundCtx.fillStyle = '#ffcc66';
+        fundCtx.fillRect(160, 50, 60, 30);
+        
+        fundCtx.fillStyle = '#000';
+        fundCtx.font = 'bold 12px Arial';
+        fundCtx.fillText('Essential/Basic Foundation', 115, 30);
+    </script>
+</body>
+</html>
