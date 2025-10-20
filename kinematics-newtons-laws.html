@@ -1,0 +1,1152 @@
+<html lang="en" class="reveal-full-page">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kinematics & Newton's Laws - Year 10 Revision</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reveal.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/theme/white.min.css">
+    <style>
+        :root {
+            --primary-blue: #2563eb;
+            --primary-purple: #7c3aed;
+            --success-green: #10b981;
+            --warning-orange: #f59e0b;
+            --accent-cyan: #06b6d4;
+            --text-dark: #1e293b;
+            --bg-light: #f8fafc;
+        }
+
+        .reveal {
+            font-size: 28px;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+        }
+
+        .reveal h1 {
+            font-size: 2em;
+            color: var(--text-dark);
+            font-weight: 700;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, var(--primary-blue), var(--primary-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .reveal h2 {
+            font-size: 1.6em;
+            color: var(--text-dark);
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .reveal .slides section {
+            height: 100%;
+            padding: 20px;
+            overflow-y: auto !important;
+        }
+
+        .slide-content-wrapper {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px 0;
+        }
+
+        .learning-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 16px;
+            margin: 15px 0;
+            max-width: 800px;
+            width: 100%;
+        }
+
+        .objective-item {
+            background: rgba(255,255,255,0.15);
+            padding: 12px;
+            margin: 8px 0;
+            border-radius: 8px;
+            font-size: 0.9em;
+            border-left: 4px solid white;
+        }
+
+        .quiz-box {
+            background: linear-gradient(135deg, var(--success-green), #34d399);
+            padding: 25px;
+            border-radius: 16px;
+            margin: 15px 0;
+            max-width: 700px;
+            width: 100%;
+            color: white;
+        }
+
+        .quiz-item {
+            background: white;
+            color: var(--text-dark);
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.85em;
+        }
+
+        .quiz-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .quiz-item.revealed {
+            background: linear-gradient(135deg, #fef3c7, #fde68a);
+        }
+
+        .quiz-answer {
+            display: none;
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 2px solid var(--warning-orange);
+            font-weight: 600;
+            color: var(--primary-blue);
+        }
+
+        .concept-card {
+            background: white;
+            border: 2px solid #e2e8f0;
+            border-radius: 14px;
+            padding: 20px;
+            margin: 15px 0;
+            max-width: 700px;
+            width: 100%;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .concept-card:hover {
+            border-color: var(--primary-blue);
+            transform: translateY(-2px);
+        }
+
+        .concept-card.revealed {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+        }
+
+        .concept-icon {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .concept-title {
+            font-size: 1.2em;
+            font-weight: 700;
+            color: var(--primary-blue);
+            margin-bottom: 8px;
+        }
+
+        .concept-details {
+            display: none;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 2px dashed var(--warning-orange);
+            font-size: 0.85em;
+        }
+
+        .detail-item {
+            margin: 8px 0;
+            padding-left: 18px;
+            position: relative;
+        }
+
+        .detail-item::before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: var(--primary-blue);
+            font-weight: bold;
+        }
+
+        .comparison-box {
+            background: white;
+            border-radius: 14px;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            max-width: 650px;
+            width: 100%;
+            margin: 15px 0;
+        }
+
+        .comparison-box.old {
+            border: 3px solid #dc2626;
+        }
+
+        .comparison-box.new {
+            border: 3px solid var(--success-green);
+            background: linear-gradient(135deg, #f0fdf4, #dcfce7);
+        }
+
+        .comparison-header {
+            font-size: 1.2em;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .comparison-box.old .comparison-header {
+            color: #dc2626;
+        }
+
+        .comparison-box.new .comparison-header {
+            color: var(--success-green);
+        }
+
+        .comparison-item {
+            font-size: 0.85em;
+            margin: 8px 0;
+            line-height: 1.5;
+        }
+
+        .info-box {
+            background: linear-gradient(135deg, #e0f2fe, #bae6fd);
+            border: 2px solid var(--accent-cyan);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 15px 0;
+            max-width: 750px;
+            width: 100%;
+            font-size: 0.9em;
+            line-height: 1.6;
+        }
+
+        .key-takeaway {
+            background: linear-gradient(135deg, #fef3c7, #fde68a);
+            border-left: 5px solid var(--warning-orange);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 15px 0;
+            max-width: 750px;
+            width: 100%;
+            font-weight: 600;
+            font-size: 0.95em;
+        }
+
+        .highlight {
+            background: #fef08a;
+            padding: 3px 6px;
+            border-radius: 4px;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .calculation-box {
+            background: white;
+            border: 3px solid var(--primary-purple);
+            border-radius: 14px;
+            padding: 25px;
+            margin: 15px 0;
+            max-width: 700px;
+            width: 100%;
+            font-family: 'Courier New', monospace;
+        }
+
+        .calc-step {
+            margin: 12px 0;
+            padding: 10px;
+            background: #f8fafc;
+            border-radius: 8px;
+            font-size: 0.85em;
+        }
+
+        .calc-label {
+            color: var(--primary-blue);
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .calc-result {
+            background: linear-gradient(135deg, #dcfce7, #bbf7d0);
+            padding: 15px;
+            border-radius: 10px;
+            border-left: 5px solid var(--success-green);
+            font-size: 1.1em;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-top: 15px;
+        }
+
+        .image-placeholder {
+            width: 100%;
+            max-width: 650px;
+            height: 400px;
+            border: 3px dashed #cbd5e1;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #f8fafc, #f1f5f9);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 15px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .image-placeholder:hover {
+            border-color: var(--primary-blue);
+            transform: scale(1.02);
+        }
+
+        .image-placeholder.has-image {
+            border-color: var(--success-green);
+            background: white;
+        }
+
+        .placeholder-content {
+            text-align: center;
+            color: #64748b;
+        }
+
+        .placeholder-icon {
+            font-size: 4em;
+            margin-bottom: 10px;
+        }
+
+        .placeholder-text {
+            font-size: 1em;
+            font-weight: 600;
+        }
+
+        .placeholder-hint {
+            font-size: 0.75em;
+            margin-top: 8px;
+            color: #94a3b8;
+        }
+
+        .toolbar {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            z-index: 100;
+        }
+
+        .toolbar-button {
+            background: linear-gradient(135deg, var(--primary-blue), var(--primary-purple));
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 10px;
+            font-size: 0.85em;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .toolbar-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+        }
+
+        .notification {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: linear-gradient(135deg, var(--success-green), #34d399);
+            color: white;
+            padding: 20px 40px;
+            border-radius: 12px;
+            font-weight: 600;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body class="reveal-viewport">
+    <!-- Toolbar -->
+    <div class="toolbar">
+        <button class="toolbar-button" onclick="bulkUpload()">📂 Bulk Upload Images</button>
+        <button class="toolbar-button" onclick="downloadWithImages()">💾 Save Lesson</button>
+        <button class="toolbar-button" onclick="clearAllImages()">🗑️ Clear All Images</button>
+    </div>
+
+    <!-- Save Notification -->
+    <div class="notification" id="saveNotification">✅ Lesson saved successfully!</div>
+
+    <div class="reveal">
+        <div class="slides">
+            <!-- Slide 1: Title & Do Now -->
+            <section>
+                <div class="slide-content-wrapper">
+                    <h1>🚀 Kinematics & Newton's Laws</h1>
+                    <h2>Year 10 Science - NSW NESA Syllabus</h2>
+                    
+                    <!-- Do Now Activity -->
+                    <div class="quiz-box fragment" data-fragment-index="0">
+                        <h3 style="margin-top: 0;">🔥 Do Now Activity - Test Your Knowledge</h3>
+                        <div class="quiz-item" onclick="toggleAnswer(this)">
+                            <strong>1.</strong> Distance and displacement are the same thing. (True or False?)
+                            <div class="quiz-answer">
+                                <strong>Answer: FALSE</strong> - Distance is total path length; displacement is straight-line distance from start to finish with direction.
+                            </div>
+                        </div>
+                        <div class="quiz-item" onclick="toggleAnswer(this)">
+                            <strong>2.</strong> A car travels 100m north, then 50m south. What is the displacement?<br>
+                            A) 150m<br>
+                            B) 50m north<br>
+                            C) 50m south<br>
+                            D) 100m
+                            <div class="quiz-answer">
+                                <strong>Answer: B</strong> - Displacement = 100m - 50m = 50m north (net position from start).
+                            </div>
+                        </div>
+                        <div class="quiz-item" onclick="toggleAnswer(this)">
+                            <strong>3.</strong> An object with constant velocity has zero acceleration. (True or False?)
+                            <div class="quiz-answer">
+                                <strong>Answer: TRUE</strong> - Acceleration is the rate of change of velocity. If velocity is constant, acceleration = 0 m/s².
+                            </div>
+                        </div>
+                        <div class="quiz-item" onclick="toggleAnswer(this)">
+                            <strong>4.</strong> According to Newton's First Law, an object at rest will:<br>
+                            A) Always start moving<br>
+                            B) Stay at rest unless acted upon by a force<br>
+                            C) Accelerate automatically<br>
+                            D) Move in circles
+                            <div class="quiz-answer">
+                                <strong>Answer: B</strong> - Newton's First Law (Inertia): Objects resist changes in motion unless a net force acts.
+                            </div>
+                        </div>
+                        <div class="quiz-item" onclick="toggleAnswer(this)">
+                            <strong>5.</strong> If you push a wall and it doesn't move, the wall pushes back on you. (True or False?)
+                            <div class="quiz-answer">
+                                <strong>Answer: TRUE</strong> - Newton's Third Law: For every action, there's an equal and opposite reaction.
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="learning-box fragment" data-fragment-index="1">
+                        <h3 style="margin-top: 0;">Learning Objectives</h3>
+                        <div class="objective-item">Distinguish between <span class="highlight">distance</span> and <span class="highlight">displacement</span></div>
+                        <div class="objective-item">Calculate <span class="highlight">speed</span>, <span class="highlight">velocity</span>, and <span class="highlight">acceleration</span></div>
+                        <div class="objective-item">Apply <span class="highlight">Newton's Three Laws of Motion</span></div>
+                        <div class="objective-item">Solve problems using <span class="highlight">F = ma</span></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 2: Distance vs Displacement -->
+            <section>
+                <div class="slide-content-wrapper">
+                    <h2>Distance vs Displacement</h2>
+                    
+                    <div class="comparison-box old fragment" data-fragment-index="0">
+                        <div class="comparison-header">📏 Distance</div>
+                        <div class="comparison-item"><span class="highlight">Distance</span> is the total path length traveled</div>
+                        <div class="comparison-item">Scalar quantity (magnitude only)</div>
+                        <div class="comparison-item">Always positive</div>
+                        <div class="comparison-item">Unit: metres (m) or kilometres (km)</div>
+                    </div>
+
+                    <div class="comparison-box new fragment" data-fragment-index="1">
+                        <div class="comparison-header">➡️ Displacement</div>
+                        <div class="comparison-item"><span class="highlight">Displacement</span> is the straight-line distance from start to finish</div>
+                        <div class="comparison-item">Vector quantity (magnitude AND direction)</div>
+                        <div class="comparison-item">Can be positive, negative, or zero</div>
+                        <div class="comparison-item">Unit: metres (m) with direction (e.g., 50m north)</div>
+                    </div>
+
+                    <svg class="fragment" width="600" height="200" viewBox="0 0 600 200" style="margin: 20px 0;" data-fragment-index="2">
+                        <!-- Path -->
+                        <path d="M 50 150 L 150 150 L 250 100 L 350 100 L 450 150" stroke="#3b82f6" stroke-width="4" fill="none" stroke-dasharray="8,4"/>
+                        
+                        <!-- Start point -->
+                        <circle cx="50" cy="150" r="10" fill="#10b981"/>
+                        <text x="50" y="180" text-anchor="middle" font-size="14" fill="#10b981" font-weight="bold">START</text>
+                        
+                        <!-- End point -->
+                        <circle cx="450" cy="150" r="10" fill="#dc2626"/>
+                        <text x="450" y="180" text-anchor="middle" font-size="14" fill="#dc2626" font-weight="bold">END</text>
+                        
+                        <!-- Displacement arrow -->
+                        <defs>
+                            <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                                <polygon points="0 0, 10 3, 0 6" fill="#f59e0b"/>
+                            </marker>
+                        </defs>
+                        <line x1="50" y1="170" x2="450" y2="170" stroke="#f59e0b" stroke-width="3" marker-end="url(#arrowhead)"/>
+                        
+                        <!-- Labels -->
+                        <text x="250" y="80" text-anchor="middle" font-size="16" fill="#3b82f6" font-weight="bold">Distance = curved path</text>
+                        <text x="250" y="195" text-anchor="middle" font-size="16" fill="#f59e0b" font-weight="bold">Displacement = straight line</text>
+                    </svg>
+
+                    <div class="key-takeaway fragment" data-fragment-index="3">
+                        💡 Distance ≥ Displacement (distance is always equal to or greater than displacement)
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 3: Speed vs Velocity -->
+            <section>
+                <div class="slide-content-wrapper">
+                    <h2>Speed vs Velocity</h2>
+                    
+                    <div class="comparison-box old fragment" data-fragment-index="0">
+                        <div class="comparison-header">⚡ Speed</div>
+                        <div class="comparison-item"><span class="highlight">Speed</span> = Distance ÷ Time</div>
+                        <div class="comparison-item">Scalar quantity (no direction)</div>
+                        <div class="comparison-item">Formula: v = d/t</div>
+                        <div class="comparison-item">Unit: m/s or km/h</div>
+                        <div class="comparison-item">Example: 60 km/h</div>
+                    </div>
+
+                    <div class="comparison-box new fragment" data-fragment-index="1">
+                        <div class="comparison-header">🎯 Velocity</div>
+                        <div class="comparison-item"><span class="highlight">Velocity</span> = Displacement ÷ Time</div>
+                        <div class="comparison-item">Vector quantity (includes direction)</div>
+                        <div class="comparison-item">Formula: v = Δs/t (Δs = change in position)</div>
+                        <div class="comparison-item">Unit: m/s with direction</div>
+                        <div class="comparison-item">Example: 60 km/h north</div>
+                    </div>
+
+                    <div class="info-box fragment" data-fragment-index="2">
+                        <strong>Key Point:</strong> An object can have constant speed but changing velocity if it changes direction (e.g., circular motion).
+                    </div>
+
+                    <div class="calculation-box fragment" data-fragment-index="3">
+                        <div class="calc-label">Example Problem:</div>
+                        <div class="calc-step">A runner completes a 400m circular track in 80 seconds.</div>
+                        <div class="calc-step"><strong>Calculate:</strong> (a) Average speed (b) Average velocity</div>
+                        <div class="calc-step">
+                            <strong>Solution:</strong><br>
+                            (a) Average speed = distance ÷ time = 400m ÷ 80s = 5 m/s
+                        </div>
+                        <div class="calc-step">
+                            (b) Average velocity = displacement ÷ time = 0m ÷ 80s = 0 m/s<br>
+                            (The runner returns to start, so displacement = 0)
+                        </div>
+                        <div class="calc-result">
+                            Answer: Speed = 5 m/s, Velocity = 0 m/s
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 4: Acceleration -->
+            <section>
+                <div class="slide-content-wrapper">
+                    <h2>Acceleration</h2>
+                    
+                    <div class="info-box fragment" data-fragment-index="0">
+                        <span class="highlight">Acceleration</span> is the rate of change of velocity.
+                    </div>
+
+                    <div class="comparison-box new fragment" data-fragment-index="1">
+                        <div class="comparison-header">📊 Acceleration Formula</div>
+                        <div class="comparison-item"><strong>a = (v - u) / t</strong></div>
+                        <div class="comparison-item">a = acceleration (m/s²)</div>
+                        <div class="comparison-item">v = final velocity (m/s)</div>
+                        <div class="comparison-item">u = initial velocity (m/s)</div>
+                        <div class="comparison-item">t = time (s)</div>
+                    </div>
+
+                    <div class="concept-card fragment" data-fragment-index="2">
+                        <div class="concept-icon">⬆️</div>
+                        <div class="concept-title">Positive Acceleration</div>
+                        <div class="detail-item">Velocity increasing (speeding up)</div>
+                        <div class="detail-item">Example: Car accelerating from rest</div>
+                    </div>
+
+                    <div class="concept-card fragment" data-fragment-index="3">
+                        <div class="concept-icon">⬇️</div>
+                        <div class="concept-title">Negative Acceleration (Deceleration)</div>
+                        <div class="detail-item">Velocity decreasing (slowing down)</div>
+                        <div class="detail-item">Example: Car braking</div>
+                    </div>
+
+                    <div class="calculation-box fragment" data-fragment-index="4">
+                        <div class="calc-label">Example Problem:</div>
+                        <div class="calc-step">A car accelerates from rest to 25 m/s in 5 seconds. Calculate acceleration.</div>
+                        <div class="calc-step">
+                            <strong>Given:</strong><br>
+                            u = 0 m/s (starts from rest)<br>
+                            v = 25 m/s<br>
+                            t = 5 s
+                        </div>
+                        <div class="calc-step">
+                            <strong>Formula:</strong> a = (v - u) / t
+                        </div>
+                        <div class="calc-step">
+                            <strong>Calculation:</strong><br>
+                            a = (25 - 0) / 5<br>
+                            a = 25 / 5<br>
+                            a = 5 m/s²
+                        </div>
+                        <div class="calc-result">
+                            Answer: Acceleration = 5 m/s²
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 5: Distance-Time Graphs -->
+            <section>
+                <div class="slide-content-wrapper">
+                    <h2>Distance-Time Graphs</h2>
+                    
+                    <div class="info-box fragment" data-fragment-index="0">
+                        The <span class="highlight">gradient (slope)</span> of a distance-time graph = speed
+                    </div>
+
+                    <svg class="fragment" width="600" height="350" viewBox="0 0 600 350" style="margin: 20px 0;" data-fragment-index="1">
+                        <!-- Axes -->
+                        <line x1="50" y1="300" x2="550" y2="300" stroke="#1e293b" stroke-width="2"/>
+                        <line x1="50" y1="300" x2="50" y2="50" stroke="#1e293b" stroke-width="2"/>
+                        
+                        <!-- Axis labels -->
+                        <text x="300" y="330" text-anchor="middle" font-size="18" fill="#1e293b" font-weight="bold">Time (s)</text>
+                        <text x="20" y="180" text-anchor="middle" font-size="18" fill="#1e293b" font-weight="bold" transform="rotate(-90 20 180)">Distance (m)</text>
+                        
+                        <!-- Stationary (horizontal line) -->
+                        <line x1="50" y1="250" x2="200" y2="250" stroke="#dc2626" stroke-width="3"/>
+                        <text x="125" y="235" text-anchor="middle" font-size="14" fill="#dc2626" font-weight="bold">Stationary</text>
+                        
+                        <!-- Constant speed (diagonal line) -->
+                        <line x1="50" y1="250" x2="350" y2="100" stroke="#10b981" stroke-width="3"/>
+                        <text x="200" y="150" text-anchor="middle" font-size="14" fill="#10b981" font-weight="bold">Constant speed</text>
+                        
+                        <!-- Accelerating (curve) -->
+                        <path d="M 50 250 Q 400 220, 550 80" stroke="#3b82f6" stroke-width="3" fill="none"/>
+                        <text x="450" y="120" text-anchor="middle" font-size="14" fill="#3b82f6" font-weight="bold">Accelerating</text>
+                    </svg>
+
+                    <div class="key-takeaway fragment" data-fragment-index="2">
+                        💡 Positive gradient = acceleration | Negative gradient = deceleration | Horizontal = constant velocity
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 7: Kinematics Practice Problem -->
+            <section>
+                <div class="slide-content-wrapper">
+                    <h2>Kinematics Practice Problem</h2>
+                    
+                    <div class="calculation-box fragment" data-fragment-index="0">
+                        <div class="calc-label">Challenge Problem:</div>
+                        <div class="calc-step">A cyclist travels 150m east, then 90m west. The journey takes 60 seconds.</div>
+                        <div class="calc-step"><strong>Calculate:</strong> (a) Total distance (b) Displacement (c) Average speed (d) Average velocity</div>
+                    </div>
+
+                    <div class="calculation-box fragment" data-fragment-index="1">
+                        <div class="calc-step">
+                            <strong>(a) Total Distance:</strong><br>
+                            Distance = 150m + 90m = 240m
+                        </div>
+                        <div class="calc-result">Distance = 240m</div>
+                    </div>
+
+                    <div class="calculation-box fragment" data-fragment-index="2">
+                        <div class="calc-step">
+                            <strong>(b) Displacement:</strong><br>
+                            Net position = 150m east - 90m west = 60m east
+                        </div>
+                        <div class="calc-result">Displacement = 60m east</div>
+                    </div>
+
+                    <div class="calculation-box fragment" data-fragment-index="3">
+                        <div class="calc-step">
+                            <strong>(c) Average Speed:</strong><br>
+                            Speed = distance ÷ time = 240m ÷ 60s = 4 m/s
+                        </div>
+                        <div class="calc-result">Average Speed = 4 m/s</div>
+                    </div>
+
+                    <div class="calculation-box fragment" data-fragment-index="4">
+                        <div class="calc-step">
+                            <strong>(d) Average Velocity:</strong><br>
+                            Velocity = displacement ÷ time = 60m ÷ 60s = 1 m/s east
+                        </div>
+                        <div class="calc-result">Average Velocity = 1 m/s east</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 8: Newton's First Law -->
+            <section>
+                <div class="slide-content-wrapper">
+                    <h2>Newton's First Law of Motion</h2>
+                    
+                    <div class="info-box fragment" data-fragment-index="0">
+                        <strong>Law of Inertia:</strong> An object at rest stays at rest, and an object in motion stays in motion with constant velocity, unless acted upon by a net external force.
+                    </div>
+
+                    <svg class="fragment" width="600" height="250" viewBox="0 0 600 250" style="margin: 20px 0;" data-fragment-index="1">
+                        <!-- Object at rest -->
+                        <rect x="80" y="120" width="80" height="60" fill="#3b82f6" stroke="#1e293b" stroke-width="2"/>
+                        <text x="120" y="155" text-anchor="middle" font-size="20" fill="white" font-weight="bold">BLOCK</text>
+                        <line x1="40" y1="180" x2="200" y2="180" stroke="#1e293b" stroke-width="3"/>
+                        <text x="120" y="210" text-anchor="middle" font-size="16" fill="#1e293b" font-weight="bold">At Rest</text>
+                        <text x="120" y="230" text-anchor="middle" font-size="14" fill="#64748b">Stays at rest</text>
+                        
+                        <!-- Object in motion -->
+                        <rect x="380" y="120" width="80" height="60" fill="#10b981" stroke="#1e293b" stroke-width="2"/>
+                        <text x="420" y="155" text-anchor="middle" font-size="20" fill="white" font-weight="bold">BLOCK</text>
+                        <line x1="340" y1="180" x2="500" y2="180" stroke="#1e293b" stroke-width="3"/>
+                        
+                        <!-- Motion arrows -->
+                        <defs>
+                            <marker id="arrow-green" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                                <polygon points="0 0, 10 3, 0 6" fill="#10b981"/>
+                            </marker>
+                        </defs>
+                        <line x1="340" y1="150" x2="370" y2="150" stroke="#10b981" stroke-width="3" marker-end="url(#arrow-green)"/>
+                        <line x1="470" y1="150" x2="500" y2="150" stroke="#10b981" stroke-width="3" marker-end="url(#arrow-green)"/>
+                        
+                        <text x="420" y="210" text-anchor="middle" font-size="16" fill="#1e293b" font-weight="bold">In Motion</text>
+                        <text x="420" y="230" text-anchor="middle" font-size="14" fill="#64748b">Stays in motion</text>
+                    </svg>
+
+                    <div class="concept-card fragment" data-fragment-index="2">
+                        <div class="concept-icon">🚗</div>
+                        <div class="concept-title">Real-Life Example</div>
+                        <div class="detail-item">When a car brakes suddenly, passengers lurch forward</div>
+                        <div class="detail-item">Your body wants to keep moving at constant velocity</div>
+                        <div class="detail-item">Seatbelts provide the force to stop you</div>
+                    </div>
+
+                    <div class="key-takeaway fragment" data-fragment-index="3">
+                        💡 Inertia = resistance to change in motion | More mass = more inertia
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 9: Newton's Second Law -->
+            <section>
+                <div class="slide-content-wrapper">
+                    <h2>Newton's Second Law of Motion</h2>
+                    
+                    <div class="info-box fragment" data-fragment-index="0">
+                        <strong>F = ma</strong><br>
+                        The acceleration of an object depends on the net force acting on it and its mass.
+                    </div>
+
+                    <div class="comparison-box new fragment" data-fragment-index="1">
+                        <div class="comparison-header">📐 Formula Breakdown</div>
+                        <div class="comparison-item"><strong>F = m × a</strong></div>
+                        <div class="comparison-item">F = Force (Newtons, N)</div>
+                        <div class="comparison-item">m = mass (kilograms, kg)</div>
+                        <div class="comparison-item">a = acceleration (m/s²)</div>
+                    </div>
+
+                    <svg class="fragment" width="600" height="200" viewBox="0 0 600 200" style="margin: 20px 0;" data-fragment-index="2">
+                        <!-- Object -->
+                        <rect x="250" y="80" width="100" height="70" fill="#3b82f6" stroke="#1e293b" stroke-width="2"/>
+                        <text x="300" y="120" text-anchor="middle" font-size="18" fill="white" font-weight="bold">5 kg</text>
+                        
+                        <!-- Force arrow -->
+                        <defs>
+                            <marker id="arrow-force" markerWidth="12" markerHeight="12" refX="10" refY="3" orient="auto">
+                                <polygon points="0 0, 12 3, 0 6" fill="#ef4444"/>
+                            </marker>
+                        </defs>
+                        <line x1="150" y1="115" x2="240" y2="115" stroke="#ef4444" stroke-width="4" marker-end="url(#arrow-force)"/>
+                        <text x="195" y="105" text-anchor="middle" font-size="16" fill="#ef4444" font-weight="bold">F = 20N</text>
+                        
+                        <!-- Acceleration arrow -->
+                        <line x1="360" y1="115" x2="450" y2="115" stroke="#10b981" stroke-width="4" marker-end="url(#arrow-green)"/>
+                        <text x="405" y="105" text-anchor="middle" font-size="16" fill="#10b981" font-weight="bold">a = 4 m/s²</text>
+                        
+                        <!-- Ground -->
+                        <line x1="100" y1="150" x2="500" y2="150" stroke="#1e293b" stroke-width="2"/>
+                    </svg>
+
+                    <div class="key-takeaway fragment" data-fragment-index="3">
+                        💡 More force = more acceleration | More mass = less acceleration
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 10: F=ma Calculations - Problem 1 -->
+            <section>
+                <div class="slide-content-wrapper">
+                    <h2>F = ma: Calculation Practice</h2>
+                    
+                    <div class="calculation-box fragment" data-fragment-index="0">
+                        <div class="calc-label">Problem 1: Find Force</div>
+                        <div class="calc-step">A 10 kg object accelerates at 3 m/s². Calculate the net force.</div>
+                        <div class="calc-step">
+                            <strong>Given:</strong><br>
+                            m = 10 kg<br>
+                            a = 3 m/s²
+                        </div>
+                        <div class="calc-step">
+                            <strong>Formula:</strong> F = m × a
+                        </div>
+                        <div class="calc-step">
+                            <strong>Calculation:</strong><br>
+                            F = 10 kg × 3 m/s²<br>
+                            F = 30 N
+                        </div>
+                        <div class="calc-result">
+                            Answer: Force = 30 N
+                        </div>
+                    </div>
+
+                    <div class="calculation-box fragment" data-fragment-index="1">
+                        <div class="calc-label">Problem 2: Find Mass</div>
+                        <div class="calc-step">A force of 50 N causes an object to accelerate at 5 m/s². Find the mass.</div>
+                        <div class="calc-step">
+                            <strong>Given:</strong><br>
+                            F = 50 N<br>
+                            a = 5 m/s²
+                        </div>
+                        <div class="calc-step">
+                            <strong>Rearrange formula:</strong> m = F ÷ a
+                        </div>
+                        <div class="calc-step">
+                            <strong>Calculation:</strong><br>
+                            m = 50 N ÷ 5 m/s²<br>
+                            m = 10 kg
+                        </div>
+                        <div class="calc-result">
+                            Answer: Mass = 10 kg
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 11: F=ma Calculations - Problem 3 -->
+            <section>
+                <div class="slide-content-wrapper">
+                    <h2>F = ma: More Practice</h2>
+                    
+                    <div class="calculation-box fragment" data-fragment-index="0">
+                        <div class="calc-label">Problem 3: Find Acceleration</div>
+                        <div class="calc-step">A 25 kg box is pushed with a force of 100 N. Calculate acceleration.</div>
+                        <div class="calc-step">
+                            <strong>Given:</strong><br>
+                            m = 25 kg<br>
+                            F = 100 N
+                        </div>
+                        <div class="calc-step">
+                            <strong>Rearrange formula:</strong> a = F ÷ m
+                        </div>
+                        <div class="calc-step">
+                            <strong>Calculation:</strong><br>
+                            a = 100 N ÷ 25 kg<br>
+                            a = 4 m/s²
+                        </div>
+                        <div class="calc-result">
+                            Answer: Acceleration = 4 m/s²
+                        </div>
+                    </div>
+
+                    <div class="calculation-box fragment" data-fragment-index="1">
+                        <div class="calc-label">Problem 4: Combined Problem</div>
+                        <div class="calc-step">A 60 kg student pushes a 20 kg cart. The cart accelerates at 2 m/s². What force did the student apply?</div>
+                        <div class="calc-step">
+                            <strong>Given:</strong><br>
+                            m = 20 kg (only cart mass matters!)<br>
+                            a = 2 m/s²
+                        </div>
+                        <div class="calc-step">
+                            <strong>Formula:</strong> F = m × a
+                        </div>
+                        <div class="calc-step">
+                            <strong>Calculation:</strong><br>
+                            F = 20 kg × 2 m/s²<br>
+                            F = 40 N
+                        </div>
+                        <div class="calc-result">
+                            Answer: Force = 40 N
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 12: Newton's Third Law -->
+            <section>
+                <div class="slide-content-wrapper">
+                    <h2>Newton's Third Law of Motion</h2>
+                    
+                    <div class="info-box fragment" data-fragment-index="0">
+                        <strong>Action-Reaction:</strong> For every action, there is an equal and opposite reaction.
+                    </div>
+
+                    <svg class="fragment" width="600" height="280" viewBox="0 0 600 280" style="margin: 20px 0;" data-fragment-index="1">
+                        <!-- Person -->
+                        <ellipse cx="150" cy="100" rx="30" ry="40" fill="#fbbf24" stroke="#1e293b" stroke-width="2"/>
+                        <circle cx="150" cy="60" r="25" fill="#fde68a" stroke="#1e293b" stroke-width="2"/>
+                        <line x1="150" y1="100" x2="150" y2="160" stroke="#1e293b" stroke-width="3"/>
+                        <line x1="150" y1="120" x2="120" y2="150" stroke="#1e293b" stroke-width="3"/>
+                        <line x1="150" y1="120" x2="220" y2="120" stroke="#1e293b" stroke-width="3"/>
+                        <line x1="150" y1="160" x2="130" y2="200" stroke="#1e293b" stroke-width="3"/>
+                        <line x1="150" y1="160" x2="170" y2="200" stroke="#1e293b" stroke-width="3"/>
+                        
+                        <!-- Wall -->
+                        <rect x="280" y="40" width="20" height="180" fill="#94a3b8" stroke="#1e293b" stroke-width="2"/>
+                        <rect x="300" y="30" width="10" height="200" fill="#cbd5e1"/>
+                        
+                        <!-- Force arrows -->
+                        <defs>
+                            <marker id="arrow-red" markerWidth="12" markerHeight="12" refX="10" refY="3" orient="auto">
+                                <polygon points="0 0, 12 3, 0 6" fill="#ef4444"/>
+                            </marker>
+                            <marker id="arrow-blue" markerWidth="12" markerHeight="12" refX="10" refY="3" orient="auto">
+                                <polygon points="0 0, 12 3, 0 6" fill="#3b82f6"/>
+                            </marker>
+                        </defs>
+                        
+                        <!-- Action force -->
+                        <line x1="230" y1="120" x2="270" y2="120" stroke="#ef4444" stroke-width="5" marker-end="url(#arrow-red)"/>
+                        <text x="250" y="110" text-anchor="middle" font-size="14" fill="#ef4444" font-weight="bold">Action</text>
+                        <text x="250" y="145" text-anchor="middle" font-size="12" fill="#ef4444">Person pushes wall</text>
+                        
+                        <!-- Reaction force -->
+                        <line x1="270" y1="160" x2="230" y2="160" stroke="#3b82f6" stroke-width="5" marker-end="url(#arrow-blue)"/>
+                        <text x="250" y="180" text-anchor="middle" font-size="14" fill="#3b82f6" font-weight="bold">Reaction</text>
+                        <text x="250" y="195" text-anchor="middle" font-size="12" fill="#3b82f6">Wall pushes person</text>
+                        
+                        <!-- Ground -->
+                        <line x1="80" y1="220" x2="320" y2="220" stroke="#1e293b" stroke-width="3"/>
+                        
+                        <!-- Labels -->
+                        <text x="400" y="80" font-size="16" fill="#1e293b" font-weight="bold">Equal in magnitude</text>
+                        <text x="400" y="110" font-size="16" fill="#1e293b" font-weight="bold">Opposite in direction</text>
+                        <text x="400" y="140" font-size="16" fill="#1e293b" font-weight="bold">Act on different objects</text>
+                    </svg>
+
+                    <div class="concept-card fragment" data-fragment-index="2">
+                        <div class="concept-icon">🚀</div>
+                        <div class="concept-title">Real-Life Examples</div>
+                        <div class="detail-item"><strong>Rocket:</strong> Exhaust gases push down → Rocket pushed up</div>
+                        <div class="detail-item"><strong>Swimming:</strong> Push water back → Water pushes you forward</div>
+                        <div class="detail-item"><strong>Walking:</strong> Push ground backward → Ground pushes you forward</div>
+                    </div>
+
+                    <div class="key-takeaway fragment" data-fragment-index="3">
+                        💡 Forces always come in pairs | Same size, opposite direction, different objects
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 13: Check Your Understanding -->
+            <section>
+                <div class="slide-content-wrapper">
+                    <h2>Check Your Understanding</h2>
+                    <div class="quiz-box">
+                        <h3 style="margin-top: 0;">Quick Quiz 🎯</h3>
+                        <div class="quiz-item fragment" onclick="toggleAnswer(this)" data-fragment-index="0">
+                            <strong>Q1:</strong> What is the difference between speed and velocity?
+                            <div class="quiz-answer">
+                                <strong>Answer:</strong> Speed is scalar (magnitude only), velocity is vector (magnitude + direction).
+                            </div>
+                        </div>
+                        <div class="quiz-item fragment" onclick="toggleAnswer(this)" data-fragment-index="1">
+                            <strong>Q2:</strong> A car travels 80m in 4 seconds. What is its speed?
+                            <div class="quiz-answer">
+                                <strong>Answer:</strong> Speed = distance ÷ time = 80m ÷ 4s = 20 m/s
+                            </div>
+                        </div>
+                        <div class="quiz-item fragment" onclick="toggleAnswer(this)" data-fragment-index="2">
+                            <strong>Q3:</strong> Which Newton's Law explains why seatbelts are important?
+                            <div class="quiz-answer">
+                                <strong>Answer:</strong> First Law (Inertia) - Your body keeps moving when the car stops suddenly.
+                            </div>
+                        </div>
+                        <div class="quiz-item fragment" onclick="toggleAnswer(this)" data-fragment-index="3">
+                            <strong>Q4:</strong> A 5 kg ball accelerates at 6 m/s². What force is applied?
+                            <div class="quiz-answer">
+                                <strong>Answer:</strong> F = ma = 5 kg × 6 m/s² = 30 N
+                            </div>
+                        </div>
+                        <div class="quiz-item fragment" onclick="toggleAnswer(this)" data-fragment-index="4">
+                            <strong>Q5:</strong> When you jump, you push Earth down. What pushes you up?
+                            <div class="quiz-answer">
+                                <strong>Answer:</strong> Earth pushes you up (Newton's Third Law - action-reaction pair).
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 14: Summary -->
+            <section>
+                <div class="slide-content-wrapper">
+                    <h2>Summary</h2>
+                    <div class="learning-box">
+                        <h3 style="margin-top: 0;">Key Concepts 📚</h3>
+                        <div class="objective-item fragment" data-fragment-index="0"><span class="highlight">Distance:</span> Total path length (scalar)</div>
+                        <div class="objective-item fragment" data-fragment-index="1"><span class="highlight">Displacement:</span> Straight-line distance with direction (vector)</div>
+                        <div class="objective-item fragment" data-fragment-index="2"><span class="highlight">Speed:</span> Distance ÷ Time (scalar)</div>
+                        <div class="objective-item fragment" data-fragment-index="3"><span class="highlight">Velocity:</span> Displacement ÷ Time (vector)</div>
+                        <div class="objective-item fragment" data-fragment-index="4"><span class="highlight">Acceleration:</span> a = (v - u) / t</div>
+                        <div class="objective-item fragment" data-fragment-index="5"><span class="highlight">Newton's 1st Law:</span> Objects resist changes in motion (Inertia)</div>
+                        <div class="objective-item fragment" data-fragment-index="6"><span class="highlight">Newton's 2nd Law:</span> F = ma</div>
+                        <div class="objective-item fragment" data-fragment-index="7"><span class="highlight">Newton's 3rd Law:</span> Action-Reaction pairs</div>
+                    </div>
+
+                    <div class="key-takeaway fragment" data-fragment-index="8">
+                        🎓 Master these formulas and you'll ace your physics exam!
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reveal.min.js"></script>
+    <script>
+        Reveal.initialize({
+            hash: true,
+            center: true,
+            transition: 'slide',
+            transitionSpeed: 'default',
+            backgroundTransition: 'fade',
+            controls: true,
+            progress: true,
+            slideNumber: 'c/t',
+            keyboard: true,
+            overview: true,
+            loop: false,
+            rtl: false,
+            navigationMode: 'default',
+            shuffle: false,
+            fragments: true,
+            fragmentInURL: true,
+            embedded: false,
+            help: true,
+            showNotes: false,
+            autoPlayMedia: null,
+            preloadIframes: null,
+            autoSlide: 0,
+            autoSlideStoppable: true,
+            mouseWheel: false,
+            hideInactiveCursor: true,
+            hideCursorTime: 5000,
+            previewLinks: false,
+            width: 1280,
+            height: 720,
+            margin: 0.04,
+            minScale: 0.2,
+            maxScale: 2.0
+        });
+
+        function toggleAnswer(item) {
+            const answer = item.querySelector('.quiz-answer');
+            if (answer.style.display === 'block') {
+                answer.style.display = 'none';
+                item.classList.remove('revealed');
+            } else {
+                answer.style.display = 'block';
+                item.classList.add('revealed');
+            }
+        }
+
+        function loadImage(file, callback) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                callback(e.target.result);
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function bulkUpload() {
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.accept = 'image/*';
+            input.multiple = true;
+            input.onchange = function(e) {
+                const files = Array.from(e.target.files);
+                const placeholders = document.querySelectorAll('.image-placeholder:not(.has-image)');
+                
+                files.forEach((file, index) => {
+                    if (index < placeholders.length) {
+                        loadImage(file, (dataUrl) => setSlideImage(placeholders[index], dataUrl));
+                    }
+                });
+            };
+            input.click();
+        }
+
+        function setSlideImage(placeholder, dataUrl) {
+            if (!placeholder) return;
+            placeholder.innerHTML = `<img src="${dataUrl}" style="width: 100%; height: 100%; object-fit: contain;">`;
+            placeholder.classList.add('has-image');
+        }
+
+        function downloadWithImages() {
+            const html = document.documentElement.outerHTML;
+            const blob = new Blob([html], { type: 'text/html' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'kinematics-newtons-laws-revision.html';
+            a.click();
+            URL.revokeObjectURL(url);
+            
+            const notification = document.getElementById('saveNotification');
+            notification.style.opacity = '1';
+            setTimeout(() => notification.style.opacity = '0', 3000);
+        }
+
+        function clearAllImages() {
+            if (!confirm('Remove all images?')) return;
+            const placeholders = document.querySelectorAll('.image-placeholder.has-image');
+            placeholders.forEach(placeholder => {
+                placeholder.innerHTML = `
+                    <div class="placeholder-content">
+                        <div class="placeholder-icon">🖼️</div>
+                        <div class="placeholder-text">Image</div>
+                    </div>
+                `;
+                placeholder.classList.remove('has-image');
+            });
+        }
+    </script>
+</body>
+</html>💡 Steeper gradient = faster speed | Horizontal line = stationary | Curved line = acceleration
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 6: Velocity-Time Graphs -->
+            <section>
+                <div class="slide-content-wrapper">
+                    <h2>Velocity-Time Graphs</h2>
+                    
+                    <div class="info-box fragment" data-fragment-index="0">
+                        The <span class="highlight">gradient (slope)</span> = acceleration<br>
+                        The <span class="highlight">area under the graph</span> = displacement
+                    </div>
+
+                    <svg class="fragment" width="600" height="350" viewBox="0 0 600 350" style="margin: 20px 0;" data-fragment-index="1">
+                        <!-- Axes -->
+                        <line x1="50" y1="300" x2="550" y2="300" stroke="#1e293b" stroke-width="2"/>
+                        <line x1="50" y1="300" x2="50" y2="50" stroke="#1e293b" stroke-width="2"/>
+                        
+                        <!-- Axis labels -->
+                        <text x="300" y="330" text-anchor="middle" font-size="18" fill="#1e293b" font-weight="bold">Time (s)</text>
+                        <text x="20" y="180" text-anchor="middle" font-size="18" fill="#1e293b" font-weight="bold" transform="rotate(-90 20 180)">Velocity (m/s)</text>
+                        
+                        <!-- Constant velocity (horizontal) -->
+                        <line x1="50" y1="150" x2="250" y2="150" stroke="#10b981" stroke-width="3"/>
+                        <text x="150" y="135" text-anchor="middle" font-size="14" fill="#10b981" font-weight="bold">Constant velocity</text>
+                        <text x="150" y="170" text-anchor="middle" font-size="12" fill="#10b981">(a = 0)</text>
+                        
+                        <!-- Positive acceleration -->
+                        <line x1="250" y1="150" x2="400" y2="80" stroke="#3b82f6" stroke-width="3"/>
+                        <text x="325" y="100" text-anchor="middle" font-size="14" fill="#3b82f6" font-weight="bold">Accelerating</text>
+                        
+                        <!-- Negative acceleration (deceleration) -->
+                        <line x1="400" y1="80" x2="550" y2="250" stroke="#f59e0b" stroke-width="3"/>
+                        <text x="475" y="180" text-anchor="middle" font-size="14" fill="#f59e0b" font-weight="bold">Decelerating</text>
+                    </svg>
+
+                    <div class="key-takeaway fragment" data-fragment-index="2">
+                        
