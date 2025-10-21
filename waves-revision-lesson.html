@@ -1,0 +1,1177 @@
+<html lang="en" class="reveal-full-page">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Waves - Year 10 Revision</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reveal.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/theme/white.min.css">
+    <style>
+        :root {
+            --primary-blue: #2563eb;
+            --primary-purple: #7c3aed;
+            --success-green: #10b981;
+            --warning-orange: #f59e0b;
+            --accent-cyan: #06b6d4;
+            --text-dark: #1e293b;
+            --bg-light: #f8fafc;
+        }
+
+        .reveal {
+            font-size: 28px;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+        }
+
+        .reveal h1 {
+            font-size: 2em;
+            color: var(--text-dark);
+            font-weight: 700;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, var(--primary-blue), var(--primary-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .reveal h2 {
+            font-size: 1.6em;
+            color: var(--text-dark);
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .reveal .slides section {
+            height: 100%;
+            padding: 20px;
+            overflow-y: auto !important;
+        }
+
+        .slide-content-wrapper {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px 0;
+        }
+
+        .learning-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 16px;
+            margin: 15px 0;
+            max-width: 800px;
+            width: 100%;
+        }
+
+        .objective-item {
+            background: rgba(255,255,255,0.15);
+            padding: 12px;
+            margin: 8px 0;
+            border-radius: 8px;
+            font-size: 0.9em;
+            border-left: 4px solid white;
+        }
+
+        .quiz-box {
+            background: linear-gradient(135deg, var(--success-green), #34d399);
+            padding: 25px;
+            border-radius: 16px;
+            margin: 15px 0;
+            max-width: 700px;
+            width: 100%;
+            color: white;
+        }
+
+        .quiz-item {
+            background: white;
+            color: var(--text-dark);
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.85em;
+        }
+
+        .quiz-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .quiz-item.revealed {
+            background: linear-gradient(135deg, #fef3c7, #fde68a);
+        }
+
+        .quiz-answer {
+            display: none;
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 2px solid var(--warning-orange);
+            font-weight: 600;
+            color: var(--primary-blue);
+        }
+
+        .concept-card {
+            background: white;
+            border: 2px solid #e2e8f0;
+            border-radius: 14px;
+            padding: 20px;
+            margin: 15px 0;
+            max-width: 700px;
+            width: 100%;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .concept-card:hover {
+            border-color: var(--primary-blue);
+            transform: translateY(-2px);
+        }
+
+        .concept-card.revealed {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+        }
+
+        .concept-icon {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .concept-title {
+            font-size: 1.2em;
+            font-weight: 700;
+            color: var(--primary-blue);
+            margin-bottom: 8px;
+        }
+
+        .concept-details {
+            display: none;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 2px dashed var(--warning-orange);
+            font-size: 0.85em;
+        }
+
+        .detail-item {
+            margin: 8px 0;
+            padding-left: 18px;
+            position: relative;
+        }
+
+        .detail-item::before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: var(--primary-blue);
+            font-weight: bold;
+        }
+
+        .comparison-box {
+            background: white;
+            border-radius: 14px;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            max-width: 650px;
+            width: 100%;
+            margin: 15px 0;
+        }
+
+        .comparison-box.old {
+            border: 3px solid #dc2626;
+        }
+
+        .comparison-box.new {
+            border: 3px solid var(--success-green);
+            background: linear-gradient(135deg, #f0fdf4, #dcfce7);
+        }
+
+        .comparison-header {
+            font-size: 1.2em;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .comparison-box.old .comparison-header {
+            color: #dc2626;
+        }
+
+        .comparison-box.new .comparison-header {
+            color: var(--success-green);
+        }
+
+        .comparison-item {
+            font-size: 0.85em;
+            margin: 8px 0;
+            line-height: 1.5;
+        }
+
+        .info-box {
+            background: linear-gradient(135deg, #e0f2fe, #bae6fd);
+            border: 2px solid var(--accent-cyan);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 15px 0;
+            max-width: 750px;
+            width: 100%;
+            font-size: 0.9em;
+            line-height: 1.6;
+        }
+
+        .key-takeaway {
+            background: linear-gradient(135deg, #fef3c7, #fde68a);
+            border-left: 5px solid var(--warning-orange);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 15px 0;
+            max-width: 750px;
+            width: 100%;
+            font-weight: 600;
+            font-size: 0.95em;
+        }
+
+        .highlight {
+            background: #fef08a;
+            padding: 3px 6px;
+            border-radius: 4px;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .calculation-box {
+            background: white;
+            border: 3px solid var(--primary-purple);
+            border-radius: 14px;
+            padding: 25px;
+            margin: 15px 0;
+            max-width: 700px;
+            width: 100%;
+            font-family: 'Courier New', monospace;
+        }
+
+        .calc-step {
+            margin: 12px 0;
+            padding: 10px;
+            background: #f8fafc;
+            border-radius: 8px;
+            font-size: 0.85em;
+        }
+
+        .calc-label {
+            color: var(--primary-blue);
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .calc-result {
+            background: linear-gradient(135deg, #dcfce7, #bbf7d0);
+            padding: 15px;
+            border-radius: 10px;
+            border-left: 5px solid var(--success-green);
+            font-size: 1.1em;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-top: 15px;
+        }
+
+        .image-placeholder {
+            width: 100%;
+            max-width: 650px;
+            height: 400px;
+            border: 3px dashed #cbd5e1;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #f8fafc, #f1f5f9);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 15px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .image-placeholder:hover {
+            border-color: var(--primary-blue);
+            transform: scale(1.02);
+        }
+
+        .image-placeholder.has-image {
+            border-color: var(--success-green);
+            background: white;
+        }
+
+        .placeholder-content {
+            text-align: center;
+            color: #64748b;
+        }
+
+        .placeholder-icon {
+            font-size: 4em;
+            margin-bottom: 10px;
+        }
+
+        .placeholder-text {
+            font-size: 1em;
+            font-weight: 600;
+        }
+
+        .placeholder-hint {
+            font-size: 0.75em;
+            margin-top: 8px;
+            color: #94a3b8;
+        }
+
+        .toolbar {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            z-index: 100;
+        }
+
+        .toolbar-button {
+            background: linear-gradient(135deg, var(--primary-blue), var(--primary-purple));
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 10px;
+            font-size: 0.85em;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .toolbar-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+        }
+
+        .notification {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: linear-gradient(135deg, var(--success-green), #34d399);
+            color: white;
+            padding: 20px 40px;
+            border-radius: 12px;
+            font-weight: 600;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body class="reveal-viewport">
+    <!-- Toolbar -->
+    <div class="toolbar">
+        <button class="toolbar-button" onclick="bulkUpload()">📂 Bulk Upload Images</button>
+        <button class="toolbar-button" onclick="downloadWithImages()">💾 Save Lesson</button>
+        <button class="toolbar-button" onclick="clearAllImages()">🗑️ Clear All Images</button>
+    </div>
+
+    <!-- Save Notification -->
+    <div class="notification" id="saveNotification">✅ Lesson saved successfully!</div>
+
+    <div class="reveal">
+        <div class="slides">
+            <!-- Slide 1: Title & Do Now -->
+            <section>
+                <div class="slide-content-wrapper">
+                    <h1>🌊 Waves</h1>
+                    <h2>Year 10 Science - NSW NESA Syllabus</h2>
+                    
+                    <!-- Do Now Activity -->
+                    <div class="quiz-box fragment" data-fragment-index="0">
+                        <h3 style="margin-top: 0;">🔥 Do Now Activity - Test Your Knowledge</h3>
+                        <div class="quiz-item" onclick="toggleAnswer(this)">
+                            <strong>1.</strong> Sound is a type of wave. (True or False?)
+                            <div class="quiz-answer">
+                                <strong>Answer: TRUE</strong> - Sound is a mechanical wave that requires a medium to travel.
+                            </div>
+                        </div>
+                        <div class="quiz-item" onclick="toggleAnswer(this)">
+                            <strong>2.</strong> If a wave's frequency increases (and speed stays constant), what happens to wavelength?<br>
+                            A) Increases<br>
+                            B) Decreases<br>
+                            C) Stays the same<br>
+                            D) Doubles
+                            <div class="quiz-answer">
+                                <strong>Answer: B</strong> - Wavelength decreases because v = fλ (if v is constant and f increases, λ must decrease).
+                            </div>
+                        </div>
+                        <div class="quiz-item" onclick="toggleAnswer(this)">
+                            <strong>3.</strong> Sound travels faster in water than in air. (True or False?)
+                            <div class="quiz-answer">
+                                <strong>Answer: TRUE</strong> - Water particles are closer together, allowing vibrations to transfer more efficiently.
+                            </div>
+                        </div>
+                        <div class="quiz-item" onclick="toggleAnswer(this)">
+                            <strong>4.</strong> Which type of wave can travel through a vacuum?<br>
+                            A) Sound waves<br>
+                            B) Water waves<br>
+                            C) Electromagnetic waves<br>
+                            D) Seismic waves
+                            <div class="quiz-answer">
+                                <strong>Answer: C</strong> - Electromagnetic waves (like light) don't need a medium and can travel through space.
+                            </div>
+                        </div>
+                        <div class="quiz-item" onclick="toggleAnswer(this)">
+                            <strong>5.</strong> The distance between two wave crests is called the wavelength. (True or False?)
+                            <div class="quiz-answer">
+                                <strong>Answer: TRUE</strong> - Wavelength (λ) is measured from crest to crest or trough to trough.
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="learning-box fragment" data-fragment-index="1">
+                        <h3 style="margin-top: 0;">Learning Objectives</h3>
+                        <div class="objective-item">Identify <span class="highlight">wave properties</span> (wavelength, frequency, amplitude, speed)</div>
+                        <div class="objective-item">Apply the wave equation <span class="highlight">v = fλ</span></div>
+                        <div class="objective-item">Understand the <span class="highlight">electromagnetic spectrum</span></div>
+                        <div class="objective-item">Explain how <span class="highlight">particle arrangement</span> affects wave speed</div>
+                        <div class="objective-item">Describe <span class="highlight">energy transfer</span> in waves</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 2: What is a Wave? -->
+            <section>
+                <div class="slide-content-wrapper">
+                    <h2>What is a Wave?</h2>
+                    
+                    <div class="info-box fragment" data-fragment-index="0">
+                        A <span class="highlight">wave</span> is a disturbance that transfers energy from one place to another without transferring matter.
+                    </div>
+
+                    <svg class="fragment" width="700" height="250" viewBox="0 0 700 250" style="margin: 20px 0;" data-fragment-index="1">
+                        <!-- Wave -->
+                        <path d="M 50 125 Q 100 75, 150 125 T 250 125 T 350 125 T 450 125 T 550 125 T 650 125" 
+                              stroke="#3b82f6" stroke-width="4" fill="none"/>
+                        
+                        <!-- Crest labels -->
+                        <circle cx="150" cy="75" r="6" fill="#ef4444"/>
+                        <text x="150" y="60" text-anchor="middle" font-size="14" fill="#ef4444" font-weight="bold">Crest</text>
+                        <line x1="150" y1="65" x2="150" y2="72" stroke="#ef4444" stroke-width="2"/>
+                        
+                        <!-- Trough labels -->
+                        <circle cx="250" cy="175" r="6" fill="#10b981"/>
+                        <text x="250" y="200" text-anchor="middle" font-size="14" fill="#10b981" font-weight="bold">Trough</text>
+                        <line x1="250" y1="178" x2="250" y2="185" stroke="#10b981" stroke-width="2"/>
+                        
+                        <!-- Wavelength arrow -->
+                        <defs>
+                            <marker id="arrow1" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                                <polygon points="0 0, 10 3, 0 6" fill="#f59e0b"/>
+                            </marker>
+                            <marker id="arrow2" markerWidth="10" markerHeight="10" refX="1" refY="3" orient="auto">
+                                <polygon points="10 0, 0 3, 10 6" fill="#f59e0b"/>
+                            </marker>
+                        </defs>
+                        <line x1="150" y1="220" x2="350" y2="220" stroke="#f59e0b" stroke-width="3" 
+                              marker-start="url(#arrow2)" marker-end="url(#arrow1)"/>
+                        <text x="250" y="240" text-anchor="middle" font-size="16" fill="#f59e0b" font-weight="bold">Wavelength (λ)</text>
+                        
+                        <!-- Amplitude arrow -->
+                        <line x1="550" y1="125" x2="550" y2="75" stroke="#7c3aed" stroke-width="3" marker-end="url(#arrow1)"/>
+                        <text x="600" y="100" font-size="14" fill="#7c3aed" font-weight="bold">Amplitude</text>
+                        
+                        <!-- Rest position line -->
+                        <line x1="40" y1="125" x2="660" y2="125" stroke="#94a3b8" stroke-width="1" stroke-dasharray="5,5"/>
+                        <text x="30" y="130" font-size="12" fill="#94a3b8">Rest</text>
+                    </svg>
+
+                    <div class="comparison-box new fragment" data-fragment-index="2">
+                        <div class="comparison-header">🔑 Key Point</div>
+                        <div class="comparison-item">Energy travels through the wave, but particles only vibrate in place</div>
+                        <div class="comparison-item">Like a stadium wave - people go up and down, but the wave moves around</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 3: Wave Properties -->
+            <section>
+                <div class="slide-content-wrapper">
+                    <h2>Wave Properties</h2>
+                    
+                    <div class="concept-card fragment" data-fragment-index="0">
+                        <div class="concept-icon">📏</div>
+                        <div class="concept-title">Wavelength (λ)</div>
+                        <div class="detail-item">Distance between two consecutive crests (or troughs)</div>
+                        <div class="detail-item">Measured in metres (m)</div>
+                        <div class="detail-item">Symbol: λ (lambda)</div>
+                    </div>
+
+                    <div class="concept-card fragment" data-fragment-index="1">
+                        <div class="concept-icon">⚡</div>
+                        <div class="concept-title">Frequency (f)</div>
+                        <div class="detail-item">Number of waves passing a point per second</div>
+                        <div class="detail-item">Measured in Hertz (Hz) or waves per second</div>
+                        <div class="detail-item">Higher frequency = more waves per second</div>
+                    </div>
+
+                    <div class="concept-card fragment" data-fragment-index="2">
+                        <div class="concept-icon">📊</div>
+                        <div class="concept-title">Amplitude (A)</div>
+                        <div class="detail-item">Maximum displacement from rest position</div>
+                        <div class="detail-item">Related to energy: larger amplitude = more energy</div>
+                        <div class="detail-item">Loud sounds have large amplitude; quiet sounds have small amplitude</div>
+                    </div>
+
+                    <div class="concept-card fragment" data-fragment-index="3">
+                        <div class="concept-icon">🚀</div>
+                        <div class="concept-title">Wave Speed (v)</div>
+                        <div class="detail-item">How fast the wave travels through the medium</div>
+                        <div class="detail-item">Measured in metres per second (m/s)</div>
+                        <div class="detail-item">Depends on the medium the wave travels through</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 4: The Wave Equation -->
+            <section>
+                <div class="slide-content-wrapper">
+                    <h2>The Wave Equation</h2>
+                    
+                    <div class="info-box fragment" data-fragment-index="0">
+                        The relationship between wave speed, frequency, and wavelength:
+                    </div>
+
+                    <div class="comparison-box new fragment" data-fragment-index="1">
+                        <div class="comparison-header">📐 Wave Equation</div>
+                        <div class="comparison-item" style="font-size: 1.5em; text-align: center; margin: 20px 0;">
+                            <strong>v = f × λ</strong>
+                        </div>
+                        <div class="comparison-item">v = wave speed (m/s)</div>
+                        <div class="comparison-item">f = frequency (Hz)</div>
+                        <div class="comparison-item">λ = wavelength (m)</div>
+                    </div>
+
+                    <svg class="fragment" width="600" height="180" viewBox="0 0 600 180" style="margin: 20px 0;" data-fragment-index="2">
+                        <!-- Triangle diagram -->
+                        <polygon points="300,30 150,160 450,160" fill="#e0f2fe" stroke="#0284c7" stroke-width="3"/>
+                        
+                        <!-- Labels -->
+                        <text x="300" y="80" text-anchor="middle" font-size="32" fill="#0284c7" font-weight="bold">v</text>
+                        <text x="220" y="140" text-anchor="middle" font-size="32" fill="#0284c7" font-weight="bold">f</text>
+                        <text x="380" y="140" text-anchor="middle" font-size="32" fill="#0284c7" font-weight="bold">λ</text>
+                        
+                        <!-- Division line -->
+                        <line x1="150" y1="120" x2="450" y2="120" stroke="#0284c7" stroke-width="2"/>
+                        
+                        <!-- Formulas -->
+                        <text x="100" y="100" font-size="14" fill="#64748b">Cover what you want to find:</text>
+                        <text x="100" y="120" font-size="14" fill="#64748b">v = f × λ</text>
+                        <text x="100" y="140" font-size="14" fill="#64748b">f = v ÷ λ</text>
+                        <text x="100" y="160" font-size="14" fill="#64748b">λ = v ÷ f</text>
+                    </svg>
+
+                    <div class="key-takeaway fragment" data-fragment-index="3">
+                        💡 If speed is constant: increasing frequency → decreasing wavelength
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 5: Wave Equation Calculations -->
+            <section>
+                <div class="slide-content-wrapper">
+                    <h2>Wave Equation: Practice Problems</h2>
+                    
+                    <div class="calculation-box fragment" data-fragment-index="0">
+                        <div class="calc-label">Problem 1: Find Wave Speed</div>
+                        <div class="calc-step">A wave has frequency 50 Hz and wavelength 2 m. Calculate the wave speed.</div>
+                        <div class="calc-step">
+                            <strong>Given:</strong><br>
+                            f = 50 Hz<br>
+                            λ = 2 m
+                        </div>
+                        <div class="calc-step">
+                            <strong>Formula:</strong> v = f × λ
+                        </div>
+                        <div class="calc-step">
+                            <strong>Calculation:</strong><br>
+                            v = 50 Hz × 2 m<br>
+                            v = 100 m/s
+                        </div>
+                        <div class="calc-result">
+                            Answer: Wave speed = 100 m/s
+                        </div>
+                    </div>
+
+                    <div class="calculation-box fragment" data-fragment-index="1">
+                        <div class="calc-label">Problem 2: Find Frequency</div>
+                        <div class="calc-step">Sound waves travel at 340 m/s with wavelength 0.5 m. Calculate frequency.</div>
+                        <div class="calc-step">
+                            <strong>Given:</strong><br>
+                            v = 340 m/s<br>
+                            λ = 0.5 m
+                        </div>
+                        <div class="calc-step">
+                            <strong>Rearrange:</strong> f = v ÷ λ
+                        </div>
+                        <div class="calc-step">
+                            <strong>Calculation:</strong><br>
+                            f = 340 m/s ÷ 0.5 m<br>
+                            f = 680 Hz
+                        </div>
+                        <div class="calc-result">
+                            Answer: Frequency = 680 Hz
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 6: More Wave Calculations -->
+            <section>
+                <div class="slide-content-wrapper">
+                    <h2>Wave Equation: More Practice</h2>
+                    
+                    <div class="calculation-box fragment" data-fragment-index="0">
+                        <div class="calc-label">Problem 3: Find Wavelength</div>
+                        <div class="calc-step">Radio waves travel at 3 × 10⁸ m/s with frequency 100 MHz (100 × 10⁶ Hz). Find wavelength.</div>
+                        <div class="calc-step">
+                            <strong>Given:</strong><br>
+                            v = 3 × 10⁸ m/s<br>
+                            f = 100 × 10⁶ Hz = 1 × 10⁸ Hz
+                        </div>
+                        <div class="calc-step">
+                            <strong>Rearrange:</strong> λ = v ÷ f
+                        </div>
+                        <div class="calc-step">
+                            <strong>Calculation:</strong><br>
+                            λ = (3 × 10⁸) ÷ (1 × 10⁸)<br>
+                            λ = 3 m
+                        </div>
+                        <div class="calc-result">
+                            Answer: Wavelength = 3 m
+                        </div>
+                    </div>
+
+                    <div class="calculation-box fragment" data-fragment-index="1">
+                        <div class="calc-label">Problem 4: Inverse Relationship</div>
+                        <div class="calc-step">A microwave has wavelength 0.12 m. If frequency doubles (speed constant), find new wavelength.</div>
+                        <div class="calc-step">
+                            <strong>Key concept:</strong> v = f × λ<br>
+                            If v is constant and f doubles, then λ must halve!
+                        </div>
+                        <div class="calc-step">
+                            <strong>Calculation:</strong><br>
+                            New λ = 0.12 m ÷ 2<br>
+                            New λ = 0.06 m
+                        </div>
+                        <div class="calc-result">
+                            Answer: New wavelength = 0.06 m (6 cm)
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 7: Types of Waves -->
+            <section>
+                <div class="slide-content-wrapper">
+                    <h2>Types of Waves</h2>
+                    
+                    <div class="comparison-box old fragment" data-fragment-index="0">
+                        <div class="comparison-header">🔊 Mechanical Waves</div>
+                        <div class="comparison-item">Require a <span class="highlight">medium</span> to travel (solid, liquid, or gas)</div>
+                        <div class="comparison-item">Cannot travel through a vacuum</div>
+                        <div class="comparison-item">Examples: sound, water waves, seismic waves</div>
+                    </div>
+
+                    <svg class="fragment" width="600" height="120" viewBox="0 0 600 120" style="margin: 20px 0;" data-fragment-index="1">
+                        <!-- Particles for mechanical wave -->
+                        <circle cx="50" cy="60" r="8" fill="#3b82f6"/>
+                        <circle cx="100" cy="40" r="8" fill="#3b82f6"/>
+                        <circle cx="150" cy="60" r="8" fill="#3b82f6"/>
+                        <circle cx="200" cy="80" r="8" fill="#3b82f6"/>
+                        <circle cx="250" cy="60" r="8" fill="#3b82f6"/>
+                        <circle cx="300" cy="40" r="8" fill="#3b82f6"/>
+                        <circle cx="350" cy="60" r="8" fill="#3b82f6"/>
+                        <circle cx="400" cy="80" r="8" fill="#3b82f6"/>
+                        <circle cx="450" cy="60" r="8" fill="#3b82f6"/>
+                        <circle cx="500" cy="40" r="8" fill="#3b82f6"/>
+                        <circle cx="550" cy="60" r="8" fill="#3b82f6"/>
+                        <text x="300" y="110" text-anchor="middle" font-size="14" fill="#64748b">Particles vibrate to transfer energy</text>
+                    </svg>
+
+                    <div class="comparison-box new fragment" data-fragment-index="2">
+                        <div class="comparison-header">💡 Electromagnetic Waves</div>
+                        <div class="comparison-item">Do NOT require a medium</div>
+                        <div class="comparison-item">Can travel through a vacuum (space)</div>
+                        <div class="comparison-item">All travel at the speed of light: 3 × 10⁸ m/s</div>
+                        <div class="comparison-item">Examples: light, radio waves, X-rays, microwaves</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 8: Electromagnetic Spectrum -->
+            <section>
+                <div class="slide-content-wrapper">
+                    <h2>The Electromagnetic Spectrum</h2>
+                    
+                    <div class="info-box fragment" data-fragment-index="0">
+                        All electromagnetic waves travel at the <span class="highlight">same speed</span> (3 × 10⁸ m/s) but have different frequencies and wavelengths.
+                    </div>
+
+                    <svg class="fragment" width="900" height="300" viewBox="0 0 900 300" style="margin: 20px 0;" data-fragment-index="1">
+                        <!-- Spectrum bar -->
+                        <defs>
+                            <linearGradient id="spectrum" x1="0%" y1="0%" x2="100%" y2="0%">
+                                <stop offset="0%" style="stop-color:#8B0000;stop-opacity:1" />
+                                <stop offset="14%" style="stop-color:#FF0000;stop-opacity:1" />
+                                <stop offset="28%" style="stop-color:#FFA500;stop-opacity:1" />
+                                <stop offset="42%" style="stop-color:#FFFF00;stop-opacity:1" />
+                                <stop offset="57%" style="stop-color:#00FF00;stop-opacity:1" />
+                                <stop offset="71%" style="stop-color:#0000FF;stop-opacity:1" />
+                                <stop offset="85%" style="stop-color:#4B0082;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#8B00FF;stop-opacity:1" />
+                            </linearGradient>
+                        </defs>
+                        <rect x="50" y="120" width="800" height="40" fill="url(#spectrum)" stroke="#1e293b" stroke-width="2"/>
+                        
+                        <!-- Labels -->
+                        <text x="80" y="100" font-size="12" fill="#dc2626" font-weight="bold">Radio</text>
+                        <text x="80" y="115" font-size="10" fill="#dc2626">Long λ</text>
+                        <text x="80" y="180" font-size="10" fill="#dc2626">Low f</text>
+                        
+                        <text x="200" y="100" font-size="12" fill="#f59e0b" font-weight="bold">Microwave</text>
+                        
+                        <text x="350" y="100" font-size="12" fill="#fbbf24" font-weight="bold">Infrared</text>
+                        
+                        <text x="430" y="85" font-size="12" fill="#10b981" font-weight="bold">Visible</text>
+                        <text x="430" y="100" font-size="10" fill="#10b981">Light</text>
+                        
+                        <text x="550" y="100" font-size="12" fill="#3b82f6" font-weight="bold">Ultraviolet</text>
+                        
+                        <text x="680" y="100" font-size="12" fill="#8b5cf6" font-weight="bold">X-rays</text>
+                        
+                        <text x="780" y="100" font-size="12" fill="#7c3aed" font-weight="bold">Gamma</text>
+                        <text x="780" y="115" font-size="10" fill="#7c3aed">Short λ</text>
+                        <text x="780" y="180" font-size="10" fill="#7c3aed">High f</text>
+                        
+                        <!-- Arrows -->
+                        <text x="450" y="220" text-anchor="middle" font-size="16" fill="#1e293b" font-weight="bold">Increasing Frequency →</text>
+                        <text x="450" y="240" text-anchor="middle" font-size="16" fill="#1e293b" font-weight="bold">← Increasing Wavelength</text>
+                        <text x="450" y="270" text-anchor="middle" font-size="16" fill="#1e293b" font-weight="bold">Increasing Energy →</text>
+                    </svg>
+
+                    <div class="key-takeaway fragment" data-fragment-index="2">
+                        💡 Remember: Radio waves have longest wavelength; Gamma rays have shortest wavelength
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 9: EM Spectrum Applications -->
+            <section>
+                <div class="slide-content-wrapper">
+                    <h2>Electromagnetic Spectrum: Uses</h2>
+                    
+                    <div class="concept-card fragment" data-fragment-index="0">
+                        <div class="concept-icon">📻</div>
+                        <div class="concept-title">Radio Waves</div>
+                        <div class="detail-item">Broadcasting: TV, radio, mobile phones</div>
+                        <div class="detail-item">Longest wavelength, lowest frequency</div>
+                        <div class="detail-item">Low energy, safe for communication</div>
+                    </div>
+
+                    <div class="concept-card fragment" data-fragment-index="1">
+                        <div class="concept-icon">📡</div>
+                        <div class="concept-title">Microwaves</div>
+                        <div class="detail-item">Communication: satellites, WiFi, mobile networks</div>
+                        <div class="detail-item">Cooking: microwave ovens heat water molecules</div>
+                        <div class="detail-item">Wavelength: 1 mm to 1 m</div>
+                    </div>
+
+                    <div class="concept-card fragment" data-fragment-index="2">
+                        <div class="concept-icon">🌡️</div>
+                        <div class="concept-title">Infrared</div>
+                        <div class="detail-item">Thermal imaging, night vision cameras</div>
+                        <div class="detail-item">Remote controls, heating</div>
+                        <div class="detail-item">All warm objects emit infrared radiation</div>
+                    </div>
+
+                    <div class="concept-card fragment" data-fragment-index="3">
+                        <div class="concept-icon">🌈</div>
+                        <div class="concept-title">Visible Light</div>
+                        <div class="detail-item">The only part humans can see!</div>
+                        <div class="detail-item">Range: Red (long λ) to Violet (short λ)</div>
+                        <div class="detail-item">Photography, vision, photosynthesis</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 10: More EM Applications -->
+            <section>
+                <div class="slide-content-wrapper">
+                    <h2>More Electromagnetic Uses</h2>
+                    
+                    <div class="concept-card fragment" data-fragment-index="0">
+                        <div class="concept-icon">☀️</div>
+                        <div class="concept-title">Ultraviolet (UV)</div>
+                        <div class="detail-item">Sterilization: kills bacteria</div>
+                        <div class="detail-item">Sun tanning, vitamin D production</div>
+                        <div class="detail-item">⚠️ Danger: Can cause skin cancer and eye damage</div>
+                    </div>
+
+                    <div class="concept-card fragment" data-fragment-index="1">
+                        <div class="concept-icon">🏥</div>
+                        <div class="concept-title">X-rays</div>
+                        <div class="detail-item">Medical imaging: see bones, detect fractures</div>
+                        <div class="detail-item">Airport security scanners</div>
+                        <div class="detail-item">⚠️ High energy: can damage cells, use sparingly</div>
+                    </div>
+
+                    <div class="concept-card fragment" data-fragment-index="2">
+                        <div class="concept-icon">☢️</div>
+                        <div class="concept-title">Gamma Rays</div>
+                        <div class="detail-item">Cancer treatment: radiotherapy</div>
+                        <div class="detail-item">Sterilizing medical equipment</div>
+                        <div class="detail-item">⚠️ Most dangerous: highest energy, most penetrating</div>
+                    </div>
+
+                    <div class="key-takeaway fragment" data-fragment-index="3">
+                        💡 Higher frequency = higher energy = more dangerous to living tissue
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 11: Wave Speed in Different Media -->
+            <section>
+                <div class="slide-content-wrapper">
+                    <h2>How Particle Arrangement Affects Wave Speed</h2>
+                    
+                    <div class="info-box fragment" data-fragment-index="0">
+                        The speed of <span class="highlight">mechanical waves</span> depends on how particles are arranged in the medium.
+                    </div>
+
+                    <div class="comparison-box new fragment" data-fragment-index="1">
+                        <div class="comparison-header">🔑 Key Principle</div>
+                        <div class="comparison-item">Closer particles = faster energy transfer</div>
+                        <div class="comparison-item">Vibrations pass more quickly between tightly-packed particles</div>
+                        <div class="comparison-item">Sound speed: Solids > Liquids > Gases</div>
+                    </div>
+
+                    <svg class="fragment" width="700" height="250" viewBox="0 0 700 250" style="margin: 20px 0;" data-fragment-index="2">
+                        <!-- Solid -->
+                        <rect x="30" y="30" width="180" height="180" fill="#f0fdf4" stroke="#10b981" stroke-width="3" rx="8"/>
+                        <text x="120" y="20" text-anchor="middle" font-size="16" fill="#10b981" font-weight="bold">SOLID</text>
+                        <circle cx="70" cy="70" r="10" fill="#10b981"/>
+                        <circle cx="100" cy="70" r="10" fill="#10b981"/>
+                        <circle cx="130" cy="70" r="10" fill="#10b981"/>
+                        <circle cx="160" cy="70" r="10" fill="#10b981"/>
+                        <circle cx="70" cy="100" r="10" fill="#10b981"/>
+                        <circle cx="100" cy="100" r="10" fill="#10b981"/>
+                        <circle cx="130" cy="100" r="10" fill="#10b981"/>
+                        <circle cx="160" cy="100" r="10" fill="#10b981"/>
+                        <circle cx="70" cy="130" r="10" fill="#10b981"/>
+                        <circle cx="100" cy="130" r="10" fill="#10b981"/>
+                        <circle cx="130" cy="130" r="10" fill="#10b981"/>
+                        <circle cx="160" cy="130" r="10" fill="#10b981"/>
+                        <circle cx="70" cy="160" r="10" fill="#10b981"/>
+                        <circle cx="100" cy="160" r="10" fill="#10b981"/>
+                        <circle cx="130" cy="160" r="10" fill="#10b981"/>
+                        <circle cx="160" cy="160" r="10" fill="#10b981"/>
+                        <text x="120" y="230" text-anchor="middle" font-size="14" fill="#10b981" font-weight="bold">Very close</text>
+                        
+                        <!-- Liquid -->
+                        <rect x="260" y="30" width="180" height="180" fill="#fef3e0" stroke="#f59e0b" stroke-width="3" rx="8"/>
+                        <text x="350" y="20" text-anchor="middle" font-size="16" fill="#f59e0b" font-weight="bold">LIQUID</text>
+                        <circle cx="290" cy="60" r="10" fill="#f59e0b"/>
+                        <circle cx="330" cy="75" r="10" fill="#f59e0b"/>
+                        <circle cx="370" cy="65" r="10" fill="#f59e0b"/>
+                        <circle cx="410" cy="80" r="10" fill="#f59e0b"/>
+                        <circle cx="280" cy="110" r="10" fill="#f59e0b"/>
+                        <circle cx="320" cy="120" r="10" fill="#f59e0b"/>
+                        <circle cx="360" cy="115" r="10" fill="#f59e0b"/>
+                        <circle cx="400" cy="125" r="10" fill="#f59e0b"/>
+                        <circle cx="295" cy="160" r="10" fill="#f59e0b"/>
+                        <circle cx="335" cy="170" r="10" fill="#f59e0b"/>
+                        <circle cx="375" cy="165" r="10" fill="#f59e0b"/>
+                        <circle cx="415" cy="175" r="10" fill="#f59e0b"/>
+                        <text x="350" y="230" text-anchor="middle" font-size="14" fill="#f59e0b" font-weight="bold">Close</text>
+                        
+                        <!-- Gas -->
+                        <rect x="490" y="30" width="180" height="180" fill="#fee" stroke="#ef4444" stroke-width="3" rx="8"/>
+                        <text x="580" y="20" text-anchor="middle" font-size="16" fill="#ef4444" font-weight="bold">GAS</text>
+                        <circle cx="520" cy="60" r="10" fill="#ef4444"/>
+                        <circle cx="600" cy="90" r="10" fill="#ef4444"/>
+                        <circle cx="540" cy="130" r="10" fill="#ef4444"/>
+                        <circle cx="630" cy="150" r="10" fill="#ef4444"/>
+                        <circle cx="560" cy="180" r="10" fill="#ef4444"/>
+                        <circle cx="620" cy="70" r="10" fill="#ef4444"/>
+                        <text x="580" y="230" text-anchor="middle" font-size="14" fill="#ef4444" font-weight="bold">Far apart</text>
+                    </svg>
+                </div>
+            </section>
+
+            <!-- Slide 12: Sound Speed Examples -->
+            <section>
+                <div class="slide-content-wrapper">
+                    <h2>Sound Speed in Different Media</h2>
+                    
+                    <div class="comparison-box new fragment" data-fragment-index="0">
+                        <div class="comparison-header">🔊 Sound Speed Comparison</div>
+                        <div class="comparison-item">Air (gas): ~340 m/s</div>
+                        <div class="comparison-item">Water (liquid): ~1,500 m/s (4× faster!)</div>
+                        <div class="comparison-item">Steel (solid): ~6,000 m/s (17× faster!)</div>
+                    </div>
+
+                    <div class="info-box fragment" data-fragment-index="1">
+                        <strong>Why does sound travel faster in water?</strong><br><br>
+                        Water particles are <span class="highlight">closer together</span> than air particles, so vibrations transfer more efficiently from particle to particle.
+                    </div>
+
+                    <svg class="fragment" width="600" height="200" viewBox="0 0 600 200" style="margin: 20px 0;" data-fragment-index="2">
+                        <!-- Vibration transfer illustration -->
+                        <text x="300" y="30" text-anchor="middle" font-size="16" fill="#1e293b" font-weight="bold">Energy Transfer in Water</text>
+                        
+                        <circle cx="100" cy="100" r="15" fill="#3b82f6" stroke="#1e293b" stroke-width="2"/>
+                        <circle cx="160" cy="100" r="15" fill="#3b82f6" stroke="#1e293b" stroke-width="2"/>
+                        <circle cx="220" cy="100" r="15" fill="#3b82f6" stroke="#1e293b" stroke-width="2"/>
+                        <circle cx="280" cy="100" r="15" fill="#3b82f6" stroke="#1e293b" stroke-width="2"/>
+                        <circle cx="340" cy="100" r="15" fill="#3b82f6" stroke="#1e293b" stroke-width="2"/>
+                        <circle cx="400" cy="100" r="15" fill="#3b82f6" stroke="#1e293b" stroke-width="2"/>
+                        <circle cx="460" cy="100" r="15" fill="#3b82f6" stroke="#1e293b" stroke-width="2"/>
+                        
+                        <!-- Arrows showing transfer -->
+                        <defs>
+                            <marker id="arrow-transfer" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                                <polygon points="0 0, 10 3, 0 6" fill="#ef4444"/>
+                            </marker>
+                        </defs>
+                        <line x1="120" y1="100" x2="155" y2="100" stroke="#ef4444" stroke-width="3" marker-end="url(#arrow-transfer)"/>
+                        <line x1="180" y1="100" x2="215" y2="100" stroke="#ef4444" stroke-width="3" marker-end="url(#arrow-transfer)"/>
+                        <line x1="240" y1="100" x2="275" y2="100" stroke="#ef4444" stroke-width="3" marker-end="url(#arrow-transfer)"/>
+                        <line x1="300" y1="100" x2="335" y2="100" stroke="#ef4444" stroke-width="3" marker-end="url(#arrow-transfer)"/>
+                        <line x1="360" y1="100" x2="395" y2="100" stroke="#ef4444" stroke-width="3" marker-end="url(#arrow-transfer)"/>
+                        <line x1="420" y1="100" x2="455" y2="100" stroke="#ef4444" stroke-width="3" marker-end="url(#arrow-transfer)"/>
+                        
+                        <text x="300" y="160" text-anchor="middle" font-size="14" fill="#64748b">Close particles = efficient energy transfer</text>
+                    </svg>
+
+                    <div class="key-takeaway fragment" data-fragment-index="3">
+                        💡 Dolphins and whales use sound underwater because it travels far and fast!
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 13: Energy Transfer in Waves -->
+            <section>
+                <div class="slide-content-wrapper">
+                    <h2>Energy Transfer in Waves</h2>
+                    
+                    <div class="info-box fragment" data-fragment-index="0">
+                        Waves transfer <span class="highlight">energy</span> from one place to another without transferring matter.
+                    </div>
+
+                    <div class="concept-card fragment" data-fragment-index="1">
+                        <div class="concept-icon">🔊</div>
+                        <div class="concept-title">Sound Energy</div>
+                        <div class="detail-item">Vibrations transfer through air particles</div>
+                        <div class="detail-item">Your ear detects these vibrations as sound</div>
+                        <div class="detail-item">Example: Speaker → Air → Eardrum</div>
+                    </div>
+
+                    <div class="concept-card fragment" data-fragment-index="2">
+                        <div class="concept-icon">☀️</div>
+                        <div class="concept-title">Radiant Energy (Light)</div>
+                        <div class="detail-item">Electromagnetic waves carry energy</div>
+                        <div class="detail-item">Can travel through vacuum (no medium needed)</div>
+                        <div class="detail-item">Example: Sun → Space → Earth (warmth and light)</div>
+                    </div>
+
+                    <div class="concept-card fragment" data-fragment-index="3">
+                        <div class="concept-icon">🌊</div>
+                        <div class="concept-title">Water Waves</div>
+                        <div class="detail-item">Energy moves across water surface</div>
+                        <div class="detail-item">Water particles move in circles, but don't travel forward</div>
+                        <div class="detail-item">Example: Earthquake → Ocean wave → Shore</div>
+                    </div>
+
+                    <div class="key-takeaway fragment" data-fragment-index="4">
+                        💡 Higher amplitude = more energy transferred
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 14: Check Your Understanding -->
+            <section>
+                <div class="slide-content-wrapper">
+                    <h2>Check Your Understanding</h2>
+                    <div class="quiz-box">
+                        <h3 style="margin-top: 0;">Quick Quiz 🎯</h3>
+                        <div class="quiz-item fragment" onclick="toggleAnswer(this)" data-fragment-index="0">
+                            <strong>Q1:</strong> What is the formula linking wave speed, frequency, and wavelength?
+                            <div class="quiz-answer">
+                                <strong>Answer:</strong> v = f × λ (speed = frequency × wavelength)
+                            </div>
+                        </div>
+                        <div class="quiz-item fragment" onclick="toggleAnswer(this)" data-fragment-index="1">
+                            <strong>Q2:</strong> A wave has frequency 200 Hz and wavelength 1.5 m. Calculate wave speed.
+                            <div class="quiz-answer">
+                                <strong>Answer:</strong> v = 200 × 1.5 = 300 m/s
+                            </div>
+                        </div>
+                        <div class="quiz-item fragment" onclick="toggleAnswer(this)" data-fragment-index="2">
+                            <strong>Q3:</strong> Why does sound travel faster in water than in air?
+                            <div class="quiz-answer">
+                                <strong>Answer:</strong> Water particles are closer together, allowing vibrations to transfer more efficiently.
+                            </div>
+                        </div>
+                        <div class="quiz-item fragment" onclick="toggleAnswer(this)" data-fragment-index="3">
+                            <strong>Q4:</strong> Which part of the EM spectrum has the highest frequency?
+                            <div class="quiz-answer">
+                                <strong>Answer:</strong> Gamma rays have the highest frequency (and shortest wavelength).
+                            </div>
+                        </div>
+                        <div class="quiz-item fragment" onclick="toggleAnswer(this)" data-fragment-index="4">
+                            <strong>Q5:</strong> What type of wave is used for mobile phone communication?
+                            <div class="quiz-answer">
+                                <strong>Answer:</strong> Microwaves (and radio waves) are used for wireless communication.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 15: Summary -->
+            <section>
+                <div class="slide-content-wrapper">
+                    <h2>Summary</h2>
+                    <div class="learning-box">
+                        <h3 style="margin-top: 0;">Key Concepts 📚</h3>
+                        <div class="objective-item fragment" data-fragment-index="0"><span class="highlight">Wavelength (λ):</span> Distance between crests/troughs</div>
+                        <div class="objective-item fragment" data-fragment-index="1"><span class="highlight">Frequency (f):</span> Number of waves per second (Hz)</div>
+                        <div class="objective-item fragment" data-fragment-index="2"><span class="highlight">Wave Equation:</span> v = f × λ</div>
+                        <div class="objective-item fragment" data-fragment-index="3"><span class="highlight">Inverse relationship:</span> ↑ frequency = ↓ wavelength (constant speed)</div>
+                        <div class="objective-item fragment" data-fragment-index="4"><span class="highlight">EM Spectrum:</span> Radio → Microwave → IR → Visible → UV → X-ray → Gamma</div>
+                        <div class="objective-item fragment" data-fragment-index="5"><span class="highlight">Sound speed:</span> Solids > Liquids > Gases (closer particles = faster)</div>
+                        <div class="objective-item fragment" data-fragment-index="6"><span class="highlight">Energy transfer:</span> Waves carry energy without transferring matter</div>
+                        <div class="objective-item fragment" data-fragment-index="7"><span class="highlight">Microwaves:</span> Used for communication (satellites, WiFi, phones)</div>
+                    </div>
+
+                    <div class="key-takeaway fragment" data-fragment-index="8">
+                        🎓 Master these concepts and wave calculations for your exam!
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reveal.min.js"></script>
+    <script>
+        Reveal.initialize({
+            hash: true,
+            center: true,
+            transition: 'slide',
+            transitionSpeed: 'default',
+            backgroundTransition: 'fade',
+            controls: true,
+            progress: true,
+            slideNumber: 'c/t',
+            keyboard: true,
+            overview: true,
+            loop: false,
+            rtl: false,
+            navigationMode: 'default',
+            shuffle: false,
+            fragments: true,
+            fragmentInURL: true,
+            embedded: false,
+            help: true,
+            showNotes: false,
+            autoPlayMedia: null,
+            preloadIframes: null,
+            autoSlide: 0,
+            autoSlideStoppable: true,
+            mouseWheel: false,
+            hideInactiveCursor: true,
+            hideCursorTime: 5000,
+            previewLinks: false,
+            width: 1280,
+            height: 720,
+            margin: 0.04,
+            minScale: 0.2,
+            maxScale: 2.0
+        });
+
+        function toggleAnswer(item) {
+            const answer = item.querySelector('.quiz-answer');
+            if (answer.style.display === 'block') {
+                answer.style.display = 'none';
+                item.classList.remove('revealed');
+            } else {
+                answer.style.display = 'block';
+                item.classList.add('revealed');
+            }
+        }
+
+        function loadImage(file, callback) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                callback(e.target.result);
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function bulkUpload() {
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.accept = 'image/*';
+            input.multiple = true;
+            input.onchange = function(e) {
+                const files = Array.from(e.target.files);
+                const placeholders = document.querySelectorAll('.image-placeholder:not(.has-image)');
+                
+                files.forEach((file, index) => {
+                    if (index < placeholders.length) {
+                        loadImage(file, (dataUrl) => setSlideImage(placeholders[index], dataUrl));
+                    }
+                });
+            };
+            input.click();
+        }
+
+        function setSlideImage(placeholder, dataUrl) {
+            if (!placeholder) return;
+            placeholder.innerHTML = `<img src="${dataUrl}" style="width: 100%; height: 100%; object-fit: contain;">`;
+            placeholder.classList.add('has-image');
+        }
+
+        function downloadWithImages() {
+            const html = document.documentElement.outerHTML;
+            const blob = new Blob([html], { type: 'text/html' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'waves-revision-year10.html';
+            a.click();
+            URL.revokeObjectURL(url);
+            
+            const notification = document.getElementById('saveNotification');
+            notification.style.opacity = '1';
+            setTimeout(() => notification.style.opacity = '0', 3000);
+        }
+
+        function clearAllImages() {
+            if (!confirm('Remove all images?')) return;
+            const placeholders = document.querySelectorAll('.image-placeholder.has-image');
+            placeholders.forEach(placeholder => {
+                placeholder.innerHTML = `
+                    <div class="placeholder-content">
+                        <div class="placeholder-icon">🖼️</div>
+                        <div class="placeholder-text">Image</div>
+                    </div>
+                `;
+                placeholder.classList.remove('has-image');
+            });
+        }
+    </script>
+</body>
+</html>
