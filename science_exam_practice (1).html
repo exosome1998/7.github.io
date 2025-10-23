@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Science Practice Exam</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 1.5cm;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            font-size: 11pt;
+            line-height: 1.3;
+            margin: 0;
+            padding: 1.5cm;
+            max-width: 21cm;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #333;
+            padding-bottom: 8px;
+        }
+        h1 {
+            font-size: 18pt;
+            margin: 0 0 5px 0;
+        }
+        .student-info {
+            font-size: 10pt;
+            margin: 8px 0;
+        }
+        .instructions {
+            background-color: #fffacd;
+            padding: 8px;
+            margin-bottom: 12px;
+            border: 1px solid #e6d700;
+            border-radius: 4px;
+            font-size: 10pt;
+            text-align: center;
+        }
+        h2 {
+            font-size: 13pt;
+            margin: 12px 0 6px 0;
+            color: #2c5aa0;
+        }
+        .question {
+            margin-bottom: 8px;
+            page-break-inside: avoid;
+            cursor: pointer;
+            padding: 4px;
+            border-radius: 3px;
+            transition: background-color 0.2s;
+        }
+        .question:hover {
+            background-color: #f5f5f5;
+        }
+        .marks {
+            font-weight: bold;
+            color: #666;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 6px 0;
+            font-size: 10pt;
+        }
+        th, td {
+            border: 1px solid #666;
+            padding: 4px 6px;
+        }
+        th {
+            background-color: #e8f0f8;
+            font-weight: bold;
+        }
+        .line {
+            border-bottom: 1px solid #999;
+            min-height: 18px;
+            margin: 2px 0;
+        }
+        .mc-option {
+            margin-left: 20px;
+        }
+        .section-divider {
+            margin: 10px 0;
+            page-break-after: avoid;
+        }
+        .answer {
+            display: none;
+            color: #cc0000;
+            font-weight: bold;
+            margin-top: 5px;
+            padding: 5px;
+            background-color: #fff0f0;
+            border-left: 3px solid #cc0000;
+            font-size: 10pt;
+        }
+        .answer.show {
+            display: block;
+        }
+    </style>
+    <script>
+        function toggleAnswer(questionId) {
+            const answer = document.getElementById('answer-' + questionId);
+            answer.classList.toggle('show');
+        }
+    </script>
+</head>
+<body>
+    <div class="header">
+        <h1>Science Practice Examination</h1>
+        <div class="student-info">
+            Name: _________________________ &nbsp;&nbsp;&nbsp; Date: _____________ &nbsp;&nbsp;&nbsp; Total: 75 marks
+        </div>
+    </div>
+
+    <div class="instructions">
+        💡 <strong>Interactive Mode:</strong> Click on any question to reveal/hide the answer in red
+    </div>
+
+    <h2>Section A: Multiple Choice (20 marks)</h2>
+    <p style="font-size: 10pt; margin: 4px 0 8px 0;"><em>Circle the correct answer for each question.</em></p>
+
+    <div class="question" onclick="toggleAnswer('q1')">
+        <strong>1.</strong> A student catches a cold from a classmate. This is an example of: <span class="marks">(1 mark)</span><br>
+        <div class="mc-option">A. Non-communicable disease &nbsp;&nbsp; B. Genetic disorder &nbsp;&nbsp; C. Infectious disease &nbsp;&nbsp; D. Deficiency disease</div>
+        <div class="answer" id="answer-q1">Answer: C. Infectious disease (transmitted from person to person by pathogens)</div>
+    </div>
+
+    <div class="question" onclick="toggleAnswer('q2')">
+        <strong>2.</strong> An element has 11 protons. What is its atomic number? <span class="marks">(1 mark)</span><br>
+        <div class="mc-option">A. 11 &nbsp;&nbsp; B. 22 &nbsp;&nbsp; C. 23 &nbsp;&nbsp; D. Cannot determine</div>
+        <div class="answer" id="answer-q2">Answer: A. 11 (atomic number equals number of protons)</div>
+    </div>
+
+    <div class="question" onclick="toggleAnswer('q3')">
+        <strong>3.</strong> Christmas tree lights are wired so that if one breaks, all the others go out. This is a: <span class="marks">(1 mark)</span><br>
+        <div class="mc-option">A. Parallel circuit &nbsp;&nbsp; B. Series circuit &nbsp;&nbsp; C. Complex circuit &nbsp;&nbsp; D. Short circuit</div>
+        <div class="answer" id="answer-q3">Answer: B. Series circuit (only one path, so breaking one stops all)</div>
+    </div>
+
+    <div class="question" onclick="toggleAnswer('q4')">
+        <strong>4.</strong> Which element has the electron arrangement 2,8,8? <span class="marks">(1 mark)</span><br>
+        <div class="mc-option">A. Neon (10) &nbsp;&nbsp; B. Argon (18) &nbsp;&nbsp; C. Oxygen (8) &nbsp;&nbsp; D. Calcium (20)</div>
+        <div class="answer" id="answer-q4">Answer: B. Argon (18) (2+8+8 = 18 electrons)</div>
+    </div>
+
+    <div class="question" onclick="toggleAnswer('q5')">
+        <strong>5.</strong> After eating a large meal, blood glucose rises. Which hormone lowers it? <span class="marks">(1 mark)</span><br>
+        <div class="mc-option">A. Glucagon &nbsp;&nbsp; B. Adrenaline &nbsp;&nbsp; C. Insulin &nbsp;&nbsp; D. Testosterone</div>
+        <div class="answer" id="answer-q5">Answer: C. Insulin (causes liver to store glucose as glycogen)</div>
+    </div>
+
+    <div class="question" onclick="toggleAnswer('q6')">
+        <strong>6.</strong> A lamp uses 300 J of electrical energy and produces 90 J of light. What is wasted? <span class="marks">(1 mark)</span><br>
+        <div class="mc-option">A. 90 J &nbsp;&nbsp; B. 210 J &nbsp;&nbsp; C. 300 J &nbsp;&nbsp; D. 390 J</div>
+        <div class="answer" id="answer-q6">Answer: B. 210 J (300 - 90 = 210 J wasted as heat)</div>
+    </div>
+
+    <div class="question" onclick="toggleAnswer('q7')">
+        <strong>7.</strong> Who proposed the "plum pudding" model with electrons in a positive sphere? <span class="marks">(1 mark)</span><br>
+        <div class="mc-option">A. Dalton &nbsp;&nbsp; B. Thomson &nbsp;&nbsp; C. Rutherford &nbsp;&nbsp; D. Bohr</div>
+        <div class="answer" id="answer-q7">Answer: B. Thomson (discovered electrons, proposed plum pudding model)</div>
+    </div>
+
+    <div class="question" onclick="toggleAnswer('q8')">
+        <strong>8.</strong> Which type of radiation is the most ionizing but least penetrating? <span class="marks">(1 mark)</span><br>
+        <div class="mc-option">A. Alpha &nbsp;&nbsp; B. Beta &nbsp;&nbsp; C. Gamma &nbsp;&nbsp; D. All are equal</div>
+        <div class="answer" id="answer-q8">Answer: A. Alpha (highly ionizing, stopped by paper/skin)</div>
+    </div>
+
+    <div class="question" onclick="toggleAnswer('q9')">
+        <strong>9.</strong> A hawk eats a snake that ate a mouse that ate seeds. The hawk is a: <span class="marks">(1 mark)</span><br>
+        <div class="mc-option">A. Producer &nbsp;&nbsp; B. Primary consumer &nbsp;&nbsp; C. Secondary consumer &nbsp;&nbsp; D. Tertiary consumer</div>
+        <div class="answer" id="answer-q9">Answer: D. Tertiary consumer (third level consumer in food chain)</div>
+    </div>
+
+    <div class="question" onclick="toggleAnswer('q10')">
+        <strong>10.</strong> A circuit has 6V and 2A. What is the resistance? <span class="marks">(1 mark)</span><br>
+        <div class="mc-option">A. 3 Ω &nbsp;&nbsp; B. 4 Ω &nbsp;&nbsp; C. 8 Ω &nbsp;&nbsp; D. 12 Ω</div>
+        <div class="answer" id="answer-q10">Answer: A. 3 Ω (R = V÷I = 6÷2 = 3 Ω)</div>
+    </div>
+
+    <div class="question" onclick="toggleAnswer('q11')">
+        <strong>11.</strong> Phagocytosis is when white blood cells: <span class="marks">(1 mark)</span><br>
+        <div class="mc-option">A. Produce antibodies &nbsp;&nbsp; B. Engulf pathogens &nbsp;&nbsp; C. Produce antigens &nbsp;&nbsp; D. Form blood clots</div>
+        <div class="answer" id="answer-q11">Answer: B. Engulf pathogens (phagocytes surround and digest pathogens)</div>
+    </div>
+
+    <div class="question" onclick="toggleAnswer('q12')">
+        <strong>12.</strong> Lithium (Li), Sodium (Na) and Potassium (K) are all in Group 1. They all have: <span class="marks">(1 mark)</span><br>
+        <div class="mc-option">A. 1 electron in outer shell &nbsp;&nbsp; B. Same mass number &nbsp;&nbsp; C. 1 neutron &nbsp;&nbsp; D. Same atomic number</div>
+        <div class="answer" id="answer-q12">Answer: A. 1 electron in outer shell (Group 1 = 1 valence electron)</div>
+    </div>
+
+    <div class="question" onclick="toggleAnswer('q13')">
+        <strong>13.</strong> A wind turbine converts wind energy into: <span class="marks">(1 mark)</span><br>
+        <div class="mc-option">A. Chemical energy &nbsp;&nbsp; B. Nuclear energy &nbsp;&nbsp; C. Electrical energy &nbsp;&nbsp; D. Thermal energy</div>
+        <div class="answer" id="answer-q13">Answer: C. Electrical energy (kinetic → electrical)</div>
+    </div>
+
+    <div class="question" onclick="toggleAnswer('q14')">
+        <strong>14.</strong> Alpha decay causes the atomic number to: <span class="marks">(1 mark)</span><br>
+        <div class="mc-option">A. Decrease by 2 &nbsp;&nbsp; B. Increase by 2 &nbsp;&nbsp; C. Stay the same &nbsp;&nbsp; D. Decrease by 4</div>
+        <div class="answer" id="answer-q14">Answer: A. Decrease by 2 (loses 2 protons in alpha particle)</div>
+    </div>
+
+    <div class="question" onclick="toggleAnswer('q15')">
+        <strong>15.</strong> Which transfers information fastest in the body? <span class="marks">(1 mark)</span><br>
+        <div class="mc-option">A. Hormones in blood &nbsp;&nbsp; B. Electrical impulses in nerves &nbsp;&nbsp; C. Diffusion &nbsp;&nbsp; D. Active transport</div>
+        <div class="answer" id="answer-q15">Answer: B. Electrical impulses in nerves (much faster than hormones)</div>
+    </div>
+
+    <div class="question" onclick="toggleAnswer('q16')">
+        <strong>16.</strong> When magnesium burns: 2Mg + O₂ → 2MgO. If 48g Mg reacts with 32g O₂, the mass of MgO is: <span class="marks">(1 mark)</span><br>
+        <div class="mc-option">A. 16 g &nbsp;&nbsp; B. 48 g &nbsp;&nbsp; C. 80 g &nbsp;&nbsp; D. 160 g</div>
+        <div class="answer" id="answer-q16">Answer: C. 80 g (48 + 32 = 80 g, conservation of mass)</div>
+    </div>
+
+    <div class="question" onclick="toggleAnswer('q17')">
+        <strong>17.</strong> Rubber is used to coat electrical wires because it is: <span class="marks">(1 mark)</span><br>
+        <div class="mc-option">A. A conductor &nbsp;&nbsp; B. An insulator &nbsp;&nbsp; C. Magnetic &nbsp;&nbsp; D. Cheap</div>
+        <div class="answer" id="answer-q17">Answer: B. An insulator (prevents electric shocks)</div>
+    </div>
+
+    <div class="question" onclick="toggleAnswer('q18')">
+        <strong>18.</strong> Removing trees from a forest would most directly reduce the availability of: <span class="marks">(1 mark)</span><br>
+        <div class="mc-option">A. Oxygen &nbsp;&nbsp; B. Nitrogen &nbsp;&nbsp; C. Carbon dioxide &nbsp;&nbsp; D. Methane</div>
+        <div class="answer" id="answer-q18">Answer: A. Oxygen (trees produce oxygen through photosynthesis)</div>
+    </div>
+
+    <div class="question" onclick="toggleAnswer('q19')">
+        <strong>19.</strong> The "fight or flight" response is triggered by: <span class="marks">(1 mark)</span><br>
+        <div class="mc-option">A. Insulin &nbsp;&nbsp; B. Glucagon &nbsp;&nbsp; C. Adrenaline &nbsp;&nbsp; D. Melatonin</div>
+        <div class="answer" id="answer-q19">Answer: C. Adrenaline (prepares body for emergency response)</div>
+    </div>
+
+    <div class="question" onclick="toggleAnswer('q20')">
+        <strong>20.</strong> Carbon-12 and Carbon-14 differ in their number of: <span class="marks">(1 mark)</span><br>
+        <div class="mc-option">A. Protons &nbsp;&nbsp; B. Electrons &nbsp;&nbsp; C. Neutrons &nbsp;&nbsp; D. Valence electrons</div>
+        <div class="answer" id="answer-q20">Answer: C. Neutrons (isotopes have different neutron numbers)</div>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <h2>Section B: Short Answer Questions (55 marks)</h2>
+
+    <div class="question" onclick="toggleAnswer('q21')">
+        <strong>Question 21 (4 marks):</strong> Complete the table about Phosphorus using the Periodic Table.
+        <table>
+            <tr>
+                <th>Element</th>
+                <th>Symbol</th>
+                <th>Atomic Number</th>
+                <th>Mass Number</th>
+                <th>Protons</th>
+                <th>Electrons</th>
+                <th>Neutrons</th>
+            </tr>
+            <tr>
+                <td>Phosphorus</td>
+                <td></td>
+                <td>15</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>16</td>
+            </tr>
+            <tr>
+                <td>Fluorine</td>
+                <td></td>
+                <td></td>
+                <td>19</td>
+                <td>9</td>
+                <td></td>
+                <td></td>
+            </tr>
+        </table>
+        <div class="answer" id="answer-q21">Answer: Row 1: P, 15, 31, 15, 15, 16 | Row 2: F, 9, 19, 9, 9, 10</div>
+    </div>
+
+    <div class="question" onclick="toggleAnswer('q22')">
+        <strong>Question 22 (3 marks):</strong> Hand washing with soap reduces the spread of diseases. Explain how soap helps remove pathogens from hands and why this is more effective than water alone.
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="answer" id="answer-q22">Answer: Soap molecules have hydrophobic (water-repelling) and hydrophilic (water-attracting) ends. The hydrophobic end binds to oils and pathogens on skin, while hydrophilic end binds to water, allowing pathogens to be washed away. Water alone cannot remove oily residues containing pathogens.</div>
+    </div>
+
+    <div class="question" onclick="toggleAnswer('q23')">
+        <strong>Question 23 (4 marks):</strong> A student tests different wires in a circuit:
+        <table>
+            <tr>
+                <th>Wire Material</th>
+                <th>Voltage (V)</th>
+                <th>Current (A)</th>
+                <th>Resistance (Ω)</th>
+            </tr>
+            <tr>
+                <td>Wire A</td>
+                <td>9</td>
+                <td>3</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>Wire B</td>
+                <td>9</td>
+                <td>1.5</td>
+                <td></td>
+            </tr>
+        </table>
+        Calculate the resistance of each wire. Which wire is a better conductor? Explain.
+        <div class="answer" id="answer-q23">Answer: Wire A: R = 9÷3 = 3Ω | Wire B: R = 9÷1.5 = 6Ω | Wire A is better (lower resistance allows more current to flow)</div>
+    </div>
+
+    <div class="question" onclick="toggleAnswer('q24')">
+        <strong>Question 24 (5 marks):</strong> A marathon runner's body responds to low blood glucose during a race. Describe the hormonal response that occurs, including which organ detects the change, which hormones are involved, and what happens to restore glucose levels.
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="answer" id="answer-q24">Answer: Pancreas detects low blood glucose → releases glucagon → glucagon travels in blood to liver → liver breaks down stored glycogen into glucose → glucose released into blood → blood glucose levels rise back to normal.</div>
+    </div>
+
+    <div class="question" onclick="toggleAnswer('q25')">
+        <strong>Question 25 (4 marks):</strong> A hospital uses different materials to protect workers from radiation. Explain why paper suits protect against alpha radiation but lead aprons are needed for gamma radiation.
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="answer" id="answer-q25">Answer: Alpha particles are large (2 protons + 2 neutrons), heavy, and charged. They interact strongly with matter and are stopped by paper/clothing. Gamma rays are electromagnetic waves with no mass/charge, so they penetrate deeply and require dense materials like lead to absorb them.</div>
+    </div>
+
+    <div class="question" onclick="toggleAnswer('q26')">
+        <strong>Question 26 (6 marks):</strong> Draw a circuit diagram for a room with two separate light switches - one that controls a ceiling light, and one that controls a desk lamp. Both lights should be able to work independently. Include a battery as the power source. Label all components.
+        <div class="answer" id="answer-q26">Answer: Parallel circuit needed. Battery connects to two separate branches. Branch 1: switch → ceiling light → back to battery. Branch 2: switch → desk lamp → back to battery. Each switch independently controls its bulb.</div>
+    </div>
+
+    <div class="question" onclick="toggleAnswer('q27')">
+        <strong>Question 27 (5 marks):</strong> Dalton believed atoms were solid, indivisible spheres. Explain how Thomson's cathode ray tube experiment challenged this model. What did Thomson discover and how did this change our understanding of atomic structure?
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="answer" id="answer-q27">Answer: Thomson's cathode ray tube produced a beam that was attracted to positive plates, showing particles were negatively charged. He discovered electrons - small negative particles. This proved atoms are NOT indivisible solid spheres as Dalton thought. Thomson proposed atoms contain negative electrons embedded in positive material (plum pudding model), showing atoms have internal structure.</div>
+    </div>
+
+    <div class="question" onclick="toggleAnswer('q28')">
+        <strong>Question 28 (6 marks):</strong> A hairdryer transfers 2400 J of electrical energy per second. It produces 600 J of kinetic energy (moving air) and 1800 J of thermal energy per second.
+        <br><strong>(a)</strong> Calculate the percentage of energy that becomes useful kinetic energy. (3 marks)
+        <div class="line"></div>
+        <div class="line"></div>
+        <br><strong>(b)</strong> Is the thermal energy necessarily wasted? Explain. (3 marks)
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="answer" id="answer-q28">Answer (a): Useful energy = kinetic only = 600 J. Efficiency = (600÷2400) × 100 = 25% | Answer (b): No, thermal energy is also useful in a hairdryer as it's designed to blow hot air to dry hair. Both kinetic (air movement) and thermal (heat) energies are useful outputs.</div>
+    </div>
+
+    <div class="question" onclick="toggleAnswer('q29')">
+        <strong>Question 29 (8 marks):</strong> A factory dumps warm water into a river, raising the water temperature by 5°C.
+        <br><strong>(a)</strong> Explain how warmer water affects the amount of dissolved oxygen available to fish. (2 marks)
+        <div class="line"></div>
+        <div class="line"></div>
+        <br><strong>(b)</strong> Predict how this temperature change might affect the populations of different organisms in the river ecosystem. Consider at least three different groups of organisms. (4 marks)
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+        <br><strong>(c)</strong> Suggest one method the factory could use to reduce thermal pollution. (2 marks)
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="answer" id="answer-q29">Answer (a): Warm water holds less dissolved oxygen. Fish may struggle to get enough oxygen, particularly sensitive species. (b): Cold-water fish populations decrease (not enough oxygen). Heat-tolerant bacteria increase. Algae may increase initially (warmer conditions). Invertebrates dependent on cold-water fish decline (less food). Biodiversity decreases overall. (c): Cool water in cooling towers before release; use cooling ponds; recirculate and reuse water instead of dumping into river.</div>
+    </div>
+
+    <div class="question" onclick="toggleAnswer('q30')">
+        <strong>Question 30 (10 marks):</strong> A person receives a flu vaccine in October.
+        <br><strong>(a)</strong> Describe what the vaccine contains and how the body initially responds to it. (3 marks)
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+        <br><strong>(b)</strong> Explain why this person is less likely to get flu in December, even though the vaccine was given two months earlier. (4 marks)
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+        <br><strong>(c)</strong> Some people still get flu after vaccination. Suggest two reasons why vaccines are not 100% effective. (3 marks)
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="answer" id="answer-q30">Answer (a): Vaccine contains dead/weakened flu virus or viral proteins (antigens). White blood cells recognize antigens as foreign and produce specific antibodies against them. Memory cells are created. (b): Memory cells remain in body for months/years. If real flu virus enters in December, memory cells quickly recognize it and rapidly produce large amounts of antibodies. Quick response kills virus before person becomes ill. (c): Flu virus mutates/changes antigens, so antibodies don't recognize new strain. Person's immune system may be weakened. Vaccine might not work as well in elderly/immunocompromised people. Multiple flu strains exist, vaccine only protects against predicted strains.</div>
+    </div>
+
+    <div style="text-align: center; margin-top: 20px; font-weight: bold;">
+        End of Examination
+    </div>
+
+</body>
+</html>
