@@ -1,0 +1,1252 @@
+<html lang="en" class="reveal-full-page">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heat Transfer & Chemical Reactions - Year 10 Revision</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reveal.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/theme/white.min.css">
+    <style>
+        :root {
+            --primary-blue: #2563eb;
+            --primary-purple: #7c3aed;
+            --success-green: #10b981;
+            --warning-orange: #f59e0b;
+            --accent-cyan: #06b6d4;
+            --text-dark: #1e293b;
+            --bg-light: #f8fafc;
+        }
+
+        .reveal {
+            font-size: 28px;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+        }
+
+        .reveal h1 {
+            font-size: 2em;
+            color: var(--text-dark);
+            font-weight: 700;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, var(--primary-blue), var(--primary-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .reveal h2 {
+            font-size: 1.6em;
+            color: var(--text-dark);
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .reveal .slides section {
+            height: 100%;
+            padding: 20px;
+            overflow-y: auto !important;
+        }
+
+        .slide-content-wrapper {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px 0;
+        }
+
+        .learning-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 16px;
+            margin: 15px 0;
+            max-width: 800px;
+            width: 100%;
+        }
+
+        .objective-item {
+            background: rgba(255,255,255,0.15);
+            padding: 12px;
+            margin: 8px 0;
+            border-radius: 8px;
+            font-size: 0.9em;
+            border-left: 4px solid white;
+        }
+
+        .quiz-box {
+            background: linear-gradient(135deg, var(--success-green), #34d399);
+            padding: 25px;
+            border-radius: 16px;
+            margin: 15px 0;
+            max-width: 750px;
+            width: 100%;
+            color: white;
+        }
+
+        .quiz-item {
+            background: white;
+            color: var(--text-dark);
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.85em;
+        }
+
+        .quiz-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .quiz-item.revealed {
+            background: linear-gradient(135deg, #fef3c7, #fde68a);
+        }
+
+        .quiz-answer {
+            display: none;
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 2px solid var(--warning-orange);
+            font-weight: 600;
+            color: var(--primary-blue);
+        }
+
+        .concept-card {
+            background: white;
+            border: 2px solid #e2e8f0;
+            border-radius: 14px;
+            padding: 20px;
+            margin: 15px 0;
+            max-width: 700px;
+            width: 100%;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .concept-card:hover {
+            border-color: var(--primary-blue);
+            transform: translateY(-2px);
+        }
+
+        .concept-card.revealed {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+        }
+
+        .concept-icon {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .concept-title {
+            font-size: 1.2em;
+            font-weight: 700;
+            color: var(--primary-blue);
+            margin-bottom: 8px;
+        }
+
+        .concept-details {
+            display: none;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 2px dashed var(--warning-orange);
+            font-size: 0.85em;
+        }
+
+        .detail-item {
+            margin: 8px 0;
+            padding-left: 18px;
+            position: relative;
+        }
+
+        .detail-item::before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: var(--primary-blue);
+            font-weight: bold;
+        }
+
+        .comparison-box {
+            background: white;
+            border-radius: 14px;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            max-width: 650px;
+            width: 100%;
+            margin: 15px 0;
+        }
+
+        .comparison-box.old {
+            border: 3px solid #dc2626;
+        }
+
+        .comparison-box.new {
+            border: 3px solid var(--success-green);
+            background: linear-gradient(135deg, #f0fdf4, #dcfce7);
+        }
+
+        .comparison-header {
+            font-size: 1.2em;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .comparison-box.old .comparison-header {
+            color: #dc2626;
+        }
+
+        .comparison-box.new .comparison-header {
+            color: var(--success-green);
+        }
+
+        .comparison-item {
+            font-size: 0.85em;
+            margin: 8px 0;
+            line-height: 1.5;
+        }
+
+        .info-box {
+            background: linear-gradient(135deg, #e0f2fe, #bae6fd);
+            border: 2px solid var(--accent-cyan);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 15px 0;
+            max-width: 750px;
+            width: 100%;
+            font-size: 0.9em;
+            line-height: 1.6;
+        }
+
+        .key-takeaway {
+            background: linear-gradient(135deg, #fef3c7, #fde68a);
+            border-left: 5px solid var(--warning-orange);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 15px 0;
+            max-width: 750px;
+            width: 100%;
+            font-weight: 600;
+            font-size: 0.95em;
+        }
+
+        .highlight {
+            background: #fef08a;
+            padding: 3px 6px;
+            border-radius: 4px;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .calculation-box {
+            background: white;
+            border: 3px solid var(--primary-purple);
+            border-radius: 14px;
+            padding: 25px;
+            margin: 15px 0;
+            max-width: 700px;
+            width: 100%;
+            font-family: 'Courier New', monospace;
+        }
+
+        .calc-step {
+            margin: 12px 0;
+            padding: 10px;
+            background: #f8fafc;
+            border-radius: 8px;
+            font-size: 0.85em;
+        }
+
+        .calc-label {
+            color: var(--primary-blue);
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .calc-result {
+            background: linear-gradient(135deg, #dcfce7, #bbf7d0);
+            padding: 15px;
+            border-radius: 10px;
+            border-left: 5px solid var(--success-green);
+            font-size: 1.1em;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-top: 15px;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            max-width: 700px;
+            margin: 15px 0;
+            font-size: 0.8em;
+        }
+
+        th {
+            background: var(--primary-blue);
+            color: white;
+            padding: 12px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        td {
+            padding: 12px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        tr:nth-child(even) {
+            background: #f8fafc;
+        }
+    </style>
+</head>
+<body class="reveal-viewport">
+    <div class="reveal">
+        <div class="slides">
+            <!-- Slide 1: Title & Do Now -->
+            <section>
+                <div class="slide-content-wrapper">
+                    <h1>🔥 Heat Transfer & ⚗️ Chemical Reactions</h1>
+                    <h2>Year 10 Science Revision</h2>
+                    
+                    <div class="quiz-box fragment" data-fragment-index="0">
+                        <h3 style="margin-top: 0;">🔥 Do Now Activity - Warm Up!</h3>
+                        <div class="quiz-item" onclick="toggleAnswer(this)">
+                            <strong>1.</strong> Heat always flows from hot to cold objects. (True or False?)
+                            <div class="quiz-answer">
+                                <strong>Answer: TRUE</strong> - Heat energy naturally transfers from higher temperature to lower temperature.
+                            </div>
+                        </div>
+                        <div class="quiz-item" onclick="toggleAnswer(this)">
+                            <strong>2.</strong> In an exothermic reaction, energy is absorbed from surroundings. (True or False?)
+                            <div class="quiz-answer">
+                                <strong>Answer: FALSE</strong> - Exothermic reactions RELEASE energy to the surroundings.
+                            </div>
+                        </div>
+                        <div class="quiz-item" onclick="toggleAnswer(this)">
+                            <strong>3.</strong> Which has particles that are closest together?<br>
+                            A) Solid  B) Liquid  C) Gas  D) All equal
+                            <div class="quiz-answer">
+                                <strong>Answer: A - Solid</strong> - Solid particles are tightly packed, liquids less so, gases are far apart.
+                            </div>
+                        </div>
+                        <div class="quiz-item" onclick="toggleAnswer(this)">
+                            <strong>4.</strong> Mass is created in chemical reactions. (True or False?)
+                            <div class="quiz-answer">
+                                <strong>Answer: FALSE</strong> - Mass is conserved! Atoms are rearranged, not created or destroyed.
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="learning-box fragment" data-fragment-index="1">
+                        <h3 style="margin-top: 0;">Learning Objectives</h3>
+                        <div class="objective-item">Explain <span class="highlight">conduction</span> using the particle model</div>
+                        <div class="objective-item">Explain <span class="highlight">convection</span> using the particle model</div>
+                        <div class="objective-item">Compare <span class="highlight">heat transfer</span> in solids, liquids, and gases</div>
+                        <div class="objective-item">Distinguish between <span class="highlight">endothermic</span> and <span class="highlight">exothermic</span> reactions</div>
+                        <div class="objective-item">Apply the law of <span class="highlight">conservation of mass</span></div>
+                        <div class="objective-item">Identify factors affecting <span class="highlight">reaction rate</span></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 2: The Particle Model -->
+            <section>
+                <div class="slide-content-wrapper">
+                    <h2>The Particle Model 🔬</h2>
+                    
+                    <div class="info-box fragment" data-fragment-index="0">
+                        All matter = tiny <span class="highlight">particles</span> constantly moving. Arrangement determines heat transfer.
+                    </div>
+
+                    <svg class="fragment" width="800" height="300" viewBox="0 0 800 300" style="margin: 20px 0;" data-fragment-index="1">
+                        <!-- Solid -->
+                        <rect x="20" y="20" width="230" height="260" fill="#e0f2fe" stroke="#3b82f6" stroke-width="3" rx="10"/>
+                        <text x="135" y="50" text-anchor="middle" font-size="20" font-weight="bold" fill="#1e293b">🧊 SOLID</text>
+                        
+                        <!-- Solid particles - tightly packed grid -->
+                        <circle cx="70" cy="100" r="12" fill="#3b82f6"/>
+                        <circle cx="100" cy="100" r="12" fill="#3b82f6"/>
+                        <circle cx="130" cy="100" r="12" fill="#3b82f6"/>
+                        <circle cx="160" cy="100" r="12" fill="#3b82f6"/>
+                        <circle cx="190" cy="100" r="12" fill="#3b82f6"/>
+                        
+                        <circle cx="70" cy="130" r="12" fill="#3b82f6"/>
+                        <circle cx="100" cy="130" r="12" fill="#3b82f6"/>
+                        <circle cx="130" cy="130" r="12" fill="#3b82f6"/>
+                        <circle cx="160" cy="130" r="12" fill="#3b82f6"/>
+                        <circle cx="190" cy="130" r="12" fill="#3b82f6"/>
+                        
+                        <circle cx="70" cy="160" r="12" fill="#3b82f6"/>
+                        <circle cx="100" cy="160" r="12" fill="#3b82f6"/>
+                        <circle cx="130" cy="160" r="12" fill="#3b82f6"/>
+                        <circle cx="160" cy="160" r="12" fill="#3b82f6"/>
+                        <circle cx="190" cy="160" r="12" fill="#3b82f6"/>
+                        
+                        <text x="135" y="210" text-anchor="middle" font-size="14" fill="#1e293b">✓ Very close</text>
+                        <text x="135" y="230" text-anchor="middle" font-size="14" fill="#1e293b">✓ Fixed position</text>
+                        <text x="135" y="250" text-anchor="middle" font-size="14" fill="#1e293b">✓ Vibrate only</text>
+
+                        <!-- Liquid -->
+                        <rect x="285" y="20" width="230" height="260" fill="#fef3c7" stroke="#f59e0b" stroke-width="3" rx="10"/>
+                        <text x="400" y="50" text-anchor="middle" font-size="20" font-weight="bold" fill="#1e293b">💧 LIQUID</text>
+                        
+                        <!-- Liquid particles - close but random -->
+                        <circle cx="310" cy="95" r="12" fill="#f59e0b"/>
+                        <circle cx="345" cy="110" r="12" fill="#f59e0b"/>
+                        <circle cx="375" cy="100" r="12" fill="#f59e0b"/>
+                        <circle cx="410" cy="115" r="12" fill="#f59e0b"/>
+                        <circle cx="440" cy="95" r="12" fill="#f59e0b"/>
+                        <circle cx="470" cy="105" r="12" fill="#f59e0b"/>
+                        
+                        <circle cx="325" cy="135" r="12" fill="#f59e0b"/>
+                        <circle cx="360" cy="145" r="12" fill="#f59e0b"/>
+                        <circle cx="395" cy="150" r="12" fill="#f59e0b"/>
+                        <circle cx="430" cy="140" r="12" fill="#f59e0b"/>
+                        <circle cx="460" cy="155" r="12" fill="#f59e0b"/>
+                        
+                        <text x="400" y="210" text-anchor="middle" font-size="14" fill="#1e293b">✓ Close together</text>
+                        <text x="400" y="230" text-anchor="middle" font-size="14" fill="#1e293b">✓ Can slide past</text>
+                        <text x="400" y="250" text-anchor="middle" font-size="14" fill="#1e293b">✓ Move around</text>
+
+                        <!-- Gas -->
+                        <rect x="550" y="20" width="230" height="260" fill="#dcfce7" stroke="#10b981" stroke-width="3" rx="10"/>
+                        <text x="665" y="50" text-anchor="middle" font-size="20" font-weight="bold" fill="#1e293b">💨 GAS</text>
+                        
+                        <!-- Gas particles - far apart -->
+                        <circle cx="590" cy="85" r="12" fill="#10b981"/>
+                        <circle cx="680" cy="110" r="12" fill="#10b981"/>
+                        <circle cx="630" cy="140" r="12" fill="#10b981"/>
+                        <circle cx="730" cy="95" r="12" fill="#10b981"/>
+                        <circle cx="700" cy="160" r="12" fill="#10b981"/>
+                        <circle cx="600" cy="180" r="12" fill="#10b981"/>
+                        
+                        <text x="665" y="210" text-anchor="middle" font-size="14" fill="#1e293b">✓ Far apart</text>
+                        <text x="665" y="230" text-anchor="middle" font-size="14" fill="#1e293b">✓ Random motion</text>
+                        <text x="665" y="250" text-anchor="middle" font-size="14" fill="#1e293b">✓ Fast movement</text>
+                    </svg>
+
+                    <div class="key-takeaway fragment" data-fragment-index="2">
+                        💡 Particle spacing determines heat transfer efficiency!
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 3: What is Heat? -->
+            <section>
+                <div class="slide-content-wrapper">
+                    <h2>What is Heat Energy? 🌡️</h2>
+                    
+                    <div class="info-box fragment" data-fragment-index="0">
+                        <span class="highlight">Heat</span> = transfer of thermal energy (hot → cold)
+                    </div>
+
+                    <svg class="fragment" width="600" height="200" viewBox="0 0 600 200" style="margin: 20px 0;" data-fragment-index="1">
+                        <!-- Hot object -->
+                        <circle cx="150" cy="100" r="60" fill="#fef3c7" stroke="#ef4444" stroke-width="4"/>
+                        <text x="150" y="90" text-anchor="middle" font-size="40">🔥</text>
+                        <text x="150" y="140" text-anchor="middle" font-size="18" font-weight="bold" fill="#ef4444">HOT</text>
+                        <text x="150" y="160" text-anchor="middle" font-size="14" fill="#1e293b">Fast particles</text>
+                        
+                        <!-- Heat transfer arrow -->
+                        <defs>
+                            <marker id="heatArrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                                <polygon points="0 0, 10 3, 0 6" fill="#f59e0b"/>
+                            </marker>
+                        </defs>
+                        <path d="M 220 100 L 380 100" stroke="#f59e0b" stroke-width="6" marker-end="url(#heatArrow)"/>
+                        <text x="300" y="85" text-anchor="middle" font-size="18" font-weight="bold" fill="#f59e0b">HEAT FLOW</text>
+                        
+                        <!-- Cold object -->
+                        <circle cx="450" cy="100" r="60" fill="#e0f2fe" stroke="#3b82f6" stroke-width="4"/>
+                        <text x="450" y="90" text-anchor="middle" font-size="40">🧊</text>
+                        <text x="450" y="140" text-anchor="middle" font-size="18" font-weight="bold" fill="#3b82f6">COLD</text>
+                        <text x="450" y="160" text-anchor="middle" font-size="14" fill="#1e293b">Slow particles</text>
+                    </svg>
+
+                    <div class="comparison-box new fragment" data-fragment-index="2">
+                        <div class="comparison-header">Key Points</div>
+                        <div class="comparison-item">🌡️ Temperature = average kinetic energy of particles</div>
+                        <div class="comparison-item">🔥 Heat = energy transfer due to temp difference</div>
+                        <div class="comparison-item">➡️ Heat ALWAYS flows hot → cold</div>
+                        <div class="comparison-item">⚡ Faster particles = higher temperature</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 4: Conduction -->
+            <section>
+                <div class="slide-content-wrapper">
+                    <h2>Method 1: Conduction 🔥</h2>
+                    
+                    <div class="info-box fragment" data-fragment-index="0">
+                        <span class="highlight">Conduction</span> = Heat transfer through particle collisions
+                    </div>
+
+                    <svg class="fragment" width="750" height="280" viewBox="0 0 750 280" style="margin: 20px 0;" data-fragment-index="1">
+                        <!-- Metal bar -->
+                        <rect x="50" y="100" width="650" height="80" fill="#cbd5e1" stroke="#64748b" stroke-width="3" rx="5"/>
+                        
+                        <!-- Heat source (fire) -->
+                        <text x="30" y="150" font-size="40">🔥</text>
+                        <text x="25" y="195" font-size="14" font-weight="bold" fill="#ef4444">HOT</text>
+                        
+                        <!-- Cold end (ice) -->
+                        <text x="710" y="150" font-size="40">🧊</text>
+                        <text x="705" y="195" font-size="14" font-weight="bold" fill="#3b82f6">COLD</text>
+                        
+                        <!-- Particles with vibration arrows -->
+                        <!-- Hot end - large vibrations -->
+                        <circle cx="120" cy="140" r="10" fill="#ef4444"/>
+                        <path d="M 115 125 L 115 115 M 125 125 L 125 115 M 115 155 L 115 165 M 125 155 L 125 165" stroke="#ef4444" stroke-width="2"/>
+                        
+                        <circle cx="160" cy="140" r="10" fill="#f97316"/>
+                        <path d="M 155 125 L 155 118 M 165 125 L 165 118 M 155 155 L 155 162 M 165 155 L 165 162" stroke="#f97316" stroke-width="2"/>
+                        
+                        <!-- Arrow showing energy transfer -->
+                        <defs>
+                            <marker id="energyArrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                                <polygon points="0 0, 10 3, 0 6" fill="#f59e0b"/>
+                            </marker>
+                        </defs>
+                        <path d="M 140 140 L 180 140" stroke="#f59e0b" stroke-width="3" marker-end="url(#energyArrow)"/>
+                        
+                        <!-- Middle particles - medium vibrations -->
+                        <circle cx="250" cy="140" r="10" fill="#fb923c"/>
+                        <path d="M 247 128 L 247 122 M 253 128 L 253 122 M 247 152 L 247 158 M 253 152 L 253 158" stroke="#fb923c" stroke-width="2"/>
+                        
+                        <circle cx="300" cy="140" r="10" fill="#fbbf24"/>
+                        <path d="M 297 130 L 297 125 M 303 130 L 303 125 M 297 150 L 297 155 M 303 150 L 303 155" stroke="#fbbf24" stroke-width="2"/>
+                        
+                        <circle cx="350" cy="140" r="10" fill="#fcd34d"/>
+                        <path d="M 347 130 L 347 125 M 353 130 L 353 125 M 347 150 L 347 155 M 353 150 L 353 155" stroke="#fcd34d" stroke-width="2"/>
+                        
+                        <circle cx="400" cy="140" r="10" fill="#fde68a"/>
+                        
+                        <circle cx="450" cy="140" r="10" fill="#bae6fd"/>
+                        
+                        <!-- Cold end - small vibrations -->
+                        <circle cx="550" cy="140" r="10" fill="#7dd3fc"/>
+                        <path d="M 548 133 L 548 130 M 552 133 L 552 130 M 548 147 L 548 150 M 552 147 L 552 150" stroke="#7dd3fc" stroke-width="1"/>
+                        
+                        <circle cx="620" cy="140" r="10" fill="#3b82f6"/>
+                        <path d="M 618 135 L 618 133 M 622 135 L 622 133 M 618 145 L 618 147 M 622 145 L 622 147" stroke="#3b82f6" stroke-width="1"/>
+                        
+                        <!-- Labels -->
+                        <text x="120" y="230" text-anchor="middle" font-size="14" fill="#ef4444" font-weight="bold">Fast vibration</text>
+                        <text x="350" y="230" text-anchor="middle" font-size="14" fill="#f59e0b" font-weight="bold">Energy transfer →</text>
+                        <text x="620" y="230" text-anchor="middle" font-size="14" fill="#3b82f6" font-weight="bold">Slow vibration</text>
+                    </svg>
+
+                    <div class="comparison-box new fragment" data-fragment-index="2">
+                        <div class="comparison-header">How It Works</div>
+                        <div class="comparison-item">1. Hot particles vibrate fast → collide with neighbors</div>
+                        <div class="comparison-item">2. Kinetic energy transfers along material</div>
+                        <div class="comparison-item">3. Cold end gradually heats up</div>
+                    </div>
+
+                    <table class="fragment" data-fragment-index="3">
+                        <thead>
+                            <tr>
+                                <th>Material</th>
+                                <th>Conduction Rate</th>
+                                <th>Why?</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Metals</td>
+                                <td>⚡ Very fast</td>
+                                <td>Particles very close + free electrons</td>
+                            </tr>
+                            <tr>
+                                <td>Other solids</td>
+                                <td>✓ Good</td>
+                                <td>Particles close together</td>
+                            </tr>
+                            <tr>
+                                <td>Liquids</td>
+                                <td>~ Slow</td>
+                                <td>Particles less organized</td>
+                            </tr>
+                            <tr>
+                                <td>Gases</td>
+                                <td>✗ Very slow</td>
+                                <td>Particles far apart, few collisions</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Slide 5: Convection -->
+            <section>
+                <div class="slide-content-wrapper">
+                    <h2>Method 2: Convection 🌊</h2>
+                    
+                    <div class="info-box fragment" data-fragment-index="0">
+                        <span class="highlight">Convection</span> = Heat transfer through bulk fluid movement
+                    </div>
+
+                    <svg class="fragment" width="700" height="350" viewBox="0 0 700 350" style="margin: 20px 0;" data-fragment-index="1">
+                        <!-- Container -->
+                        <rect x="100" y="50" width="500" height="250" fill="none" stroke="#64748b" stroke-width="4" rx="10"/>
+                        
+                        <!-- Heat source -->
+                        <rect x="300" y="280" width="100" height="20" fill="#ef4444" rx="5"/>
+                        <text x="350" y="320" text-anchor="middle" font-size="16" font-weight="bold" fill="#ef4444">🔥 HEAT</text>
+                        
+                        <!-- Hot water particles (red) - bottom center, rising -->
+                        <circle cx="350" cy="260" r="8" fill="#ef4444"/>
+                        <circle cx="365" cy="250" r="8" fill="#ef4444"/>
+                        <circle cx="335" cy="250" r="8" fill="#f97316"/>
+                        <circle cx="350" cy="230" r="8" fill="#f97316"/>
+                        
+                        <circle cx="340" cy="200" r="8" fill="#fb923c"/>
+                        <circle cx="360" cy="190" r="8" fill="#fb923c"/>
+                        <circle cx="350" cy="170" r="8" fill="#fbbf24"/>
+                        <circle cx="365" cy="150" r="8" fill="#fbbf24"/>
+                        
+                        <!-- Rising arrow -->
+                        <defs>
+                            <marker id="upArrow" markerWidth="10" markerHeight="10" refX="5" refY="0" orient="auto">
+                                <polygon points="5 0, 0 10, 10 10" fill="#ef4444"/>
+                            </marker>
+                            <marker id="downArrow" markerWidth="10" markerHeight="10" refX="5" refY="10" orient="auto">
+                                <polygon points="5 10, 0 0, 10 0" fill="#3b82f6"/>
+                            </marker>
+                            <marker id="sideArrow" markerWidth="10" markerHeight="10" refX="10" refY="5" orient="auto">
+                                <polygon points="10 5, 0 0, 0 10" fill="#64748b"/>
+                            </marker>
+                        </defs>
+                        
+                        <path d="M 380 260 L 380 120" stroke="#ef4444" stroke-width="4" marker-end="url(#upArrow)" stroke-dasharray="5,5"/>
+                        <text x="400" y="190" font-size="16" font-weight="bold" fill="#ef4444">HOT RISES</text>
+                        
+                        <!-- Top particles moving sideways -->
+                        <circle cx="370" cy="80" r="8" fill="#fde68a"/>
+                        <circle cx="400" cy="75" r="8" fill="#fde68a"/>
+                        <circle cx="430" cy="80" r="8" fill="#fef3c7"/>
+                        <circle cx="460" cy="85" r="8" fill="#fef3c7"/>
+                        <circle cx="500" cy="90" r="8" fill="#bae6fd"/>
+                        
+                        <!-- Sideways arrow at top -->
+                        <path d="M 320 100 L 520 100" stroke="#64748b" stroke-width="3" marker-end="url(#sideArrow)"/>
+                        
+                        <!-- Cool water particles (blue) - sides, sinking -->
+                        <circle cx="540" cy="120" r="8" fill="#bae6fd"/>
+                        <circle cx="550" cy="150" r="8" fill="#7dd3fc"/>
+                        <circle cx="560" cy="180" r="8" fill="#7dd3fc"/>
+                        <circle cx="555" cy="210" r="8" fill="#38bdf8"/>
+                        <circle cx="560" cy="240" r="8" fill="#3b82f6"/>
+                        <circle cx="550" cy="270" r="8" fill="#3b82f6"/>
+                        
+                        <circle cx="150" cy="120" r="8" fill="#bae6fd"/>
+                        <circle cx="140" cy="150" r="8" fill="#7dd3fc"/>
+                        <circle cx="135" cy="180" r="8" fill="#7dd3fc"/>
+                        <circle cx="140" cy="210" r="8" fill="#38bdf8"/>
+                        <circle cx="145" cy="240" r="8" fill="#3b82f6"/>
+                        <circle cx="150" cy="270" r="8" fill="#3b82f6"/>
+                        
+                        <!-- Sinking arrows -->
+                        <path d="M 580 120 L 580 270" stroke="#3b82f6" stroke-width="4" marker-end="url(#downArrow)" stroke-dasharray="5,5"/>
+                        <text x="590" y="190" font-size="16" font-weight="bold" fill="#3b82f6">COOL SINKS</text>
+                        
+                        <!-- Bottom flow arrow -->
+                        <path d="M 180 280 L 290 280" stroke="#64748b" stroke-width="3" marker-end="url(#sideArrow)"/>
+                        
+                        <!-- Circular arrow showing full cycle -->
+                        <path d="M 350 310 Q 250 310, 200 200 Q 200 100, 350 70 Q 500 100, 500 200 Q 500 310, 350 310" 
+                              fill="none" stroke="#7c3aed" stroke-width="3" stroke-dasharray="10,5" marker-end="url(#sideArrow)"/>
+                    </svg>
+
+                    <div class="comparison-box new fragment" data-fragment-index="2">
+                        <div class="comparison-header">Convection Current Steps</div>
+                        <div class="comparison-item">1. Hot fluid → less dense → rises ⬆️</div>
+                        <div class="comparison-item">2. Cool fluid → more dense → sinks ⬇️</div>
+                        <div class="comparison-item">3. Creates circular flow pattern 🔄</div>
+                    </div>
+
+                    <div class="comparison-box old fragment" data-fragment-index="3">
+                        <div class="comparison-header">⚠️ Why NO Convection in Solids</div>
+                        <div class="comparison-item">❌ Particles FIXED in position</div>
+                        <div class="comparison-item">❌ Cannot flow or circulate</div>
+                        <div class="comparison-item">✓ Solids only do conduction</div>
+                    </div>
+
+                    <div class="key-takeaway fragment" data-fragment-index="4">
+                        💡 Convection needs particles that can MOVE = liquids & gases only!
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 6: Comparing Heat Transfer Methods -->
+            <section>
+                <div class="slide-content-wrapper">
+                    <h2>Comparing Heat Transfer Methods 📊</h2>
+                    
+                    <table class="fragment" data-fragment-index="0">
+                        <thead>
+                            <tr>
+                                <th>Method</th>
+                                <th>Requires Matter?</th>
+                                <th>Particle Movement</th>
+                                <th>Works In</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>🔥 Conduction</strong></td>
+                                <td>Yes</td>
+                                <td>Vibrate & collide</td>
+                                <td>Solids, liquids, gases</td>
+                            </tr>
+                            <tr>
+                                <td><strong>🌊 Convection</strong></td>
+                                <td>Yes (fluids only)</td>
+                                <td>Bulk flow (rising/sinking)</td>
+                                <td>Liquids & gases ONLY</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <svg class="fragment" width="800" height="280" viewBox="0 0 800 280" style="margin: 20px 0;" data-fragment-index="1">
+                        <!-- Solid -->
+                        <rect x="50" y="20" width="200" height="240" fill="#e0f2fe" stroke="#3b82f6" stroke-width="3" rx="10"/>
+                        <text x="150" y="50" text-anchor="middle" font-size="18" font-weight="bold" fill="#1e293b">SOLID</text>
+                        <text x="150" y="130" text-anchor="middle" font-size="60">🧊</text>
+                        <text x="150" y="180" text-anchor="middle" font-size="16" font-weight="bold" fill="#10b981">✓ Conduction</text>
+                        <text x="150" y="220" text-anchor="middle" font-size="16" font-weight="bold" fill="#ef4444">✗ Convection</text>
+                        <text x="150" y="245" text-anchor="middle" font-size="12" fill="#64748b">(particles fixed)</text>
+                        
+                        <!-- Liquid -->
+                        <rect x="300" y="20" width="200" height="240" fill="#fef3c7" stroke="#f59e0b" stroke-width="3" rx="10"/>
+                        <text x="400" y="50" text-anchor="middle" font-size="18" font-weight="bold" fill="#1e293b">LIQUID</text>
+                        <text x="400" y="130" text-anchor="middle" font-size="60">💧</text>
+                        <text x="400" y="180" text-anchor="middle" font-size="16" font-weight="bold" fill="#10b981">✓ Conduction</text>
+                        <text x="400" y="220" text-anchor="middle" font-size="16" font-weight="bold" fill="#10b981">✓ Convection</text>
+                        <text x="400" y="245" text-anchor="middle" font-size="12" fill="#64748b">(particles can flow)</text>
+                        
+                        <!-- Gas -->
+                        <rect x="550" y="20" width="200" height="240" fill="#dcfce7" stroke="#10b981" stroke-width="3" rx="10"/>
+                        <text x="650" y="50" text-anchor="middle" font-size="18" font-weight="bold" fill="#1e293b">GAS</text>
+                        <text x="650" y="130" text-anchor="middle" font-size="60">💨</text>
+                        <text x="650" y="180" text-anchor="middle" font-size="16" font-weight="bold" fill="#10b981">✓ Conduction</text>
+                        <text x="650" y="220" text-anchor="middle" font-size="16" font-weight="bold" fill="#10b981">✓ Convection</text>
+                        <text x="650" y="245" text-anchor="middle" font-size="12" fill="#64748b">(particles can flow)</text>
+                    </svg>
+
+                    <div class="key-takeaway fragment" data-fragment-index="2">
+                        💡 Solids: ONLY conduction | Liquids/Gases: BOTH conduction & convection
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 7: Practice Questions - Heat -->
+            <section>
+                <div class="slide-content-wrapper">
+                    <h2>Practice: Heat Transfer 🎯</h2>
+                    
+                    <div class="quiz-box">
+                        <h3 style="margin-top: 0;">Quick Check</h3>
+                        <div class="quiz-item fragment" onclick="toggleAnswer(this)" data-fragment-index="0">
+                            <strong>Q1:</strong> Why does a wooden spoon stay cooler than a metal spoon in hot tea?
+                            <div class="quiz-answer">
+                                <strong>Answer:</strong> Wood is a poor conductor (insulator). Its particles are less organized for heat transfer compared to metal's tightly packed particles.
+                            </div>
+                        </div>
+                        <div class="quiz-item fragment" onclick="toggleAnswer(this)" data-fragment-index="1">
+                            <strong>Q2:</strong> A lava lamp has wax that rises when hot and sinks when cool. What heat transfer method is this?
+                            <div class="quiz-answer">
+                                <strong>Answer: Convection</strong> - Hot wax (less dense) rises, cool wax (more dense) sinks, creating a convection current.
+                            </div>
+                        </div>
+                        <div class="quiz-item fragment" onclick="toggleAnswer(this)" data-fragment-index="2">
+                            <strong>Q3:</strong> Explain using particles why a metal rod conducts heat better than a glass rod.
+                            <div class="quiz-answer">
+                                <strong>Answer:</strong> Metal particles are very close and have free electrons that transfer energy quickly through collisions. Glass particles transfer energy more slowly.
+                            </div>
+                        </div>
+                        <div class="quiz-item fragment" onclick="toggleAnswer(this)" data-fragment-index="3">
+                            <strong>Q4:</strong> Why can't a brick wall transfer heat by convection?
+                            <div class="quiz-answer">
+                                <strong>Answer:</strong> Solid particles are locked in fixed positions and cannot move to create currents. Only vibration (conduction) possible.
+                            </div>
+                        </div>
+                        <div class="quiz-item fragment" onclick="toggleAnswer(this)" data-fragment-index="4">
+                            <strong>Q5:</strong> Compare how heat transfers in water vs ice using particle model.
+                            <div class="quiz-answer">
+                                <strong>Answer:</strong> Ice (solid): particles fixed, only conduction. Water (liquid): particles can move, both conduction AND convection possible.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 8: Chemical Reactions Intro -->
+            <section>
+                <div class="slide-content-wrapper">
+                    <h1>⚗️ Chemical Reactions</h1>
+                    
+                    <div class="info-box fragment" data-fragment-index="0">
+                        <span class="highlight">Chemical reaction</span> = substances transform into new substances with different properties
+                    </div>
+
+                    <svg class="fragment" width="700" height="200" viewBox="0 0 700 200" style="margin: 20px 0;" data-fragment-index="1">
+                        <!-- Reactants -->
+                        <text x="130" y="40" text-anchor="middle" font-size="18" font-weight="bold" fill="#3b82f6">REACTANTS</text>
+                        <circle cx="100" cy="100" r="20" fill="#3b82f6"/>
+                        <text x="100" y="108" text-anchor="middle" font-size="18" fill="white" font-weight="bold">A</text>
+                        <circle cx="160" cy="100" r="20" fill="#ef4444"/>
+                        <text x="160" y="108" text-anchor="middle" font-size="18" fill="white" font-weight="bold">B</text>
+                        
+                        <!-- Arrow -->
+                        <text x="350" y="100" text-anchor="middle" font-size="50" fill="#f59e0b">→</text>
+                        <text x="350" y="140" text-anchor="middle" font-size="16" fill="#f59e0b" font-weight="bold">REACTION</text>
+                        <text x="350" y="160" text-anchor="middle" font-size="14" fill="#64748b">(bonds break & form)</text>
+                        
+                        <!-- Products -->
+                        <text x="570" y="40" text-anchor="middle" font-size="18" font-weight="bold" fill="#10b981">PRODUCTS</text>
+                        <g>
+                            <circle cx="540" cy="100" r="20" fill="#3b82f6"/>
+                            <text x="540" y="108" text-anchor="middle" font-size="18" fill="white" font-weight="bold">A</text>
+                            <circle cx="570" cy="100" r="20" fill="#ef4444"/>
+                            <text x="570" y="108" text-anchor="middle" font-size="18" fill="white" font-weight="bold">B</text>
+                            <line x1="550" y1="100" x2="560" y2="100" stroke="white" stroke-width="3"/>
+                        </g>
+                    </svg>
+
+                    <div class="comparison-box new fragment" data-fragment-index="2">
+                        <div class="comparison-header">Signs of a Reaction</div>
+                        <div class="comparison-item">🔥 Temperature change | 💨 Gas produced</div>
+                        <div class="comparison-item">🌈 Color change | ⬇️ Precipitate forms | 💡 Light emitted</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 9: Exothermic vs Endothermic -->
+            <section>
+                <div class="slide-content-wrapper">
+                    <h2>Energy in Reactions 🔥❄️</h2>
+                    
+                    <svg class="fragment" width="800" height="350" viewBox="0 0 800 350" style="margin: 20px 0;" data-fragment-index="0">
+                        <!-- Exothermic on left -->
+                        <text x="200" y="30" text-anchor="middle" font-size="22" font-weight="bold" fill="#ef4444">🔥 EXOTHERMIC</text>
+                        
+                        <!-- Axes -->
+                        <line x1="50" y1="300" x2="50" y2="80" stroke="#1e293b" stroke-width="2"/>
+                        <line x1="50" y1="300" x2="350" y2="300" stroke="#1e293b" stroke-width="2"/>
+                        <text x="20" y="180" font-size="14" fill="#1e293b" transform="rotate(-90, 20, 180)">Energy</text>
+                        <text x="200" y="330" text-anchor="middle" font-size="14" fill="#1e293b">Time</text>
+                        
+                        <!-- Exothermic curve -->
+                        <path d="M 80 150 Q 180 100, 280 200" stroke="#ef4444" stroke-width="4" fill="none"/>
+                        
+                        <!-- Reactants level -->
+                        <line x1="60" y1="150" x2="100" y2="150" stroke="#3b82f6" stroke-width="3"/>
+                        <text x="130" y="155" font-size="14" fill="#3b82f6">Reactants</text>
+                        
+                        <!-- Products level (lower) -->
+                        <line x1="260" y1="200" x2="300" y2="200" stroke="#10b981" stroke-width="3"/>
+                        <text x="240" y="225" font-size="14" fill="#10b981">Products</text>
+                        
+                        <!-- Energy released arrow -->
+                        <defs>
+                            <marker id="downArrow2" markerWidth="10" markerHeight="10" refX="5" refY="10" orient="auto">
+                                <polygon points="5 10, 0 0, 10 0" fill="#f59e0b"/>
+                            </marker>
+                            <marker id="upArrow2" markerWidth="10" markerHeight="10" refX="5" refY="0" orient="auto">
+                                <polygon points="5 0, 0 10, 10 10" fill="#f59e0b"/>
+                            </marker>
+                        </defs>
+                        <path d="M 320 150 L 320 200" stroke="#f59e0b" stroke-width="3" stroke-dasharray="5,5" marker-end="url(#downArrow2)"/>
+                        <text x="330" y="180" font-size="14" font-weight="bold" fill="#f59e0b">Energy OUT</text>
+                        
+                        <!-- Endothermic on right -->
+                        <text x="600" y="30" text-anchor="middle" font-size="22" font-weight="bold" fill="#3b82f6">❄️ ENDOTHERMIC</text>
+                        
+                        <!-- Axes -->
+                        <line x1="450" y1="300" x2="450" y2="80" stroke="#1e293b" stroke-width="2"/>
+                        <line x1="450" y1="300" x2="750" y2="300" stroke="#1e293b" stroke-width="2"/>
+                        <text x="420" y="180" font-size="14" fill="#1e293b" transform="rotate(-90, 420, 180)">Energy</text>
+                        <text x="600" y="330" text-anchor="middle" font-size="14" fill="#1e293b">Time</text>
+                        
+                        <!-- Endothermic curve -->
+                        <path d="M 480 200 Q 580 100, 680 150" stroke="#3b82f6" stroke-width="4" fill="none"/>
+                        
+                        <!-- Reactants level -->
+                        <line x1="460" y1="200" x2="500" y2="200" stroke="#3b82f6" stroke-width="3"/>
+                        <text x="460" y="225" font-size="14" fill="#3b82f6">Reactants</text>
+                        
+                        <!-- Products level (higher) -->
+                        <line x1="660" y1="150" x2="700" y2="150" stroke="#10b981" stroke-width="3"/>
+                        <text x="640" y="145" font-size="14" fill="#10b981">Products</text>
+                        
+                        <!-- Energy absorbed arrow -->
+                        <path d="M 720 200 L 720 150" stroke="#f59e0b" stroke-width="3" stroke-dasharray="5,5" marker-end="url(#upArrow2)"/>
+                        <text x="730" y="180" font-size="14" font-weight="bold" fill="#f59e0b">Energy IN</text>
+                    </svg>
+
+                    <table class="fragment" data-fragment-index="1">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>🔥 Exothermic</th>
+                                <th>❄️ Endothermic</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Energy</strong></td>
+                                <td>Releases to surroundings</td>
+                                <td>Absorbs from surroundings</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Temperature</strong></td>
+                                <td>↑ Gets hotter</td>
+                                <td>↓ Gets colder</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Examples</strong></td>
+                                <td>Combustion, respiration, hand warmers</td>
+                                <td>Photosynthesis, cold packs, melting</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="key-takeaway fragment" data-fragment-index="2">
+                        💡 EXO = EXIT = energy out (hot) | ENDO = ENTER = energy in (cold)
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 11: Conservation of Mass -->
+            <section>
+                <div class="slide-content-wrapper">
+                    <h2>Law of Conservation of Mass ⚖️</h2>
+                    
+                    <div class="info-box fragment" data-fragment-index="0">
+                        <span class="highlight">Mass is conserved</span> - atoms rearrange but never created/destroyed
+                    </div>
+
+                    <svg class="fragment" width="700" height="250" viewBox="0 0 700 250" style="margin: 20px 0;" data-fragment-index="1">
+                        <!-- Before reaction -->
+                        <text x="150" y="40" text-anchor="middle" font-size="20" font-weight="bold" fill="#3b82f6">REACTANTS</text>
+                        
+                        <!-- Atoms before -->
+                        <circle cx="100" cy="100" r="15" fill="#ef4444"/>
+                        <text x="100" y="107" text-anchor="middle" font-size="14" fill="white" font-weight="bold">H</text>
+                        <circle cx="140" cy="100" r="15" fill="#ef4444"/>
+                        <text x="140" y="107" text-anchor="middle" font-size="14" fill="white" font-weight="bold">H</text>
+                        
+                        <circle cx="100" cy="150" r="15" fill="#ef4444"/>
+                        <text x="100" y="157" text-anchor="middle" font-size="14" fill="white" font-weight="bold">H</text>
+                        <circle cx="140" cy="150" r="15" fill="#ef4444"/>
+                        <text x="140" y="157" text-anchor="middle" font-size="14" fill="white" font-weight="bold">H</text>
+                        
+                        <circle cx="190" cy="125" r="18" fill="#3b82f6"/>
+                        <text x="190" y="132" text-anchor="middle" font-size="14" fill="white" font-weight="bold">O</text>
+                        <circle cx="230" cy="125" r="18" fill="#3b82f6"/>
+                        <text x="230" y="132" text-anchor="middle" font-size="14" fill="white" font-weight="bold">O</text>
+                        
+                        <text x="150" y="210" text-anchor="middle" font-size="16" fill="#1e293b">2H₂ + O₂</text>
+                        <text x="150" y="230" text-anchor="middle" font-size="16" font-weight="bold" fill="#1e293b">Mass = 36g</text>
+                        
+                        <!-- Arrow -->
+                        <text x="350" y="130" text-anchor="middle" font-size="40" fill="#f59e0b">→</text>
+                        <text x="350" y="170" text-anchor="middle" font-size="16" fill="#f59e0b" font-weight="bold">REACTION</text>
+                        
+                        <!-- After reaction -->
+                        <text x="550" y="40" text-anchor="middle" font-size="20" font-weight="bold" fill="#10b981">PRODUCTS</text>
+                        
+                        <!-- Water molecules -->
+                        <circle cx="520" cy="100" r="15" fill="#ef4444"/>
+                        <text x="520" y="107" text-anchor="middle" font-size="14" fill="white" font-weight="bold">H</text>
+                        <circle cx="545" cy="100" r="18" fill="#3b82f6"/>
+                        <text x="545" y="107" text-anchor="middle" font-size="14" fill="white" font-weight="bold">O</text>
+                        <circle cx="570" cy="100" r="15" fill="#ef4444"/>
+                        <text x="570" y="107" text-anchor="middle" font-size="14" fill="white" font-weight="bold">H</text>
+                        
+                        <circle cx="520" cy="150" r="15" fill="#ef4444"/>
+                        <text x="520" y="157" text-anchor="middle" font-size="14" fill="white" font-weight="bold">H</text>
+                        <circle cx="545" cy="150" r="18" fill="#3b82f6"/>
+                        <text x="545" y="157" text-anchor="middle" font-size="14" fill="white" font-weight="bold">O</text>
+                        <circle cx="570" cy="150" r="15" fill="#ef4444"/>
+                        <text x="570" y="157" text-anchor="middle" font-size="14" fill="white" font-weight="bold">H</text>
+                        
+                        <text x="550" y="210" text-anchor="middle" font-size="16" fill="#1e293b">2H₂O</text>
+                        <text x="550" y="230" text-anchor="middle" font-size="16" font-weight="bold" fill="#1e293b">Mass = 36g</text>
+                    </svg>
+
+                    <div class="comparison-box new fragment" data-fragment-index="2">
+                        <div class="comparison-header">Why Mass Stays Same</div>
+                        <div class="comparison-item">✓ Same atoms before and after</div>
+                        <div class="comparison-item">✓ Only bonds break and reform</div>
+                        <div class="comparison-item">✓ Atoms just rearrange</div>
+                    </div>
+
+                    <div class="key-takeaway fragment" data-fragment-index="3">
+                        💡 Mass of reactants = Mass of products (always!)
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 12: Factors Affecting Reaction Rate -->
+            <section>
+                <div class="slide-content-wrapper">
+                    <h2>Reaction Rate Factors ⚡</h2>
+                    
+                    <div class="info-box fragment" data-fragment-index="0">
+                        <span class="highlight">Reaction rate</span> = how fast reactants → products
+                    </div>
+
+                    <svg class="fragment" width="800" height="300" viewBox="0 0 800 300" style="margin: 20px 0;" data-fragment-index="1">
+                        <!-- Low temperature -->
+                        <rect x="50" y="20" width="300" height="260" fill="#e0f2fe" stroke="#3b82f6" stroke-width="3" rx="10"/>
+                        <text x="200" y="50" text-anchor="middle" font-size="18" font-weight="bold" fill="#3b82f6">❄️ LOW TEMPERATURE</text>
+                        
+                        <!-- Slow moving particles -->
+                        <circle cx="100" cy="120" r="12" fill="#3b82f6"/>
+                        <circle cx="160" cy="140" r="12" fill="#3b82f6"/>
+                        <circle cx="220" cy="130" r="12" fill="#3b82f6"/>
+                        <circle cx="280" cy="150" r="12" fill="#3b82f6"/>
+                        <circle cx="120" cy="180" r="12" fill="#3b82f6"/>
+                        <circle cx="250" cy="200" r="12" fill="#3b82f6"/>
+                        
+                        <!-- Small motion arrows -->
+                        <path d="M 100 105 L 105 95" stroke="#3b82f6" stroke-width="2" marker-end="url(#upArrow2)"/>
+                        <path d="M 175 140 L 185 140" stroke="#3b82f6" stroke-width="2" marker-end="url(#sideArrow)"/>
+                        
+                        <text x="200" y="250" text-anchor="middle" font-size="16" fill="#1e293b">Slow movement</text>
+                        <text x="200" y="270" text-anchor="middle" font-size="16" fill="#1e293b">Few collisions</text>
+                        
+                        <!-- High temperature -->
+                        <rect x="450" y="20" width="300" height="260" fill="#fef3c7" stroke="#ef4444" stroke-width="3" rx="10"/>
+                        <text x="600" y="50" text-anchor="middle" font-size="18" font-weight="bold" fill="#ef4444">🔥 HIGH TEMPERATURE</text>
+                        
+                        <!-- Fast moving particles with longer arrows -->
+                        <circle cx="500" cy="110" r="12" fill="#ef4444"/>
+                        <circle cx="580" cy="90" r="12" fill="#ef4444"/>
+                        <circle cx="660" cy="120" r="12" fill="#ef4444"/>
+                        <circle cx="520" cy="160" r="12" fill="#ef4444"/>
+                        <circle cx="620" cy="180" r="12" fill="#ef4444"/>
+                        <circle cx="700" cy="150" r="12" fill="#ef4444"/>
+                        <circle cx="550" cy="210" r="12" fill="#ef4444"/>
+                        <circle cx="680" cy="220" r="12" fill="#ef4444"/>
+                        
+                        <!-- Many motion arrows -->
+                        <path d="M 500 95 L 500 70" stroke="#ef4444" stroke-width="3" marker-end="url(#upArrow2)"/>
+                        <path d="M 595 90 L 620 80" stroke="#ef4444" stroke-width="3" marker-end="url(#sideArrow)"/>
+                        <path d="M 675 120 L 710 120" stroke="#ef4444" stroke-width="3" marker-end="url(#sideArrow)"/>
+                        <path d="M 535 160 L 560 145" stroke="#ef4444" stroke-width="3" marker-end="url(#upArrow2)"/>
+                        <path d="M 635 180 L 655 200" stroke="#ef4444" stroke-width="3" marker-end="url(#downArrow2)"/>
+                        
+                        <text x="600" y="250" text-anchor="middle" font-size="16" fill="#1e293b">Fast movement</text>
+                        <text x="600" y="270" text-anchor="middle" font-size="16" fill="#1e293b">Many collisions</text>
+                    </svg>
+
+                    <table class="fragment" data-fragment-index="2">
+                        <thead>
+                            <tr>
+                                <th>Factor</th>
+                                <th>↑ Increase Effect</th>
+                                <th>Why?</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>🌡️ <strong>Temperature</strong></td>
+                                <td>⚡ Faster reaction</td>
+                                <td>Particles move faster → more collisions</td>
+                            </tr>
+                            <tr>
+                                <td>📦 <strong>Concentration</strong></td>
+                                <td>⚡ Faster reaction</td>
+                                <td>More particles → more collisions</td>
+                            </tr>
+                            <tr>
+                                <td>🔪 <strong>Surface Area</strong></td>
+                                <td>⚡ Faster reaction</td>
+                                <td>More exposed → more collisions</td>
+                            </tr>
+                            <tr>
+                                <td>⚡ <strong>Catalyst</strong></td>
+                                <td>⚡ Faster reaction</td>
+                                <td>Lowers energy barrier (not used up)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="key-takeaway fragment" data-fragment-index="3">
+                        💡 More collisions = Faster reaction rate!
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 12: Practice Questions - Chemistry -->
+            <section>
+                <div class="slide-content-wrapper">
+                    <h2>Practice: Chemical Reactions 🎯</h2>
+                    
+                    <div class="quiz-box">
+                        <h3 style="margin-top: 0;">Quick Check</h3>
+                        <div class="quiz-item fragment" onclick="toggleAnswer(this)" data-fragment-index="0">
+                            <strong>Q1:</strong> Ice melting feels cold to touch. Endothermic or exothermic?
+                            <div class="quiz-answer">
+                                <strong>Answer: Endothermic</strong> - Absorbs heat from surroundings (your hand), making it feel cold.
+                            </div>
+                        </div>
+                        <div class="quiz-item fragment" onclick="toggleAnswer(this)" data-fragment-index="1">
+                            <strong>Q2:</strong> 50g zinc + 20g sulfur → zinc sulfide. What mass of product?
+                            <div class="quiz-answer">
+                                <strong>Answer: 70g</strong> - Mass conserved: 50g + 20g = 70g
+                            </div>
+                        </div>
+                        <div class="quiz-item fragment" onclick="toggleAnswer(this)" data-fragment-index="2">
+                            <strong>Q3:</strong> Why does sugar dissolve faster in hot water than cold water?
+                            <div class="quiz-answer">
+                                <strong>Answer:</strong> Higher temp → particles move faster → more frequent and energetic collisions → faster dissolving.
+                            </div>
+                        </div>
+                        <div class="quiz-item fragment" onclick="toggleAnswer(this)" data-fragment-index="3">
+                            <strong>Q4:</strong> Why does iron wool rust faster than an iron nail?
+                            <div class="quiz-answer">
+                                <strong>Answer:</strong> Iron wool has much larger surface area → more iron exposed to oxygen → more collisions → faster rusting.
+                            </div>
+                        </div>
+                        <div class="quiz-item fragment" onclick="toggleAnswer(this)" data-fragment-index="4">
+                            <strong>Q5:</strong> A glow stick releases light when bent. What type of reaction?
+                            <div class="quiz-answer">
+                                <strong>Answer: Exothermic</strong> - Chemical reaction releases energy as light (and some heat).
+                            </div>
+                        </div>
+                        <div class="quiz-item fragment" onclick="toggleAnswer(this)" data-fragment-index="5">
+                            <strong>Q6:</strong> What's the role of a catalyst in a reaction?
+                            <div class="quiz-answer">
+                                <strong>Answer:</strong> Speeds up reaction by lowering activation energy. Not consumed - can be reused.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 13: Extended Response Practice -->
+            <section>
+                <div class="slide-content-wrapper">
+                    <h2>Extended Response Practice 📝</h2>
+                    
+                    <div class="concept-card fragment" data-fragment-index="0">
+                        <div class="concept-icon">🏠</div>
+                        <div class="concept-title">Heat Transfer Question (7 marks)</div>
+                        <div class="detail-item"><strong>Scenario:</strong> A student holds an ice cube in their hand while standing near a campfire.</div>
+                        <div class="detail-item">Explain the heat transfer processes occurring. Include:</div>
+                        <div class="detail-item">• How heat transfers from the hand to the ice cube</div>
+                        <div class="detail-item">• How heat from the fire reaches the student</div>
+                        <div class="detail-item">• Particle explanations for each method</div>
+                        <div class="detail-item">• Why one method works through empty space</div>
+                    </div>
+
+                    <div class="concept-card fragment" data-fragment-index="1">
+                        <div class="concept-icon">🧪</div>
+                        <div class="concept-title">Chemical Reactions Question (6 marks)</div>
+                        <div class="detail-item"><strong>Scenario:</strong> A baker investigates how bread dough rises at different temperatures.</div>
+                        <div class="detail-item">In your answer, explain:</div>
+                        <div class="detail-item">• What type of reaction produces gas in dough (endo/exo)</div>
+                        <div class="detail-item">• Why warmer dough rises faster (use particles)</div>
+                        <div class="detail-item">• How mass is conserved when gas escapes</div>
+                        <div class="detail-item">• One other factor that could change rising speed</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 14: Summary -->
+            <section>
+                <div class="slide-content-wrapper">
+                    <h2>Summary 📚</h2>
+                    
+                    <div class="learning-box">
+                        <h3 style="margin-top: 0;">🔥 Heat Transfer</h3>
+                        <div class="objective-item fragment" data-fragment-index="0"><span class="highlight">Conduction:</span> Particle collisions, best in solids (close particles)</div>
+                        <div class="objective-item fragment" data-fragment-index="1"><span class="highlight">Convection:</span> Fluid flow, ONLY liquids/gases (particles move)</div>
+                        <div class="objective-item fragment" data-fragment-index="2"><span class="highlight">Solids:</span> Conduction only (particles fixed) ❌ NO convection</div>
+                        <div class="objective-item fragment" data-fragment-index="3"><span class="highlight">Fluids:</span> Both methods work (particles flow)</div>
+                    </div>
+
+                    <div class="learning-box fragment" data-fragment-index="4">
+                        <h3 style="margin-top: 0;">⚗️ Chemical Reactions</h3>
+                        <div class="objective-item"><span class="highlight">Exothermic:</span> Release energy → surroundings hotter 🔥</div>
+                        <div class="objective-item"><span class="highlight">Endothermic:</span> Absorb energy → surroundings colder ❄️</div>
+                        <div class="objective-item"><span class="highlight">Mass conservation:</span> Atoms rearrange, total mass unchanged ⚖️</div>
+                        <div class="objective-item"><span class="highlight">↑ Temperature:</span> ↑ particle speed → ↑ collisions → ↑ rate</div>
+                        <div class="objective-item"><span class="highlight">↑ Concentration/Surface Area:</span> ↑ collisions → ↑ rate</div>
+                        <div class="objective-item"><span class="highlight">Catalysts:</span> Lower energy barrier, reusable</div>
+                    </div>
+
+                    <div class="key-takeaway fragment" data-fragment-index="5">
+                        🎓 Know your particle explanations - key to exam success!
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reveal.min.js"></script>
+    <script>
+        Reveal.initialize({
+            hash: true,
+            center: true,
+            transition: 'slide',
+            transitionSpeed: 'default',
+            backgroundTransition: 'fade',
+            controls: true,
+            progress: true,
+            slideNumber: 'c/t',
+            keyboard: true,
+            overview: true,
+            loop: false,
+            rtl: false,
+            navigationMode: 'default',
+            shuffle: false,
+            fragments: true,
+            fragmentInURL: true,
+            embedded: false,
+            help: true,
+            showNotes: false,
+            autoPlayMedia: null,
+            preloadIframes: null,
+            autoSlide: 0,
+            autoSlideStoppable: true,
+            mouseWheel: false,
+            hideInactiveCursor: true,
+            hideCursorTime: 5000,
+            previewLinks: false,
+            width: 1280,
+            height: 720,
+            margin: 0.04,
+            minScale: 0.2,
+            maxScale: 2.0
+        });
+
+        function toggleAnswer(item) {
+            const answer = item.querySelector('.quiz-answer');
+            if (answer.style.display === 'block') {
+                answer.style.display = 'none';
+                item.classList.remove('revealed');
+            } else {
+                answer.style.display = 'block';
+                item.classList.add('revealed');
+            }
+        }
+
+        function toggleCard(card) {
+            const details = card.querySelector('.concept-details');
+            if (details.style.display === 'block') {
+                details.style.display = 'none';
+                card.classList.remove('revealed');
+            } else {
+                details.style.display = 'block';
+                card.classList.add('revealed');
+            }
+        }
+    </script>
+</body>
+</html>
