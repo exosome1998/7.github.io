@@ -1,0 +1,1181 @@
+<html lang="en" class="reveal-full-page">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Universe & Environmental Science - Year 10 Revision</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reveal.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/theme/white.min.css">
+    <style>
+        :root {
+            --primary-blue: #2563eb;
+            --primary-purple: #7c3aed;
+            --success-green: #10b981;
+            --warning-orange: #f59e0b;
+            --accent-cyan: #06b6d4;
+            --text-dark: #1e293b;
+            --bg-light: #f8fafc;
+        }
+
+        .reveal {
+            font-size: 28px;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+        }
+
+        .reveal h1 {
+            font-size: 2em;
+            color: var(--text-dark);
+            font-weight: 700;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, var(--primary-blue), var(--primary-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .reveal h2 {
+            font-size: 1.6em;
+            color: var(--text-dark);
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .reveal .slides section {
+            height: 100%;
+            padding: 20px;
+            overflow-y: auto !important;
+        }
+
+        .slide-content-wrapper {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px 0;
+        }
+
+        .learning-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 16px;
+            margin: 15px 0;
+            max-width: 800px;
+            width: 100%;
+        }
+
+        .objective-item {
+            background: rgba(255,255,255,0.15);
+            padding: 12px;
+            margin: 8px 0;
+            border-radius: 8px;
+            font-size: 0.9em;
+            border-left: 4px solid white;
+        }
+
+        .quiz-box {
+            background: linear-gradient(135deg, var(--success-green), #34d399);
+            padding: 25px;
+            border-radius: 16px;
+            margin: 15px 0;
+            max-width: 750px;
+            width: 100%;
+            color: white;
+        }
+
+        .quiz-item {
+            background: white;
+            color: var(--text-dark);
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.85em;
+        }
+
+        .quiz-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .quiz-item.revealed {
+            background: linear-gradient(135deg, #fef3c7, #fde68a);
+        }
+
+        .quiz-answer {
+            display: none;
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 2px solid var(--warning-orange);
+            font-weight: 600;
+            color: var(--primary-blue);
+        }
+
+        .concept-card {
+            background: white;
+            border: 2px solid #e2e8f0;
+            border-radius: 14px;
+            padding: 20px;
+            margin: 15px 0;
+            max-width: 700px;
+            width: 100%;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .concept-card:hover {
+            border-color: var(--primary-blue);
+            transform: translateY(-2px);
+        }
+
+        .concept-card.revealed {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+        }
+
+        .concept-icon {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .concept-title {
+            font-size: 1.2em;
+            font-weight: 700;
+            color: var(--primary-blue);
+            margin-bottom: 8px;
+        }
+
+        .concept-details {
+            display: none;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 2px dashed var(--warning-orange);
+            font-size: 0.85em;
+        }
+
+        .detail-item {
+            margin: 8px 0;
+            padding-left: 18px;
+            position: relative;
+        }
+
+        .detail-item::before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: var(--primary-blue);
+            font-weight: bold;
+        }
+
+        .info-box {
+            background: linear-gradient(135deg, #e0f2fe, #bae6fd);
+            border: 2px solid var(--accent-cyan);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 15px 0;
+            max-width: 750px;
+            width: 100%;
+            font-size: 0.9em;
+            line-height: 1.6;
+        }
+
+        .key-takeaway {
+            background: linear-gradient(135deg, #fef3c7, #fde68a);
+            border-left: 5px solid var(--warning-orange);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 15px 0;
+            max-width: 750px;
+            width: 100%;
+            font-weight: 600;
+            font-size: 0.95em;
+        }
+
+        .highlight {
+            background: #fef08a;
+            padding: 3px 6px;
+            border-radius: 4px;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .comparison-table {
+            width: 100%;
+            max-width: 700px;
+            margin: 20px 0;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .comparison-table th {
+            background: linear-gradient(135deg, var(--primary-blue), var(--primary-purple));
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-size: 0.85em;
+        }
+
+        .comparison-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #e2e8f0;
+            font-size: 0.8em;
+        }
+
+        .comparison-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .comparison-table tr:hover {
+            background: #f8fafc;
+        }
+
+        .scale-card {
+            background: white;
+            border-left: 5px solid var(--primary-purple);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 15px 0;
+            max-width: 700px;
+            width: 100%;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+
+        .scale-title {
+            font-size: 1.1em;
+            font-weight: 700;
+            color: var(--primary-purple);
+            margin-bottom: 10px;
+        }
+
+        .scale-content {
+            font-size: 0.85em;
+            line-height: 1.6;
+        }
+
+        .strategy-box {
+            background: white;
+            border: 3px solid var(--success-green);
+            border-radius: 14px;
+            padding: 25px;
+            margin: 15px 0;
+            max-width: 700px;
+            width: 100%;
+        }
+
+        .strategy-title {
+            font-size: 1.2em;
+            font-weight: 700;
+            color: var(--success-green);
+            margin-bottom: 15px;
+        }
+
+        .benefit-risk {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .benefit-box {
+            background: #dcfce7;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #10b981;
+        }
+
+        .risk-box {
+            background: #fee2e2;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #ef4444;
+        }
+
+        .model-box {
+            background: linear-gradient(135deg, #fef3c7, #fde68a);
+            border: 2px solid var(--warning-orange);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 15px 0;
+            max-width: 750px;
+            width: 100%;
+        }
+    </style>
+</head>
+<body class="reveal-viewport">
+    <div class="reveal">
+        <div class="slides">
+            <!-- Slide 1: Title & Do Now -->
+            <section>
+                <div class="slide-content-wrapper">
+                    <h1>🌌 Universe & Astronomy | 🌍 Environmental Science</h1>
+                    <h2>Year 10 Science Revision</h2>
+                    
+                    <div class="quiz-box fragment" data-fragment-index="0">
+                        <h3 style="margin-top: 0;">🚀 Do Now Activity - Quick Check!</h3>
+                        <div class="quiz-item" onclick="toggleAnswer(this)">
+                            <strong>1.</strong> The Sun is a star. (True or False?)
+                            <div class="quiz-answer">
+                                <strong>Answer: TRUE</strong> - The Sun is our closest star, producing energy through nuclear fusion.
+                            </div>
+                        </div>
+                        <div class="quiz-item" onclick="toggleAnswer(this)">
+                            <strong>2.</strong> Light-year measures time. (True or False?)
+                            <div class="quiz-answer">
+                                <strong>Answer: FALSE</strong> - Light-year measures DISTANCE (how far light travels in one year).
+                            </div>
+                        </div>
+                        <div class="quiz-item" onclick="toggleAnswer(this)">
+                            <strong>3.</strong> Which is larger?<br>
+                            A) Solar System  B) Galaxy  C) Planet  D) Universe
+                            <div class="quiz-answer">
+                                <strong>Answer: D - Universe</strong> - Contains billions of galaxies, each with billions of stars.
+                            </div>
+                        </div>
+                        <div class="quiz-item" onclick="toggleAnswer(this)">
+                            <strong>4.</strong> Invasive species can harm native ecosystems. (True or False?)
+                            <div class="quiz-answer">
+                                <strong>Answer: TRUE</strong> - They compete with native species for resources and disrupt balance.
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="learning-box fragment" data-fragment-index="1">
+                        <h3 style="margin-top: 0;">Learning Objectives</h3>
+                        <div class="objective-item">Define <span class="highlight">galaxies</span> and <span class="highlight">nebulae</span></div>
+                        <div class="objective-item">Identify appropriate <span class="highlight">distance units</span> for space</div>
+                        <div class="objective-item">Describe major <span class="highlight">features of the universe</span></div>
+                        <div class="objective-item">Compare cosmic <span class="highlight">scales and distances</span></div>
+                        <div class="objective-item">Develop <span class="highlight">scientific strategies</span> for environmental problems</div>
+                        <div class="objective-item">Use <span class="highlight">cause-effect reasoning</span> and models to predict outcomes</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 2: What is a Galaxy? -->
+            <section>
+                <div class="slide-content-wrapper">
+                    <h2>Galaxies 🌌</h2>
+                    
+                    <div class="info-box fragment" data-fragment-index="0">
+                        <span class="highlight">Galaxy</span> = massive collection of billions of stars, gas, dust, and dark matter held together by gravity
+                    </div>
+
+                    <svg class="fragment" width="700" height="400" viewBox="0 0 700 400" style="margin: 20px 0;" data-fragment-index="1">
+                        <!-- Spiral Galaxy representation -->
+                        <defs>
+                            <radialGradient id="galaxy-core" cx="50%" cy="50%" r="50%">
+                                <stop offset="0%" style="stop-color:#fef3c7;stop-opacity:1" />
+                                <stop offset="50%" style="stop-color:#f59e0b;stop-opacity:0.8" />
+                                <stop offset="100%" style="stop-color:#7c3aed;stop-opacity:0.3" />
+                            </radialGradient>
+                        </defs>
+                        
+                        <!-- Galaxy structure -->
+                        <circle cx="200" cy="200" r="150" fill="url(#galaxy-core)" opacity="0.7"/>
+                        
+                        <!-- Spiral arms -->
+                        <path d="M 200 200 Q 250 150 300 180 Q 320 200 310 230" stroke="#3b82f6" stroke-width="8" fill="none" opacity="0.6"/>
+                        <path d="M 200 200 Q 150 250 100 220 Q 80 200 90 170" stroke="#3b82f6" stroke-width="8" fill="none" opacity="0.6"/>
+                        <path d="M 200 200 Q 180 120 150 100 Q 130 90 110 100" stroke="#7c3aed" stroke-width="8" fill="none" opacity="0.6"/>
+                        <path d="M 200 200 Q 220 280 250 300 Q 270 310 290 300" stroke="#7c3aed" stroke-width="8" fill="none" opacity="0.6"/>
+                        
+                        <!-- Stars -->
+                        <circle cx="240" cy="160" r="3" fill="white"/>
+                        <circle cx="270" cy="190" r="2" fill="white"/>
+                        <circle cx="160" cy="240" r="3" fill="white"/>
+                        <circle cx="130" cy="190" r="2" fill="white"/>
+                        <circle cx="170" cy="130" r="2" fill="white"/>
+                        <circle cx="230" cy="270" r="3" fill="white"/>
+                        
+                        <text x="200" y="380" text-anchor="middle" font-size="16" font-weight="bold" fill="#1e293b">Spiral Galaxy Structure</text>
+                        
+                        <!-- Key features box -->
+                        <rect x="420" y="40" width="260" height="320" fill="#f8fafc" stroke="#3b82f6" stroke-width="2" rx="10"/>
+                        <text x="550" y="70" text-anchor="middle" font-size="18" font-weight="bold" fill="#1e293b">Galaxy Components</text>
+                        
+                        <text x="435" y="110" font-size="16" font-weight="bold" fill="#f59e0b">⭐ Stars</text>
+                        <text x="435" y="130" font-size="13" fill="#1e293b">• Billions of stars</text>
+                        <text x="435" y="148" font-size="13" fill="#1e293b">• Various sizes & ages</text>
+                        
+                        <text x="435" y="180" font-size="16" font-weight="bold" fill="#3b82f6">☁️ Gas & Dust</text>
+                        <text x="435" y="200" font-size="13" fill="#1e293b">• Between stars</text>
+                        <text x="435" y="218" font-size="13" fill="#1e293b">• Forms new stars</text>
+                        
+                        <text x="435" y="250" font-size="16" font-weight="bold" fill="#7c3aed">🌑 Dark Matter</text>
+                        <text x="435" y="270" font-size="13" fill="#1e293b">• Invisible mass</text>
+                        <text x="435" y="288" font-size="13" fill="#1e293b">• Most of galaxy mass</text>
+                        
+                        <text x="435" y="320" font-size="16" font-weight="bold" fill="#10b981">🔗 Gravity</text>
+                        <text x="435" y="340" font-size="13" fill="#1e293b">• Holds everything together</text>
+                    </svg>
+
+                    <div class="key-takeaway fragment" data-fragment-index="2">
+                        💡 Our galaxy = <span class="highlight">Milky Way</span> (spiral galaxy with ~200-400 billion stars)
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 3: Types of Galaxies -->
+            <section>
+                <div class="slide-content-wrapper">
+                    <h2>Galaxy Types 🌀</h2>
+                    
+                    <svg width="700" height="400" viewBox="0 0 700 400" style="margin: 20px 0;" class="fragment" data-fragment-index="0">
+                        <!-- Spiral -->
+                        <g>
+                            <ellipse cx="120" cy="120" rx="80" ry="30" fill="#3b82f6" opacity="0.3"/>
+                            <ellipse cx="120" cy="120" rx="50" ry="50" fill="#f59e0b" opacity="0.5"/>
+                            <path d="M 120 120 Q 160 90 180 110" stroke="#7c3aed" stroke-width="6" fill="none"/>
+                            <path d="M 120 120 Q 80 150 60 130" stroke="#7c3aed" stroke-width="6" fill="none"/>
+                            <text x="120" y="200" text-anchor="middle" font-size="16" font-weight="bold">Spiral</text>
+                            <text x="120" y="220" text-anchor="middle" font-size="12" fill="#666">Rotating arms</text>
+                            <text x="120" y="235" text-anchor="middle" font-size="12" fill="#666">e.g., Milky Way</text>
+                        </g>
+                        
+                        <!-- Elliptical -->
+                        <g>
+                            <ellipse cx="350" cy="120" rx="70" ry="90" fill="#f59e0b" opacity="0.6"/>
+                            <text x="350" y="200" text-anchor="middle" font-size="16" font-weight="bold">Elliptical</text>
+                            <text x="350" y="220" text-anchor="middle" font-size="12" fill="#666">Oval/round shape</text>
+                            <text x="350" y="235" text-anchor="middle" font-size="12" fill="#666">Older stars</text>
+                        </g>
+                        
+                        <!-- Irregular -->
+                        <g>
+                            <path d="M 550 80 L 580 100 L 570 130 L 600 140 L 580 160 L 540 150 L 530 120 Z" 
+                                  fill="#10b981" opacity="0.6"/>
+                            <text x="565" y="200" text-anchor="middle" font-size="16" font-weight="bold">Irregular</text>
+                            <text x="565" y="220" text-anchor="middle" font-size="12" fill="#666">No regular shape</text>
+                            <text x="565" y="235" text-anchor="middle" font-size="12" fill="#666">Often from collisions</text>
+                        </g>
+                    </svg>
+
+                    <table class="comparison-table fragment" data-fragment-index="1">
+                        <tr>
+                            <th>Type</th>
+                            <th>Shape</th>
+                            <th>Characteristics</th>
+                            <th>Example</th>
+                        </tr>
+                        <tr>
+                            <td><strong>Spiral</strong></td>
+                            <td>Flat disk with arms</td>
+                            <td>Active star formation, rotating</td>
+                            <td>Milky Way, Andromeda</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Elliptical</strong></td>
+                            <td>Oval or spherical</td>
+                            <td>Older stars, little gas/dust</td>
+                            <td>M87</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Irregular</strong></td>
+                            <td>No defined shape</td>
+                            <td>Chaotic, often smaller</td>
+                            <td>Large Magellanic Cloud</td>
+                        </tr>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Slide 4: What is a Nebula? -->
+            <section>
+                <div class="slide-content-wrapper">
+                    <h2>Nebulae ☁️</h2>
+                    
+                    <div class="info-box fragment" data-fragment-index="0">
+                        <span class="highlight">Nebula</span> = cloud of gas and dust in space (plural: nebulae)
+                    </div>
+
+                    <svg class="fragment" width="700" height="350" viewBox="0 0 700 350" style="margin: 20px 0;" data-fragment-index="1">
+                        <!-- Nebula cloud -->
+                        <defs>
+                            <radialGradient id="nebula-glow" cx="40%" cy="40%" r="60%">
+                                <stop offset="0%" style="stop-color:#fef3c7;stop-opacity:1" />
+                                <stop offset="40%" style="stop-color:#f59e0b;stop-opacity:0.7" />
+                                <stop offset="70%" style="stop-color:#7c3aed;stop-opacity:0.4" />
+                                <stop offset="100%" style="stop-color:#3b82f6;stop-opacity:0.2" />
+                            </radialGradient>
+                        </defs>
+                        
+                        <ellipse cx="250" cy="150" rx="180" ry="120" fill="url(#nebula-glow)" opacity="0.8"/>
+                        
+                        <!-- Gas pockets -->
+                        <circle cx="200" cy="120" r="40" fill="#f59e0b" opacity="0.4"/>
+                        <circle cx="280" cy="160" r="35" fill="#7c3aed" opacity="0.4"/>
+                        <circle cx="230" cy="180" r="30" fill="#3b82f6" opacity="0.4"/>
+                        
+                        <!-- Stars forming -->
+                        <circle cx="250" cy="140" r="8" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+                        <text x="250" y="190" text-anchor="middle" font-size="12" font-weight="bold" fill="#1e293b">⭐ Star forming</text>
+                        
+                        <text x="250" y="300" text-anchor="middle" font-size="16" font-weight="bold">Stellar Nursery</text>
+                        
+                        <!-- Types box -->
+                        <rect x="480" y="30" width="200" height="280" fill="#f8fafc" stroke="#7c3aed" stroke-width="2" rx="8"/>
+                        <text x="580" y="60" text-anchor="middle" font-size="16" font-weight="bold" fill="#1e293b">Nebula Types</text>
+                        
+                        <text x="495" y="95" font-size="14" font-weight="bold" fill="#10b981">Emission</text>
+                        <text x="495" y="112" font-size="11" fill="#666">Glows (ionized gas)</text>
+                        
+                        <text x="495" y="145" font-size="14" font-weight="bold" fill="#3b82f6">Reflection</text>
+                        <text x="495" y="162" font-size="11" fill="#666">Reflects starlight</text>
+                        
+                        <text x="495" y="195" font-size="14" font-weight="bold" fill="#1e293b">Dark</text>
+                        <text x="495" y="212" font-size="11" fill="#666">Blocks light behind it</text>
+                        
+                        <text x="495" y="245" font-size="14" font-weight="bold" fill="#f59e0b">Planetary</text>
+                        <text x="495" y="262" font-size="11" fill="#666">From dying star</text>
+                        <text x="495" y="277" font-size="11" fill="#666">(Not a planet!)</text>
+                    </svg>
+
+                    <div class="key-takeaway fragment" data-fragment-index="2">
+                        💡 Nebulae are <span class="highlight">"stellar nurseries"</span> - where new stars are born from collapsing gas/dust
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 5: Solar System -->
+            <section>
+                <div class="slide-content-wrapper">
+                    <h2>Solar System ☀️</h2>
+                    
+                    <div class="info-box fragment" data-fragment-index="0">
+                        <span class="highlight">Solar System</span> = the Sun and all objects orbiting it (planets, moons, asteroids, comets)
+                    </div>
+
+                    <svg class="fragment" width="750" height="400" viewBox="0 0 750 400" style="margin: 20px 0;" data-fragment-index="1">
+                        <!-- Sun -->
+                        <circle cx="100" cy="200" r="40" fill="#fef3c7" stroke="#f59e0b" stroke-width="3"/>
+                        <text x="100" y="207" text-anchor="middle" font-size="14" font-weight="bold">☀️ Sun</text>
+                        
+                        <!-- Orbits -->
+                        <ellipse cx="100" cy="200" rx="80" ry="30" fill="none" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="3,3"/>
+                        <ellipse cx="100" cy="200" rx="140" ry="50" fill="none" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="3,3"/>
+                        <ellipse cx="100" cy="200" rx="200" ry="70" fill="none" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="3,3"/>
+                        <ellipse cx="100" cy="200" rx="260" ry="90" fill="none" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="3,3"/>
+                        
+                        <!-- Inner planets -->
+                        <circle cx="160" cy="210" r="6" fill="#94a3b8"/>
+                        <text x="160" y="235" text-anchor="middle" font-size="10">Mercury</text>
+                        
+                        <circle cx="210" cy="220" r="10" fill="#f59e0b"/>
+                        <text x="210" y="245" text-anchor="middle" font-size="10">Venus</text>
+                        
+                        <circle cx="270" cy="230" r="10" fill="#3b82f6"/>
+                        <text x="270" y="255" text-anchor="middle" font-size="10">Earth</text>
+                        
+                        <circle cx="330" cy="240" r="8" fill="#ef4444"/>
+                        <text x="330" y="265" text-anchor="middle" font-size="10">Mars</text>
+                        
+                        <!-- Asteroid belt indicator -->
+                        <text x="380" y="205" font-size="11" fill="#666">Asteroid Belt →</text>
+                        
+                        <!-- Components list -->
+                        <rect x="450" y="30" width="280" height="340" fill="#f8fafc" stroke="#3b82f6" stroke-width="2" rx="8"/>
+                        <text x="590" y="60" text-anchor="middle" font-size="18" font-weight="bold" fill="#1e293b">What's in Our Solar System?</text>
+                        
+                        <text x="465" y="95" font-size="14" font-weight="bold" fill="#f59e0b">☀️ 1 Star (Sun)</text>
+                        <text x="475" y="112" font-size="11" fill="#666">99.8% of system's mass</text>
+                        
+                        <text x="465" y="145" font-size="14" font-weight="bold" fill="#3b82f6">🪐 8 Planets</text>
+                        <text x="475" y="162" font-size="11" fill="#666">4 rocky, 4 gas giants</text>
+                        
+                        <text x="465" y="195" font-size="14" font-weight="bold" fill="#94a3b8">🌙 200+ Moons</text>
+                        <text x="475" y="212" font-size="11" fill="#666">Orbit planets</text>
+                        
+                        <text x="465" y="245" font-size="14" font-weight="bold" fill="#64748b">🪨 Asteroids</text>
+                        <text x="475" y="262" font-size="11" fill="#666">Rocky debris, main belt</text>
+                        
+                        <text x="465" y="295" font-size="14" font-weight="bold" fill="#06b6d4">☄️ Comets</text>
+                        <text x="475" y="312" font-size="11" fill="#666">Ice & rock, long orbits</text>
+                        
+                        <text x="465" y="345" font-size="14" font-weight="bold" fill="#7c3aed">🌌 Dwarf Planets</text>
+                        <text x="475" y="362" font-size="11" fill="#666">Pluto, Eris, etc.</text>
+                    </svg>
+                </div>
+            </section>
+
+            <!-- Slide 6: Distance Units in Space -->
+            <section>
+                <div class="slide-content-wrapper">
+                    <h2>Measuring Space Distances 📏</h2>
+                    
+                    <div class="scale-card fragment" data-fragment-index="0">
+                        <div class="scale-title">1. Kilometres (km)</div>
+                        <div class="scale-content">
+                            <strong>Best for:</strong> Within our solar system (planet distances, moon distances)<br>
+                            <strong>Example:</strong> Earth to Moon = 384,400 km<br>
+                            <strong>Why:</strong> Numbers stay manageable for nearby objects
+                        </div>
+                    </div>
+
+                    <div class="scale-card fragment" data-fragment-index="1">
+                        <div class="scale-title">2. Astronomical Units (AU)</div>
+                        <div class="scale-content">
+                            <strong>Best for:</strong> Distances within solar system (planet orbits)<br>
+                            <strong>Definition:</strong> 1 AU = Earth-Sun distance (~150 million km)<br>
+                            <strong>Example:</strong> Jupiter is 5.2 AU from Sun<br>
+                            <strong>Why:</strong> Easier than writing huge km numbers
+                        </div>
+                    </div>
+
+                    <div class="scale-card fragment" data-fragment-index="2">
+                        <div class="scale-title">3. Light-Years (ly)</div>
+                        <div class="scale-content">
+                            <strong>Best for:</strong> Between stars and galaxies<br>
+                            <strong>Definition:</strong> Distance light travels in one year (~9.5 trillion km)<br>
+                            <strong>Example:</strong> Nearest star (Proxima Centauri) = 4.2 ly away<br>
+                            <strong>Why:</strong> Interstellar distances are HUGE - light-years keep numbers reasonable
+                        </div>
+                    </div>
+
+                    <div class="key-takeaway fragment" data-fragment-index="3">
+                        💡 <span class="highlight">Light-year</span> measures DISTANCE, not time! (Common misconception)
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 7: Scale Comparison -->
+            <section>
+                <div class="slide-content-wrapper">
+                    <h2>Cosmic Scale Comparison 🔭</h2>
+                    
+                    <svg width="750" height="450" viewBox="0 0 750 450" style="margin: 20px 0;" class="fragment" data-fragment-index="0">
+                        <!-- Scale bar -->
+                        <line x1="50" y1="400" x2="700" y2="400" stroke="#3b82f6" stroke-width="4"/>
+                        
+                        <!-- Planet -->
+                        <g>
+                            <circle cx="100" cy="350" r="15" fill="#3b82f6"/>
+                            <line x1="100" y1="365" x2="100" y2="395" stroke="#666" stroke-width="2"/>
+                            <text x="100" y="70" text-anchor="middle" font-size="14" font-weight="bold">🌍 Planet</text>
+                            <text x="100" y="90" text-anchor="middle" font-size="11" fill="#666">~10,000 km</text>
+                        </g>
+                        
+                        <!-- Solar System -->
+                        <g>
+                            <circle cx="250" cy="350" r="20" fill="#f59e0b"/>
+                            <line x1="250" y1="370" x2="250" y2="395" stroke="#666" stroke-width="2"/>
+                            <text x="250" y="130" text-anchor="middle" font-size="14" font-weight="bold">☀️ Solar System</text>
+                            <text x="250" y="150" text-anchor="middle" font-size="11" fill="#666">~0.002 ly diameter</text>
+                            <text x="250" y="165" text-anchor="middle" font-size="10" fill="#999">(or 100 AU)</text>
+                        </g>
+                        
+                        <!-- Distance to nearest star -->
+                        <g>
+                            <circle cx="400" cy="350" r="25" fill="#7c3aed"/>
+                            <line x1="400" y1="375" x2="400" y2="395" stroke="#666" stroke-width="2"/>
+                            <text x="400" y="190" text-anchor="middle" font-size="14" font-weight="bold">⭐ Nearest Star</text>
+                            <text x="400" y="210" text-anchor="middle" font-size="11" fill="#666">4.2 ly away</text>
+                            <text x="400" y="225" text-anchor="middle" font-size="10" fill="#999">(Proxima Centauri)</text>
+                        </g>
+                        
+                        <!-- Galaxy -->
+                        <g>
+                            <circle cx="600" cy="350" r="35" fill="#10b981"/>
+                            <line x1="600" y1="385" x2="600" y2="395" stroke="#666" stroke-width="2"/>
+                            <text x="600" y="250" text-anchor="middle" font-size="14" font-weight="bold">🌌 Milky Way</text>
+                            <text x="600" y="270" text-anchor="middle" font-size="11" fill="#666">~100,000 ly diameter</text>
+                            <text x="600" y="285" text-anchor="middle" font-size="10" fill="#999">(200-400 billion stars)</text>
+                        </g>
+                        
+                        <text x="375" y="435" text-anchor="middle" font-size="16" font-weight="bold" fill="#1e293b">Each step is ~1000x larger!</text>
+                    </svg>
+
+                    <table class="comparison-table fragment" data-fragment-index="1">
+                        <tr>
+                            <th>Object</th>
+                            <th>Typical Size</th>
+                            <th>Best Unit</th>
+                        </tr>
+                        <tr>
+                            <td>Earth</td>
+                            <td>12,742 km diameter</td>
+                            <td>km</td>
+                        </tr>
+                        <tr>
+                            <td>Distance: Earth → Mars</td>
+                            <td>0.5 - 2.5 AU</td>
+                            <td>AU or km</td>
+                        </tr>
+                        <tr>
+                            <td>Distance between stars in galaxy</td>
+                            <td>4 - 10 ly typical</td>
+                            <td>light-years</td>
+                        </tr>
+                        <tr style="background: #fef3c7;">
+                            <td><strong>Milky Way diameter</strong></td>
+                            <td><strong>~100,000 ly</strong></td>
+                            <td><strong>light-years</strong></td>
+                        </tr>
+                        <tr>
+                            <td>Distance to nearest galaxy</td>
+                            <td>~2.5 million ly (Andromeda)</td>
+                            <td>light-years</td>
+                        </tr>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Slide 8: Major Features of Universe -->
+            <section>
+                <div class="slide-content-wrapper">
+                    <h2>Three Major Features of the Universe 🌌</h2>
+                    
+                    <div class="concept-card fragment" onclick="toggleDetails(this)" data-fragment-index="0">
+                        <div class="concept-icon">⭐</div>
+                        <div class="concept-title">1. Stars</div>
+                        <div class="concept-details">
+                            <div class="detail-item">Massive balls of hot gas (mostly hydrogen & helium)</div>
+                            <div class="detail-item">Produce light & heat through nuclear fusion</div>
+                            <div class="detail-item">Range from small red dwarfs to giant supergiants</div>
+                            <div class="detail-item">Grouped into star systems, clusters, and galaxies</div>
+                            <div class="detail-item"><strong>Scale:</strong> Sun diameter ~1.4 million km</div>
+                        </div>
+                    </div>
+
+                    <div class="concept-card fragment" onclick="toggleDetails(this)" data-fragment-index="1">
+                        <div class="concept-icon">🌌</div>
+                        <div class="concept-title">2. Galaxies</div>
+                        <div class="concept-details">
+                            <div class="detail-item">Massive collections of billions of stars, gas, dust</div>
+                            <div class="detail-item">Held together by gravity and dark matter</div>
+                            <div class="detail-item">Three main types: spiral, elliptical, irregular</div>
+                            <div class="detail-item">Separated by vast distances of mostly empty space</div>
+                            <div class="detail-item"><strong>Scale:</strong> Milky Way ~100,000 ly across, contains 200-400 billion stars</div>
+                        </div>
+                    </div>
+
+                    <div class="concept-card fragment" onclick="toggleDetails(this)" data-fragment-index="2">
+                        <div class="concept-icon">🌐</div>
+                        <div class="concept-title">3. Clusters & Voids</div>
+                        <div class="concept-details">
+                            <div class="detail-item">Galaxies group into clusters (dozens to thousands of galaxies)</div>
+                            <div class="detail-item">Clusters form superclusters - largest known structures</div>
+                            <div class="detail-item">Between clusters: vast empty voids</div>
+                            <div class="detail-item">Creates "cosmic web" structure</div>
+                            <div class="detail-item"><strong>Scale:</strong> Galaxy clusters millions of ly across; voids even larger</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 9: Quiz - Astronomy -->
+            <section>
+                <div class="slide-content-wrapper">
+                    <h2>Check Your Understanding 🌠</h2>
+                    
+                    <div class="quiz-box">
+                        <h3 style="margin-top: 0;">Practice Questions</h3>
+                        <div class="quiz-item" onclick="toggleAnswer(this)">
+                            <strong>Q1.</strong> What is the name of our planetary system, and what is at its center?
+                            <div class="quiz-answer">
+                                <strong>Answer:</strong> The <strong>Solar System</strong>. At the center is the <strong>Sun</strong> (our star), which contains 99.8% of the system's mass. All planets, moons, asteroids, and comets orbit around it due to gravity.
+                            </div>
+                        </div>
+                        <div class="quiz-item" onclick="toggleAnswer(this)">
+                            <strong>Q2.</strong> A scientist measures the distance from Earth to Neptune. Which unit is most appropriate: km, AU, or light-years? Explain.
+                            <div class="quiz-answer">
+                                <strong>Answer:</strong> <strong>AU (Astronomical Units)</strong> is most appropriate. Neptune is within our solar system (~30 AU from Sun). While km works, the numbers become very large. Light-years are too large for solar system distances.
+                            </div>
+                        </div>
+                        <div class="quiz-item" onclick="toggleAnswer(this)">
+                            <strong>Q3.</strong> Describe what a nebula is and explain its role in star formation.
+                            <div class="quiz-answer">
+                                <strong>Answer:</strong> A nebula is a cloud of gas and dust in space. Gravity causes regions to collapse and compress. As material compresses, temperature rises until nuclear fusion begins - creating a new star. Nebulae are "stellar nurseries."
+                            </div>
+                        </div>
+                        <div class="quiz-item" onclick="toggleAnswer(this)">
+                            <strong>Q4.</strong> Outline THREE major features of the universe and describe how their sizes compare.
+                            <div class="quiz-answer">
+                                <strong>Answer:</strong> (1) <strong>Stars</strong> - millions of km across. (2) <strong>Galaxies</strong> - ~100,000 ly across, containing billions of stars. (3) <strong>Galaxy clusters</strong> - millions of ly across. Each feature is ~1000x larger than the previous. We compare using different units: km for stars/planets, AU for solar system, light-years for galaxies/universe.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 10: Introduction to Environmental Problems -->
+            <section>
+                <div class="slide-content-wrapper">
+                    <h2>Environmental Problem-Solving 🌍</h2>
+                    
+                    <div class="info-box fragment" data-fragment-index="0">
+                        Scientists use <span class="highlight">systematic approaches</span> to address environmental challenges
+                    </div>
+
+                    <div class="concept-card fragment" onclick="toggleDetails(this)" data-fragment-index="1">
+                        <div class="concept-icon">1️⃣</div>
+                        <div class="concept-title">Identify the Problem</div>
+                        <div class="concept-details">
+                            <div class="detail-item">What is happening? (e.g., native species declining)</div>
+                            <div class="detail-item">What is causing it? (e.g., habitat loss, invasive species, pollution)</div>
+                            <div class="detail-item">Who/what is affected?</div>
+                        </div>
+                    </div>
+
+                    <div class="concept-card fragment" onclick="toggleDetails(this)" data-fragment-index="2">
+                        <div class="concept-icon">2️⃣</div>
+                        <div class="concept-title">Develop Strategies</div>
+                        <div class="concept-details">
+                            <div class="detail-item">Brainstorm multiple solutions</div>
+                            <div class="detail-item">Consider biological, chemical, physical methods</div>
+                            <div class="detail-item">Each strategy has benefits AND risks/limitations</div>
+                        </div>
+                    </div>
+
+                    <div class="concept-card fragment" onclick="toggleDetails(this)" data-fragment-index="3">
+                        <div class="concept-icon">3️⃣</div>
+                        <div class="concept-title">Predict Outcomes</div>
+                        <div class="concept-details">
+                            <div class="detail-item">Use cause-effect reasoning</div>
+                            <div class="detail-item">Build scientific models</div>
+                            <div class="detail-item">Consider unintended consequences</div>
+                        </div>
+                    </div>
+
+                    <div class="concept-card fragment" onclick="toggleDetails(this)" data-fragment-index="4">
+                        <div class="concept-icon">4️⃣</div>
+                        <div class="concept-title">Evaluate & Monitor</div>
+                        <div class="concept-details">
+                            <div class="detail-item">Implement and test strategies</div>
+                            <div class="detail-item">Collect data on effectiveness</div>
+                            <div class="detail-item">Adjust approach as needed</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 11: Example Problem - Algae Bloom -->
+            <section>
+                <div class="slide-content-wrapper">
+                    <h2>Example: Lake Algae Bloom 🌊</h2>
+                    
+                    <div class="info-box fragment" data-fragment-index="0">
+                        <strong>Problem:</strong> A lake has excessive algae growth (bloom), blocking sunlight and depleting oxygen, killing fish
+                    </div>
+
+                    <div class="strategy-box fragment" data-fragment-index="1">
+                        <div class="strategy-title">Strategy 1: Reduce Nutrient Input</div>
+                        <div style="font-size: 0.85em; margin: 10px 0;">
+                            <strong>Method:</strong> Limit fertilizer use on nearby farms, improve wastewater treatment
+                        </div>
+                        <div class="benefit-risk">
+                            <div class="benefit-box">
+                                <strong style="color: #10b981;">✓ Benefit</strong>
+                                <div style="font-size: 0.85em; margin-top: 8px;">
+                                    Addresses root cause - prevents future blooms by cutting off nutrient supply to algae
+                                </div>
+                            </div>
+                            <div class="risk-box">
+                                <strong style="color: #ef4444;">⚠ Risk/Limitation</strong>
+                                <div style="font-size: 0.85em; margin-top: 8px;">
+                                    Slow results - existing nutrients remain; requires cooperation from farmers (costly)
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="strategy-box fragment" data-fragment-index="2">
+                        <div class="strategy-title">Strategy 2: Introduce Algae-Eating Species</div>
+                        <div style="font-size: 0.85em; margin: 10px 0;">
+                            <strong>Method:</strong> Add fish or zooplankton that consume algae
+                        </div>
+                        <div class="benefit-risk">
+                            <div class="benefit-box">
+                                <strong style="color: #10b981;">✓ Benefit</strong>
+                                <div style="font-size: 0.85em; margin-top: 8px;">
+                                    Natural biological control - can reduce algae populations quickly
+                                </div>
+                            </div>
+                            <div class="risk-box">
+                                <strong style="color: #ef4444;">⚠ Risk/Limitation</strong>
+                                <div style="font-size: 0.85em; margin-top: 8px;">
+                                    May become invasive; could disrupt food web; won't work if nutrients keep fueling growth
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 12: Cause-Effect Reasoning -->
+            <section>
+                <div class="slide-content-wrapper">
+                    <h2>Cause-Effect Reasoning 🔗</h2>
+                    
+                    <div class="info-box fragment" data-fragment-index="0">
+                        <span class="highlight">Cause-effect reasoning</span> = tracing how one event leads to another in a chain
+                    </div>
+
+                    <svg class="fragment" width="700" height="350" viewBox="0 0 700 350" style="margin: 20px 0;" data-fragment-index="1">
+                        <!-- Cause-effect chain for algae example -->
+                        <rect x="50" y="50" width="150" height="80" fill="#fef3c7" stroke="#f59e0b" stroke-width="3" rx="10"/>
+                        <text x="125" y="75" text-anchor="middle" font-size="14" font-weight="bold" fill="#1e293b">CAUSE</text>
+                        <text x="125" y="95" text-anchor="middle" font-size="12" fill="#1e293b">Excess fertilizer</text>
+                        <text x="125" y="110" text-anchor="middle" font-size="12" fill="#1e293b">runoff into lake</text>
+                        
+                        <text x="230" y="95" text-anchor="middle" font-size="30">➜</text>
+                        
+                        <rect x="270" y="50" width="150" height="80" fill="#e0f2fe" stroke="#3b82f6" stroke-width="3" rx="10"/>
+                        <text x="345" y="75" text-anchor="middle" font-size="14" font-weight="bold" fill="#1e293b">EFFECT 1</text>
+                        <text x="345" y="95" text-anchor="middle" font-size="12" fill="#1e293b">Nutrients (N, P)</text>
+                        <text x="345" y="110" text-anchor="middle" font-size="12" fill="#1e293b">increase in water</text>
+                        
+                        <text x="450" y="95" text-anchor="middle" font-size="30">➜</text>
+                        
+                        <rect x="490" y="50" width="150" height="80" fill="#dcfce7" stroke="#10b981" stroke-width="3" rx="10"/>
+                        <text x="565" y="75" text-anchor="middle" font-size="14" font-weight="bold" fill="#1e293b">EFFECT 2</text>
+                        <text x="565" y="95" text-anchor="middle" font-size="12" fill="#1e293b">Rapid algae</text>
+                        <text x="565" y="110" text-anchor="middle" font-size="12" fill="#1e293b">growth (bloom)</text>
+                        
+                        <!-- Second row -->
+                        <line x1="565" y1="130" x2="565" y2="170" stroke="#666" stroke-width="3" marker-end="url(#arrowhead)"/>
+                        
+                        <rect x="490" y="180" width="150" height="80" fill="#fee2e2" stroke="#ef4444" stroke-width="3" rx="10"/>
+                        <text x="565" y="205" text-anchor="middle" font-size="14" font-weight="bold" fill="#1e293b">EFFECT 3</text>
+                        <text x="565" y="225" text-anchor="middle" font-size="12" fill="#1e293b">Algae blocks</text>
+                        <text x="565" y="240" text-anchor="middle" font-size="12" fill="#1e293b">sunlight to plants</text>
+                        
+                        <text x="450" y="225" text-anchor="middle" font-size="30">➜</text>
+                        
+                        <rect x="270" y="180" width="150" height="80" fill="#fce7f3" stroke="#ec4899" stroke-width="3" rx="10"/>
+                        <text x="345" y="205" text-anchor="middle" font-size="14" font-weight="bold" fill="#1e293b">EFFECT 4</text>
+                        <text x="345" y="225" text-anchor="middle" font-size="12" fill="#1e293b">Underwater plants</text>
+                        <text x="345" y="240" text-anchor="middle" font-size="12" fill="#1e293b">die (no sunlight)</text>
+                        
+                        <text x="230" y="225" text-anchor="middle" font-size="30">➜</text>
+                        
+                        <rect x="50" y="180" width="150" height="80" fill="#ddd6fe" stroke="#7c3aed" stroke-width="3" rx="10"/>
+                        <text x="125" y="205" text-anchor="middle" font-size="14" font-weight="bold" fill="#1e293b">FINAL EFFECT</text>
+                        <text x="125" y="225" text-anchor="middle" font-size="12" fill="#1e293b">Oxygen depletes,</text>
+                        <text x="125" y="240" text-anchor="middle" font-size="12" fill="#1e293b">fish die</text>
+                        
+                        <defs>
+                            <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto">
+                                <polygon points="0 0, 10 5, 0 10" fill="#666"/>
+                            </marker>
+                        </defs>
+                    </svg>
+
+                    <div class="key-takeaway fragment" data-fragment-index="2">
+                        💡 Use cause-effect chains to <span class="highlight">predict outcomes</span> and identify where to intervene!
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 13: Scientific Models -->
+            <section>
+                <div class="slide-content-wrapper">
+                    <h2>Using Scientific Models 📊</h2>
+                    
+                    <div class="info-box fragment" data-fragment-index="0">
+                        <span class="highlight">Scientific model</span> = simplified representation to predict outcomes and test ideas before real-world implementation
+                    </div>
+
+                    <div class="model-box fragment" data-fragment-index="1">
+                        <h3 style="margin-top: 0; color: var(--text-dark);">Types of Models for Environmental Problems</h3>
+                        
+                        <div style="margin: 15px 0;">
+                            <strong style="color: var(--primary-blue);">📈 Mathematical Models</strong>
+                            <div style="font-size: 0.85em; margin: 8px 0 8px 20px; line-height: 1.5;">
+                                • Use equations to predict population changes<br>
+                                • Example: Model algae growth vs. nutrient levels<br>
+                                • Can test "what if" scenarios quickly
+                            </div>
+                        </div>
+
+                        <div style="margin: 15px 0;">
+                            <strong style="color: var(--success-green);">🧪 Physical Models</strong>
+                            <div style="font-size: 0.85em; margin: 8px 0 8px 20px; line-height: 1.5;">
+                                • Small-scale replicas (e.g., aquarium mimicking lake)<br>
+                                • Test strategies in controlled environment<br>
+                                • Observe actual responses before full implementation
+                            </div>
+                        </div>
+
+                        <div style="margin: 15px 0;">
+                            <strong style="color: var(--primary-purple);">💻 Computer Simulations</strong>
+                            <div style="font-size: 0.85em; margin: 8px 0 8px 20px; line-height: 1.5;">
+                                • Complex interactions modeled digitally<br>
+                                • Can run thousands of scenarios<br>
+                                • Example: Predict how removing invasive species affects food web
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="key-takeaway fragment" data-fragment-index="2">
+                        💡 Models help predict consequences <span class="highlight">before</span> implementing costly or risky strategies!
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 14: Example Problem - Invasive Species -->
+            <section>
+                <div class="slide-content-wrapper">
+                    <h2>Example: Invasive Rabbits in Ecosystem 🐰</h2>
+                    
+                    <div class="info-box fragment" data-fragment-index="0">
+                        <strong>Problem:</strong> Non-native rabbits introduced to island, now overpopulating and destroying native vegetation
+                    </div>
+
+                    <div class="strategy-box fragment" data-fragment-index="1">
+                        <div class="strategy-title">Strategy 1: Introduce Natural Predators</div>
+                        <div style="font-size: 0.85em; margin: 10px 0;">
+                            <strong>Method:</strong> Bring in foxes that prey on rabbits
+                        </div>
+                        <div class="benefit-risk">
+                            <div class="benefit-box">
+                                <strong style="color: #10b981;">✓ Benefit</strong>
+                                <div style="font-size: 0.85em; margin-top: 8px;">
+                                    Natural population control - reduces rabbit numbers without chemicals
+                                </div>
+                            </div>
+                            <div class="risk-box">
+                                <strong style="color: #ef4444;">⚠ Risk/Limitation</strong>
+                                <div style="font-size: 0.85em; margin-top: 8px;">
+                                    Foxes may also hunt native birds/animals; could become another invasive species problem
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="strategy-box fragment" data-fragment-index="2">
+                        <div class="strategy-title">Strategy 2: Biological Control (Disease)</div>
+                        <div style="font-size: 0.85em; margin: 10px 0;">
+                            <strong>Method:</strong> Release rabbit-specific virus (like myxomatosis)
+                        </div>
+                        <div class="benefit-risk">
+                            <div class="benefit-box">
+                                <strong style="color: #10b981;">✓ Benefit</strong>
+                                <div style="font-size: 0.85em; margin-top: 8px;">
+                                    Targets only rabbits - doesn't harm other species; can spread through rabbit population
+                                </div>
+                            </div>
+                            <div class="risk-box">
+                                <strong style="color: #ef4444;">⚠ Risk/Limitation</strong>
+                                <div style="font-size: 0.85em; margin-top: 8px;">
+                                    Rabbits may develop immunity; disease may mutate; ethical concerns about suffering
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="model-box fragment" data-fragment-index="3">
+                        <strong>🔬 How to Predict Outcomes Using Models:</strong>
+                        <div style="font-size: 0.85em; margin: 12px 0 0 20px; line-height: 1.6;">
+                            1. <strong>Build food web model</strong> showing rabbits, vegetation, native animals, proposed predators<br>
+                            2. <strong>Use cause-effect reasoning:</strong> "If foxes eat rabbits → rabbit population falls → vegetation recovers BUT foxes may also eat birds → bird population declines"<br>
+                            3. <strong>Test in small area first</strong> (physical model) - monitor all species<br>
+                            4. <strong>Computer simulation</strong> - model different predator introduction rates and predict long-term ecosystem balance
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 15: Practice - Environmental Problem-Solving -->
+            <section>
+                <div class="slide-content-wrapper">
+                    <h2>Check Your Understanding 🌱</h2>
+                    
+                    <div class="quiz-box">
+                        <h3 style="margin-top: 0;">Practice Question - Extended Response</h3>
+                        <div class="quiz-item" onclick="toggleAnswer(this)">
+                            <strong>Scenario:</strong> A coastal wetland is experiencing severe erosion and loss of mangrove trees due to rising sea levels and increased storm activity. This is threatening wildlife habitat and coastal protection.
+                            <br><br>
+                            <strong>Task:</strong> 
+                            <ol style="margin: 10px 0; padding-left: 25px; font-size: 0.95em;">
+                                <li>Suggest TWO scientific strategies to address this problem</li>
+                                <li>For each strategy, explain ONE benefit and ONE risk/limitation</li>
+                                <li>Describe how you would use cause-effect reasoning OR scientific models to predict outcomes</li>
+                            </ol>
+                            <div class="quiz-answer" style="font-size: 0.9em;">
+                                <strong>Sample Answer:</strong><br><br>
+                                
+                                <strong>Strategy 1: Plant new mangroves in protected zones</strong><br>
+                                • <span style="color: #10b981;">Benefit:</span> Mangroves stabilize sediment, reduce wave energy, restore habitat for fish/birds<br>
+                                • <span style="color: #ef4444;">Risk/Limitation:</span> Young trees vulnerable to storms; may not survive if sea level rises too quickly; requires ongoing maintenance<br><br>
+                                
+                                <strong>Strategy 2: Build artificial barriers (breakwaters)</strong><br>
+                                • <span style="color: #10b981;">Benefit:</span> Immediately reduces wave impact and erosion; protects existing mangroves while they establish<br>
+                                • <span style="color: #ef4444;">Risk/Limitation:</span> Expensive; may disrupt natural water flow and sediment transport; doesn't address root cause (sea level rise)<br><br>
+                                
+                                <strong>Predicting Outcomes Using Cause-Effect Reasoning:</strong><br>
+                                Create a cause-effect chain: "If we plant mangroves + install barriers → waves slow → sediment accumulates → mangrove roots stabilize soil → erosion decreases → wildlife habitat expands." Model this using a physical scale model of the wetland to test sediment movement with/without barriers at different wave intensities. Monitor over 6 months before full implementation.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 16: Summary -->
+            <section>
+                <div class="slide-content-wrapper">
+                    <h2>Summary 📝</h2>
+                    
+                    <div class="learning-box">
+                        <h3 style="margin-top: 0;">Key Concepts Covered</h3>
+                        
+                        <div class="objective-item">🌌 <strong>Universe & Astronomy:</strong> Galaxies (collections of billions of stars), nebulae (star-forming clouds), solar system, distance units (km, AU, light-years)</div>
+                        
+                        <div class="objective-item">📏 <strong>Cosmic Scales:</strong> Three major features (stars, galaxies, clusters), comparing sizes using appropriate units, Milky Way ~100,000 ly diameter</div>
+                        
+                        <div class="objective-item">🌍 <strong>Environmental Science:</strong> Developing strategies (each with benefits AND risks), cause-effect reasoning, using models to predict outcomes</div>
+                    </div>
+
+                    <div class="key-takeaway fragment" data-fragment-index="0" style="margin-top: 30px;">
+                        🎯 <strong>Exam Strategy:</strong> Always explain both benefits AND limitations of strategies. Show your reasoning process!
+                    </div>
+
+                    <div class="info-box fragment" data-fragment-index="1" style="margin-top: 20px;">
+                        <strong>Practice Tips:</strong><br>
+                        ✓ Match distance units to scale (km for planets, AU for solar system, ly for stars/galaxies)<br>
+                        ✓ Know Milky Way diameter (~100,000 ly) and that it's a spiral galaxy<br>
+                        ✓ For environmental problems, always give 2 strategies with both pros AND cons<br>
+                        ✓ Explain HOW you'd use models/cause-effect chains - be specific!<br>
+                        ✓ Consider unintended consequences in your predictions
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reveal.min.js"></script>
+    <script>
+        Reveal.initialize({
+            hash: true,
+            slideNumber: true,
+            transition: 'slide',
+            width: 1200,
+            height: 800,
+            margin: 0.04,
+            minScale: 0.2,
+            maxScale: 2.0
+        });
+
+        function toggleAnswer(element) {
+            element.classList.toggle('revealed');
+            const answer = element.querySelector('.quiz-answer');
+            if (answer.style.display === 'block') {
+                answer.style.display = 'none';
+            } else {
+                answer.style.display = 'block';
+            }
+        }
+
+        function toggleDetails(element) {
+            element.classList.toggle('revealed');
+            const details = element.querySelector('.concept-details');
+            if (details.style.display === 'block') {
+                details.style.display = 'none';
+            } else {
+                details.style.display = 'block';
+            }
+        }
+    </script>
+</body>
+</html>
