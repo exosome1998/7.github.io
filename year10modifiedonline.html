@@ -1,0 +1,1496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Year 10 Science Exam - Interactive Modified Version</title>
+<style>
+* { box-sizing: border-box; }
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.8;
+    margin: 0;
+    padding: 20px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: #333;
+}
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    background: white;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+}
+h1 { color: #2c3e50; text-align: center; font-size: 28pt; margin-bottom: 10px; }
+h2 { color: #3498db; font-size: 20pt; margin-top: 30px; border-bottom: 3px solid #3498db; padding-bottom: 10px; }
+h3 { color: #555; font-size: 16pt; margin-top: 20px; }
+.header { text-align: center; margin-bottom: 30px; }
+.student-info { background: #ecf0f1; padding: 15px; border-radius: 8px; margin: 20px 0; }
+.student-info input { width: 100%; padding: 10px; font-size: 14pt; border: 2px solid #3498db; border-radius: 5px; margin-top: 5px; }
+
+.concept-box {
+    background: linear-gradient(135deg, #e8f4f8 0%, #d4e9f2 100%);
+    padding: 20px;
+    margin: 20px 0;
+    border-left: 6px solid #3498db;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+.concept-box h3 { margin-top: 0; color: #2980b9; }
+
+.question {
+    background: #f9f9f9;
+    padding: 20px;
+    margin: 20px 0;
+    border-radius: 10px;
+    border: 2px solid #ddd;
+}
+.question-title { font-weight: bold; font-size: 15pt; color: #2c3e50; margin-bottom: 15px; }
+.hint {
+    background: #fff3cd;
+    border-left: 4px solid #ffc107;
+    padding: 10px 15px;
+    margin: 10px 0;
+    border-radius: 5px;
+    font-style: italic;
+    color: #856404;
+}
+
+/* Multiple Choice Buttons */
+.mc-options { display: flex; flex-direction: column; gap: 10px; margin: 15px 0; }
+.mc-button {
+    padding: 15px 20px;
+    font-size: 14pt;
+    border: 3px solid #3498db;
+    background: white;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-align: left;
+}
+.mc-button:hover { background: #e3f2fd; transform: translateX(5px); }
+.mc-button.selected { background: #3498db; color: white; border-color: #2980b9; }
+
+/* Drag and Drop */
+.wordbank {
+    background: #d4edda;
+    border: 3px dashed #28a745;
+    padding: 15px;
+    margin: 15px 0;
+    border-radius: 8px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    min-height: 80px;
+}
+.word-tile {
+    padding: 12px 20px;
+    background: #28a745;
+    color: white;
+    border-radius: 8px;
+    cursor: move;
+    font-size: 14pt;
+    font-weight: bold;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    transition: transform 0.2s;
+}
+.word-tile:hover { transform: scale(1.05); }
+.word-tile.dragging { opacity: 0.5; }
+
+.drop-zone {
+    display: inline-block;
+    min-width: 150px;
+    min-height: 45px;
+    border: 3px dashed #6c757d;
+    border-radius: 8px;
+    padding: 10px;
+    margin: 5px;
+    background: #f8f9fa;
+    vertical-align: middle;
+    text-align: center;
+    line-height: 45px;
+    font-size: 14pt;
+    font-weight: bold;
+    color: #6c757d;
+}
+.drop-zone.filled { background: #28a745; color: white; border-color: #28a745; }
+.drop-zone.over { background: #ffeaa7; border-color: #fdcb6e; }
+
+/* Punnett Square */
+.punnett-table { width: 100%; max-width: 500px; margin: 20px auto; border-collapse: collapse; }
+.punnett-table th, .punnett-table td { 
+    border: 3px solid #2c3e50; 
+    padding: 20px; 
+    text-align: center; 
+    font-size: 16pt;
+    background: white;
+}
+.punnett-table th { background: #3498db; color: white; font-weight: bold; }
+.punnett-table .drop-zone { width: 100%; min-width: 80px; }
+
+/* Submit Button */
+.submit-container { text-align: center; margin: 40px 0; }
+.submit-btn {
+    padding: 20px 60px;
+    font-size: 20pt;
+    font-weight: bold;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    transition: all 0.3s;
+}
+.submit-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+}
+
+/* Results Modal */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.8);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+    overflow-y: auto;
+    padding: 20px;
+}
+.modal.show { display: flex; }
+.modal-content {
+    background: white;
+    padding: 40px;
+    border-radius: 20px;
+    max-width: 800px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    text-align: center;
+    box-shadow: 0 10px 50px rgba(0,0,0,0.5);
+    animation: slideIn 0.5s;
+}
+@keyframes slideIn {
+    from { transform: translateY(-100px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+.score-display {
+    font-size: 48pt;
+    font-weight: bold;
+    color: #27ae60;
+    margin: 20px 0;
+}
+.percentage {
+    font-size: 36pt;
+    color: #3498db;
+    margin: 10px 0;
+}
+.close-btn {
+    margin-top: 20px;
+    padding: 15px 40px;
+    font-size: 16pt;
+    background: #3498db;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+.close-btn:hover {
+    background: #2980b9;
+}
+.export-btn {
+    margin-top: 20px;
+    padding: 15px 40px;
+    font-size: 16pt;
+    background: #27ae60;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+.export-btn:hover {
+    background: #229954;
+}
+.progress-bar {
+    width: 100%;
+    height: 30px;
+    background: #ecf0f1;
+    border-radius: 15px;
+    overflow: hidden;
+    margin: 20px 0;
+}
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #27ae60, #2ecc71);
+    transition: width 1s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+}
+
+/* Feedback List */
+.feedback-section {
+    margin-top: 30px;
+    text-align: left;
+    max-height: 400px;
+    overflow-y: auto;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    padding: 20px;
+    background: #f9f9f9;
+}
+.feedback-item {
+    padding: 12px;
+    margin: 8px 0;
+    border-radius: 8px;
+    border-left: 5px solid;
+    background: white;
+    font-size: 13pt;
+}
+.feedback-item.correct {
+    border-color: #27ae60;
+    background: #d4edda;
+}
+.feedback-item.incorrect {
+    border-color: #e74c3c;
+    background: #f8d7da;
+}
+.feedback-item .icon {
+    font-size: 18pt;
+    margin-right: 10px;
+    font-weight: bold;
+}
+.feedback-item .question-num {
+    font-weight: bold;
+    color: #2c3e50;
+}
+.feedback-item .your-answer {
+    color: #e74c3c;
+    font-style: italic;
+}
+.feedback-item .correct-answer {
+    color: #27ae60;
+    font-weight: bold;
+}
+.toggle-feedback-btn {
+    margin-top: 15px;
+    padding: 12px 30px;
+    font-size: 14pt;
+    background: #3498db;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+.toggle-feedback-btn:hover {
+    background: #2980b9;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <h1>🔬 MARSDEN HIGH SCHOOL 🔬</h1>
+        <h2>2025 Year 10 Science Yearly Exam</h2>
+        <h3>Interactive Modified Version</h3>
+    </div>
+
+    <div class="student-info">
+        <label><strong>Student Name:</strong></label>
+        <input type="text" id="studentName" placeholder="Enter your name here">
+        <label style="margin-top:10px;"><strong>Class:</strong></label>
+        <input type="text" id="studentClass" placeholder="Enter your class">
+    </div>
+
+    <!-- SECTION I: MULTIPLE CHOICE (15 marks) -->
+    <h2>📝 Section I – Multiple Choice (15 marks)</h2>
+    <p><em>Click on your answer choice for each question.</em></p>
+
+    <!-- Question 1 -->
+    <div class="concept-box">
+        <h3>📐 About Speed and Distance</h3>
+        <p>Speed tells you how fast something moves. Formula: <strong>Speed = Distance ÷ Time</strong></p>
+    </div>
+
+    <div class="question">
+        <div class="question-title">1. Which formula is used to find distance?</div>
+        <div class="hint">💡 HINT: Distance = Speed × Time</div>
+        <div class="mc-options">
+            <div class="mc-button" onclick="selectMC(this, 1, 'a')">a. Speed = Distance × Time</div>
+            <div class="mc-button" onclick="selectMC(this, 1, 'b')">b. Distance = Speed × Time</div>
+            <div class="mc-button" onclick="selectMC(this, 1, 'c')">c. Time = Distance ÷ Speed</div>
+            <div class="mc-button" onclick="selectMC(this, 1, 'd')">d. Speed = Time ÷ Distance</div>
+        </div>
+    </div>
+
+    <!-- Question 2 -->
+    <div class="concept-box">
+        <h3>🌊 About Waves</h3>
+        <p>Waves have wavelength (distance between peaks) and frequency (waves per second). More waves = shorter wavelength.</p>
+    </div>
+
+    <div class="question">
+        <div class="question-title">2. If frequency increases, what happens to wavelength?</div>
+        <div class="hint">💡 HINT: More waves = shorter wavelength</div>
+        <div class="mc-options">
+            <div class="mc-button" onclick="selectMC(this, 2, 'a')">a. Wavelength gets longer</div>
+            <div class="mc-button" onclick="selectMC(this, 2, 'b')">b. Wavelength gets shorter</div>
+            <div class="mc-button" onclick="selectMC(this, 2, 'c')">c. Wavelength stays the same</div>
+            <div class="mc-button" onclick="selectMC(this, 2, 'd')">d. Wavelength disappears</div>
+        </div>
+    </div>
+
+    <!-- Question 3 -->
+    <div class="concept-box">
+        <h3>📱 About Electromagnetic Waves</h3>
+        <p>Mobile phones use <strong>microwaves</strong> to send signals.</p>
+    </div>
+
+    <div class="question">
+        <div class="question-title">3. Which wave type do mobile phones use?</div>
+        <div class="hint">💡 HINT: It's in the name - MICRO-waves</div>
+        <div class="mc-options">
+            <div class="mc-button" onclick="selectMC(this, 3, 'a')">a. Gamma rays</div>
+            <div class="mc-button" onclick="selectMC(this, 3, 'b')">b. Microwaves</div>
+            <div class="mc-button" onclick="selectMC(this, 3, 'c')">c. Infrared</div>
+            <div class="mc-button" onclick="selectMC(this, 3, 'd')">d. Ultraviolet</div>
+        </div>
+    </div>
+
+    <!-- Question 4 -->
+    <div class="concept-box">
+        <h3>⚽ About Newton's Laws</h3>
+        <p><strong>Newton's Second Law: F = ma</strong> (Force = mass × acceleration). This explains why objects speed up when pushed.</p>
+    </div>
+
+    <div class="question">
+        <div class="question-title">4. When a player kicks a soccer ball, which law explains acceleration?</div>
+        <div class="hint">💡 HINT: Look for F = ma</div>
+        <div class="mc-options">
+            <div class="mc-button" onclick="selectMC(this, 4, 'a')">a. Newton's First Law</div>
+            <div class="mc-button" onclick="selectMC(this, 4, 'b')">b. Newton's Second Law (F=ma)</div>
+            <div class="mc-button" onclick="selectMC(this, 4, 'c')">c. Newton's Third Law</div>
+            <div class="mc-button" onclick="selectMC(this, 4, 'd')">d. Law of Gravity</div>
+        </div>
+    </div>
+
+    <!-- Question 5 -->
+    <div class="concept-box">
+        <h3>🔊 About Sound Waves</h3>
+        <p>Sound travels through particles. In water, particles are closer together, so sound travels faster.</p>
+    </div>
+
+    <div class="question">
+        <div class="question-title">5. Why does sound travel faster in water than air?</div>
+        <div class="hint">💡 HINT: Closer particles = faster sound</div>
+        <div class="mc-options">
+            <div class="mc-button" onclick="selectMC(this, 5, 'a')">a. Water particles are lighter</div>
+            <div class="mc-button" onclick="selectMC(this, 5, 'b')">b. Water reflects sound better</div>
+            <div class="mc-button" onclick="selectMC(this, 5, 'c')">c. Water particles are closer together</div>
+            <div class="mc-button" onclick="selectMC(this, 5, 'd')">d. Sound cannot travel in water</div>
+        </div>
+    </div>
+
+    <!-- Question 6 -->
+    <div class="concept-box">
+        <h3>🧬 About DNA</h3>
+        <p>DNA is like an instruction book. It carries information about traits (eye color, height). You inherit DNA from parents.</p>
+    </div>
+
+    <div class="question">
+        <div class="question-title">6. What carries genetic information from parents?</div>
+        <div class="hint">💡 HINT: It's DNA</div>
+        <div class="mc-options">
+            <div class="mc-button" onclick="selectMC(this, 6, 'a')">a. Proteins</div>
+            <div class="mc-button" onclick="selectMC(this, 6, 'b')">b. DNA and genes</div>
+            <div class="mc-button" onclick="selectMC(this, 6, 'c')">c. Enzymes</div>
+            <div class="mc-button" onclick="selectMC(this, 6, 'd')">d. Water</div>
+        </div>
+    </div>
+
+    <!-- Question 7 -->
+    <div class="concept-box">
+        <h3>🔄 About DNA Copying</h3>
+        <p>DNA has two strands. When copying, strands split and each becomes a template (pattern) for a new strand.</p>
+    </div>
+
+    <div class="question">
+        <div class="question-title">7. How does DNA copy itself exactly?</div>
+        <div class="hint">💡 HINT: Each strand is a template</div>
+        <div class="mc-options">
+            <div class="mc-button" onclick="selectMC(this, 7, 'a')">a. Each strand is a template for new strand</div>
+            <div class="mc-button" onclick="selectMC(this, 7, 'b')">b. DNA randomly makes pieces</div>
+            <div class="mc-button" onclick="selectMC(this, 7, 'c')">c. Only one strand copies</div>
+            <div class="mc-button" onclick="selectMC(this, 7, 'd')">d. DNA breaks down</div>
+        </div>
+    </div>
+
+    <!-- Question 8 -->
+    <div class="concept-box">
+        <h3>🦴 About Fossils</h3>
+        <p>Fossils are ancient remains. Scientists study them to see how life changed over time (evolution).</p>
+    </div>
+
+    <div class="question">
+        <div class="question-title">8. What evidence shows organisms changed over time?</div>
+        <div class="hint">💡 HINT: Ancient remains in rocks</div>
+        <div class="mc-options">
+            <div class="mc-button" onclick="selectMC(this, 8, 'a')">a. Antibiotics</div>
+            <div class="mc-button" onclick="selectMC(this, 8, 'b')">b. Fossil record</div>
+            <div class="mc-button" onclick="selectMC(this, 8, 'c')">c. Microscopes</div>
+            <div class="mc-button" onclick="selectMC(this, 8, 'd')">d. Computers</div>
+        </div>
+    </div>
+
+    <!-- Question 9 -->
+    <div class="concept-box">
+        <h3>🧪 About Mutations</h3>
+        <p>DNA is made of letters: A, T, G, C. A mutation is when one letter changes (e.g., ATGC → ATGG).</p>
+    </div>
+
+    <div class="question">
+        <div class="question-title">9. What is a mutation?</div>
+        <div class="hint">💡 HINT: A change in DNA letters</div>
+        <div class="mc-options">
+            <div class="mc-button" onclick="selectMC(this, 9, 'a')">a. DNA copies exactly</div>
+            <div class="mc-button" onclick="selectMC(this, 9, 'b')">b. A change in DNA sequence</div>
+            <div class="mc-button" onclick="selectMC(this, 9, 'c')">c. Two identical molecules</div>
+            <div class="mc-button" onclick="selectMC(this, 9, 'd')">d. DNA folding</div>
+        </div>
+    </div>
+
+    <!-- Question 10 -->
+    <div class="concept-box">
+        <h3>🌍 About Earth's Age</h3>
+        <p>Earth is 4.5 billion years old. Evolution needs a long time. Earth's age provides that time.</p>
+    </div>
+
+    <div class="question">
+        <div class="question-title">10. How does Earth's age support evolution?</div>
+        <div class="hint">💡 HINT: Evolution needs lots of time</div>
+        <div class="mc-options">
+            <div class="mc-button" onclick="selectMC(this, 10, 'a')">a. Life appeared suddenly</div>
+            <div class="mc-button" onclick="selectMC(this, 10, 'b')">b. Provides time for gradual changes</div>
+            <div class="mc-button" onclick="selectMC(this, 10, 'c')">c. Disproves evolution</div>
+            <div class="mc-button" onclick="selectMC(this, 10, 'd')">d. All species appeared at once</div>
+        </div>
+    </div>
+
+    <!-- Question 11 -->
+    <div class="concept-box">
+        <h3>🔥 About Chemical Reactions</h3>
+        <p>Exothermic reactions release energy (get hot). Endothermic reactions absorb energy (get cold).</p>
+    </div>
+
+    <div class="question">
+        <div class="question-title">11. What is an exothermic reaction?</div>
+        <div class="hint">💡 HINT: "Exo" = out, energy comes OUT</div>
+        <div class="mc-options">
+            <div class="mc-button" onclick="selectMC(this, 11, 'a')">a. Absorbs energy</div>
+            <div class="mc-button" onclick="selectMC(this, 11, 'b')">b. Releases energy</div>
+            <div class="mc-button" onclick="selectMC(this, 11, 'c')">c. No energy transfer</div>
+            <div class="mc-button" onclick="selectMC(this, 11, 'd')">d. Creates mass</div>
+        </div>
+    </div>
+
+    <!-- Question 12 -->
+    <div class="concept-box">
+        <h3>⚖️ About Conservation of Mass</h3>
+        <p>In reactions, atoms rearrange but aren't destroyed. Total mass before = Total mass after.</p>
+    </div>
+
+    <div class="question">
+        <div class="question-title">12. Why does mass stay the same in reactions?</div>
+        <div class="hint">💡 HINT: Atoms rearrange, don't disappear</div>
+        <div class="mc-options">
+            <div class="mc-button" onclick="selectMC(this, 12, 'a')">a. Atoms destroyed and created equally</div>
+            <div class="mc-button" onclick="selectMC(this, 12, 'b')">b. Atoms rearranged, not created/destroyed</div>
+            <div class="mc-button" onclick="selectMC(this, 12, 'c')">c. Energy converts to mass</div>
+            <div class="mc-button" onclick="selectMC(this, 12, 'd')">d. Only gases produced</div>
+        </div>
+    </div>
+
+    <!-- Question 13 -->
+    <div class="concept-box">
+        <h3>🌌 About Galaxies</h3>
+        <p>A galaxy is billions of stars held together by gravity. Our galaxy: Milky Way.</p>
+    </div>
+
+    <div class="question">
+        <div class="question-title">13. What is a galaxy?</div>
+        <div class="hint">💡 HINT: Billions of stars together</div>
+        <div class="mc-options">
+            <div class="mc-button" onclick="selectMC(this, 13, 'a')">a. Large group of stars held by gravity</div>
+            <div class="mc-button" onclick="selectMC(this, 13, 'b')">b. One star like Sun</div>
+            <div class="mc-button" onclick="selectMC(this, 13, 'c')">c. A planet</div>
+            <div class="mc-button" onclick="selectMC(this, 13, 'd')">d. Cloud of gas</div>
+        </div>
+    </div>
+
+    <!-- Question 14 -->
+    <div class="concept-box">
+        <h3>📏 About Measuring Space</h3>
+        <p>A light year is distance light travels in one year. Used for distances between stars.</p>
+    </div>
+
+    <div class="question">
+        <div class="question-title">14. What unit measures distance between stars?</div>
+        <div class="hint">💡 HINT: Light year</div>
+        <div class="mc-options">
+            <div class="mc-button" onclick="selectMC(this, 14, 'a')">a. Kilometres</div>
+            <div class="mc-button" onclick="selectMC(this, 14, 'b')">b. Light years</div>
+            <div class="mc-button" onclick="selectMC(this, 14, 'c')">c. Meters</div>
+            <div class="mc-button" onclick="selectMC(this, 14, 'd')">d. Centimetres</div>
+        </div>
+    </div>
+
+    <!-- Question 15 -->
+    <div class="concept-box">
+        <h3>☁️ About Nebulae</h3>
+        <p>A nebula is a giant cloud of gas and dust where stars are born.</p>
+    </div>
+
+    <div class="question">
+        <div class="question-title">15. What is a nebula?</div>
+        <div class="hint">💡 HINT: Star birthplace</div>
+        <div class="mc-options">
+            <div class="mc-button" onclick="selectMC(this, 15, 'a')">a. Galaxy of billions of stars</div>
+            <div class="mc-button" onclick="selectMC(this, 15, 'b')">b. Cloud of gas where stars form</div>
+            <div class="mc-button" onclick="selectMC(this, 15, 'c')">c. Black hole</div>
+            <div class="mc-button" onclick="selectMC(this, 15, 'd')">d. Planet</div>
+        </div>
+    </div>
+
+    <!-- SECTION II: DRAG AND DROP (40 marks) -->
+    <h2>🎯 Section II – Drag and Drop Questions (40 marks)</h2>
+    <p><em>Drag words from the green box into the blank spaces.</em></p>
+
+    <!-- Question 16 -->
+    <div class="concept-box">
+        <h3>🌊 About Energy Transfer</h3>
+        <p>Waves carry energy. Examples: sound, light, water waves.</p>
+    </div>
+
+    <div class="question">
+        <div class="question-title">16. Complete: _____ waves transfer energy when _____. (2 marks)</div>
+        <div class="hint">💡 HINT: Think about sound, light, or water waves</div>
+        
+        <div class="wordbank" id="bank16">
+            <div class="word-tile" draggable="true">Sound</div>
+            <div class="word-tile" draggable="true">Light</div>
+            <div class="word-tile" draggable="true">Water</div>
+            <div class="word-tile" draggable="true">they vibrate through air</div>
+            <div class="word-tile" draggable="true">they travel from Sun to Earth</div>
+            <div class="word-tile" draggable="true">they move across ocean</div>
+        </div>
+
+        <p style="font-size:15pt; line-height:2.5;">
+            <span class="drop-zone" data-question="16a" data-answer="Sound|Light|Water"></span> waves transfer energy when 
+            <span class="drop-zone" data-question="16b" data-answer="they vibrate through air|they travel from Sun to Earth|they move across ocean"></span>
+        </p>
+    </div>
+
+    <!-- Question 17 -->
+    <div class="question">
+        <div class="question-title">17. The distance between two wave crests is called: (1 mark)</div>
+        <div class="hint">💡 HINT: Wavelength</div>
+        
+        <div class="wordbank" id="bank17">
+            <div class="word-tile" draggable="true">wavelength</div>
+            <div class="word-tile" draggable="true">amplitude</div>
+            <div class="word-tile" draggable="true">frequency</div>
+            <div class="word-tile" draggable="true">crest</div>
+        </div>
+
+        <p style="font-size:15pt;">
+            Answer: <span class="drop-zone" data-question="17" data-answer="wavelength"></span>
+        </p>
+    </div>
+
+    <!-- Question 18 -->
+    <div class="question">
+        <div class="question-title">18. The greater the force, the _____ the acceleration. (1 mark)</div>
+        <div class="hint">💡 HINT: More force = more acceleration</div>
+        
+        <div class="wordbank" id="bank18">
+            <div class="word-tile" draggable="true">greater</div>
+            <div class="word-tile" draggable="true">smaller</div>
+            <div class="word-tile" draggable="true">same</div>
+        </div>
+
+        <p style="font-size:15pt;">
+            Answer: <span class="drop-zone" data-question="18" data-answer="greater"></span>
+        </p>
+    </div>
+
+    <!-- Question 19 -->
+    <div class="question">
+        <div class="question-title">19. The system with Sun and planets is called: (1 mark)</div>
+        <div class="hint">💡 HINT: Solar System</div>
+        
+        <div class="wordbank" id="bank19">
+            <div class="word-tile" draggable="true">Solar System</div>
+            <div class="word-tile" draggable="true">Galaxy</div>
+            <div class="word-tile" draggable="true">Universe</div>
+            <div class="word-tile" draggable="true">Nebula</div>
+        </div>
+
+        <p style="font-size:15pt;">
+            Answer: <span class="drop-zone" data-question="19" data-answer="Solar System"></span>
+        </p>
+    </div>
+
+    <!-- Question 20 -->
+    <div class="question">
+        <div class="question-title">20. The Milky Way is about _____ light years wide. (1 mark)</div>
+        <div class="hint">💡 HINT: 100,000 light years</div>
+        
+        <div class="wordbank" id="bank20">
+            <div class="word-tile" draggable="true">100 light years</div>
+            <div class="word-tile" draggable="true">100,000 light years</div>
+            <div class="word-tile" draggable="true">1 million light years</div>
+        </div>
+
+        <p style="font-size:15pt;">
+            Answer: <span class="drop-zone" data-question="20" data-answer="100,000 light years"></span>
+        </p>
+    </div>
+
+    <!-- Question 21 -->
+    <div class="question">
+        <div class="question-title">21. Genetically identical organisms are called: (1 mark)</div>
+        <div class="hint">💡 HINT: Clones</div>
+        
+        <div class="wordbank" id="bank21">
+            <div class="word-tile" draggable="true">clones</div>
+            <div class="word-tile" draggable="true">mutations</div>
+            <div class="word-tile" draggable="true">fossils</div>
+        </div>
+
+        <p style="font-size:15pt;">
+            Answer: <span class="drop-zone" data-question="21" data-answer="clones"></span>
+        </p>
+    </div>
+
+    <!-- Question 22 -->
+    <div class="question">
+        <div class="question-title">22. In DNA, Adenine (A) pairs with: (1 mark)</div>
+        <div class="hint">💡 HINT: T (Thymine)</div>
+        
+        <div class="wordbank" id="bank22">
+            <div class="word-tile" draggable="true">T (Thymine)</div>
+            <div class="word-tile" draggable="true">G (Guanine)</div>
+            <div class="word-tile" draggable="true">C (Cytosine)</div>
+        </div>
+
+        <p style="font-size:15pt;">
+            Answer: <span class="drop-zone" data-question="22" data-answer="T (Thymine)"></span>
+        </p>
+    </div>
+
+    <!-- Question 23 -->
+    <div class="question">
+        <div class="question-title">23. The "Age of Dinosaurs" was in the _____ Era. (1 mark)</div>
+        <div class="hint">💡 HINT: Mesozoic</div>
+        
+        <div class="wordbank" id="bank23">
+            <div class="word-tile" draggable="true">Mesozoic</div>
+            <div class="word-tile" draggable="true">Paleozoic</div>
+            <div class="word-tile" draggable="true">Cenozoic</div>
+        </div>
+
+        <p style="font-size:15pt;">
+            Answer: <span class="drop-zone" data-question="23" data-answer="Mesozoic"></span>
+        </p>
+    </div>
+
+    <!-- Question 24 - DNA Replication Fill-in -->
+    <div class="concept-box">
+        <h3>🧬 About DNA Copying</h3>
+        <p>DNA has two strands. They separate and each acts as a template. Base pairing: A-T, G-C.</p>
+    </div>
+
+    <div class="question">
+        <div class="question-title">24. Complete the paragraph about DNA replication: (4 marks)</div>
+        <div class="hint">💡 Drag the correct words to complete each blank</div>
+        
+        <div class="wordbank" id="bank24">
+            <div class="word-tile" draggable="true">two</div>
+            <div class="word-tile" draggable="true">three</div>
+            <div class="word-tile" draggable="true">separate</div>
+            <div class="word-tile" draggable="true">stay together</div>
+            <div class="word-tile" draggable="true">template</div>
+            <div class="word-tile" draggable="true">energy</div>
+            <div class="word-tile" draggable="true">T</div>
+            <div class="word-tile" draggable="true">G</div>
+            <div class="word-tile" draggable="true">C</div>
+        </div>
+
+        <p style="font-size:14pt; line-height:2.5;">
+            DNA has <span class="drop-zone" data-question="24a" data-answer="two"></span> strands twisted together. 
+            When DNA copies itself, the strands <span class="drop-zone" data-question="24b" data-answer="separate"></span>. 
+            Each strand acts as a <span class="drop-zone" data-question="24c" data-answer="template"></span> to make a new matching strand. 
+            In base pairing, A pairs with <span class="drop-zone" data-question="24d" data-answer="T"></span>, and G pairs with 
+            <span class="drop-zone" data-question="24e" data-answer="C"></span>.
+        </p>
+    </div>
+
+    <!-- Question 25 - Genetics Punnett Square -->
+    <div class="concept-box">
+        <h3>🐰 About Genetics</h3>
+        <p><strong>Dominant (B)</strong> = Black fur | <strong>Recessive (b)</strong> = White fur</p>
+        <p>Parent 1: Bb (black, heterozygous) | Parent 2: bb (white)</p>
+    </div>
+
+    <div class="question">
+        <div class="question-title">25. Complete the Punnett Square by dragging alleles: (4 marks)</div>
+        <div class="hint">💡 Combine alleles from each parent (Example: B + b = Bb)</div>
+        
+        <div class="wordbank" id="bank25">
+            <div class="word-tile" draggable="true">Bb</div>
+            <div class="word-tile" draggable="true">Bb</div>
+            <div class="word-tile" draggable="true">bb</div>
+            <div class="word-tile" draggable="true">bb</div>
+            <div class="word-tile" draggable="true">BB</div>
+        </div>
+
+        <table class="punnett-table">
+            <tr>
+                <th></th>
+                <th>B (Parent 1)</th>
+                <th>b (Parent 1)</th>
+            </tr>
+            <tr>
+                <th>b (Parent 2)</th>
+                <td><span class="drop-zone" data-question="25a" data-answer="Bb"></span></td>
+                <td><span class="drop-zone" data-question="25b" data-answer="bb"></span></td>
+            </tr>
+            <tr>
+                <th>b (Parent 2)</th>
+                <td><span class="drop-zone" data-question="25c" data-answer="Bb"></span></td>
+                <td><span class="drop-zone" data-question="25d" data-answer="bb"></span></td>
+            </tr>
+        </table>
+    </div>
+
+    <!-- Question 26 - Percentage Calculation -->
+    <div class="question">
+        <div class="question-title">26. What percentage of offspring will have black fur? (1 mark)</div>
+        <div class="hint">💡 Count boxes with at least one B, divide by 4, multiply by 100</div>
+        
+        <div class="wordbank" id="bank26">
+            <div class="word-tile" draggable="true">25%</div>
+            <div class="word-tile" draggable="true">50%</div>
+            <div class="word-tile" draggable="true">75%</div>
+            <div class="word-tile" draggable="true">100%</div>
+        </div>
+
+        <p style="font-size:15pt;">
+            Answer: <span class="drop-zone" data-question="26" data-answer="50%"></span>
+        </p>
+    </div>
+
+    <!-- Question 27 - Wave Parts Labeling -->
+    <div class="concept-box">
+        <h3>🌊 Parts of a Wave</h3>
+        <p><strong>Crest</strong> = highest point | <strong>Trough</strong> = lowest point | <strong>Wavelength</strong> = crest to crest | <strong>Amplitude</strong> = middle to crest</p>
+    </div>
+
+    <div class="question">
+        <div class="question-title">27. Label the wave parts (drag to match): (5 marks)</div>
+        <div class="hint">💡 Match each arrow to the correct wave part</div>
+        
+        <div class="wordbank" id="bank27">
+            <div class="word-tile" draggable="true">Crest</div>
+            <div class="word-tile" draggable="true">Trough</div>
+            <div class="word-tile" draggable="true">Wavelength</div>
+            <div class="word-tile" draggable="true">Amplitude</div>
+            <div class="word-tile" draggable="true">Line of origin</div>
+        </div>
+
+        <table style="width:100%; border:none;">
+            <tr>
+                <td style="border:none; font-size:13pt;">Arrow A (pointing to TOP of wave):</td>
+                <td style="border:none;"><span class="drop-zone" data-question="27a" data-answer="Crest"></span></td>
+            </tr>
+            <tr>
+                <td style="border:none; font-size:13pt;">Arrow B (pointing to BOTTOM of wave):</td>
+                <td style="border:none;"><span class="drop-zone" data-question="27b" data-answer="Trough"></span></td>
+            </tr>
+            <tr>
+                <td style="border:none; font-size:13pt;">Arrow C (crest to next crest):</td>
+                <td style="border:none;"><span class="drop-zone" data-question="27c" data-answer="Wavelength"></span></td>
+            </tr>
+            <tr>
+                <td style="border:none; font-size:13pt;">Arrow D (middle to crest):</td>
+                <td style="border:none;"><span class="drop-zone" data-question="27d" data-answer="Amplitude"></span></td>
+            </tr>
+            <tr>
+                <td style="border:none; font-size:13pt;">Arrow E (horizontal middle line):</td>
+                <td style="border:none;"><span class="drop-zone" data-question="27e" data-answer="Line of origin"></span></td>
+            </tr>
+        </table>
+    </div>
+
+    <!-- Question 28 - Forces Matching -->
+    <div class="concept-box">
+        <h3>🚗 Forces on a Car</h3>
+        <p>Four forces: Engine (forward), Friction (backward), Weight (down), Normal force (up)</p>
+    </div>
+
+    <div class="question">
+        <div class="question-title">28. Match each force to its description: (4 marks)</div>
+        <div class="hint">💡 Think about direction each force acts</div>
+        
+        <div class="wordbank" id="bank28">
+            <div class="word-tile" draggable="true">Pushes car forward</div>
+            <div class="word-tile" draggable="true">Slows car down</div>
+            <div class="word-tile" draggable="true">Pulls car down</div>
+            <div class="word-tile" draggable="true">Pushes car up from road</div>
+        </div>
+
+        <table style="width:100%; border:none;">
+            <tr>
+                <td style="border:none; font-size:13pt;">1. Driving force:</td>
+                <td style="border:none;"><span class="drop-zone" data-question="28a" data-answer="Pushes car forward"></span></td>
+            </tr>
+            <tr>
+                <td style="border:none; font-size:13pt;">2. Friction:</td>
+                <td style="border:none;"><span class="drop-zone" data-question="28b" data-answer="Slows car down"></span></td>
+            </tr>
+            <tr>
+                <td style="border:none; font-size:13pt;">3. Weight:</td>
+                <td style="border:none;"><span class="drop-zone" data-question="28c" data-answer="Pulls car down"></span></td>
+            </tr>
+            <tr>
+                <td style="border:none; font-size:13pt;">4. Normal force:</td>
+                <td style="border:none;"><span class="drop-zone" data-question="28d" data-answer="Pushes car up from road"></span></td>
+            </tr>
+        </table>
+    </div>
+
+    <!-- Question 29 - Calculation with Dropdowns -->
+    <div class="concept-box">
+        <h3>🧮 Car Acceleration Calculation</h3>
+        <p>Car: mass 1000 kg, speeds from 0 to 20 m/s in 10 seconds</p>
+        <p><strong>Formula: acceleration = (final speed - starting speed) ÷ time</strong></p>
+    </div>
+
+    <div class="question">
+        <div class="question-title">29. Calculate acceleration by filling blanks: (3 marks)</div>
+        <div class="hint">💡 (20 - 0) ÷ 10 = ?</div>
+        
+        <div class="wordbank" id="bank29">
+            <div class="word-tile" draggable="true">20</div>
+            <div class="word-tile" draggable="true">0</div>
+            <div class="word-tile" draggable="true">10</div>
+            <div class="word-tile" draggable="true">2</div>
+            <div class="word-tile" draggable="true">30</div>
+        </div>
+
+        <p style="font-size:14pt; line-height:2.5;">
+            acceleration = (<span class="drop-zone" data-question="29a" data-answer="20"></span> - 
+            <span class="drop-zone" data-question="29b" data-answer="0"></span>) ÷ 
+            <span class="drop-zone" data-question="29c" data-answer="10"></span><br>
+            acceleration = <span class="drop-zone" data-question="29d" data-answer="2"></span> m/s²
+        </p>
+    </div>
+
+    <!-- Question 30 - Force Calculation -->
+    <div class="concept-box">
+        <h3>⚡ Force Calculation</h3>
+        <p><strong>Formula: Force = mass × acceleration</strong></p>
+        <p>Mass = 1000 kg, acceleration = 2 m/s²</p>
+    </div>
+
+    <div class="question">
+        <div class="question-title">30. Calculate force by filling blanks: (3 marks)</div>
+        <div class="hint">💡 1000 × 2 = ?</div>
+        
+        <div class="wordbank" id="bank30">
+            <div class="word-tile" draggable="true">1000</div>
+            <div class="word-tile" draggable="true">2</div>
+            <div class="word-tile" draggable="true">2000</div>
+            <div class="word-tile" draggable="true">500</div>
+        </div>
+
+        <p style="font-size:14pt; line-height:2.5;">
+            Force = <span class="drop-zone" data-question="30a" data-answer="1000"></span> kg × 
+            <span class="drop-zone" data-question="30b" data-answer="2"></span> m/s²<br>
+            Force = <span class="drop-zone" data-question="30c" data-answer="2000"></span> N
+        </p>
+    </div>
+
+    <!-- Question 31 - Data Table -->
+    <div class="concept-box">
+        <h3>📊 Plant Growth Data</h3>
+        <p>Three light conditions: Full Light, Partial Light, No Light (4 weeks)</p>
+    </div>
+
+    <div class="question">
+        <div class="question-title">31. Complete the data table by dragging numbers: (5 marks)</div>
+        <div class="hint">💡 Match each height measurement to the correct week and light condition</div>
+        
+        <div class="wordbank" id="bank31">
+            <div class="word-tile" draggable="true">5.0</div>
+            <div class="word-tile" draggable="true">8.0</div>
+            <div class="word-tile" draggable="true">12.0</div>
+            <div class="word-tile" draggable="true">15.0</div>
+            <div class="word-tile" draggable="true">4.5</div>
+            <div class="word-tile" draggable="true">6.5</div>
+            <div class="word-tile" draggable="true">9.0</div>
+            <div class="word-tile" draggable="true">3.0</div>
+            <div class="word-tile" draggable="true">3.5</div>
+            <div class="word-tile" draggable="true">3.8</div>
+            <div class="word-tile" draggable="true">4.0</div>
+        </div>
+
+        <table style="width:100%;">
+            <tr>
+                <th>Week</th>
+                <th>Full Light (cm)</th>
+                <th>Partial Light (cm)</th>
+                <th>No Light (cm)</th>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td><span class="drop-zone" data-question="31a" data-answer="5.0"></span></td>
+                <td><span class="drop-zone" data-question="31b" data-answer="4.5"></span></td>
+                <td><span class="drop-zone" data-question="31c" data-answer="3.0"></span></td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td><span class="drop-zone" data-question="31d" data-answer="8.0"></span></td>
+                <td><span class="drop-zone" data-question="31e" data-answer="6.5"></span></td>
+                <td><span class="drop-zone" data-question="31f" data-answer="3.5"></span></td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td><span class="drop-zone" data-question="31g" data-answer="12.0"></span></td>
+                <td><span class="drop-zone" data-question="31h" data-answer="8.0"></span></td>
+                <td><span class="drop-zone" data-question="31i" data-answer="3.8"></span></td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td><span class="drop-zone" data-question="31j" data-answer="15.0"></span></td>
+                <td><span class="drop-zone" data-question="31k" data-answer="9.0"></span></td>
+                <td><span class="drop-zone" data-question="31l" data-answer="4.0"></span></td>
+            </tr>
+        </table>
+    </div>
+
+    <!-- Question 32 - Pattern Analysis -->
+    <div class="question">
+        <div class="question-title">32. What pattern shows in the data? (2 marks)</div>
+        <div class="hint">💡 Which light condition grew the most?</div>
+        
+        <div class="wordbank" id="bank32">
+            <div class="word-tile" draggable="true">full</div>
+            <div class="word-tile" draggable="true">partial</div>
+            <div class="word-tile" draggable="true">no</div>
+            <div class="word-tile" draggable="true">most</div>
+            <div class="word-tile" draggable="true">least</div>
+            <div class="word-tile" draggable="true">important</div>
+            <div class="word-tile" draggable="true">not important</div>
+        </div>
+
+        <p style="font-size:14pt; line-height:2.5;">
+            Plants with <span class="drop-zone" data-question="32a" data-answer="full"></span> light grew the 
+            <span class="drop-zone" data-question="32b" data-answer="most"></span>. 
+            Plants with <span class="drop-zone" data-question="32c" data-answer="no"></span> light grew the 
+            <span class="drop-zone" data-question="32d" data-answer="least"></span>. 
+            This shows light is <span class="drop-zone" data-question="32e" data-answer="important"></span> for plant growth.
+        </p>
+    </div>
+
+    <!-- SUBMIT BUTTON -->
+    <div class="submit-container">
+        <button class="submit-btn" onclick="calculateScore()">🎓 SUBMIT EXAM 🎓</button>
+    </div>
+
+</div>
+
+<!-- Results Modal -->
+<div class="modal" id="resultsModal">
+    <div class="modal-content">
+        <h2 style="color:#2c3e50;">🎉 Exam Results 🎉</h2>
+        <div class="score-display" id="scoreDisplay">0 / 70</div>
+        <div class="percentage" id="percentageDisplay">0%</div>
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressFill" style="width:0%;">0%</div>
+        </div>
+        <p id="gradeComment" style="font-size:16pt; margin:20px 0;"></p>
+        
+        <!-- Feedback Section -->
+        <div class="feedback-section" id="feedbackSection" style="display:none;">
+            <h3 style="text-align:center; color:#2c3e50;">📋 Detailed Feedback</h3>
+            <div id="feedbackList"></div>
+        </div>
+        
+        <button class="toggle-feedback-btn" onclick="toggleFeedback()">📊 Show Detailed Feedback</button>
+        
+        <div style="margin-top:20px;">
+            <button class="export-btn" onclick="exportFeedback()">📥 Export Feedback as TXT</button>
+        </div>
+        
+        <div style="margin-top:10px;">
+            <button class="close-btn" onclick="closeModal()">Close</button>
+            <button class="close-btn" style="background:#e74c3c; margin-left:10px;" onclick="location.reload()">Retry Exam</button>
+        </div>
+    </div>
+</div>
+
+<script>
+// Store answers
+let answers = {};
+let feedbackData = [];
+let studentName = '';
+let studentClass = '';
+let finalScore = 0;
+let finalPercentage = 0;
+
+// Question descriptions for feedback
+const questionDescriptions = {
+    'mc1': 'Q1: Formula for distance',
+    'mc2': 'Q2: Wavelength and frequency relationship',
+    'mc3': 'Q3: Type of wave for mobile phones',
+    'mc4': 'Q4: Newton\'s law for acceleration',
+    'mc5': 'Q5: Sound travel in water',
+    'mc6': 'Q6: Genetic information carrier',
+    'mc7': 'Q7: DNA replication process',
+    'mc8': 'Q8: Evidence for evolution',
+    'mc9': 'Q9: Definition of mutation',
+    'mc10': 'Q10: Earth\'s age and evolution',
+    'mc11': 'Q11: Exothermic reaction',
+    'mc12': 'Q12: Conservation of mass',
+    'mc13': 'Q13: Definition of galaxy',
+    'mc14': 'Q14: Unit for measuring star distances',
+    'mc15': 'Q15: Definition of nebula',
+    '16a': 'Q16a: Type of wave',
+    '16b': 'Q16b: Energy transfer description',
+    '17': 'Q17: Distance between crests',
+    '18': 'Q18: Force and acceleration relationship',
+    '19': 'Q19: Sun and planets system name',
+    '20': 'Q20: Milky Way width',
+    '21': 'Q21: Identical organisms term',
+    '22': 'Q22: Adenine pairs with',
+    '23': 'Q23: Age of Dinosaurs era',
+    '24a': 'Q24a: Number of DNA strands',
+    '24b': 'Q24b: What DNA strands do',
+    '24c': 'Q24c: Each strand acts as',
+    '24d': 'Q24d: A pairs with',
+    '24e': 'Q24e: G pairs with',
+    '25a': 'Q25a: Punnett square top-left',
+    '25b': 'Q25b: Punnett square top-right',
+    '25c': 'Q25c: Punnett square bottom-left',
+    '25d': 'Q25d: Punnett square bottom-right',
+    '26': 'Q26: Percentage with black fur',
+    '27a': 'Q27a: Wave label - Arrow A',
+    '27b': 'Q27b: Wave label - Arrow B',
+    '27c': 'Q27c: Wave label - Arrow C',
+    '27d': 'Q27d: Wave label - Arrow D',
+    '27e': 'Q27e: Wave label - Arrow E',
+    '28a': 'Q28a: Driving force description',
+    '28b': 'Q28b: Friction description',
+    '28c': 'Q28c: Weight description',
+    '28d': 'Q28d: Normal force description',
+    '29a': 'Q29a: Final speed value',
+    '29b': 'Q29b: Starting speed value',
+    '29c': 'Q29c: Time value',
+    '29d': 'Q29d: Acceleration result',
+    '30a': 'Q30a: Mass value',
+    '30b': 'Q30b: Acceleration value',
+    '30c': 'Q30c: Force result',
+    '31a': 'Q31a: Week 1 Full Light',
+    '31b': 'Q31b: Week 1 Partial Light',
+    '31c': 'Q31c: Week 1 No Light',
+    '31d': 'Q31d: Week 2 Full Light',
+    '31e': 'Q31e: Week 2 Partial Light',
+    '31f': 'Q31f: Week 2 No Light',
+    '31g': 'Q31g: Week 3 Full Light',
+    '31h': 'Q31h: Week 3 Partial Light',
+    '31i': 'Q31i: Week 3 No Light',
+    '31j': 'Q31j: Week 4 Full Light',
+    '31k': 'Q31k: Week 4 Partial Light',
+    '31l': 'Q31l: Week 4 No Light',
+    '32a': 'Q32a: Light condition with most growth',
+    '32b': 'Q32b: Growth amount descriptor',
+    '32c': 'Q32c: Light condition with least growth',
+    '32d': 'Q32d: Growth amount descriptor',
+    '32e': 'Q32e: Light importance for growth'
+};
+
+// Multiple Choice Selection
+function selectMC(button, questionNum, choice) {
+    // Deselect other buttons in same question
+    const parent = button.parentElement;
+    parent.querySelectorAll('.mc-button').forEach(btn => btn.classList.remove('selected'));
+    button.classList.add('selected');
+    answers[`mc${questionNum}`] = choice;
+}
+
+// Drag and Drop Functionality
+document.addEventListener('DOMContentLoaded', function() {
+    const wordTiles = document.querySelectorAll('.word-tile');
+    const dropZones = document.querySelectorAll('.drop-zone');
+
+    wordTiles.forEach(tile => {
+        tile.addEventListener('dragstart', function(e) {
+            e.dataTransfer.setData('text/plain', this.textContent);
+            this.classList.add('dragging');
+        });
+
+        tile.addEventListener('dragend', function() {
+            this.classList.remove('dragging');
+        });
+    });
+
+    dropZones.forEach(zone => {
+        zone.addEventListener('dragover', function(e) {
+            e.preventDefault();
+            this.classList.add('over');
+        });
+
+        zone.addEventListener('dragleave', function() {
+            this.classList.remove('over');
+        });
+
+        zone.addEventListener('drop', function(e) {
+            e.preventDefault();
+            this.classList.remove('over');
+            
+            const text = e.dataTransfer.getData('text/plain');
+            this.textContent = text;
+            this.classList.add('filled');
+            
+            // Store answer
+            const questionId = this.getAttribute('data-question');
+            answers[questionId] = text;
+        });
+
+        // Click to clear
+        zone.addEventListener('dblclick', function() {
+            this.textContent = '';
+            this.classList.remove('filled');
+            const questionId = this.getAttribute('data-question');
+            delete answers[questionId];
+        });
+    });
+});
+
+// Calculate Score
+function calculateScore() {
+    studentName = document.getElementById('studentName').value;
+    studentClass = document.getElementById('studentClass').value;
+
+    if (!studentName || !studentClass) {
+        alert('⚠️ Please enter your name and class before submitting!');
+        return;
+    }
+
+    // Correct answers
+    const correctAnswers = {
+        // Multiple Choice (15 marks)
+        mc1: 'b', mc2: 'b', mc3: 'b', mc4: 'b', mc5: 'c',
+        mc6: 'b', mc7: 'a', mc8: 'b', mc9: 'b', mc10: 'b',
+        mc11: 'b', mc12: 'b', mc13: 'a', mc14: 'b', mc15: 'b',
+        
+        // Drag and Drop (40 marks total, flexible answers)
+        '17': 'wavelength',
+        '18': 'greater',
+        '19': 'Solar System',
+        '20': '100,000 light years',
+        '21': 'clones',
+        '22': 'T (Thymine)',
+        '23': 'Mesozoic',
+        '24a': 'two',
+        '24b': 'separate',
+        '24c': 'template',
+        '24d': 'T',
+        '24e': 'C',
+        '25a': 'Bb',
+        '25b': 'bb',
+        '25c': 'Bb',
+        '25d': 'bb',
+        '26': '50%',
+        '27a': 'Crest',
+        '27b': 'Trough',
+        '27c': 'Wavelength',
+        '27d': 'Amplitude',
+        '27e': 'Line of origin',
+        '28a': 'Pushes car forward',
+        '28b': 'Slows car down',
+        '28c': 'Pulls car down',
+        '28d': 'Pushes car up from road',
+        '29a': '20',
+        '29b': '0',
+        '29c': '10',
+        '29d': '2',
+        '30a': '1000',
+        '30b': '2',
+        '30c': '2000',
+        '31a': '5.0',
+        '31b': '4.5',
+        '31c': '3.0',
+        '31d': '8.0',
+        '31e': '6.5',
+        '31f': '3.5',
+        '31g': '12.0',
+        '31h': '8.0',
+        '31i': '3.8',
+        '31j': '15.0',
+        '31k': '9.0',
+        '31l': '4.0',
+        '32a': 'full',
+        '32b': 'most',
+        '32c': 'no',
+        '32d': 'least',
+        '32e': 'important'
+    };
+
+    let score = 0;
+    const totalMarks = 70;
+    feedbackData = [];
+
+    // Check answers
+    for (let key in correctAnswers) {
+        let isCorrect = false;
+        let userAnswer = answers[key] || '(No answer)';
+        let correctAnswer = correctAnswers[key];
+        
+        if (answers[key]) {
+            // Flexible matching for drag-drop (case insensitive, trim spaces)
+            const userAnswerClean = answers[key].trim().toLowerCase();
+            const correctAnswerClean = correctAnswers[key].trim().toLowerCase();
+            
+            // For question 16 (accepts any valid wave example)
+            if (key === '16a' && (userAnswerClean.includes('sound') || userAnswerClean.includes('light') || userAnswerClean.includes('water'))) {
+                score += 1;
+                isCorrect = true;
+            } else if (key === '16b' && userAnswerClean.length > 5) {
+                score += 1;
+                isCorrect = true;
+            } else if (userAnswerClean === correctAnswerClean) {
+                score += 1;
+                isCorrect = true;
+            }
+        }
+        
+        // Store feedback
+        feedbackData.push({
+            question: questionDescriptions[key] || key,
+            correct: isCorrect,
+            userAnswer: userAnswer,
+            correctAnswer: correctAnswer
+        });
+    }
+
+    finalScore = score;
+    finalPercentage = Math.round((score / totalMarks) * 100);
+
+    // Determine grade comment
+    let comment = '';
+    if (finalPercentage >= 90) comment = '🌟 Outstanding! Excellent work!';
+    else if (finalPercentage >= 80) comment = '🎖️ Great job! Very good understanding!';
+    else if (finalPercentage >= 70) comment = '✅ Good work! You passed!';
+    else if (finalPercentage >= 60) comment = '👍 Nice effort! Keep practicing!';
+    else if (finalPercentage >= 50) comment = '💪 You tried hard! Review and improve!';
+    else comment = '📚 Keep studying! You can do better!';
+
+    // Display results
+    document.getElementById('scoreDisplay').textContent = `${score} / ${totalMarks}`;
+    document.getElementById('percentageDisplay').textContent = `${finalPercentage}%`;
+    document.getElementById('gradeComment').textContent = comment;
+    
+    // Generate feedback list
+    generateFeedbackList();
+    
+    // Animate progress bar
+    setTimeout(() => {
+        document.getElementById('progressFill').style.width = `${finalPercentage}%`;
+        document.getElementById('progressFill').textContent = `${finalPercentage}%`;
+    }, 300);
+
+    // Show modal
+    document.getElementById('resultsModal').classList.add('show');
+
+    // Log results (teacher can see in console)
+    console.log('=== EXAM RESULTS ===');
+    console.log('Student:', studentName);
+    console.log('Class:', studentClass);
+    console.log('Score:', score, '/', totalMarks);
+    console.log('Percentage:', finalPercentage + '%');
+    console.log('Answers:', answers);
+    console.log('Detailed Feedback:', feedbackData);
+}
+
+function generateFeedbackList() {
+    const feedbackList = document.getElementById('feedbackList');
+    feedbackList.innerHTML = '';
+    
+    feedbackData.forEach((item, index) => {
+        const feedbackItem = document.createElement('div');
+        feedbackItem.className = `feedback-item ${item.correct ? 'correct' : 'incorrect'}`;
+        
+        if (item.correct) {
+            feedbackItem.innerHTML = `
+                <span class="icon">✅</span>
+                <span class="question-num">${item.question}</span><br>
+                <span style="color:#27ae60;">Correct!</span> Your answer: <strong>${item.userAnswer}</strong>
+            `;
+        } else {
+            feedbackItem.innerHTML = `
+                <span class="icon">❌</span>
+                <span class="question-num">${item.question}</span><br>
+                <span class="your-answer">Your answer: ${item.userAnswer}</span><br>
+                <span class="correct-answer">Correct answer: ${item.correctAnswer}</span>
+            `;
+        }
+        
+        feedbackList.appendChild(feedbackItem);
+    });
+}
+
+function toggleFeedback() {
+    const feedbackSection = document.getElementById('feedbackSection');
+    const button = event.target;
+    
+    if (feedbackSection.style.display === 'none') {
+        feedbackSection.style.display = 'block';
+        button.textContent = '📊 Hide Detailed Feedback';
+    } else {
+        feedbackSection.style.display = 'none';
+        button.textContent = '📊 Show Detailed Feedback';
+    }
+}
+
+function exportFeedback() {
+    // Get current date and time
+    const now = new Date();
+    const dateStr = now.toLocaleDateString('en-AU');
+    const timeStr = now.toLocaleTimeString('en-AU');
+    
+    // Count correct and incorrect
+    const correctCount = feedbackData.filter(item => item.correct).length;
+    const incorrectCount = feedbackData.filter(item => !item.correct).length;
+    
+    // Build text content
+    let txtContent = '';
+    txtContent += '═══════════════════════════════════════════════════════════\n';
+    txtContent += '          MARSDEN HIGH SCHOOL - YEAR 10 SCIENCE EXAM\n';
+    txtContent += '                 DETAILED FEEDBACK REPORT\n';
+    txtContent += '═══════════════════════════════════════════════════════════\n\n';
+    
+    txtContent += `Student Name: ${studentName}\n`;
+    txtContent += `Class: ${studentClass}\n`;
+    txtContent += `Date: ${dateStr}\n`;
+    txtContent += `Time: ${timeStr}\n\n`;
+    
+    txtContent += '───────────────────────────────────────────────────────────\n';
+    txtContent += '                         OVERALL RESULTS\n';
+    txtContent += '───────────────────────────────────────────────────────────\n\n';
+    
+    txtContent += `Final Score: ${finalScore} / 70\n`;
+    txtContent += `Percentage: ${finalPercentage}%\n`;
+    txtContent += `Questions Correct: ${correctCount}\n`;
+    txtContent += `Questions Incorrect: ${incorrectCount}\n\n`;
+    
+    // Grade comment
+    let gradeComment = '';
+    if (finalPercentage >= 90) gradeComment = 'Outstanding! Excellent work!';
+    else if (finalPercentage >= 80) gradeComment = 'Great job! Very good understanding!';
+    else if (finalPercentage >= 70) gradeComment = 'Good work! You passed!';
+    else if (finalPercentage >= 60) gradeComment = 'Nice effort! Keep practicing!';
+    else if (finalPercentage >= 50) gradeComment = 'You tried hard! Review and improve!';
+    else gradeComment = 'Keep studying! You can do better!';
+    
+    txtContent += `Grade Comment: ${gradeComment}\n\n`;
+    
+    txtContent += '═══════════════════════════════════════════════════════════\n';
+    txtContent += '                    DETAILED QUESTION FEEDBACK\n';
+    txtContent += '═══════════════════════════════════════════════════════════\n\n';
+    
+    // Correct answers section
+    txtContent += '✅ CORRECT ANSWERS:\n';
+    txtContent += '───────────────────────────────────────────────────────────\n\n';
+    
+    let hasCorrect = false;
+    feedbackData.forEach((item, index) => {
+        if (item.correct) {
+            hasCorrect = true;
+            txtContent += `${item.question}\n`;
+            txtContent += `  Status: CORRECT ✓\n`;
+            txtContent += `  Your Answer: ${item.userAnswer}\n\n`;
+        }
+    });
+    
+    if (!hasCorrect) {
+        txtContent += '  (No correct answers)\n\n';
+    }
+    
+    // Incorrect answers section
+    txtContent += '❌ INCORRECT ANSWERS (Areas for Improvement):\n';
+    txtContent += '───────────────────────────────────────────────────────────\n\n';
+    
+    let hasIncorrect = false;
+    feedbackData.forEach((item, index) => {
+        if (!item.correct) {
+            hasIncorrect = true;
+            txtContent += `${item.question}\n`;
+            txtContent += `  Status: INCORRECT ✗\n`;
+            txtContent += `  Your Answer: ${item.userAnswer}\n`;
+            txtContent += `  Correct Answer: ${item.correctAnswer}\n\n`;
+        }
+    });
+    
+    if (!hasIncorrect) {
+        txtContent += '  (All answers correct - Perfect score!)\n\n';
+    }
+    
+    txtContent += '═══════════════════════════════════════════════════════════\n';
+    txtContent += '                         END OF REPORT\n';
+    txtContent += '═══════════════════════════════════════════════════════════\n\n';
+    
+    txtContent += 'Study Tips:\n';
+    txtContent += '- Review all incorrect answers carefully\n';
+    txtContent += '- Focus on understanding WHY the correct answer is right\n';
+    txtContent += '- Practice similar questions in your textbook\n';
+    txtContent += '- Ask your teacher for help with difficult concepts\n\n';
+    
+    txtContent += 'Generated by: Year 10 Science Interactive Exam System\n';
+    txtContent += 'Marsden High School - 2025\n';
+    
+    // Create download
+    const blob = new Blob([txtContent], { type: 'text/plain' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `${studentName.replace(/\s+/g, '_')}_Science_Exam_Feedback_${dateStr.replace(/\//g, '-')}.txt`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    
+    alert('✅ Feedback exported successfully! Check your Downloads folder.');
+}
+
+function closeModal() {
+    document.getElementById('resultsModal').classList.remove('show');
+    document.getElementById('feedbackSection').style.display = 'none';
+}
+</script>
+
+</body>
+</html>
