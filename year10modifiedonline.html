@@ -5,9 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Year 10 Science Exam - Interactive Modified Version</title>
 <style>
-* { box-sizing: border-box; }
+* { 
+    box-sizing: border-box; 
+}
 body {
-    font-family: 'Arial', sans-serif;
+    font-family: 'Verdana', 'Arial', sans-serif;
+    font-size: 24pt;
     line-height: 1.8;
     margin: 0;
     padding: 20px;
@@ -15,125 +18,233 @@ body {
     color: #333;
 }
 .container {
-    max-width: 900px;
+    max-width: 1200px;
     margin: 0 auto;
     background: white;
-    padding: 40px;
+    padding: 50px;
     border-radius: 15px;
     box-shadow: 0 10px 40px rgba(0,0,0,0.3);
 }
-h1 { color: #2c3e50; text-align: center; font-size: 28pt; margin-bottom: 10px; }
-h2 { color: #3498db; font-size: 20pt; margin-top: 30px; border-bottom: 3px solid #3498db; padding-bottom: 10px; }
-h3 { color: #555; font-size: 16pt; margin-top: 20px; }
+h1 { 
+    color: #2c3e50; 
+    text-align: center; 
+    font-size: 36pt; 
+    margin-bottom: 10px; 
+    font-family: 'Verdana', 'Arial', sans-serif;
+}
+h2 { 
+    color: #3498db; 
+    font-size: 30pt; 
+    margin-top: 30px; 
+    border-bottom: 3px solid #3498db; 
+    padding-bottom: 10px; 
+    font-family: 'Verdana', 'Arial', sans-serif;
+}
+h3 { 
+    color: #555; 
+    font-size: 26pt; 
+    margin-top: 20px; 
+    font-family: 'Verdana', 'Arial', sans-serif;
+}
 .header { text-align: center; margin-bottom: 30px; }
-.student-info { background: #ecf0f1; padding: 15px; border-radius: 8px; margin: 20px 0; }
-.student-info input { width: 100%; padding: 10px; font-size: 14pt; border: 2px solid #3498db; border-radius: 5px; margin-top: 5px; }
+.student-info { 
+    background: #ecf0f1; 
+    padding: 20px; 
+    border-radius: 8px; 
+    margin: 20px 0; 
+    font-size: 24pt;
+}
+.student-info input { 
+    width: 100%; 
+    padding: 15px; 
+    font-size: 24pt; 
+    border: 2px solid #3498db; 
+    border-radius: 5px; 
+    margin-top: 10px; 
+    font-family: 'Verdana', 'Arial', sans-serif;
+}
 
 .concept-box {
     background: linear-gradient(135deg, #e8f4f8 0%, #d4e9f2 100%);
-    padding: 20px;
-    margin: 20px 0;
+    padding: 25px;
+    margin: 25px 0;
     border-left: 6px solid #3498db;
     border-radius: 8px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    font-size: 24pt;
 }
-.concept-box h3 { margin-top: 0; color: #2980b9; }
+.concept-box h3 { 
+    margin-top: 0; 
+    color: #2980b9; 
+    font-size: 26pt;
+}
+.concept-box p {
+    font-size: 24pt;
+    line-height: 1.6;
+}
+.concept-box ul {
+    font-size: 24pt;
+}
+.concept-box li {
+    font-size: 24pt;
+}
 
 .question {
     background: #f9f9f9;
-    padding: 20px;
-    margin: 20px 0;
+    padding: 25px;
+    margin: 25px 0;
     border-radius: 10px;
     border: 2px solid #ddd;
+    font-size: 24pt;
 }
-.question-title { font-weight: bold; font-size: 15pt; color: #2c3e50; margin-bottom: 15px; }
+.question-title { 
+    font-weight: bold; 
+    font-size: 24pt; 
+    color: #2c3e50; 
+    margin-bottom: 20px; 
+    line-height: 1.5;
+}
 .hint {
     background: #fff3cd;
     border-left: 4px solid #ffc107;
-    padding: 10px 15px;
-    margin: 10px 0;
+    padding: 15px 20px;
+    margin: 15px 0;
     border-radius: 5px;
     font-style: italic;
     color: #856404;
+    font-size: 24pt;
 }
 
 /* Multiple Choice Buttons */
-.mc-options { display: flex; flex-direction: column; gap: 10px; margin: 15px 0; }
+.mc-options { 
+    display: flex; 
+    flex-direction: column; 
+    gap: 15px; 
+    margin: 20px 0; 
+}
 .mc-button {
-    padding: 15px 20px;
-    font-size: 14pt;
+    padding: 20px 25px;
+    font-size: 24pt;
     border: 3px solid #3498db;
     background: white;
     border-radius: 8px;
     cursor: pointer;
     transition: all 0.3s;
     text-align: left;
+    font-family: 'Verdana', 'Arial', sans-serif;
+    line-height: 1.5;
 }
-.mc-button:hover { background: #e3f2fd; transform: translateX(5px); }
-.mc-button.selected { background: #3498db; color: white; border-color: #2980b9; }
+.mc-button:hover { 
+    background: #e3f2fd; 
+    transform: translateX(5px); 
+}
+.mc-button.selected { 
+    background: #3498db; 
+    color: white; 
+    border-color: #2980b9; 
+}
 
 /* Drag and Drop */
 .wordbank {
     background: #d4edda;
     border: 3px dashed #28a745;
-    padding: 15px;
-    margin: 15px 0;
+    padding: 20px;
+    margin: 20px 0;
     border-radius: 8px;
     display: flex;
     flex-wrap: wrap;
-    gap: 10px;
-    min-height: 80px;
+    gap: 15px;
+    min-height: 100px;
 }
 .word-tile {
-    padding: 12px 20px;
+    padding: 15px 25px;
     background: #28a745;
     color: white;
     border-radius: 8px;
     cursor: move;
-    font-size: 14pt;
+    font-size: 24pt;
     font-weight: bold;
     box-shadow: 0 2px 5px rgba(0,0,0,0.2);
     transition: transform 0.2s;
+    font-family: 'Verdana', 'Arial', sans-serif;
 }
 .word-tile:hover { transform: scale(1.05); }
 .word-tile.dragging { opacity: 0.5; }
 
 .drop-zone {
     display: inline-block;
-    min-width: 150px;
-    min-height: 45px;
+    min-width: 200px;
+    min-height: 60px;
     border: 3px dashed #6c757d;
     border-radius: 8px;
-    padding: 10px;
-    margin: 5px;
+    padding: 15px;
+    margin: 10px;
     background: #f8f9fa;
     vertical-align: middle;
     text-align: center;
-    line-height: 45px;
-    font-size: 14pt;
+    line-height: 1.2;
+    font-size: 24pt;
     font-weight: bold;
     color: #6c757d;
+    font-family: 'Verdana', 'Arial', sans-serif;
 }
-.drop-zone.filled { background: #28a745; color: white; border-color: #28a745; }
-.drop-zone.over { background: #ffeaa7; border-color: #fdcb6e; }
+.drop-zone.filled { 
+    background: #28a745; 
+    color: white; 
+    border-color: #28a745; 
+}
+.drop-zone.over { 
+    background: #ffeaa7; 
+    border-color: #fdcb6e; 
+}
 
 /* Punnett Square */
-.punnett-table { width: 100%; max-width: 500px; margin: 20px auto; border-collapse: collapse; }
+.punnett-table { 
+    width: 100%; 
+    max-width: 700px; 
+    margin: 25px auto; 
+    border-collapse: collapse; 
+}
 .punnett-table th, .punnett-table td { 
     border: 3px solid #2c3e50; 
-    padding: 20px; 
+    padding: 25px; 
     text-align: center; 
-    font-size: 16pt;
+    font-size: 24pt;
     background: white;
+    font-family: 'Verdana', 'Arial', sans-serif;
 }
-.punnett-table th { background: #3498db; color: white; font-weight: bold; }
-.punnett-table .drop-zone { width: 100%; min-width: 80px; }
+.punnett-table th { 
+    background: #3498db; 
+    color: white; 
+    font-weight: bold; 
+}
+.punnett-table .drop-zone { 
+    width: 100%; 
+    min-width: 100px; 
+}
+
+/* Regular table for data */
+table {
+    font-size: 24pt;
+    font-family: 'Verdana', 'Arial', sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+table th, table td {
+    padding: 15px;
+    font-size: 24pt;
+    border: 2px solid #333;
+}
+table th {
+    background: #d0d0d0;
+    font-weight: bold;
+}
 
 /* Submit Button */
-.submit-container { text-align: center; margin: 40px 0; }
+.submit-container { text-align: center; margin: 50px 0; }
 .submit-btn {
-    padding: 20px 60px;
-    font-size: 20pt;
+    padding: 25px 70px;
+    font-size: 28pt;
     font-weight: bold;
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: white;
@@ -142,6 +253,7 @@ h3 { color: #555; font-size: 16pt; margin-top: 20px; }
     cursor: pointer;
     box-shadow: 0 5px 15px rgba(0,0,0,0.3);
     transition: all 0.3s;
+    font-family: 'Verdana', 'Arial', sans-serif;
 }
 .submit-btn:hover {
     transform: translateY(-3px);
@@ -166,62 +278,65 @@ h3 { color: #555; font-size: 16pt; margin-top: 20px; }
 .modal.show { display: flex; }
 .modal-content {
     background: white;
-    padding: 40px;
+    padding: 50px;
     border-radius: 20px;
-    max-width: 800px;
+    max-width: 1000px;
     width: 100%;
     max-height: 90vh;
     overflow-y: auto;
     text-align: center;
     box-shadow: 0 10px 50px rgba(0,0,0,0.5);
     animation: slideIn 0.5s;
+    font-size: 24pt;
 }
 @keyframes slideIn {
     from { transform: translateY(-100px); opacity: 0; }
     to { transform: translateY(0); opacity: 1; }
 }
 .score-display {
-    font-size: 48pt;
+    font-size: 56pt;
     font-weight: bold;
     color: #27ae60;
     margin: 20px 0;
 }
 .percentage {
-    font-size: 36pt;
+    font-size: 44pt;
     color: #3498db;
     margin: 10px 0;
 }
 .close-btn {
     margin-top: 20px;
-    padding: 15px 40px;
-    font-size: 16pt;
+    padding: 18px 45px;
+    font-size: 24pt;
     background: #3498db;
     color: white;
     border: none;
     border-radius: 8px;
     cursor: pointer;
     transition: background 0.3s;
+    font-family: 'Verdana', 'Arial', sans-serif;
 }
 .close-btn:hover {
     background: #2980b9;
 }
 .export-btn {
     margin-top: 20px;
-    padding: 15px 40px;
-    font-size: 16pt;
+    padding: 18px 45px;
+    font-size: 24pt;
     background: #27ae60;
     color: white;
     border: none;
     border-radius: 8px;
     cursor: pointer;
     transition: background 0.3s;
+    font-family: 'Verdana', 'Arial', sans-serif;
 }
 .export-btn:hover {
     background: #229954;
 }
 .progress-bar {
     width: 100%;
-    height: 30px;
+    height: 40px;
     background: #ecf0f1;
     border-radius: 15px;
     overflow: hidden;
@@ -236,26 +351,27 @@ h3 { color: #555; font-size: 16pt; margin-top: 20px; }
     justify-content: center;
     color: white;
     font-weight: bold;
+    font-size: 24pt;
 }
 
 /* Feedback List */
 .feedback-section {
     margin-top: 30px;
     text-align: left;
-    max-height: 400px;
+    max-height: 500px;
     overflow-y: auto;
     border: 2px solid #ddd;
     border-radius: 10px;
-    padding: 20px;
+    padding: 25px;
     background: #f9f9f9;
 }
 .feedback-item {
-    padding: 12px;
-    margin: 8px 0;
+    padding: 15px;
+    margin: 10px 0;
     border-radius: 8px;
     border-left: 5px solid;
     background: white;
-    font-size: 13pt;
+    font-size: 24pt;
 }
 .feedback-item.correct {
     border-color: #27ae60;
@@ -266,35 +382,71 @@ h3 { color: #555; font-size: 16pt; margin-top: 20px; }
     background: #f8d7da;
 }
 .feedback-item .icon {
-    font-size: 18pt;
+    font-size: 28pt;
     margin-right: 10px;
     font-weight: bold;
 }
 .feedback-item .question-num {
     font-weight: bold;
     color: #2c3e50;
+    font-size: 24pt;
 }
 .feedback-item .your-answer {
     color: #e74c3c;
     font-style: italic;
+    font-size: 24pt;
 }
 .feedback-item .correct-answer {
     color: #27ae60;
     font-weight: bold;
+    font-size: 24pt;
 }
 .toggle-feedback-btn {
     margin-top: 15px;
-    padding: 12px 30px;
-    font-size: 14pt;
+    padding: 15px 35px;
+    font-size: 24pt;
     background: #3498db;
     color: white;
     border: none;
     border-radius: 8px;
     cursor: pointer;
     transition: background 0.3s;
+    font-family: 'Verdana', 'Arial', sans-serif;
 }
 .toggle-feedback-btn:hover {
     background: #2980b9;
+}
+
+/* Paragraphs and text elements */
+p {
+    font-size: 24pt;
+    line-height: 1.6;
+    font-family: 'Verdana', 'Arial', sans-serif;
+}
+
+em {
+    font-size: 24pt;
+}
+
+strong {
+    font-size: 24pt;
+}
+
+label {
+    font-size: 24pt;
+    font-family: 'Verdana', 'Arial', sans-serif;
+}
+
+ul, ol {
+    font-size: 24pt;
+}
+
+li {
+    font-size: 24pt;
+}
+
+span {
+    font-size: 24pt;
 }
 </style>
 </head>
@@ -596,7 +748,7 @@ h3 { color: #555; font-size: 16pt; margin-top: 20px; }
             <div class="word-tile" draggable="true">they move across ocean</div>
         </div>
 
-        <p style="font-size:15pt; line-height:2.5;">
+        <p style="font-size:24pt; line-height:2.5;">
             <span class="drop-zone" data-question="16a" data-answer="Sound|Light|Water"></span> waves transfer energy when 
             <span class="drop-zone" data-question="16b" data-answer="they vibrate through air|they travel from Sun to Earth|they move across ocean"></span>
         </p>
@@ -614,7 +766,7 @@ h3 { color: #555; font-size: 16pt; margin-top: 20px; }
             <div class="word-tile" draggable="true">crest</div>
         </div>
 
-        <p style="font-size:15pt;">
+        <p style="font-size:24pt;">
             Answer: <span class="drop-zone" data-question="17" data-answer="wavelength"></span>
         </p>
     </div>
@@ -630,7 +782,7 @@ h3 { color: #555; font-size: 16pt; margin-top: 20px; }
             <div class="word-tile" draggable="true">same</div>
         </div>
 
-        <p style="font-size:15pt;">
+        <p style="font-size:24pt;">
             Answer: <span class="drop-zone" data-question="18" data-answer="greater"></span>
         </p>
     </div>
@@ -647,7 +799,7 @@ h3 { color: #555; font-size: 16pt; margin-top: 20px; }
             <div class="word-tile" draggable="true">Nebula</div>
         </div>
 
-        <p style="font-size:15pt;">
+        <p style="font-size:24pt;">
             Answer: <span class="drop-zone" data-question="19" data-answer="Solar System"></span>
         </p>
     </div>
@@ -663,7 +815,7 @@ h3 { color: #555; font-size: 16pt; margin-top: 20px; }
             <div class="word-tile" draggable="true">1 million light years</div>
         </div>
 
-        <p style="font-size:15pt;">
+        <p style="font-size:24pt;">
             Answer: <span class="drop-zone" data-question="20" data-answer="100,000 light years"></span>
         </p>
     </div>
@@ -679,7 +831,7 @@ h3 { color: #555; font-size: 16pt; margin-top: 20px; }
             <div class="word-tile" draggable="true">fossils</div>
         </div>
 
-        <p style="font-size:15pt;">
+        <p style="font-size:24pt;">
             Answer: <span class="drop-zone" data-question="21" data-answer="clones"></span>
         </p>
     </div>
@@ -695,7 +847,7 @@ h3 { color: #555; font-size: 16pt; margin-top: 20px; }
             <div class="word-tile" draggable="true">C (Cytosine)</div>
         </div>
 
-        <p style="font-size:15pt;">
+        <p style="font-size:24pt;">
             Answer: <span class="drop-zone" data-question="22" data-answer="T (Thymine)"></span>
         </p>
     </div>
@@ -711,7 +863,7 @@ h3 { color: #555; font-size: 16pt; margin-top: 20px; }
             <div class="word-tile" draggable="true">Cenozoic</div>
         </div>
 
-        <p style="font-size:15pt;">
+        <p style="font-size:24pt;">
             Answer: <span class="drop-zone" data-question="23" data-answer="Mesozoic"></span>
         </p>
     </div>
@@ -738,7 +890,7 @@ h3 { color: #555; font-size: 16pt; margin-top: 20px; }
             <div class="word-tile" draggable="true">C</div>
         </div>
 
-        <p style="font-size:14pt; line-height:2.5;">
+        <p style="font-size:24pt; line-height:2.5;">
             DNA has <span class="drop-zone" data-question="24a" data-answer="two"></span> strands twisted together. 
             When DNA copies itself, the strands <span class="drop-zone" data-question="24b" data-answer="separate"></span>. 
             Each strand acts as a <span class="drop-zone" data-question="24c" data-answer="template"></span> to make a new matching strand. 
@@ -797,7 +949,7 @@ h3 { color: #555; font-size: 16pt; margin-top: 20px; }
             <div class="word-tile" draggable="true">100%</div>
         </div>
 
-        <p style="font-size:15pt;">
+        <p style="font-size:24pt;">
             Answer: <span class="drop-zone" data-question="26" data-answer="50%"></span>
         </p>
     </div>
@@ -820,26 +972,26 @@ h3 { color: #555; font-size: 16pt; margin-top: 20px; }
             <div class="word-tile" draggable="true">Line of origin</div>
         </div>
 
-        <table style="width:100%; border:none;">
+        <table style="width:100%; border:none; font-size:24pt;">
             <tr>
-                <td style="border:none; font-size:13pt;">Arrow A (pointing to TOP of wave):</td>
-                <td style="border:none;"><span class="drop-zone" data-question="27a" data-answer="Crest"></span></td>
+                <td style="border:none; font-size:24pt; padding:15px;">Arrow A (pointing to TOP of wave):</td>
+                <td style="border:none; padding:15px;"><span class="drop-zone" data-question="27a" data-answer="Crest"></span></td>
             </tr>
             <tr>
-                <td style="border:none; font-size:13pt;">Arrow B (pointing to BOTTOM of wave):</td>
-                <td style="border:none;"><span class="drop-zone" data-question="27b" data-answer="Trough"></span></td>
+                <td style="border:none; font-size:24pt; padding:15px;">Arrow B (pointing to BOTTOM of wave):</td>
+                <td style="border:none; padding:15px;"><span class="drop-zone" data-question="27b" data-answer="Trough"></span></td>
             </tr>
             <tr>
-                <td style="border:none; font-size:13pt;">Arrow C (crest to next crest):</td>
-                <td style="border:none;"><span class="drop-zone" data-question="27c" data-answer="Wavelength"></span></td>
+                <td style="border:none; font-size:24pt; padding:15px;">Arrow C (crest to next crest):</td>
+                <td style="border:none; padding:15px;"><span class="drop-zone" data-question="27c" data-answer="Wavelength"></span></td>
             </tr>
             <tr>
-                <td style="border:none; font-size:13pt;">Arrow D (middle to crest):</td>
-                <td style="border:none;"><span class="drop-zone" data-question="27d" data-answer="Amplitude"></span></td>
+                <td style="border:none; font-size:24pt; padding:15px;">Arrow D (middle to crest):</td>
+                <td style="border:none; padding:15px;"><span class="drop-zone" data-question="27d" data-answer="Amplitude"></span></td>
             </tr>
             <tr>
-                <td style="border:none; font-size:13pt;">Arrow E (horizontal middle line):</td>
-                <td style="border:none;"><span class="drop-zone" data-question="27e" data-answer="Line of origin"></span></td>
+                <td style="border:none; font-size:24pt; padding:15px;">Arrow E (horizontal middle line):</td>
+                <td style="border:none; padding:15px;"><span class="drop-zone" data-question="27e" data-answer="Line of origin"></span></td>
             </tr>
         </table>
     </div>
@@ -861,22 +1013,22 @@ h3 { color: #555; font-size: 16pt; margin-top: 20px; }
             <div class="word-tile" draggable="true">Pushes car up from road</div>
         </div>
 
-        <table style="width:100%; border:none;">
+        <table style="width:100%; border:none; font-size:24pt;">
             <tr>
-                <td style="border:none; font-size:13pt;">1. Driving force:</td>
-                <td style="border:none;"><span class="drop-zone" data-question="28a" data-answer="Pushes car forward"></span></td>
+                <td style="border:none; font-size:24pt; padding:15px;">1. Driving force:</td>
+                <td style="border:none; padding:15px;"><span class="drop-zone" data-question="28a" data-answer="Pushes car forward"></span></td>
             </tr>
             <tr>
-                <td style="border:none; font-size:13pt;">2. Friction:</td>
-                <td style="border:none;"><span class="drop-zone" data-question="28b" data-answer="Slows car down"></span></td>
+                <td style="border:none; font-size:24pt; padding:15px;">2. Friction:</td>
+                <td style="border:none; padding:15px;"><span class="drop-zone" data-question="28b" data-answer="Slows car down"></span></td>
             </tr>
             <tr>
-                <td style="border:none; font-size:13pt;">3. Weight:</td>
-                <td style="border:none;"><span class="drop-zone" data-question="28c" data-answer="Pulls car down"></span></td>
+                <td style="border:none; font-size:24pt; padding:15px;">3. Weight:</td>
+                <td style="border:none; padding:15px;"><span class="drop-zone" data-question="28c" data-answer="Pulls car down"></span></td>
             </tr>
             <tr>
-                <td style="border:none; font-size:13pt;">4. Normal force:</td>
-                <td style="border:none;"><span class="drop-zone" data-question="28d" data-answer="Pushes car up from road"></span></td>
+                <td style="border:none; font-size:24pt; padding:15px;">4. Normal force:</td>
+                <td style="border:none; padding:15px;"><span class="drop-zone" data-question="28d" data-answer="Pushes car up from road"></span></td>
             </tr>
         </table>
     </div>
@@ -900,7 +1052,7 @@ h3 { color: #555; font-size: 16pt; margin-top: 20px; }
             <div class="word-tile" draggable="true">30</div>
         </div>
 
-        <p style="font-size:14pt; line-height:2.5;">
+        <p style="font-size:24pt; line-height:2.5;">
             acceleration = (<span class="drop-zone" data-question="29a" data-answer="20"></span> - 
             <span class="drop-zone" data-question="29b" data-answer="0"></span>) ÷ 
             <span class="drop-zone" data-question="29c" data-answer="10"></span><br>
@@ -926,7 +1078,7 @@ h3 { color: #555; font-size: 16pt; margin-top: 20px; }
             <div class="word-tile" draggable="true">500</div>
         </div>
 
-        <p style="font-size:14pt; line-height:2.5;">
+        <p style="font-size:24pt; line-height:2.5;">
             Force = <span class="drop-zone" data-question="30a" data-answer="1000"></span> kg × 
             <span class="drop-zone" data-question="30b" data-answer="2"></span> m/s²<br>
             Force = <span class="drop-zone" data-question="30c" data-answer="2000"></span> N
@@ -957,7 +1109,7 @@ h3 { color: #555; font-size: 16pt; margin-top: 20px; }
             <div class="word-tile" draggable="true">4.0</div>
         </div>
 
-        <table style="width:100%;">
+        <table style="width:100%; font-size:24pt;">
             <tr>
                 <th>Week</th>
                 <th>Full Light (cm)</th>
@@ -1006,7 +1158,7 @@ h3 { color: #555; font-size: 16pt; margin-top: 20px; }
             <div class="word-tile" draggable="true">not important</div>
         </div>
 
-        <p style="font-size:14pt; line-height:2.5;">
+        <p style="font-size:24pt; line-height:2.5;">
             Plants with <span class="drop-zone" data-question="32a" data-answer="full"></span> light grew the 
             <span class="drop-zone" data-question="32b" data-answer="most"></span>. 
             Plants with <span class="drop-zone" data-question="32c" data-answer="no"></span> light grew the 
@@ -1025,17 +1177,17 @@ h3 { color: #555; font-size: 16pt; margin-top: 20px; }
 <!-- Results Modal -->
 <div class="modal" id="resultsModal">
     <div class="modal-content">
-        <h2 style="color:#2c3e50;">🎉 Exam Results 🎉</h2>
+        <h2 style="color:#2c3e50; font-size:32pt;">🎉 Exam Results 🎉</h2>
         <div class="score-display" id="scoreDisplay">0 / 70</div>
         <div class="percentage" id="percentageDisplay">0%</div>
         <div class="progress-bar">
             <div class="progress-fill" id="progressFill" style="width:0%;">0%</div>
         </div>
-        <p id="gradeComment" style="font-size:16pt; margin:20px 0;"></p>
+        <p id="gradeComment" style="font-size:24pt; margin:20px 0;"></p>
         
         <!-- Feedback Section -->
         <div class="feedback-section" id="feedbackSection" style="display:none;">
-            <h3 style="text-align:center; color:#2c3e50;">📋 Detailed Feedback</h3>
+            <h3 style="text-align:center; color:#2c3e50; font-size:28pt;">📋 Detailed Feedback</h3>
             <div id="feedbackList"></div>
         </div>
         
