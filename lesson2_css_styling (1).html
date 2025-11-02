@@ -1,0 +1,1169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LESSON 2: Advanced CSS Styling & Layout (Week 1, Part 2)</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
+            line-height: 1.7;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            background-color: #f8f9fa;
+            color: #333;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            color: #2c3e50;
+            border-bottom: 4px solid #667eea;
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+        }
+
+        h2 {
+            font-size: 2em;
+            color: #34495e;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            border-left: 5px solid #667eea;
+            padding-left: 20px;
+        }
+
+        h3 {
+            font-size: 1.5em;
+            color: #555;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+
+        p {
+            margin: 15px 0;
+        }
+
+        code {
+            background-color: #f4f4f4;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+            font-size: 0.9em;
+            color: #e83e8c;
+        }
+
+        pre {
+            background-color: #2d2d2d;
+            color: #f8f8f2;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            border-left: 5px solid #667eea;
+            margin: 20px 0;
+            font-size: 0.9em;
+        }
+
+        pre code {
+            background-color: transparent;
+            color: inherit;
+            padding: 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 25px 0;
+            background-color: white;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        th, td {
+            border: 1px solid #e0e0e0;
+            padding: 15px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #667eea;
+            color: white;
+            font-weight: 600;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        tr:hover {
+            background-color: #f0f0f0;
+        }
+
+        ul, ol {
+            margin: 15px 0;
+            padding-left: 40px;
+        }
+
+        li {
+            margin: 10px 0;
+        }
+
+        strong {
+            color: #2c3e50;
+            font-weight: 600;
+        }
+
+        hr {
+            border: none;
+            border-top: 3px solid #e0e0e0;
+            margin: 50px 0;
+        }
+
+        .section {
+            background-color: white;
+            padding: 30px;
+            margin: 25px 0;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+
+        .highlight-box {
+            background-color: #fff3cd;
+            border-left: 5px solid #ffc107;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+
+        .checklist {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .checklist li {
+            position: relative;
+            padding-left: 35px;
+            margin: 10px 0;
+        }
+
+        .checklist li:before {
+            content: "☐";
+            position: absolute;
+            left: 0;
+            font-size: 1.3em;
+            color: #667eea;
+        }
+
+        .ascii-art {
+            font-family: monospace;
+            white-space: pre;
+            background-color: #f8f9fa;
+            padding: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 5px;
+            overflow-x: auto;
+            font-size: 0.85em;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 20px 15px;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            h2 {
+                font-size: 1.6em;
+            }
+
+            h3 {
+                font-size: 1.3em;
+            }
+
+            .section {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<h1>LESSON 2: Advanced CSS Styling & Layout (Week 1, Part 2)</h1>
+
+<div class="section">
+    <h2>What You'll Learn Today</h2>
+    <ul>
+        <li>The CSS Box Model (margin, padding, border)</li>
+        <li>How to use classes and IDs to target specific elements</li>
+        <li>How to create card-style sections</li>
+        <li>How to add borders and shadows</li>
+        <li>How to create a professional-looking layout</li>
+        <li>More advanced CSS properties</li>
+    </ul>
+</div>
+
+<div class="section">
+    <h2>What You'll Build</h2>
+    <p>By the end of this lesson, your webpage will have:</p>
+    <ul>
+        <li>Organized card sections with backgrounds</li>
+        <li>Borders and shadows for depth</li>
+        <li>A color scheme that looks professional</li>
+        <li>Highlighted important text</li>
+        <li>Much better overall design!</li>
+    </ul>
+</div>
+
+<hr>
+
+<div class="section">
+    <h2>PART 1: Review and Setup (5 minutes)</h2>
+
+    <h3>Step 1: Open Your Codespace</h3>
+    <p><strong>1.1</strong> Go to your GitHub repository: <code>https://github.com/YourUsername/my-first-website</code></p>
+    <p><strong>1.2</strong> Click the green "Code" button</p>
+    <p><strong>1.3</strong> Click "Codespaces" tab</p>
+    <p><strong>1.4</strong> Click on your existing codespace (or create a new one if needed)</p>
+    <p><strong>1.5</strong> Wait for it to load</p>
+
+    <h3>Step 2: Open Your Files and Live Server</h3>
+    <p><strong>2.1</strong> Click <code>index.html</code> in the file explorer to open it</p>
+    <p><strong>2.2</strong> Right-click in the file and select "Open with Live Server"</p>
+    <p><strong>2.3</strong> Your webpage opens in a browser</p>
+    <p><strong>2.4</strong> Open <code>styles.css</code> in another tab (click it in file explorer)</p>
+    <p><strong>Now you can edit CSS and see changes immediately!</strong></p>
+</div>
+
+<hr>
+
+<div class="section">
+    <h2>PART 2: Understanding the CSS Box Model (15 minutes)</h2>
+
+    <h3>What is the Box Model?</h3>
+    <p>Every HTML element is a <strong>box</strong>. The CSS Box Model describes how these boxes work.</p>
+
+    <p><strong>Think of it like a picture frame:</strong></p>
+    <div class="ascii-art">┌─────────────────────────────┐
+│       MARGIN (outside)      │  ← Space between elements
+│  ┌────────────────────────┐ │
+│  │     BORDER (frame)     │ │  ← Line around the element
+│  │ ┌────────────────────┐ │ │
+│  │ │  PADDING (inside)  │ │ │  ← Space inside border
+│  │ │ ┌────────────────┐ │ │ │
+│  │ │ │   CONTENT      │ │ │ │  ← Your actual content
+│  │ │ │  (text/image)  │ │ │ │
+│  │ │ └────────────────┘ │ │ │
+│  │ └────────────────────┘ │ │
+│  └────────────────────────┘ │
+└─────────────────────────────┘</div>
+
+    <p><strong>The four parts:</strong></p>
+    <ol>
+        <li><strong>Content</strong> - Your text, images, etc.</li>
+        <li><strong>Padding</strong> - Space INSIDE the border (between content and border)</li>
+        <li><strong>Border</strong> - A line around the element</li>
+        <li><strong>Margin</strong> - Space OUTSIDE the border (between elements)</li>
+    </ol>
+
+    <h3>Step 1: See the Box Model in Action</h3>
+    <p><strong>1.1</strong> Add this temporary code to your <code>styles.css</code>:</p>
+
+<pre><code>/* Temporary - to visualize the box model */
+h2 {
+    background-color: lightblue;
+    padding: 20px;
+    border: 3px solid darkblue;
+    margin: 30px;
+}</code></pre>
+
+    <p><strong>1.2</strong> Save and look at your browser</p>
+
+    <p><strong>You should see:</strong></p>
+    <ul>
+        <li>Light blue background (the content area)</li>
+        <li>Dark blue border around each h2</li>
+        <li>Space inside the border (padding)</li>
+        <li>Space outside the border (margin)</li>
+    </ul>
+
+    <p><strong>1.3</strong> Now try changing the values:</p>
+
+<pre><code>h2 {
+    background-color: lightblue;
+    padding: 50px;           /* Make padding bigger */
+    border: 10px solid darkblue;  /* Make border thicker */
+    margin: 50px;            /* Make margin bigger */
+}</code></pre>
+
+    <p>Save and see the difference!</p>
+
+    <h3>Understanding Spacing Values</h3>
+    <p>You can set spacing for all sides at once, or individually:</p>
+
+    <p><strong>All sides the same:</strong></p>
+<pre><code>padding: 20px;  /* 20px on all sides */</code></pre>
+
+    <p><strong>Different for each side (Top, Right, Bottom, Left):</strong></p>
+<pre><code>padding: 10px 20px 30px 40px;
+/* Top: 10px, Right: 20px, Bottom: 30px, Left: 40px */</code></pre>
+
+    <p><strong>Top/Bottom and Left/Right:</strong></p>
+<pre><code>padding: 20px 40px;
+/* Top and Bottom: 20px, Left and Right: 40px */</code></pre>
+
+    <p><strong>Individual sides:</strong></p>
+<pre><code>padding-top: 10px;
+padding-right: 20px;
+padding-bottom: 30px;
+padding-left: 40px;</code></pre>
+
+    <p><strong>Same rules apply to margin and border!</strong></p>
+
+    <h3>Step 2: Remove Temporary Code</h3>
+    <p><strong>2.1</strong> Delete or comment out the temporary h2 styling we just added</p>
+    <p><strong>2.2</strong> We'll add better styling next!</p>
+</div>
+
+<hr>
+
+<div class="section">
+    <h2>PART 3: Using Classes and IDs (15 minutes)</h2>
+
+    <h3>What Are Classes and IDs?</h3>
+    <p>So far, we've styled ALL elements of the same type:</p>
+    <ul>
+        <li>ALL <code>&lt;h1&gt;</code> headings look the same</li>
+        <li>ALL <code>&lt;p&gt;</code> paragraphs look the same</li>
+    </ul>
+
+    <p>But what if you want to style SPECIFIC elements differently?</p>
+    <p><strong>That's where classes and IDs come in!</strong></p>
+
+    <h3>Classes vs IDs</h3>
+    <p><strong>CLASS:</strong></p>
+    <ul>
+        <li>Can be used on MULTIPLE elements</li>
+        <li>Use a dot (<code>.</code>) in CSS</li>
+        <li>Use for styling groups of elements</li>
+    </ul>
+
+    <p><strong>ID:</strong></p>
+    <ul>
+        <li>Can ONLY be used on ONE element per page</li>
+        <li>Use a hashtag (<code>#</code>) in CSS</li>
+        <li>Use for unique elements</li>
+    </ul>
+
+    <p><strong>Analogy:</strong></p>
+    <ul>
+        <li><strong>Class</strong> = School uniform (many students wear it)</li>
+        <li><strong>ID</strong> = Your student ID number (only you have it)</li>
+    </ul>
+
+    <h3>Step 1: Understanding Class Syntax</h3>
+    <p><strong>In HTML, add a class:</strong></p>
+<pre><code>&lt;p class="highlight"&gt;This paragraph is special!&lt;/p&gt;</code></pre>
+
+    <p><strong>In CSS, style the class:</strong></p>
+<pre><code>.highlight {
+    background-color: yellow;
+    font-weight: bold;
+}</code></pre>
+
+    <p><strong>Notice the dot (<code>.</code>) before the class name in CSS!</strong></p>
+
+    <h3>Step 2: Create a Highlight Class</h3>
+    <p><strong>2.1</strong> In your <code>styles.css</code>, add this code:</p>
+
+<pre><code>/* Highlight class for important text */
+.highlight {
+    background-color: #fff3cd;
+    color: #856404;
+    padding: 3px 8px;
+    border-radius: 5px;
+    font-weight: bold;
+}</code></pre>
+
+    <p><strong>What do these properties do?</strong></p>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Property</th>
+                <th>Value</th>
+                <th>What It Does</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><code>background-color</code></td>
+                <td><code>#fff3cd</code></td>
+                <td>Light yellow background</td>
+            </tr>
+            <tr>
+                <td><code>color</code></td>
+                <td><code>#856404</code></td>
+                <td>Dark orange text</td>
+            </tr>
+            <tr>
+                <td><code>padding</code></td>
+                <td><code>3px 8px</code></td>
+                <td>Space inside (top/bottom: 3px, left/right: 8px)</td>
+            </tr>
+            <tr>
+                <td><code>border-radius</code></td>
+                <td><code>5px</code></td>
+                <td>Rounds the corners</td>
+            </tr>
+            <tr>
+                <td><code>font-weight</code></td>
+                <td><code>bold</code></td>
+                <td>Makes text bold</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <p><strong>2.2</strong> Save the CSS file</p>
+    <p><strong>2.3</strong> Now use it in your HTML! Open <code>index.html</code></p>
+    <p><strong>2.4</strong> Find a sentence in one of your paragraphs and wrap part of it with <code>&lt;span&gt;</code>:</p>
+
+    <p><strong>Before:</strong></p>
+<pre><code>&lt;p&gt;I'm 16 years old and I love coding!&lt;/p&gt;</code></pre>
+
+    <p><strong>After:</strong></p>
+<pre><code>&lt;p&gt;I'm 16 years old and I &lt;span class="highlight"&gt;love coding!&lt;/span&gt;&lt;/p&gt;</code></pre>
+
+    <p><strong>What is <code>&lt;span&gt;</code>?</strong></p>
+    <ul>
+        <li>A generic inline container (doesn't create a new line)</li>
+        <li>Perfect for styling part of a sentence</li>
+        <li>Invisible until you style it with CSS!</li>
+    </ul>
+
+    <p><strong>2.5</strong> Save <code>index.html</code> and check your browser</p>
+    <p><strong>You should see the highlighted text with a yellow background!</strong></p>
+
+    <p><strong>2.6</strong> Try adding more highlights in different places:</p>
+<pre><code>&lt;p&gt;My favorite hobby is &lt;span class="highlight"&gt;playing video games&lt;/span&gt;!&lt;/p&gt;</code></pre>
+
+    <h3>Step 3: Create Card Sections</h3>
+    <p>Now let's create beautiful card-style sections for your content!</p>
+
+    <p><strong>3.1</strong> In <code>styles.css</code>, add this card class:</p>
+
+<pre><code>/* Card container styling */
+.card {
+    background-color: white;
+    padding: 30px;
+    margin: 20px 0;
+    border-radius: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}</code></pre>
+
+    <p><strong>New property - box-shadow:</strong></p>
+    <p><code>box-shadow: horizontal vertical blur color;</code></p>
+
+    <ul>
+        <li><code>0</code> - No horizontal offset</li>
+        <li><code>4px</code> - 4px down</li>
+        <li><code>6px</code> - Blur radius (how soft the shadow is)</li>
+        <li><code>rgba(0, 0, 0, 0.1)</code> - Black color at 10% opacity (transparent)</li>
+    </ul>
+
+    <p><strong>This creates a subtle shadow under the element!</strong></p>
+
+    <p><strong>3.2</strong> Save the CSS</p>
+    <p><strong>3.3</strong> Now wrap your content in cards! Open <code>index.html</code></p>
+    <p><strong>3.4</strong> Find your "About Me" section and wrap it in a div with the card class:</p>
+
+    <p><strong>Before:</strong></p>
+<pre><code>&lt;h2&gt;About Me&lt;/h2&gt;
+&lt;p&gt;Hi! My name is Jordan...&lt;/p&gt;
+&lt;p&gt;I'm 16 years old...&lt;/p&gt;</code></pre>
+
+    <p><strong>After:</strong></p>
+<pre><code>&lt;div class="card"&gt;
+    &lt;h2&gt;About Me&lt;/h2&gt;
+    &lt;p&gt;Hi! My name is Jordan...&lt;/p&gt;
+    &lt;p&gt;I'm 16 years old...&lt;/p&gt;
+&lt;/div&gt;</code></pre>
+
+    <p><strong>What is <code>&lt;div&gt;</code>?</strong></p>
+    <ul>
+        <li>A generic container element</li>
+        <li>Creates a "box" around content</li>
+        <li>Perfect for grouping and styling sections</li>
+    </ul>
+
+    <p><strong>3.5</strong> Do the same for your hobbies section:</p>
+
+<pre><code>&lt;div class="card"&gt;
+    &lt;h2&gt;My Hobbies&lt;/h2&gt;
+    &lt;ul&gt;
+        &lt;li&gt;Playing video games&lt;/li&gt;
+        &lt;li&gt;Drawing and digital art&lt;/li&gt;
+        &lt;li&gt;Playing basketball&lt;/li&gt;
+    &lt;/ul&gt;
+&lt;/div&gt;</code></pre>
+
+    <p><strong>3.6</strong> And your image section:</p>
+
+<pre><code>&lt;div class="card"&gt;
+    &lt;h2&gt;A Cool Image&lt;/h2&gt;
+    &lt;img src="https://picsum.photos/500/300" alt="A random photo"&gt;
+&lt;/div&gt;</code></pre>
+
+    <p><strong>3.7</strong> Save and check your browser!</p>
+
+    <p><strong>Your page should now have:</strong></p>
+    <ul>
+        <li>White boxes around each section</li>
+        <li>Shadows under the boxes</li>
+        <li>Rounded corners</li>
+        <li>Better separation between sections</li>
+    </ul>
+
+    <p><strong>Looks much more professional, right?</strong></p>
+</div>
+
+<hr>
+
+<div class="section">
+    <h2>PART 4: Advanced Styling Techniques (15 minutes)</h2>
+
+    <h3>Step 1: Create a Header Section</h3>
+    <p>Let's make your main heading stand out even more!</p>
+
+    <p><strong>1.1</strong> In <code>index.html</code>, wrap your <code>&lt;h1&gt;</code> in a special div:</p>
+
+    <p><strong>Before:</strong></p>
+<pre><code>&lt;h1&gt;Welcome to Sarah's Website&lt;/h1&gt;</code></pre>
+
+    <p><strong>After:</strong></p>
+<pre><code>&lt;div class="header"&gt;
+    &lt;h1&gt;Welcome to Sarah's Website&lt;/h1&gt;
+    &lt;p class="tagline"&gt;Learning to code, one line at a time!&lt;/p&gt;
+&lt;/div&gt;</code></pre>
+
+    <p><strong>1.2</strong> In <code>styles.css</code>, add these styles:</p>
+
+<pre><code>/* Header section */
+.header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 60px 30px;
+    text-align: center;
+    border-radius: 15px;
+    margin-bottom: 30px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.header h1 {
+    color: white;
+    font-size: 48px;
+    margin: 0;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.tagline {
+    font-size: 20px;
+    margin: 15px 0 0 0;
+    opacity: 0.9;
+}</code></pre>
+
+    <p><strong>New properties explained:</strong></p>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Property</th>
+                <th>What It Does</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><code>background: linear-gradient()</code></td>
+                <td>Creates a color gradient (blend between colors)</td>
+            </tr>
+            <tr>
+                <td><code>text-shadow</code></td>
+                <td>Adds shadow to text (makes it pop!)</td>
+            </tr>
+            <tr>
+                <td><code>opacity</code></td>
+                <td>Transparency (0 = invisible, 1 = solid)</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <p><strong>Understanding Gradients:</strong></p>
+<pre><code>linear-gradient(direction, color1, color2);</code></pre>
+
+    <ul>
+        <li><code>135deg</code> - Angle (0deg = up, 90deg = right, 135deg = diagonal)</li>
+        <li><code>#667eea 0%</code> - First color at start</li>
+        <li><code>#764ba2 100%</code> - Second color at end</li>
+    </ul>
+
+    <p><strong>Try different gradient colors:</strong></p>
+
+    <p><strong>Option A - Ocean Blue:</strong></p>
+<pre><code>background: linear-gradient(135deg, #0093E9 0%, #80D0C7 100%);</code></pre>
+
+    <p><strong>Option B - Sunset:</strong></p>
+<pre><code>background: linear-gradient(135deg, #FA8BFF 0%, #2BD2FF 90%);</code></pre>
+
+    <p><strong>Option C - Forest:</strong></p>
+<pre><code>background: linear-gradient(135deg, #0F2027 0%, #203A43 50%, #2C5364 100%);</code></pre>
+
+    <p><strong>1.3</strong> Save and check your browser!</p>
+
+    <p>Your header should now look amazing with:</p>
+    <ul>
+        <li>A gradient background</li>
+        <li>White text with shadow</li>
+        <li>A tagline underneath</li>
+        <li>Larger size and centered</li>
+    </ul>
+
+    <h3>Step 2: Add Borders to Cards</h3>
+    <p>Let's make the cards even nicer with colored borders!</p>
+
+    <p><strong>2.1</strong> Update your <code>.card</code> style in <code>styles.css</code>:</p>
+
+<pre><code>.card {
+    background-color: white;
+    padding: 30px;
+    margin: 20px 0;
+    border-radius: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-left: 5px solid #667eea;  /* Add this line */
+    transition: transform 0.3s ease;  /* Add this line */
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
+}</code></pre>
+
+    <p><strong>New concepts:</strong></p>
+
+    <p><strong>border-left:</strong> Only adds border to the left side (you can do <code>border-right</code>, <code>border-top</code>, <code>border-bottom</code> too!)</p>
+
+    <p><strong>transition:</strong> Makes changes smooth (animated)</p>
+
+    <p><strong>:hover</strong> - A special selector that applies when you mouse over the element!</p>
+
+    <p><strong>What this does:</strong></p>
+    <ul>
+        <li>Adds a colored bar on the left of each card</li>
+        <li>When you hover over a card, it lifts up slightly!</li>
+        <li>The shadow gets bigger</li>
+        <li>It all animates smoothly!</li>
+    </ul>
+
+    <p><strong>2.2</strong> Save and test by hovering over your cards!</p>
+
+    <h3>Step 3: Style Your List Better</h3>
+
+    <p><strong>3.1</strong> Add this to your <code>styles.css</code>:</p>
+
+<pre><code>/* Better list styling */
+ul {
+    list-style: none;  /* Removes default bullets */
+    padding-left: 0;
+}
+
+li {
+    color: #555;
+    font-size: 16px;
+    margin: 12px 0;
+    padding-left: 30px;
+    position: relative;
+}
+
+li:before {
+    content: "✓";
+    color: #667eea;
+    font-weight: bold;
+    font-size: 20px;
+    position: absolute;
+    left: 0;
+}</code></pre>
+
+    <p><strong>What's happening here?</strong></p>
+    <ul>
+        <li><code>list-style: none;</code> - Removes the default black dots</li>
+        <li><code>li:before</code> - Adds content BEFORE each list item</li>
+        <li><code>content: "✓";</code> - Adds a checkmark symbol</li>
+        <li><code>position: absolute;</code> - Allows precise positioning</li>
+    </ul>
+
+    <p><strong>You can change the checkmark to other symbols:</strong></p>
+    <ul>
+        <li><code>content: "★";</code> - Star</li>
+        <li><code>content: "♥";</code> - Heart</li>
+        <li><code>content: "▸";</code> - Arrow</li>
+        <li><code>content: "●";</code> - Dot</li>
+    </ul>
+
+    <p><strong>3.2</strong> Save and check your list!</p>
+    <p>Your hobbies should now have colorful checkmarks instead of boring bullets!</p>
+
+    <h3>Step 4: Add a Footer</h3>
+
+    <p><strong>4.1</strong> In <code>index.html</code>, add this at the BOTTOM, just before <code>&lt;/body&gt;</code>:</p>
+
+<pre><code>&lt;div class="footer"&gt;
+    &lt;p&gt;Created by [Your Name] | 2025&lt;/p&gt;
+    &lt;p&gt;Learning Web Development 🚀&lt;/p&gt;
+&lt;/div&gt;</code></pre>
+
+    <p><strong>4.2</strong> In <code>styles.css</code>, add:</p>
+
+<pre><code>/* Footer styling */
+.footer {
+    background-color: #2c3e50;
+    color: white;
+    text-align: center;
+    padding: 30px;
+    margin-top: 40px;
+    border-radius: 15px;
+}
+
+.footer p {
+    margin: 5px 0;
+    color: white;
+}</code></pre>
+
+    <p><strong>4.3</strong> Save and scroll to the bottom of your page!</p>
+</div>
+
+<hr>
+
+<div class="section">
+    <h2>PART 5: Creating a Color Scheme (10 minutes)</h2>
+
+    <h3>Why Color Schemes Matter</h3>
+    <p>Professional websites use a consistent color scheme (3-5 colors used throughout).</p>
+
+    <p><strong>Your current colors:</strong></p>
+    <ul>
+        <li>Purple/Blue gradient: <code>#667eea</code></li>
+        <li>Dark text: <code>#333</code></li>
+        <li>Gray text: <code>#555</code></li>
+        <li>Light background: <code>#f0f0f0</code></li>
+    </ul>
+
+    <h3>Step 1: Choose a Theme</h3>
+    <p>Pick ONE color scheme and update your CSS:</p>
+
+    <p><strong>OPTION A - Ocean Theme (Blues and Teals)</strong></p>
+    <p>Update these values in your CSS:</p>
+
+<pre><code>.header {
+    background: linear-gradient(135deg, #0093E9 0%, #80D0C7 100%);
+}
+
+.card {
+    border-left: 5px solid #0093E9;
+}
+
+h2 {
+    color: #0093E9;
+}
+
+li:before {
+    color: #0093E9;
+}</code></pre>
+
+    <p><strong>OPTION B - Sunset Theme (Pinks and Oranges)</strong></p>
+
+<pre><code>.header {
+    background: linear-gradient(135deg, #FA8BFF 0%, #2BD2FF 90%);
+}
+
+.card {
+    border-left: 5px solid #FA8BFF;
+}
+
+h2 {
+    color: #d946ef;
+}
+
+li:before {
+    color: #FA8BFF;
+}</code></pre>
+
+    <p><strong>OPTION C - Nature Theme (Greens)</strong></p>
+
+<pre><code>.header {
+    background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+}
+
+.card {
+    border-left: 5px solid #11998e;
+}
+
+h2 {
+    color: #059669;
+}
+
+li:before {
+    color: #11998e;
+}</code></pre>
+
+    <p><strong>OPTION D - Keep Your Own Colors!</strong></p>
+    <p>If you like what you have, keep it! Or mix and match!</p>
+
+    <h3>Step 2: Fine-Tune Your Design</h3>
+
+    <p><strong>2.1</strong> Adjust spacing if things feel cramped:</p>
+
+<pre><code>body {
+    padding: 40px;
+    max-width: 900px;
+    margin: 0 auto;
+}</code></pre>
+
+    <p><strong>What does <code>max-width</code> and <code>margin: 0 auto</code> do?</strong></p>
+    <ul>
+        <li><code>max-width: 900px;</code> - Content won't get wider than 900px</li>
+        <li><code>margin: 0 auto;</code> - Centers the content on the page</li>
+    </ul>
+
+    <p><strong>2.2</strong> Make your image better:</p>
+
+<pre><code>img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: block;
+    margin: 20px auto;
+    transition: transform 0.3s ease;
+}
+
+img:hover {
+    transform: scale(1.05);
+}</code></pre>
+
+    <p>Now your image zooms slightly when you hover over it!</p>
+</div>
+
+<hr>
+
+<div class="section">
+    <h2>PART 6: Responsive Design Basics (10 minutes)</h2>
+
+    <h3>What is Responsive Design?</h3>
+    <p>Your webpage should look good on different screen sizes:</p>
+    <ul>
+        <li>Desktop computers (wide)</li>
+        <li>Tablets (medium)</li>
+        <li>Phones (narrow)</li>
+    </ul>
+
+    <h3>Step 1: Add Mobile-Friendly Meta Tag</h3>
+    <p><strong>1.1</strong> Check your <code>index.html</code> - you should already have this in <code>&lt;head&gt;</code>:</p>
+
+<pre><code>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</code></pre>
+
+    <p><strong>If not, add it!</strong> This tells mobile browsers to show the page at the right size.</p>
+
+    <h3>Step 2: Add a Media Query</h3>
+    <p>Media queries change styles based on screen size!</p>
+
+    <p><strong>2.1</strong> Add this at the VERY BOTTOM of your <code>styles.css</code>:</p>
+
+<pre><code>/* Mobile responsive design */
+@media (max-width: 768px) {
+    body {
+        padding: 10px;
+    }
+
+    .header h1 {
+        font-size: 32px;
+    }
+
+    .card {
+        padding: 20px;
+    }
+
+    .footer {
+        padding: 20px;
+    }
+}</code></pre>
+
+    <p><strong>What does this mean?</strong></p>
+    <ul>
+        <li><code>@media (max-width: 768px)</code> - "If screen is 768px wide or less..."</li>
+        <li>Everything inside <code>{ }</code> only applies on small screens</li>
+        <li>Makes padding smaller, fonts smaller, etc.</li>
+    </ul>
+
+    <p><strong>2.2</strong> Test it!</p>
+    <p>In your browser, press F12 to open Developer Tools</p>
+    <p>Click the device icon (looks like a phone) in the top-left</p>
+    <p>Now you can see how your site looks on different devices!</p>
+</div>
+
+<hr>
+
+<div class="section">
+    <h2>PART 7: Final Touches (5 minutes)</h2>
+
+    <h3>Step 1: Add Some Fun Effects</h3>
+
+    <p><strong>1.1</strong> Make links change color on hover (if you have any):</p>
+
+<pre><code>a {
+    color: #667eea;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: #764ba2;
+    text-decoration: underline;
+}</code></pre>
+
+    <p><strong>1.2</strong> Add a smooth scroll behavior:</p>
+
+<pre><code>html {
+    scroll-behavior: smooth;
+}</code></pre>
+
+    <p>This makes the page scroll smoothly instead of jumping!</p>
+
+    <h3>Step 2: Add Comments to Your CSS</h3>
+
+    <p><strong>2.1</strong> Add comments to organize your CSS file:</p>
+
+<pre><code>/* ========================================
+   BASE STYLES
+   ======================================== */
+
+/* Body and general layout */
+body {
+    ...
+}
+
+/* ========================================
+   HEADER SECTION
+   ======================================== */
+
+.header {
+    ...
+}
+
+/* ========================================
+   CARD COMPONENTS
+   ======================================== */
+
+.card {
+    ...
+}</code></pre>
+
+    <p><strong>Why?</strong> Comments help you (and others) understand your code!</p>
+</div>
+
+<hr>
+
+<div class="section">
+    <h2>PART 8: Saving Your Work (5 minutes)</h2>
+    <p>Time to commit your amazing progress!</p>
+
+    <h3>Step 1: Git Add, Commit, Push</h3>
+
+    <p><strong>1.1</strong> Open the Terminal (Ctrl + `)</p>
+    <p><strong>1.2</strong> Run these commands:</p>
+
+<pre><code>git status</code></pre>
+
+    <p>See what changed? Probably <code>index.html</code> and <code>styles.css</code></p>
+
+<pre><code>git add .</code></pre>
+
+    <p>Stages all changes</p>
+
+<pre><code>git commit -m "Add advanced CSS styling with cards, gradients, and responsive design"</code></pre>
+
+    <p>Saves with a descriptive message</p>
+
+<pre><code>git push</code></pre>
+
+    <p>Uploads to GitHub!</p>
+
+    <h3>Step 2: Verify on GitHub</h3>
+    <p><strong>2.1</strong> Go to your repository on GitHub.com</p>
+    <p><strong>2.2</strong> Check that your latest commit appears</p>
+    <p><strong>2.3</strong> Click on <code>styles.css</code> to see all your beautiful CSS code!</p>
+</div>
+
+<hr>
+
+<div class="section">
+    <h2>LESSON 2 CHECKLIST - Did You Complete Everything?</h2>
+
+    <p><strong>CSS Box Model:</strong></p>
+    <ul class="checklist">
+        <li>Understand margin, padding, border, content</li>
+        <li>Can adjust spacing on elements</li>
+        <li>Know how to use <code>px</code> values</li>
+    </ul>
+
+    <p><strong>Classes and IDs:</strong></p>
+    <ul class="checklist">
+        <li>Created a <code>.highlight</code> class</li>
+        <li>Created a <code>.card</code> class</li>
+        <li>Applied classes to HTML elements with <code>class="name"</code></li>
+        <li>Understand the difference between classes and IDs</li>
+    </ul>
+
+    <p><strong>Advanced Styling:</strong></p>
+    <ul class="checklist">
+        <li>Created a gradient header with <code>.header</code></li>
+        <li>Added shadows with <code>box-shadow</code></li>
+        <li>Added borders to cards</li>
+        <li>Styled lists with custom bullets</li>
+        <li>Created a footer section</li>
+        <li>Added hover effects with <code>:hover</code></li>
+        <li>Used transitions for smooth animations</li>
+    </ul>
+
+    <p><strong>Layout & Design:</strong></p>
+    <ul class="checklist">
+        <li>Centered content with <code>margin: 0 auto</code></li>
+        <li>Set maximum width with <code>max-width</code></li>
+        <li>Used <code>border-radius</code> for rounded corners</li>
+        <li>Applied consistent color scheme</li>
+        <li>Made images responsive</li>
+    </ul>
+
+    <p><strong>Responsive Design:</strong></p>
+    <ul class="checklist">
+        <li>Added meta viewport tag</li>
+        <li>Created media query for mobile</li>
+        <li>Tested on different screen sizes</li>
+    </ul>
+
+    <p><strong>Git:</strong></p>
+    <ul class="checklist">
+        <li>Committed changes with good message</li>
+        <li>Pushed to GitHub</li>
+        <li>Verified code online</li>
+    </ul>
+</div>
+
+<hr>
+
+<div class="section">
+    <h2>Homework Before Lesson 3</h2>
+
+    <p><strong>1. Add More Sections:</strong></p>
+    <p>Create at least 2 more card sections with new content:</p>
+
+<pre><code>&lt;div class="card"&gt;
+    &lt;h2&gt;My Favorite Things&lt;/h2&gt;
+    &lt;ul&gt;
+        &lt;li&gt;Favorite movie: [movie name]&lt;/li&gt;
+        &lt;li&gt;Favorite food: [food]&lt;/li&gt;
+        &lt;li&gt;Favorite song: [song]&lt;/li&gt;
+    &lt;/ul&gt;
+&lt;/div&gt;</code></pre>
+
+    <p><strong>2. Experiment with Colors:</strong></p>
+    <p>Try creating your own color scheme! Use a color picker tool:</p>
+    <ul>
+        <li>Google "color picker"</li>
+        <li>Or visit: coolors.co for palette ideas</li>
+    </ul>
+
+    <p><strong>3. Add More Hover Effects:</strong></p>
+    <p>Make other elements interactive:</p>
+
+<pre><code>h2:hover {
+    color: #667eea;
+    transform: scale(1.05);
+    transition: all 0.3s ease;
+}</code></pre>
+
+    <p><strong>4. Challenge - Create a Skills Section:</strong></p>
+    <p>Add a section showing your skills with colored bars:</p>
+
+<pre><code>&lt;div class="card"&gt;
+    &lt;h2&gt;My Skills&lt;/h2&gt;
+    &lt;div class="skill"&gt;
+        &lt;p&gt;HTML&lt;/p&gt;
+        &lt;div class="skill-bar"&gt;
+            &lt;div class="skill-level" style="width: 80%;"&gt;&lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+
+<pre><code>.skill-bar {
+    background-color: #e0e0e0;
+    border-radius: 10px;
+    height: 20px;
+    margin: 10px 0;
+}
+
+.skill-level {
+    background: linear-gradient(90deg, #667eea, #764ba2);
+    height: 100%;
+    border-radius: 10px;
+    transition: width 1s ease;
+}</code></pre>
+
+    <p><strong>5. Commit Everything:</strong></p>
+<pre><code>git add .
+git commit -m "Add new sections and custom styling"
+git push</code></pre>
+</div>
+
+<hr>
+
+<div class="section">
+    <h2>Get Ready for Lesson 3!</h2>
+
+    <p>In Lessons 3 & 4, we'll learn <strong>JavaScript</strong> - how to make your website interactive!</p>
+
+    <p>We'll add:</p>
+    <ul>
+        <li>Buttons that do things when clicked</li>
+        <li>Forms that respond to user input</li>
+        <li>Dynamic content that changes</li>
+        <li>Animations and effects</li>
+        <li>Much more!</li>
+    </ul>
+</div>
+
+<hr>
+
+<div class="highlight-box">
+    <h2>🎉 Congratulations!</h2>
+
+    <p>Your website now looks professional with:</p>
+    <ul>
+        <li>Beautiful cards and sections</li>
+        <li>Gradient backgrounds</li>
+        <li>Hover effects and animations</li>
+        <li>Consistent color scheme</li>
+        <li>Responsive design for mobile!</li>
+    </ul>
+
+    <p><strong>You're doing amazing! See you in Lesson 3 where we add JavaScript interactivity!</strong></p>
+</div>
+
+</body>
+</html>
