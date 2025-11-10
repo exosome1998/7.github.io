@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Year 8 Science Revision Worksheet - NSW NESA</title>
+    <style>
+        @media print {
+            @page { margin: 0.5cm; size: A4; }
+            body { font-size: 9pt; }
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: Arial, sans-serif; font-size: 9pt; line-height: 1.3; padding: 0.5cm; }
+        .header { text-align: center; margin-bottom: 8px; padding-bottom: 5px; border-bottom: 2px solid #000; }
+        .header h1 { font-size: 14pt; margin-bottom: 3px; }
+        .header p { font-size: 8pt; }
+        .container { column-count: 2; column-gap: 15px; }
+        .section { break-inside: avoid; margin-bottom: 10px; }
+        .section-title { font-weight: bold; font-size: 10pt; background: #333; color: white; padding: 3px 5px; margin-bottom: 5px; }
+        .question { margin-bottom: 8px; padding: 4px; border: 1px solid #ddd; cursor: pointer; break-inside: avoid; }
+        .question:hover { background: #f9f9f9; }
+        .q-number { font-weight: bold; display: inline; }
+        .q-text { display: inline; }
+        .answer { color: red; font-weight: bold; display: none; margin-top: 3px; }
+        .mc-options { display: flex; gap: 8px; margin-top: 3px; font-size: 8.5pt; }
+        .mc-option { white-space: nowrap; }
+        table { width: 100%; border-collapse: collapse; font-size: 8pt; margin: 5px 0; }
+        td { border: 1px solid #999; padding: 2px; }
+        .graph-space { height: 60px; border: 1px solid #999; margin: 5px 0; }
+    </style>
+    <script>
+        function toggleAnswer(id) {
+            const answer = document.getElementById('ans' + id);
+            answer.style.display = answer.style.display === 'none' ? 'block' : 'none';
+        }
+    </script>
+</head>
+<body>
+    <div class="header">
+        <h1>Year 8 Science Revision Worksheet</h1>
+        <p><strong>NSW NESA Syllabus</strong> | Name: _________________ | Date: _________________ | <em>Click on any question to reveal the answer</em></p>
+    </div>
+
+    <div class="container">
+        <!-- PHYSICAL WORLD -->
+        <div class="section">
+            <div class="section-title">PHYSICAL WORLD - Energy</div>
+
+            <div class="question" onclick="toggleAnswer(1)">
+                <div><span class="q-number">1.</span> <span class="q-text">Which form of energy does a moving car possess?</span></div>
+                <div class="mc-options">
+                    <span class="mc-option">A) Potential</span>
+                    <span class="mc-option">B) Kinetic</span>
+                    <span class="mc-option">C) Chemical</span>
+                    <span class="mc-option">D) Thermal</span>
+                </div>
+                <div class="answer" id="ans1">B) Kinetic energy</div>
+            </div>
+
+            <div class="question" onclick="toggleAnswer(2)">
+                <div><span class="q-number">2.</span> <span class="q-text">A book on a shelf 2m high has 20J of gravitational potential energy. What happens to this energy when it falls?</span></div>
+                <div class="answer" id="ans2">It converts to kinetic energy (then sound and thermal energy when it hits the ground)</div>
+            </div>
+
+            <div class="question" onclick="toggleAnswer(3)">
+                <div><span class="q-number">3.</span> <span class="q-text">State the Law of Conservation of Energy.</span></div>
+                <div class="answer" id="ans3">Energy cannot be created or destroyed, only transformed from one form to another</div>
+            </div>
+
+            <div class="question" onclick="toggleAnswer(4)">
+                <div><span class="q-number">4.</span> <span class="q-text">Identify the energy transformation in a light bulb:</span></div>
+                <div class="answer" id="ans4">Electrical energy → Light energy + Heat energy</div>
+            </div>
+
+            <div class="question" onclick="toggleAnswer(5)">
+                <div><span class="q-number">5.</span> <span class="q-text">Draw the circuit diagram symbol for: (a) battery (b) resistor (c) switch</span></div>
+                <div class="answer" id="ans5">(a) Two parallel lines (one longer) (b) Rectangle (c) Break in line with diagonal connector</div>
+            </div>
+
+            <div class="question" onclick="toggleAnswer(6)">
+                <div><span class="q-number">6.</span> <span class="q-text">A device uses 1200J of energy and produces 900J of useful energy. Calculate its efficiency.</span></div>
+                <div class="answer" id="ans6">Efficiency = (900/1200) × 100 = 75%</div>
+            </div>
+
+            <div class="question" onclick="toggleAnswer(7)">
+                <div><span class="q-number">7.</span> <span class="q-text">Name THREE ways energy is transferred.</span></div>
+                <div class="answer" id="ans7">Conduction, convection, radiation (or mechanically, electrically, by heating)</div>
+            </div>
+        </div>
+
+        <!-- BIOLOGICAL WORLD -->
+        <div class="section">
+            <div class="section-title">BIOLOGICAL WORLD - Body Systems</div>
+
+            <div class="question" onclick="toggleAnswer(8)">
+                <div><span class="q-number">8.</span> <span class="q-text">Where does chemical digestion of carbohydrates BEGIN?</span></div>
+                <div class="mc-options">
+                    <span class="mc-option">A) Stomach</span>
+                    <span class="mc-option">B) Mouth</span>
+                    <span class="mc-option">C) Small intestine</span>
+                    <span class="mc-option">D) Oesophagus</span>
+                </div>
+                <div class="answer" id="ans8">B) Mouth (enzyme amylase in saliva)</div>
+            </div>
+
+            <div class="question" onclick="toggleAnswer(9)">
+                <div><span class="q-number">9.</span> <span class="q-text">What is the function of villi in the small intestine?</span></div>
+                <div class="answer" id="ans9">Increase surface area for absorption of nutrients into bloodstream</div>
+            </div>
+
+            <div class="question" onclick="toggleAnswer(10)">
+                <div><span class="q-number">10.</span> <span class="q-text">Name the enzyme that breaks down fats.</span></div>
+                <div class="answer" id="ans10">Lipase</div>
+            </div>
+
+            <div class="question" onclick="toggleAnswer(11)">
+                <div><span class="q-number">11.</span> <span class="q-text">Describe the pathway of blood through the heart (4 chambers).</span></div>
+                <div class="answer" id="ans11">Right atrium → Right ventricle → Lungs → Left atrium → Left ventricle → Body</div>
+            </div>
+
+            <div class="question" onclick="toggleAnswer(12)">
+                <div><span class="q-number">12.</span> <span class="q-text">What is the function of red blood cells?</span></div>
+                <div class="answer" id="ans12">Transport oxygen (using haemoglobin) from lungs to body cells</div>
+            </div>
+
+            <div class="question" onclick="toggleAnswer(13)">
+                <div><span class="q-number">13.</span> <span class="q-text">Explain gas exchange in alveoli.</span></div>
+                <div class="answer" id="ans13">Oxygen diffuses from alveoli into blood; CO₂ diffuses from blood into alveoli</div>
+            </div>
+
+            <div class="question" onclick="toggleAnswer(14)">
+                <div><span class="q-number">14.</span> <span class="q-text">What is the main function of the kidneys?</span></div>
+                <div class="answer" id="ans14">Filter blood to remove waste (urea) and excess water/salts; produce urine</div>
+            </div>
+
+            <div class="question" onclick="toggleAnswer(15)">
+                <div><span class="q-number">15.</span> <span class="q-text">Name THREE components of the musculoskeletal system.</span></div>
+                <div class="answer" id="ans15">Bones, muscles, tendons (also: ligaments, cartilage, joints)</div>
+            </div>
+
+            <div class="question" onclick="toggleAnswer(16)">
+                <div><span class="q-number">16.</span> <span class="q-text">Muscles work in pairs. What are these pairs called?</span></div>
+                <div class="mc-options">
+                    <span class="mc-option">A) Complementary</span>
+                    <span class="mc-option">B) Antagonistic</span>
+                    <span class="mc-option">C) Parallel</span>
+                    <span class="mc-option">D) Reciprocal</span>
+                </div>
+                <div class="answer" id="ans16">B) Antagonistic pairs</div>
+            </div>
+        </div>
+
+        <!-- CHEMICAL WORLD -->
+        <div class="section">
+            <div class="section-title">CHEMICAL WORLD - Matter & Atoms</div>
+
+            <div class="question" onclick="toggleAnswer(17)">
+                <div><span class="q-number">17.</span> <span class="q-text">Name the THREE states of matter.</span></div>
+                <div class="answer" id="ans17">Solid, Liquid, Gas</div>
+            </div>
+
+            <div class="question" onclick="toggleAnswer(18)">
+                <div><span class="q-number">18.</span> <span class="q-text">What is the process called when a liquid changes to a gas?</span></div>
+                <div class="mc-options">
+                    <span class="mc-option">A) Melting</span>
+                    <span class="mc-option">B) Freezing</span>
+                    <span class="mc-option">C) Evaporation</span>
+                    <span class="mc-option">D) Condensation</span>
+                </div>
+                <div class="answer" id="ans18">C) Evaporation (or vaporisation/boiling)</div>
+            </div>
+
+            <div class="question" onclick="toggleAnswer(19)">
+                <div><span class="q-number">19.</span> <span class="q-text">Give TWO examples of physical changes.</span></div>
+                <div class="answer" id="ans19">Melting ice, dissolving sugar, cutting paper, breaking glass (any two)</div>
+            </div>
+
+            <div class="question" onclick="toggleAnswer(20)">
+                <div><span class="q-number">20.</span> <span class="q-text">Give TWO examples of chemical changes.</span></div>
+                <div class="answer" id="ans20">Burning wood, rusting iron, cooking egg, digesting food (any two)</div>
+            </div>
+
+            <div class="question" onclick="toggleAnswer(21)">
+                <div><span class="q-number">21.</span> <span class="q-text">What is the difference between an element and a compound?</span></div>
+                <div class="answer" id="ans21">Element: one type of atom only. Compound: two or more elements chemically bonded</div>
+            </div>
+
+            <div class="question" onclick="toggleAnswer(22)">
+                <div><span class="q-number">22.</span> <span class="q-text">Classify: H₂O, Fe, NaCl, O₂ as element or compound.</span></div>
+                <div class="answer" id="ans22">H₂O = compound, Fe = element, NaCl = compound, O₂ = element</div>
+            </div>
+
+            <div class="question" onclick="toggleAnswer(23)">
+                <div><span class="q-number">23.</span> <span class="q-text">What is a mixture? Give an example.</span></div>
+                <div class="answer" id="ans23">Two or more substances mixed but NOT chemically bonded. E.g. air, seawater, salad</div>
+            </div>
+
+            <div class="question" onclick="toggleAnswer(24)">
+                <div><span class="q-number">24.</span> <span class="q-text">State THREE properties of metals.</span></div>
+                <div class="answer" id="ans24">Conduct electricity, conduct heat, shiny/lustrous, malleable, ductile (any three)</div>
+            </div>
+
+            <div class="question" onclick="toggleAnswer(25)">
+                <div><span class="q-number">25.</span> <span class="q-text">What particles make up an atom?</span></div>
+                <div class="answer" id="ans25">Protons (positive), Neutrons (neutral), Electrons (negative)</div>
+            </div>
+        </div>
+
+        <!-- EARTH & SPACE -->
+        <div class="section">
+            <div class="section-title">EARTH & SPACE</div>
+
+            <div class="question" onclick="toggleAnswer(26)">
+                <div><span class="q-number">26.</span> <span class="q-text">List the layers of Earth from outside to centre.</span></div>
+                <div class="answer" id="ans26">Crust → Mantle → Outer core → Inner core</div>
+            </div>
+
+            <div class="question" onclick="toggleAnswer(27)">
+                <div><span class="q-number">27.</span> <span class="q-text">Which layer is liquid?</span></div>
+                <div class="mc-options">
+                    <span class="mc-option">A) Crust</span>
+                    <span class="mc-option">B) Mantle</span>
+                    <span class="mc-option">C) Outer core</span>
+                    <span class="mc-option">D) Inner core</span>
+                </div>
+                <div class="answer" id="ans27">C) Outer core (liquid iron/nickel)</div>
+            </div>
+
+            <div class="question" onclick="toggleAnswer(28)">
+                <div><span class="q-number">28.</span> <span class="q-text">Define weathering.</span></div>
+                <div class="answer" id="ans28">The breaking down of rocks into smaller pieces by physical, chemical or biological processes</div>
+            </div>
+
+            <div class="question" onclick="toggleAnswer(29)">
+                <div><span class="q-number">29.</span> <span class="q-text">What is the difference between weathering and erosion?</span></div>
+                <div class="answer" id="ans29">Weathering = breaking down rocks in place. Erosion = transport of weathered material by wind/water/ice</div>
+            </div>
+
+            <div class="question" onclick="toggleAnswer(30)">
+                <div><span class="q-number">30.</span> <span class="q-text">Name the THREE types of rocks.</span></div>
+                <div class="answer" id="ans30">Igneous, Sedimentary, Metamorphic</div>
+            </div>
+
+            <div class="question" onclick="toggleAnswer(31)">
+                <div><span class="q-number">31.</span> <span class="q-text">How are igneous rocks formed?</span></div>
+                <div class="answer" id="ans31">Cooling and solidification of magma (underground) or lava (above ground)</div>
+            </div>
+
+            <div class="question" onclick="toggleAnswer(32)">
+                <div><span class="q-number">32.</span> <span class="q-text">Describe how sedimentary rocks form.</span></div>
+                <div class="answer" id="ans32">Sediments deposited in layers, compacted and cemented together over time</div>
+            </div>
+
+            <div class="question" onclick="toggleAnswer(33)">
+                <div><span class="q-number">33.</span> <span class="q-text">What conditions create metamorphic rocks?</span></div>
+                <div class="answer" id="ans33">High heat and/or pressure (without melting) transform existing rocks</div>
+            </div>
+
+            <div class="question" onclick="toggleAnswer(34)">
+                <div><span class="q-number">34.</span> <span class="q-text">Give an example of each rock type.</span></div>
+                <div class="answer" id="ans34">Igneous: granite/basalt; Sedimentary: sandstone/limestone; Metamorphic: marble/slate</div>
+            </div>
+        </div>
+
+        <!-- WORKING SCIENTIFICALLY -->
+        <div class="section">
+            <div class="section-title">WORKING SCIENTIFICALLY</div>
+
+            <div class="question" onclick="toggleAnswer(35)">
+                <div><span class="q-number">35.</span> <span class="q-text">What are the THREE variables in a scientific experiment?</span></div>
+                <div class="answer" id="ans35">Independent (changed), Dependent (measured), Controlled (kept constant)</div>
+            </div>
+
+            <div class="question" onclick="toggleAnswer(36)">
+                <div><span class="q-number">36.</span> <span class="q-text">A student investigates how temperature affects plant growth. Identify: IV, DV.</span></div>
+                <div class="answer" id="ans36">IV = Temperature; DV = Plant growth (height/mass)</div>
+            </div>
+
+            <div class="question" onclick="toggleAnswer(37)">
+                <div><span class="q-number">37.</span> <span class="q-text">What should always go on the x-axis of a graph?</span></div>
+                <div class="mc-options">
+                    <span class="mc-option">A) Dependent variable</span>
+                    <span class="mc-option">B) Independent variable</span>
+                    <span class="mc-option">C) Controlled variable</span>
+                    <span class="mc-option">D) Any variable</span>
+                </div>
+                <div class="answer" id="ans37">B) Independent variable</div>
+            </div>
+
+            <div class="question" onclick="toggleAnswer(38)">
+                <div><span class="q-number">38.</span> <span class="q-text">When drawing a line graph, should you join the dots or draw a line of best fit?</span></div>
+                <div class="answer" id="ans38">Draw a line (or curve) of best fit through the data points</div>
+            </div>
+
+            <div class="question" onclick="toggleAnswer(39)">
+                <div><span class="q-number">39.</span> <span class="q-text">Data table: Time(s): 0, 10, 20, 30 | Temp(°C): 20, 30, 40, 50. What is the rate of temperature increase per second?</span></div>
+                <div class="answer" id="ans39">1°C per second (30°C increase ÷ 30s = 1°C/s)</div>
+            </div>
+
+            <div class="question" onclick="toggleAnswer(40)">
+                <div><span class="q-number">40.</span> <span class="q-text">Why do we repeat experiments?</span></div>
+                <div class="answer" id="ans40">To improve reliability/accuracy and identify anomalies (outliers)</div>
+            </div>
+
+            <div class="question" onclick="toggleAnswer(41)">
+                <div><span class="q-number">41.</span> <span class="q-text">What is a hypothesis?</span></div>
+                <div class="answer" id="ans41">A testable prediction about the relationship between variables</div>
+            </div>
+        </div>
+
+        <!-- MIXED APPLICATION QUESTIONS -->
+        <div class="section">
+            <div class="section-title">APPLICATION QUESTIONS</div>
+
+            <div class="question" onclick="toggleAnswer(42)">
+                <div><span class="q-number">42.</span> <span class="q-text">A solar panel converts 180J of light energy into 45J of electrical energy. Calculate efficiency and explain where the "lost" energy goes.</span></div>
+                <div class="answer" id="ans42">Efficiency = (45/180) × 100 = 25%. Lost energy becomes heat (thermal energy)</div>
+            </div>
+
+            <div class="question" onclick="toggleAnswer(43)">
+                <div><span class="q-number">43.</span> <span class="q-text">Why can't humans digest cellulose but can digest starch?</span></div>
+                <div class="answer" id="ans43">Humans lack the enzyme (cellulase) to break down cellulose bonds; we have amylase for starch</div>
+            </div>
+
+            <div class="question" onclick="toggleAnswer(44)">
+                <div><span class="q-number">44.</span> <span class="q-text">Explain why breathing rate increases during exercise.</span></div>
+                <div class="answer" id="ans44">Muscles need more oxygen for cellular respiration to produce energy; more CO₂ needs removal</div>
+            </div>
+
+            <div class="question" onclick="toggleAnswer(45)">
+                <div><span class="q-number">45.</span> <span class="q-text">A river carries sediment to the ocean. Link this to weathering, erosion, and rock formation.</span></div>
+                <div class="answer" id="ans45">Weathering breaks rocks → Erosion transports sediment via river → Deposition → Compaction/cementation forms sedimentary rock</div>
+            </div>
+
+            <div class="question" onclick="toggleAnswer(46)">
+                <div><span class="q-number">46.</span> <span class="q-text">Is rusting a physical or chemical change? Justify your answer.</span></div>
+                <div class="answer" id="ans46">Chemical change - new substance (iron oxide) formed; irreversible; requires oxygen</div>
+            </div>
+
+            <div class="question" onclick="toggleAnswer(47)">
+                <div><span class="q-number">47.</span> <span class="q-text">Draw a series circuit with 1 battery, 2 bulbs, and 1 switch.</span></div>
+                <div class="answer" id="ans47">[Simple diagram: battery → switch → bulb → bulb → back to battery in one loop]</div>
+            </div>
+
+            <div class="question" onclick="toggleAnswer(48)">
+                <div><span class="q-number">48.</span> <span class="q-text">Water is boiled then cooled back to ice. What state changes occurred? Are these physical or chemical?</span></div>
+                <div class="answer" id="ans48">Liquid→gas (evaporation), gas→liquid (condensation), liquid→solid (freezing). All physical changes</div>
+            </div>
+
+            <div class="question" onclick="toggleAnswer(49)">
+                <div><span class="q-number">49.</span> <span class="q-text">Explain the relationship between the circulatory and respiratory systems.</span></div>
+                <div class="answer" id="ans49">Respiratory system exchanges O₂/CO₂ in lungs; circulatory system transports these gases via blood to/from body cells</div>
+            </div>
+
+            <div class="question" onclick="toggleAnswer(50)">
+                <div><span class="q-number">50.</span> <span class="q-text">An object has 500J of GPE at the top of a ramp. At the bottom it has 400J of KE. Where did 100J go? Does this violate the Law of Conservation of Energy?</span></div>
+                <div class="answer" id="ans50">100J converted to heat/sound (friction). No violation - energy transformed, not lost; total = 500J</div>
+            </div>
+        </div>
+    </div>
+
+    <div style="margin-top: 15px; padding-top: 10px; border-top: 2px solid #000; font-size: 8pt; text-align: center;">
+        <strong>EXAM TIPS:</strong> Read questions carefully | Show working for calculations | Use scientific terminology | Check units | Review all answers before submitting
+    </div>
+</body>
+</html>
