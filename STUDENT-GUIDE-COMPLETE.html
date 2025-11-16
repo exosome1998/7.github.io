@@ -1,0 +1,1604 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HSC Year 12 JavaScript Guide - Programming for the Web</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            font-size: 1.2em;
+            opacity: 0.95;
+        }
+
+        nav {
+            background: #f8f9fa;
+            padding: 20px;
+            border-bottom: 3px solid #667eea;
+        }
+
+        nav h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+        }
+
+        nav ul {
+            list-style: none;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 10px;
+        }
+
+        nav li a {
+            color: #667eea;
+            text-decoration: none;
+            padding: 8px 15px;
+            display: block;
+            border-radius: 5px;
+            transition: all 0.3s;
+        }
+
+        nav li a:hover {
+            background: #667eea;
+            color: white;
+        }
+
+        main {
+            padding: 40px;
+        }
+
+        section {
+            margin-bottom: 50px;
+            padding-bottom: 30px;
+            border-bottom: 2px solid #eee;
+        }
+
+        section:last-child {
+            border-bottom: none;
+        }
+
+        h2 {
+            color: #667eea;
+            font-size: 2em;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #764ba2;
+        }
+
+        h3 {
+            color: #764ba2;
+            font-size: 1.5em;
+            margin: 25px 0 15px 0;
+        }
+
+        h4 {
+            color: #667eea;
+            font-size: 1.2em;
+            margin: 20px 0 10px 0;
+        }
+
+        p, li {
+            margin-bottom: 12px;
+            font-size: 1.05em;
+        }
+
+        ul, ol {
+            margin-left: 30px;
+            margin-bottom: 20px;
+        }
+
+        code {
+            background: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+            color: #d63384;
+        }
+
+        pre {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 20px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.95em;
+            line-height: 1.5;
+        }
+
+        pre code {
+            background: none;
+            color: inherit;
+            padding: 0;
+        }
+
+        .highlight {
+            background: #fff3cd;
+            padding: 15px;
+            border-left: 4px solid #ffc107;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+
+        .info-box {
+            background: #e3f2fd;
+            padding: 15px;
+            border-left: 4px solid #2196f3;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+
+        .warning-box {
+            background: #fff3e0;
+            padding: 15px;
+            border-left: 4px solid #ff9800;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+
+        .success-box {
+            background: #e8f5e9;
+            padding: 15px;
+            border-left: 4px solid #4caf50;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+
+        .step-number {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 30px;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        footer {
+            background: #2d2d2d;
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .checklist {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        .checklist li {
+            list-style: none;
+            padding: 8px 0;
+        }
+
+        .checklist li:before {
+            content: "☐ ";
+            font-size: 1.3em;
+            margin-right: 10px;
+        }
+
+        @media print {
+            body {
+                background: white;
+            }
+            .container {
+                box-shadow: none;
+            }
+            pre {
+                page-break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🚀 JavaScript for the Web</h1>
+            <p>HSC Year 12 Software Engineering - Complete Student Guide</p>
+            <p style="font-size: 0.9em; margin-top: 10px;">Programming for the Web Focus Area</p>
+        </header>
+
+        <nav>
+            <h3>📋 Quick Navigation</h3>
+            <ul>
+                <li><a href="#setup">1. GitHub Codespaces Setup</a></li>
+                <li><a href="#live-server">2. Live Server Setup</a></li>
+                <li><a href="#console">3. Developer Console</a></li>
+                <li><a href="#create-js">4. Create JavaScript File</a></li>
+                <li><a href="#exercise1">Exercise 1: Button Click</a></li>
+                <li><a href="#exercise2">Exercise 2: Variables & Input</a></li>
+                <li><a href="#exercise3">Exercise 3: Arithmetic</a></li>
+                <li><a href="#exercise4">Exercise 4: Conditionals</a></li>
+                <li><a href="#exercise5">Exercise 5: Loops</a></li>
+                <li><a href="#exercise6">Exercise 6: Functions</a></li>
+                <li><a href="#exercise7">Exercise 7: Arrays</a></li>
+                <li><a href="#exercise8">Exercise 8: DOM Styling</a></li>
+                <li><a href="#exercise9">Exercise 9: Keyboard Events</a></li>
+                <li><a href="#exercise10">Exercise 10: Quiz App</a></li>
+                <li><a href="#git">Git Commands</a></li>
+                <li><a href="#troubleshooting">Troubleshooting</a></li>
+            </ul>
+        </nav>
+
+        <main>
+            <section id="intro">
+                <h2>📖 How to Use This Guide</h2>
+                <div class="info-box">
+                    <p><strong>Important:</strong> This guide is designed for absolute beginners. Every step is explained clearly.</p>
+                    <ul>
+                        <li>✅ Follow steps in order</li>
+                        <li>✅ Copy and paste code exactly</li>
+                        <li>✅ Test each exercise before moving to the next</li>
+                        <li>✅ Save your work frequently</li>
+                        <li>✅ Use the Console (F12) to debug errors</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="setup">
+                <h2><span class="step-number">1</span> GitHub Codespaces Setup</h2>
+
+                <h3>What is GitHub Codespaces?</h3>
+                <p>GitHub Codespaces is a cloud-based development environment. It's like VS Code in your browser—no installation needed!</p>
+
+                <h3>Step-by-Step Instructions</h3>
+                <ol>
+                    <li><strong>Fork the Repository</strong>
+                        <ul>
+                            <li>Go to your teacher's GitHub repository link</li>
+                            <li>Click the <strong>"Fork"</strong> button in the top-right corner</li>
+                            <li>Wait a few seconds for GitHub to create your copy</li>
+                        </ul>
+                    </li>
+                    <li><strong>Open Codespace</strong>
+                        <ul>
+                            <li>On your forked repository page, click the green <strong>"Code"</strong> button</li>
+                            <li>Click the <strong>"Codespaces"</strong> tab</li>
+                            <li>Click <strong>"Create codespace on main"</strong></li>
+                            <li>Wait 30-60 seconds for the environment to load</li>
+                        </ul>
+                    </li>
+                    <li><strong>Explore Your Files</strong>
+                        <ul>
+                            <li>In the left sidebar, you'll see: <code>index.html</code>, <code>styles.css</code></li>
+                            <li>These are your starter files!</li>
+                        </ul>
+                    </li>
+                </ol>
+
+                <div class="success-box">
+                    <strong>✅ You're ready!</strong> Your development environment is now set up.
+                </div>
+            </section>
+
+            <section id="live-server">
+                <h2><span class="step-number">2</span> Live Server Setup</h2>
+
+                <h3>What is Live Server?</h3>
+                <p>Live Server shows you a live preview of your web page. Every time you save a file, it automatically refreshes!</p>
+
+                <h3>How to Start Live Server</h3>
+                <div class="highlight">
+                    <p><strong>Option 1:</strong></p>
+                    <ol>
+                        <li>In the file explorer (left sidebar), <strong>right-click</strong> on <code>index.html</code></li>
+                        <li>Click <strong>"Open with Live Server"</strong></li>
+                    </ol>
+
+                    <p style="margin-top: 15px;"><strong>Option 2:</strong></p>
+                    <ol>
+                        <li>Look at the bottom-right corner of Codespaces</li>
+                        <li>Click the <strong>"Go Live"</strong> button</li>
+                    </ol>
+                </div>
+
+                <div class="info-box">
+                    <strong>What you'll see:</strong> A preview window opens showing your interactive web page. Currently, buttons won't work because we haven't added JavaScript yet!
+                </div>
+            </section>
+
+            <section id="console">
+                <h2><span class="step-number">3</span> Opening the Developer Console</h2>
+
+                <h3>Why Use the Console?</h3>
+                <p>The console shows you error messages and lets you print debug information. It's your best friend when coding!</p>
+
+                <h3>How to Open It</h3>
+                <div class="highlight">
+                    <p><strong>Windows:</strong> Press <code>F12</code></p>
+                    <p><strong>Mac:</strong> Press <code>Cmd + Option + J</code></p>
+                    <p><strong>Alternative:</strong> Right-click the page → "Inspect" → "Console" tab</p>
+                </div>
+
+                <div class="info-box">
+                    <p><strong>What you'll see:</strong> A panel opens at the bottom or side with tabs like "Console", "Elements", etc.</p>
+                    <p>Click the <strong>"Console"</strong> tab. This is where JavaScript messages appear!</p>
+                </div>
+            </section>
+
+            <section id="create-js">
+                <h2><span class="step-number">4</span> Create Your JavaScript File</h2>
+
+                <h3>Step 4.1: Create script.js</h3>
+                <ol>
+                    <li>In the file explorer (left sidebar), <strong>right-click</strong> in empty space</li>
+                    <li>Click <strong>"New File"</strong></li>
+                    <li>Type: <code>script.js</code></li>
+                    <li>Press <strong>Enter</strong></li>
+                </ol>
+
+                <h3>Step 4.2: Link JavaScript to HTML</h3>
+                <p>Open <code>index.html</code> and make sure this line exists just before <code>&lt;/body&gt;</code>:</p>
+
+<pre><code>&lt;script src="script.js"&gt;&lt;/script&gt;</code></pre>
+
+                <div class="warning-box">
+                    <strong>⚠️ Critical:</strong> Without this line, your JavaScript won't run! This line connects the JavaScript file to your HTML page.
+                </div>
+
+                <h3>Step 4.3: How to Add Code</h3>
+                <div class="info-box">
+                    <p><strong>VERY IMPORTANT - READ THIS:</strong></p>
+                    <ol>
+                        <li>Start with an <strong>empty</strong> <code>script.js</code></li>
+                        <li>Copy the code for <strong>Exercise 1 ONLY</strong></li>
+                        <li>Paste it into <code>script.js</code></li>
+                        <li><strong>Save</strong> the file (Ctrl+S or Cmd+S)</li>
+                        <li><strong>Test</strong> in Live Server preview</li>
+                        <li>If it works, copy <strong>Exercise 2 code</strong></li>
+                        <li>Paste it <strong>UNDER</strong> Exercise 1 (at the bottom)</li>
+                        <li>Save and test again</li>
+                        <li>Repeat for all 10 exercises</li>
+                    </ol>
+                    <p><strong>DO NOT:</strong> Delete previous exercises or paste above existing code. Always add at the bottom!</p>
+                </div>
+            </section>
+
+            <!-- EXERCISE 1 -->
+            <section id="exercise1">
+                <h2>Exercise 1: Button Click & Output</h2>
+
+                <h3>What You'll Learn</h3>
+                <ul>
+                    <li>How to find HTML elements with <code>getElementById()</code></li>
+                    <li>How to listen for button clicks with <code>addEventListener()</code></li>
+                    <li>How to change page content with <code>innerHTML</code></li>
+                </ul>
+
+                <h3>The Code (Copy & Paste into script.js)</h3>
+<pre><code>// ========================================
+// EXERCISE 1: Button Click & Simple Output
+// ========================================
+console.log('Exercise 1 loaded!');
+
+// Step 1: Find the button in HTML by its ID
+const btnShowMessage = document.getElementById('btn-show-message');
+
+// Step 2: Find the output box where we'll show results
+const output1 = document.getElementById('output-1');
+
+// Step 3: Make the button listen for clicks
+btnShowMessage.addEventListener('click', function() {
+  // This code runs when the button is clicked
+  const message = 'You clicked the button! Great job! 🎉';
+  output1.innerHTML = '&lt;p class="success"&gt;' + message + '&lt;/p&gt;';
+  console.log('Button clicked!');
+});
+
+// Step 4: Reset button to clear the message
+const btnResetMessage = document.getElementById('btn-reset-message');
+btnResetMessage.addEventListener('click', function() {
+  output1.innerHTML = '&lt;p&gt;Your message will appear here...&lt;/p&gt;';
+  console.log('Message cleared!');
+});</code></pre>
+
+                <h3>How to Test</h3>
+                <div class="checklist">
+                    <ul>
+                        <li>Save <code>script.js</code></li>
+                        <li>Go to your Live Server preview</li>
+                        <li>Click the "Click Me!" button</li>
+                        <li>You should see the success message appear</li>
+                        <li>Click "Reset" and the message should disappear</li>
+                    </ul>
+                </div>
+
+                <h3>What Each Line Does</h3>
+                <ul>
+                    <li><code>document.getElementById('btn-show-message')</code> - Finds the button element</li>
+                    <li><code>addEventListener('click', function() {...})</code> - Says "when clicked, run this code"</li>
+                    <li><code>innerHTML</code> - Changes the HTML content inside an element</li>
+                    <li><code>console.log()</code> - Prints a message to the Console (F12 to see it)</li>
+                </ul>
+            </section>
+
+            <!-- EXERCISE 2 -->
+            <section id="exercise2">
+                <h2>Exercise 2: Variables & User Input</h2>
+
+                <h3>What You'll Learn</h3>
+                <ul>
+                    <li>How to get text from input boxes with <code>.value</code></li>
+                    <li>How to store information in variables</li>
+                    <li>How to use <code>if/else</code> statements</li>
+                    <li>How to combine text strings with <code>+</code></li>
+                </ul>
+
+                <h3>The Code (Paste UNDER Exercise 1)</h3>
+<pre><code>// ========================================
+// EXERCISE 2: Variables & User Input
+// ========================================
+console.log('Exercise 2 loaded!');
+
+// Get the input box, button, and output
+const inputName = document.getElementById('user-name');
+const btnGreet = document.getElementById('btn-greet');
+const output2 = document.getElementById('output-2');
+
+// When button is clicked, greet the user
+btnGreet.addEventListener('click', function() {
+  // .value gets what the user typed
+  const name = inputName.value;
+  console.log('User typed:', name);
+
+  // Check if they typed anything
+  if (name === '') {
+    // If empty, show error
+    output2.innerHTML = '&lt;p class="error"&gt;Please enter your name!&lt;/p&gt;';
+  } else {
+    // If they typed something, greet them
+    const greeting = 'Hello, ' + name + '! Nice to meet you! 👋';
+    output2.innerHTML = '&lt;p class="success"&gt;' + greeting + '&lt;/p&gt;';
+  }
+});
+
+// Reset button
+const btnResetGreet = document.getElementById('btn-reset-greet');
+btnResetGreet.addEventListener('click', function() {
+  inputName.value = '';  // Clear the input box
+  output2.innerHTML = '&lt;p&gt;Greeting will appear here...&lt;/p&gt;';
+});</code></pre>
+
+                <h3>How to Test</h3>
+                <div class="checklist">
+                    <ul>
+                        <li>Type your name in the input box</li>
+                        <li>Click "Say Hello"</li>
+                        <li>You should see a personalized greeting</li>
+                        <li>Try clicking "Say Hello" without typing - you should see an error</li>
+                        <li>Click "Clear" to reset everything</li>
+                    </ul>
+                </div>
+
+                <h3>Key Concepts</h3>
+                <ul>
+                    <li><code>const name = inputName.value;</code> - Gets user input and stores it</li>
+                    <li><code>if (name === '')</code> - Checks if name is empty</li>
+                    <li><code>'Hello, ' + name</code> - Combines text (called "concatenation")</li>
+                </ul>
+            </section>
+
+            <!-- EXERCISE 3 -->
+            <section id="exercise3">
+                <h2>Exercise 3: Numbers & Arithmetic</h2>
+
+                <h3>What You'll Learn</h3>
+                <ul>
+                    <li>How to convert text to numbers with <code>Number()</code></li>
+                    <li>How to do math operations (+, -, ×, ÷)</li>
+                    <li>How to create reusable functions</li>
+                    <li>How to handle errors (division by zero)</li>
+                </ul>
+
+                <h3>The Code (Paste UNDER Exercise 2)</h3>
+<pre><code>// ========================================
+// EXERCISE 3: Numbers & Arithmetic
+// ========================================
+console.log('Exercise 3 loaded!');
+
+const num1Input = document.getElementById('num-1');
+const num2Input = document.getElementById('num-2');
+const btnAdd = document.getElementById('btn-add');
+const btnSubtract = document.getElementById('btn-subtract');
+const btnMultiply = document.getElementById('btn-multiply');
+const btnDivide = document.getElementById('btn-divide');
+const output3 = document.getElementById('output-3');
+
+// Create a reusable function for calculations
+function performCalculation(operation) {
+  // Convert text to numbers using Number()
+  const num1 = Number(num1Input.value);
+  const num2 = Number(num2Input.value);
+
+  let result;
+
+  // Decide which operation to do
+  if (operation === 'add') {
+    result = num1 + num2;
+  } 
+  else if (operation === 'subtract') {
+    result = num1 - num2;
+  } 
+  else if (operation === 'multiply') {
+    result = num1 * num2;
+  } 
+  else if (operation === 'divide') {
+    // Check for division by zero
+    if (num2 === 0) {
+      output3.innerHTML = '&lt;p class="error"&gt;Cannot divide by zero!&lt;/p&gt;';
+      return;  // Stop here
+    }
+    result = num1 / num2;
+  }
+
+  // Show result (rounded to 2 decimals)
+  const resultText = num1 + ' ' + operation + ' ' + num2 + ' = ' + result.toFixed(2);
+  output3.innerHTML = '&lt;p class="success"&gt;' + resultText + '&lt;/p&gt;';
+}
+
+// Connect each button to the function
+btnAdd.addEventListener('click', function() {
+  performCalculation('add');
+});
+
+btnSubtract.addEventListener('click', function() {
+  performCalculation('subtract');
+});
+
+btnMultiply.addEventListener('click', function() {
+  performCalculation('multiply');
+});
+
+btnDivide.addEventListener('click', function() {
+  performCalculation('divide');
+});
+
+// Reset button
+const btnResetMath = document.getElementById('btn-reset-math');
+btnResetMath.addEventListener('click', function() {
+  num1Input.value = 0;
+  num2Input.value = 0;
+  output3.innerHTML = '&lt;p&gt;Calculation results will appear here...&lt;/p&gt;';
+});</code></pre>
+
+                <h3>How to Test</h3>
+                <div class="checklist">
+                    <ul>
+                        <li>Enter two numbers in the input boxes</li>
+                        <li>Try each operation button (Add, Subtract, Multiply, Divide)</li>
+                        <li>Try dividing by zero - you should see an error</li>
+                        <li>Click "Clear" to reset</li>
+                    </ul>
+                </div>
+
+                <h3>Key Concepts</h3>
+                <ul>
+                    <li><code>Number()</code> converts text to a number (inputs always give text!)</li>
+                    <li>Functions let you write code once and use it many times</li>
+                    <li><code>return</code> stops a function immediately</li>
+                    <li><code>.toFixed(2)</code> rounds numbers to 2 decimal places</li>
+                </ul>
+            </section>
+
+            <!-- EXERCISE 4 -->
+            <section id="exercise4">
+                <h2>Exercise 4: Conditionals (If/Else)</h2>
+
+                <h3>What You'll Learn</h3>
+                <ul>
+                    <li>How to check multiple conditions with <code>else if</code></li>
+                    <li>How to use logical operators like <code>&&</code> (AND)</li>
+                    <li>How to respond to the Enter key</li>
+                </ul>
+
+                <h3>The Code (Paste UNDER Exercise 3)</h3>
+<pre><code>// ========================================
+// EXERCISE 4: Conditionals (If/Else)
+// ========================================
+console.log('Exercise 4 loaded!');
+
+const ageInput = document.getElementById('age-input');
+const btnCheckAge = document.getElementById('btn-check-age');
+const output4 = document.getElementById('output-4');
+
+function checkAgeEligibility() {
+  const age = Number(ageInput.value);
+
+  // Check if valid number
+  if (age === 0 || isNaN(age)) {
+    output4.innerHTML = '&lt;p class="error"&gt;Please enter a valid age!&lt;/p&gt;';
+    return;
+  }
+
+  let message = '';
+  let className = '';
+
+  // Check different age ranges
+  if (age &lt; 13) {
+    message = '🎮 You are ' + age + ' years old. Too young for most activities.';
+    className = 'warning';
+  } 
+  else if (age &gt;= 13 && age &lt; 16) {
+    message = '🎬 You are ' + age + ' years old. You can watch PG movies!';
+    className = 'info';
+  } 
+  else if (age &gt;= 16 && age &lt; 18) {
+    message = '🎞️ You are ' + age + ' years old. You can watch M movies!';
+    className = 'success';
+  } 
+  else if (age &gt;= 18) {
+    message = '🎥 You are ' + age + ' years old. You are an adult!';
+    className = 'success';
+  }
+
+  output4.innerHTML = '&lt;p class="' + className + '"&gt;' + message + '&lt;/p&gt;';
+}
+
+// Button click
+btnCheckAge.addEventListener('click', checkAgeEligibility);
+
+// Also work when user presses Enter
+ageInput.addEventListener('keypress', function(event) {
+  if (event.key === 'Enter') {
+    checkAgeEligibility();
+  }
+});
+
+// Reset button
+const btnResetAge = document.getElementById('btn-reset-age');
+btnResetAge.addEventListener('click', function() {
+  ageInput.value = 0;
+  output4.innerHTML = '&lt;p&gt;Eligibility result will appear here...&lt;/p&gt;';
+});</code></pre>
+
+                <h3>How to Test</h3>
+                <div class="checklist">
+                    <ul>
+                        <li>Try different ages: 10, 14, 17, 20</li>
+                        <li>See how the message changes for each age range</li>
+                        <li>Try pressing Enter instead of clicking the button</li>
+                    </ul>
+                </div>
+
+                <h3>Key Concepts</h3>
+                <ul>
+                    <li><code>else if</code> checks another condition if the first is false</li>
+                    <li><code>&&</code> means AND (both conditions must be true)</li>
+                    <li><code>isNaN()</code> checks if something is "Not a Number"</li>
+                </ul>
+            </section>
+
+            <!-- EXERCISE 5 -->
+            <section id="exercise5">
+                <h2>Exercise 5: Loops & Lists</h2>
+
+                <h3>What You'll Learn</h3>
+                <ul>
+                    <li>How to repeat code with <code>for</code> loops</li>
+                    <li>How to create HTML dynamically</li>
+                    <li>How loop counters work</li>
+                </ul>
+
+                <h3>The Code (Paste UNDER Exercise 4)</h3>
+<pre><code>// ========================================
+// EXERCISE 5: Loops & Lists
+// ========================================
+console.log('Exercise 5 loaded!');
+
+const loopCountInput = document.getElementById('loop-count');
+const btnGenerateList = document.getElementById('btn-generate-list');
+const output5 = document.getElementById('output-5');
+
+function generateList() {
+  const count = Number(loopCountInput.value);
+
+  // Validate input
+  if (count === 0 || isNaN(count) || count &lt; 1 || count &gt; 10) {
+    output5.innerHTML = '&lt;p class="error"&gt;Enter a number between 1 and 10!&lt;/p&gt;';
+    return;
+  }
+
+  let listHTML = '&lt;ul&gt;';  // Start a list
+
+  // FOR LOOP: repeat from 1 to count
+  // for (start; condition; increment)
+  for (let i = 1; i &lt;= count; i++) {
+    // i++ means: add 1 to i after each repeat
+    listHTML += '&lt;li&gt;Item number ' + i + '&lt;/li&gt;';
+  }
+
+  listHTML += '&lt;/ul&gt;';  // End the list
+
+  output5.innerHTML = '&lt;p class="info"&gt;Generated ' + count + ' items:&lt;/p&gt;' + listHTML;
+}
+
+btnGenerateList.addEventListener('click', generateList);
+
+// Reset button
+const btnResetList = document.getElementById('btn-reset-list');
+btnResetList.addEventListener('click', function() {
+  loopCountInput.value = 5;
+  output5.innerHTML = '&lt;p&gt;List will appear here...&lt;/p&gt;';
+});</code></pre>
+
+                <h3>How to Test</h3>
+                <div class="checklist">
+                    <ul>
+                        <li>Enter a number between 1 and 10</li>
+                        <li>Click "Generate List"</li>
+                        <li>You should see a numbered list appear</li>
+                        <li>Try different numbers to see the list change</li>
+                    </ul>
+                </div>
+
+                <h3>Key Concepts</h3>
+                <ul>
+                    <li><code>for (let i = 1; i &lt;= count; i++)</code> - Loop structure</li>
+                    <li><code>let i = 1</code> - Start at 1</li>
+                    <li><code>i &lt;= count</code> - Keep going while i ≤ count</li>
+                    <li><code>i++</code> - Add 1 to i after each loop</li>
+                </ul>
+            </section>
+
+            <!-- EXERCISE 6 -->
+            <section id="exercise6">
+                <h2>Exercise 6: Functions (Reusable Code)</h2>
+
+                <h3>What You'll Learn</h3>
+                <ul>
+                    <li>How to create helper functions</li>
+                    <li>How to pass information to functions (parameters)</li>
+                    <li>How to return results from functions</li>
+                    <li>String manipulation techniques</li>
+                </ul>
+
+                <h3>The Code (Paste UNDER Exercise 5)</h3>
+<pre><code>// ========================================
+// EXERCISE 6: Functions (Reusable Code)
+// ========================================
+console.log('Exercise 6 loaded!');
+
+const wordInput = document.getElementById('word-input');
+const btnAnalyzeWord = document.getElementById('btn-analyze-word');
+const output6 = document.getElementById('output-6');
+
+// Helper function 1: Count letters
+function countLetters(word) {
+  return word.length;
+}
+
+// Helper function 2: Check if palindrome
+function isPalindrome(word) {
+  const lowerWord = word.toLowerCase();
+  const reversedWord = lowerWord.split('').reverse().join('');
+  return lowerWord === reversedWord;
+}
+
+// Helper function 3: Count vowels
+function countVowels(word) {
+  let vowelCount = 0;
+  for (let i = 0; i &lt; word.length; i++) {
+    const letter = word[i].toLowerCase();
+    if (letter === 'a' || letter === 'e' || letter === 'i' || 
+        letter === 'o' || letter === 'u') {
+      vowelCount++;
+    }
+  }
+  return vowelCount;
+}
+
+// Helper function 4: Count consonants
+function countConsonants(word) {
+  let consonantCount = 0;
+  for (let i = 0; i &lt; word.length; i++) {
+    const letter = word[i].toLowerCase();
+    if (/[a-z]/.test(letter) && 
+        letter !== 'a' && letter !== 'e' && letter !== 'i' && 
+        letter !== 'o' && letter !== 'u') {
+      consonantCount++;
+    }
+  }
+  return consonantCount;
+}
+
+// Main function
+function analyzeWord() {
+  const word = wordInput.value.trim();
+
+  if (word === '') {
+    output6.innerHTML = '&lt;p class="error"&gt;Please enter a word!&lt;/p&gt;';
+    return;
+  }
+
+  // Call helper functions
+  const letters = countLetters(word);
+  const vowels = countVowels(word);
+  const consonants = countConsonants(word);
+  const palindrome = isPalindrome(word);
+
+  // Build results
+  let resultHTML = '&lt;p class="info"&gt;&lt;strong&gt;Analysis of "' + word + '":&lt;/strong&gt;&lt;/p&gt;';
+  resultHTML += '&lt;ul&gt;';
+  resultHTML += '&lt;li&gt;Total letters: ' + letters + '&lt;/li&gt;';
+  resultHTML += '&lt;li&gt;Vowels: ' + vowels + '&lt;/li&gt;';
+  resultHTML += '&lt;li&gt;Consonants: ' + consonants + '&lt;/li&gt;';
+
+  if (palindrome) {
+    resultHTML += '&lt;li&gt;🎉 This is a PALINDROME!&lt;/li&gt;';
+  } else {
+    resultHTML += '&lt;li&gt;Not a palindrome&lt;/li&gt;';
+  }
+
+  resultHTML += '&lt;/ul&gt;';
+  output6.innerHTML = resultHTML;
+}
+
+btnAnalyzeWord.addEventListener('click', analyzeWord);
+
+wordInput.addEventListener('keypress', function(event) {
+  if (event.key === 'Enter') {
+    analyzeWord();
+  }
+});
+
+const btnResetWord = document.getElementById('btn-reset-word');
+btnResetWord.addEventListener('click', function() {
+  wordInput.value = '';
+  output6.innerHTML = '&lt;p&gt;Word analysis will appear here...&lt;/p&gt;';
+});</code></pre>
+
+                <h3>How to Test</h3>
+                <div class="checklist">
+                    <ul>
+                        <li>Type a word like "hello" or "racecar"</li>
+                        <li>Click "Analyze Word"</li>
+                        <li>See the statistics appear</li>
+                        <li>Try palindromes: "radar", "level", "mom", "racecar"</li>
+                    </ul>
+                </div>
+
+                <h3>Key Concepts</h3>
+                <ul>
+                    <li>Functions take inputs (parameters) and give outputs (<code>return</code>)</li>
+                    <li>Breaking code into small functions makes it easier to understand</li>
+                    <li>You can call functions from inside other functions</li>
+                </ul>
+            </section>
+
+            <!-- EXERCISE 7 -->
+            <section id="exercise7">
+                <h2>Exercise 7: Arrays & Iteration</h2>
+
+                <h3>What You'll Learn</h3>
+                <ul>
+                    <li>How to create and use arrays (lists)</li>
+                    <li>How to add items with <code>.push()</code></li>
+                    <li>How to loop through arrays</li>
+                    <li>How to calculate statistics</li>
+                </ul>
+
+                <h3>The Code (Paste UNDER Exercise 6)</h3>
+<pre><code>// ========================================
+// EXERCISE 7: Arrays & Iteration
+// ========================================
+console.log('Exercise 7 loaded!');
+
+const gradeInput = document.getElementById('student-grade');
+const btnAddGrade = document.getElementById('btn-add-grade');
+const btnShowStats = document.getElementById('btn-show-stats');
+const output7 = document.getElementById('output-7');
+const btnResetGrades = document.getElementById('btn-reset-grades');
+
+// Create empty array
+let grades = [];
+
+function addGrade() {
+  const grade = gradeInput.value.toUpperCase();
+
+  if (grade === '') {
+    output7.innerHTML = '&lt;p class="error"&gt;Please enter a grade!&lt;/p&gt;';
+    return;
+  }
+
+  const validGrades = ['A', 'B', 'C', 'D', 'F'];
+  if (validGrades.indexOf(grade) === -1) {
+    output7.innerHTML = '&lt;p class="error"&gt;Enter A, B, C, D, or F only!&lt;/p&gt;';
+    return;
+  }
+
+  grades.push(grade);
+  gradeInput.value = '';
+
+  output7.innerHTML = '&lt;p class="success"&gt;Grade ' + grade + ' added! Total: ' + 
+                      grades.length + '&lt;/p&gt;';
+}
+
+function showStatistics() {
+  if (grades.length === 0) {
+    output7.innerHTML = '&lt;p class="error"&gt;No grades added yet!&lt;/p&gt;';
+    return;
+  }
+
+  let countA = 0, countB = 0, countC = 0, countD = 0, countF = 0;
+
+  for (let i = 0; i &lt; grades.length; i++) {
+    if (grades[i] === 'A') countA++;
+    else if (grades[i] === 'B') countB++;
+    else if (grades[i] === 'C') countC++;
+    else if (grades[i] === 'D') countD++;
+    else if (grades[i] === 'F') countF++;
+  }
+
+  const total = grades.length;
+  const percentA = ((countA / total) * 100).toFixed(1);
+  const percentB = ((countB / total) * 100).toFixed(1);
+  const percentC = ((countC / total) * 100).toFixed(1);
+  const percentD = ((countD / total) * 100).toFixed(1);
+  const percentF = ((countF / total) * 100).toFixed(1);
+
+  const counts = [countA, countB, countC, countD, countF];
+  const maxCount = Math.max(...counts);
+
+  let mostCommon = '';
+  if (maxCount === countA) mostCommon = 'A';
+  else if (maxCount === countB) mostCommon = 'B';
+  else if (maxCount === countC) mostCommon = 'C';
+  else if (maxCount === countD) mostCommon = 'D';
+  else if (maxCount === countF) mostCommon = 'F';
+
+  let statsHTML = '&lt;p class="info"&gt;&lt;strong&gt;Statistics (Total: ' + total + '):&lt;/strong&gt;&lt;/p&gt;';
+  statsHTML += '&lt;ul&gt;';
+  statsHTML += '&lt;li&gt;A: ' + countA + ' (' + percentA + '%)&lt;/li&gt;';
+  statsHTML += '&lt;li&gt;B: ' + countB + ' (' + percentB + '%)&lt;/li&gt;';
+  statsHTML += '&lt;li&gt;C: ' + countC + ' (' + percentC + '%)&lt;/li&gt;';
+  statsHTML += '&lt;li&gt;D: ' + countD + ' (' + percentD + '%)&lt;/li&gt;';
+  statsHTML += '&lt;li&gt;F: ' + countF + ' (' + percentF + '%)&lt;/li&gt;';
+  statsHTML += '&lt;/ul&gt;';
+  statsHTML += '&lt;p&gt;Most common: ' + mostCommon + '&lt;/p&gt;';
+
+  output7.innerHTML = statsHTML;
+}
+
+btnAddGrade.addEventListener('click', addGrade);
+btnShowStats.addEventListener('click', showStatistics);
+
+gradeInput.addEventListener('keypress', function(event) {
+  if (event.key === 'Enter') {
+    addGrade();
+  }
+});
+
+btnResetGrades.addEventListener('click', function() {
+  grades = [];
+  gradeInput.value = '';
+  output7.innerHTML = '&lt;p&gt;Grade statistics will appear here...&lt;/p&gt;';
+});</code></pre>
+
+                <h3>How to Test</h3>
+                <div class="checklist">
+                    <ul>
+                        <li>Enter grades one at a time: A, B, A, C, B, A</li>
+                        <li>Click "Add Grade" after each</li>
+                        <li>Click "Show Statistics" to see breakdown</li>
+                    </ul>
+                </div>
+
+                <h3>Key Concepts</h3>
+                <ul>
+                    <li><code>let grades = []</code> creates empty array</li>
+                    <li><code>grades.push(grade)</code> adds item to end</li>
+                    <li><code>grades.length</code> tells how many items</li>
+                    <li><code>grades[i]</code> gets item at position i (starts at 0!)</li>
+                </ul>
+            </section>
+
+            <!-- EXERCISE 8 -->
+            <section id="exercise8">
+                <h2>Exercise 8: DOM Manipulation & Styling</h2>
+
+                <h3>What You'll Learn</h3>
+                <ul>
+                    <li>How to change CSS with JavaScript</li>
+                    <li>How to add/remove CSS classes</li>
+                    <li>How to read CSS variables</li>
+                </ul>
+
+                <h3>The Code (Paste UNDER Exercise 7)</h3>
+<pre><code>// ========================================
+// EXERCISE 8: DOM Manipulation & Styling
+// ========================================
+console.log('Exercise 8 loaded!');
+
+const bgColorSelect = document.getElementById('bg-color');
+const btnChangeStyle = document.getElementById('btn-change-style');
+const output8 = document.getElementById('output-8');
+const btnResetStyle = document.getElementById('btn-reset-style');
+
+function changeStyle() {
+  const colorVariable = bgColorSelect.value;
+
+  const root = document.documentElement;
+  const colorValue = getComputedStyle(root).getPropertyValue(colorVariable).trim();
+
+  output8.style.backgroundColor = colorValue;
+
+  if (colorVariable === '--color-dark') {
+    output8.style.color = 'white';
+  } else {
+    output8.style.color = '#2c3e50';
+  }
+
+  output8.style.border = '3px solid black';
+  output8.style.boxShadow = '0 8px 16px rgba(0, 0, 0, 0.3)';
+
+  output8.classList.remove('fade-in');
+  output8.classList.add('fade-in');
+
+  output8.innerHTML = '&lt;p&gt;&lt;strong&gt;Style Updated! ✨&lt;/strong&gt;&lt;/p&gt;' +
+                      '&lt;p&gt;Color: ' + colorVariable + '&lt;/p&gt;';
+}
+
+btnChangeStyle.addEventListener('click', changeStyle);
+bgColorSelect.addEventListener('change', changeStyle);
+
+btnResetStyle.addEventListener('click', function() {
+  output8.style.backgroundColor = '';
+  output8.style.color = '';
+  output8.style.border = '';
+  output8.style.boxShadow = '';
+  output8.classList.remove('fade-in');
+  output8.innerHTML = '&lt;p&gt;This box will change!&lt;/p&gt;';
+  bgColorSelect.value = '--color-light';
+});</code></pre>
+
+                <h3>How to Test</h3>
+                <div class="checklist">
+                    <ul>
+                        <li>Use dropdown to select different colors</li>
+                        <li>Watch the box change appearance</li>
+                        <li>Click "Reset" to restore defaults</li>
+                    </ul>
+                </div>
+
+                <h3>Key Concepts</h3>
+                <ul>
+                    <li><code>.style.property</code> changes CSS directly</li>
+                    <li><code>.classList.add()</code> adds CSS class</li>
+                    <li><code>.classList.remove()</code> removes CSS class</li>
+                </ul>
+            </section>
+
+            <!-- EXERCISE 9 -->
+            <section id="exercise9">
+                <h2>Exercise 9: Keyboard Events</h2>
+
+                <h3>What You'll Learn</h3>
+                <ul>
+                    <li>How to detect when user types</li>
+                    <li>How to count characters in real-time</li>
+                    <li>How to respond to specific keys</li>
+                </ul>
+
+                <h3>The Code (Paste UNDER Exercise 8)</h3>
+<pre><code>// ========================================
+// EXERCISE 9: Keyboard Events
+// ========================================
+console.log('Exercise 9 loaded!');
+
+const textCounter = document.getElementById('text-counter');
+const charCountSpan = document.getElementById('char-count');
+const wordCountSpan = document.getElementById('word-count');
+
+textCounter.addEventListener('input', function() {
+  const text = textCounter.value;
+
+  const charCount = text.length;
+  charCountSpan.textContent = charCount;
+
+  let wordCount = 0;
+  if (text.trim() !== '') {
+    wordCount = text.trim().split(' ').length;
+  }
+  wordCountSpan.textContent = wordCount;
+});
+
+textCounter.addEventListener('keydown', function(event) {
+  if (event.key === 'Escape') {
+    textCounter.value = '';
+    charCountSpan.textContent = '0';
+    wordCountSpan.textContent = '0';
+  }
+});</code></pre>
+
+                <h3>How to Test</h3>
+                <div class="checklist">
+                    <ul>
+                        <li>Start typing in the text box</li>
+                        <li>Watch character and word counts update</li>
+                        <li>Press Escape to clear everything</li>
+                    </ul>
+                </div>
+
+                <h3>Key Concepts</h3>
+                <ul>
+                    <li><code>'input'</code> event fires every time text changes</li>
+                    <li><code>'keydown'</code> fires when key pressed</li>
+                    <li><code>event.key</code> tells which key was pressed</li>
+                </ul>
+            </section>
+
+            <!-- EXERCISE 10 -->
+            <section id="exercise10">
+                <h2>Exercise 10: Interactive Quiz (Complete Application)</h2>
+
+                <h3>What You'll Learn</h3>
+                <ul>
+                    <li>How to combine all previous concepts</li>
+                    <li>How to create a complete working app</li>
+                    <li>How to manage state (current question, score)</li>
+                    <li>How to create HTML elements dynamically</li>
+                </ul>
+
+                <h3>The Code (Paste UNDER Exercise 9)</h3>
+<pre><code>// ========================================
+// EXERCISE 10: Interactive Quiz
+// ========================================
+console.log('Exercise 10 loaded!');
+
+const quizData = [
+  {
+    question: "What does HTML stand for?",
+    options: [
+      "Hyper Text Markup Language",
+      "High Tech Modern Language",
+      "Home Tool Markup Language",
+      "Hyperlinks and Text Markup Language"
+    ],
+    correct: 0
+  },
+  {
+    question: "Which is a JavaScript data type?",
+    options: ["Integer", "Boolean", "Character", "Alphabet"],
+    correct: 1
+  },
+  {
+    question: "What does CSS stand for?",
+    options: [
+      "Computer Style Sheets",
+      "Cascading Style Sheets",
+      "Creative Style Sheets",
+      "Complex Style Sheets"
+    ],
+    correct: 1
+  },
+  {
+    question: "How do you create a function in JavaScript?",
+    options: [
+      "function myFunc() {}",
+      "def myFunc() {}",
+      "func myFunc() {}",
+      "create function myFunc()"
+    ],
+    correct: 0
+  },
+  {
+    question: "What is an array?",
+    options: [
+      "A type of variable",
+      "A list that stores multiple values",
+      "A mathematical formula",
+      "A CSS property"
+    ],
+    correct: 1
+  }
+];
+
+const btnSubmitAnswer = document.getElementById('btn-submit-answer');
+const btnNextQuestion = document.getElementById('btn-next-question');
+const btnResetQuiz = document.getElementById('btn-reset-quiz');
+const output10 = document.getElementById('output-10');
+
+let currentQuestion = 0;
+let score = 0;
+let selectedAnswer = null;
+
+function displayQuestion() {
+  const question = quizData[currentQuestion];
+  selectedAnswer = null;
+
+  const questionElement = document.getElementById('quiz-question');
+  questionElement.textContent = 'Question ' + (currentQuestion + 1) + ' of ' + 
+                                 quizData.length + ': ' + question.question;
+
+  const optionsElement = document.getElementById('quiz-options');
+  optionsElement.innerHTML = '';
+
+  for (let i = 0; i &lt; question.options.length; i++) {
+    const label = document.createElement('label');
+    const radio = document.createElement('input');
+
+    radio.type = 'radio';
+    radio.name = 'answer';
+    radio.value = i;
+
+    radio.addEventListener('change', function() {
+      selectedAnswer = parseInt(this.value);
+    });
+
+    label.appendChild(radio);
+    label.appendChild(document.createTextNode(' ' + question.options[i]));
+    label.style.display = 'block';
+    label.style.margin = '10px 0';
+    label.style.cursor = 'pointer';
+
+    optionsElement.appendChild(label);
+  }
+
+  btnSubmitAnswer.style.display = 'inline-block';
+  btnNextQuestion.style.display = 'none';
+}
+
+function checkAnswer() {
+  if (selectedAnswer === null) {
+    output10.innerHTML = '&lt;p class="error"&gt;Please select an answer!&lt;/p&gt;';
+    return;
+  }
+
+  const question = quizData[currentQuestion];
+  const isCorrect = (selectedAnswer === question.correct);
+
+  if (isCorrect) {
+    score++;
+    output10.innerHTML = '&lt;p class="success"&gt;✅ Correct!&lt;/p&gt;';
+  } else {
+    output10.innerHTML = '&lt;p class="error"&gt;❌ Wrong!&lt;/p&gt;' +
+                        '&lt;p&gt;Correct: ' + question.options[question.correct] + '&lt;/p&gt;';
+  }
+
+  btnSubmitAnswer.style.display = 'none';
+  btnNextQuestion.style.display = 'inline-block';
+}
+
+function nextQuestion() {
+  currentQuestion++;
+
+  if (currentQuestion &lt; quizData.length) {
+    displayQuestion();
+    output10.innerHTML = '&lt;p&gt;Select an answer!&lt;/p&gt;';
+  } else {
+    displayQuizEnd();
+  }
+}
+
+function displayQuizEnd() {
+  const percentage = ((score / quizData.length) * 100).toFixed(0);
+
+  let message = '';
+  if (percentage &gt;= 80) {
+    message = '🏆 Excellent! ' + percentage + '%!';
+  } else if (percentage &gt;= 60) {
+    message = '👍 Good job! ' + percentage + '%!';
+  } else {
+    message = '📚 Keep studying! ' + percentage + '%!';
+  }
+
+  const questionElement = document.getElementById('quiz-question');
+  questionElement.textContent = 'Quiz Complete!';
+
+  const optionsElement = document.getElementById('quiz-options');
+  optionsElement.innerHTML = '';
+
+  btnSubmitAnswer.style.display = 'none';
+  btnNextQuestion.style.display = 'none';
+  btnResetQuiz.style.display = 'inline-block';
+
+  output10.innerHTML = '&lt;p class="success"&gt;' + message + '&lt;/p&gt;' +
+                       '&lt;p&gt;Score: ' + score + '/' + quizData.length + '&lt;/p&gt;';
+}
+
+function resetQuiz() {
+  currentQuestion = 0;
+  score = 0;
+  selectedAnswer = null;
+
+  btnSubmitAnswer.style.display = 'inline-block';
+  btnNextQuestion.style.display = 'none';
+  btnResetQuiz.style.display = 'none';
+
+  displayQuestion();
+  output10.innerHTML = '&lt;p&gt;Select an answer!&lt;/p&gt;';
+}
+
+btnSubmitAnswer.addEventListener('click', checkAnswer);
+btnNextQuestion.addEventListener('click', nextQuestion);
+btnResetQuiz.addEventListener('click', resetQuiz);
+
+displayQuestion();
+
+console.log('✅ All 10 exercises loaded successfully!');</code></pre>
+
+                <h3>How to Test</h3>
+                <div class="checklist">
+                    <ul>
+                        <li>First question appears automatically</li>
+                        <li>Select answer and click "Submit Answer"</li>
+                        <li>Click "Next Question" to continue</li>
+                        <li>Complete all 5 questions to see your score</li>
+                        <li>Click "Start Over" to try again</li>
+                    </ul>
+                </div>
+
+                <h3>Key Concepts</h3>
+                <ul>
+                    <li>This combines EVERYTHING: variables, arrays, functions, loops, events, DOM</li>
+                    <li>State management: tracking current question and score</li>
+                    <li>Dynamic HTML with <code>createElement()</code></li>
+                    <li>This is a complete, working web application!</li>
+                </ul>
+            </section>
+
+            <!-- GIT COMMANDS -->
+            <section id="git">
+                <h2>💾 Saving Your Work with Git</h2>
+
+                <h3>Why Use Git?</h3>
+                <ul>
+                    <li>Backs up your work to the cloud</li>
+                    <li>Lets your teacher see your progress</li>
+                    <li>Keeps history of all changes</li>
+                </ul>
+
+                <h3>Basic Git Commands</h3>
+
+                <h4>1. Check What Changed</h4>
+<pre><code>git status</code></pre>
+                <p>Shows which files you've modified</p>
+
+                <h4>2. Add Your Changes</h4>
+<pre><code>git add script.js</code></pre>
+                <p>Or add all files:</p>
+<pre><code>git add .</code></pre>
+
+                <h4>3. Commit (Save) Your Changes</h4>
+<pre><code>git commit -m "Completed exercises 1-10"</code></pre>
+                <p>The message in quotes describes what you did</p>
+
+                <h4>4. Push to GitHub</h4>
+<pre><code>git push</code></pre>
+                <p>Uploads your changes to GitHub</p>
+
+                <h3>Complete Example</h3>
+<pre><code># After completing exercises:
+git status
+git add script.js
+git commit -m "Added all JavaScript exercises"
+git push</code></pre>
+
+                <div class="info-box">
+                    <p><strong>When to commit:</strong></p>
+                    <ul>
+                        <li>After completing each exercise</li>
+                        <li>After fixing a bug</li>
+                        <li>Before taking a break</li>
+                        <li>At the end of class</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- TROUBLESHOOTING -->
+            <section id="troubleshooting">
+                <h2>🔧 Troubleshooting Guide</h2>
+
+                <h3>Problem: Buttons Don't Do Anything</h3>
+                <div class="warning-box">
+                    <p><strong>Solutions:</strong></p>
+                    <ol>
+                        <li>Check if <code>script.js</code> is linked in <code>index.html</code></li>
+                        <li>Open Console (F12) - are there red errors?</li>
+                        <li>Make sure IDs match exactly (case-sensitive!)</li>
+                        <li>Did you save the file after pasting code?</li>
+                        <li>Try refreshing the browser</li>
+                    </ol>
+                </div>
+
+                <h3>Problem: "Cannot read property 'addEventListener' of null"</h3>
+                <div class="warning-box">
+                    <p><strong>Meaning:</strong> JavaScript can't find the HTML element</p>
+                    <p><strong>Solutions:</strong></p>
+                    <ul>
+                        <li>Check that ID in <code>getElementById('...')</code> matches HTML exactly</li>
+                        <li>IDs are case-sensitive: <code>btn-show-message</code> ≠ <code>Btn-Show-Message</code></li>
+                        <li>Make sure element exists in <code>index.html</code></li>
+                    </ul>
+                </div>
+
+                <h3>Problem: Numbers Aren't Calculating Correctly</h3>
+                <div class="warning-box">
+                    <p><strong>Solutions:</strong></p>
+                    <ul>
+                        <li>Use <code>Number()</code> to convert text to numbers</li>
+                        <li><code>"5" + 3 = "53"</code> (string) not <code>8</code> (number)</li>
+                        <li>Use <code>Number("5") + 3 = 8</code> (correct)</li>
+                    </ul>
+                </div>
+
+                <h3>Problem: Live Server Not Updating</h3>
+                <div class="warning-box">
+                    <p><strong>Solutions:</strong></p>
+                    <ol>
+                        <li>Save file (Ctrl+S or Cmd+S)</li>
+                        <li>Refresh browser (Ctrl+R or Cmd+R)</li>
+                        <li>Restart Live Server</li>
+                    </ol>
+                </div>
+
+                <h3>Problem: Git Push Fails</h3>
+                <div class="warning-box">
+                    <p><strong>Solutions:</strong></p>
+                    <ol>
+                        <li>Check internet connection</li>
+                        <li>Make sure signed into GitHub in Codespaces</li>
+                        <li>Try: <code>git pull</code> first, then <code>git push</code></li>
+                    </ol>
+                </div>
+
+                <h3>Getting More Help</h3>
+                <ol>
+                    <li><strong>Read the error</strong> in Console carefully</li>
+                    <li><strong>Google</strong> the exact error message</li>
+                    <li><strong>Ask a classmate</strong> who finished that exercise</li>
+                    <li><strong>Use console.log()</strong> to print values and debug</li>
+                    <li><strong>Ask your teacher</strong> with specific questions</li>
+                </ol>
+            </section>
+
+            <!-- COMPLETION CHECKLIST -->
+            <section id="completion">
+                <h2>✅ Completion Checklist</h2>
+
+                <div class="checklist">
+                    <ul>
+                        <li>Forked repository</li>
+                        <li>Created Codespace</li>
+                        <li>Started Live Server</li>
+                        <li>Opened Console (F12)</li>
+                        <li>Created <code>script.js</code></li>
+                        <li>Exercise 1: Button clicks work</li>
+                        <li>Exercise 2: Greeting displays</li>
+                        <li>Exercise 3: Calculator works</li>
+                        <li>Exercise 4: Age checker works</li>
+                        <li>Exercise 5: Loop creates lists</li>
+                        <li>Exercise 6: Word analysis works</li>
+                        <li>Exercise 7: Grade statistics work</li>
+                        <li>Exercise 8: Colors change</li>
+                        <li>Exercise 9: Character counting works</li>
+                        <li>Exercise 10: Quiz is playable</li>
+                        <li>Committed and pushed to GitHub</li>
+                    </ul>
+                </div>
+
+                <div class="success-box">
+                    <h3>🎉 Congratulations!</h3>
+                    <p>You've completed all 10 exercises and learned:</p>
+                    <ul>
+                        <li>✅ Variables, data types, operators</li>
+                        <li>✅ Functions and code organization</li>
+                        <li>✅ Control flow (if/else, loops)</li>
+                        <li>✅ Arrays and iteration</li>
+                        <li>✅ DOM manipulation</li>
+                        <li>✅ Event handling</li>
+                        <li>✅ Building complete applications</li>
+                    </ul>
+                    <p><strong>You're now ready to build your own interactive web pages!</strong></p>
+                </div>
+            </section>
+
+            <!-- TIPS FOR SUCCESS -->
+            <section id="tips">
+                <h2>💡 Tips for Success</h2>
+
+                <div class="info-box">
+                    <h3>1. Work Slowly and Carefully</h3>
+                    <p>Don't rush! Read each line and try to understand it.</p>
+
+                    <h3>2. Use console.log()</h3>
+<pre><code>console.log('Debug:', variableName);</code></pre>
+                    <p>This helps you see what's happening in your code!</p>
+
+                    <h3>3. Read Error Messages</h3>
+                    <p>Errors tell you exactly what's wrong. They include line numbers!</p>
+
+                    <h3>4. Experiment</h3>
+                    <p>Change values to see what happens. Break things on purpose to learn!</p>
+
+                    <h3>5. Comment Your Code</h3>
+<pre><code>// This explains what your code does</code></pre>
+
+                    <h3>6. Save and Test Frequently</h3>
+                    <p>Don't write 100 lines before testing. Test after every few lines!</p>
+
+                    <h3>7. Ask Questions</h3>
+                    <p>No question is too simple. Everyone was a beginner once!</p>
+                </div>
+            </section>
+
+            <!-- WHAT'S NEXT -->
+            <section id="next">
+                <h2>🚀 What's Next?</h2>
+
+                <h3>Challenge Ideas</h3>
+                <ul>
+                    <li>Add a timer to the quiz</li>
+                    <li>Create more quiz questions</li>
+                    <li>Build a todo list app</li>
+                    <li>Make a simple game</li>
+                    <li>Create a form validator</li>
+                    <li>Build a random quote generator</li>
+                    <li>Design a tip calculator</li>
+                </ul>
+
+                <h3>Resources for Further Learning</h3>
+                <ul>
+                    <li><strong>MDN Web Docs:</strong> developer.mozilla.org</li>
+                    <li><strong>W3Schools:</strong> w3schools.com/js</li>
+                    <li><strong>JavaScript.info:</strong> javascript.info</li>
+                    <li><strong>FreeCodeCamp:</strong> freecodecamp.org</li>
+                </ul>
+
+                <div class="success-box">
+                    <h3>Keep Coding!</h3>
+                    <p>The best way to learn is by building real projects. Start small, experiment often, and don't be afraid to make mistakes!</p>
+                    <p><strong>Good luck with your HSC Software Engineering! 🎓</strong></p>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p><strong>HSC Year 12 Software Engineering</strong></p>
+            <p>Programming for the Web Focus Area</p>
+            <p style="margin-top: 15px; font-size: 0.9em;">NSW NESA Curriculum Aligned</p>
+            <p style="margin-top: 10px;">Created for Students • 2025</p>
+        </footer>
+    </div>
+</body>
+</html>
